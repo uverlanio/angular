@@ -1,0 +1,310 @@
+{
+  "propostas": [
+    {
+      "indice": 1,
+      "numeroOrcamento": "00061380",
+      "numeroPortal": 0,
+      "origem": 18,
+      "ramoSeguro": 1391,
+      "tipoSeguro": "Novo",
+      "entradaNegocio": "COR",
+      "dataProtocolo": "2022-02-03",
+      "meioComercializacao": "SFC",
+      "codigoProdutoVida": "VI-PESSOAS",
+      "contratantes": [
+        {
+          "tipo": "PRI",
+          "numero": 1,
+          "grupos": [
+            {
+              "numero": 1,
+              "segurados": [
+                {
+                  "pessoa": {
+                    "tipo": "FIS",
+                    "enderecos": [
+                      {
+                        "tipoEndereco": "RESIDENCIAL",
+                        "logradouro": "Afonso Cláudio",
+                        "numeroLogradouro": 10,
+                        "bairro": "Vila Voturua",
+                        "cidade": "São Vicente",
+                        "uf": "SP",
+                        "cep": "11380",
+                        "complemento": "",
+                        "complementoCep": "410"
+                      },
+                      {
+                        "tipoEndereco": "COMERCIAL",
+                        "logradouro": "",
+                        "numeroLogradouro": null,
+                        "bairro": "",
+                        "cidade": "",
+                        "uf": "",
+                        "cep": "",
+                        "complemento": ""
+                      }
+                    ],
+                    "nome": "FRANCIS LIU",
+                    "dadosPessoaFisica": {
+                      "grupoProfissao": "DIT-A",
+                      "cicloVacinal": "1",
+                      "profissao": "2111-05",
+                      "temDependentes": false,
+                      "tipoContrato": "VOCE",
+                      "tempoGarantiaRenda": "24",
+                      "dataNascimento": "1964-05-22T00:00:00.000Z",
+                      "sexo": "MASCULINO",
+                      "fumante": false,
+                      "regimeTrabalho": "CLT",
+                      "numeroCpf": "518179180",
+                      "digitoCpf": "87",
+                      "estadoCivil": "SOLTEIRO",
+                      "nacionalidade": "BRASILEIRA",
+                      "tipoDocIdentificacao": "rg",
+                      "docIdentificacao": "022222",
+                      "orgaoExpedidor": "SSP",
+                      "dataExpedicao": "2013-04-01",
+                      "idade": 57,
+                      "paisResidente": "Brasil",
+                      "DataUltimaVacina": null,
+                      "paisDeOrigem": "",
+                      "resideBrasil": true
+                    },
+                    "email": "email@email.com",
+                    "rendaMensal": "4000.00",
+                    "telefones": [
+                      {
+                        "tipoTelefone": "CEL",
+                        "numeroTelefone": "111111111",
+                        "dddTelefone": "11"
+                      },
+                      {
+                        "tipoTelefone": "RES",
+                        "numeroTelefone": "222222222",
+                        "dddTelefone": "22"
+                      }
+                    ],
+                    "melhorPeriodo": "I",
+                    "pessoaExpostaPoliticamente": "Nao"
+                  },
+                  "numero": 1,
+                  "coberturas": [
+                    {
+                      "franquia": null,
+                      "sigla": "AFI",
+                      "moeda": "BRL",
+                      "limitemaximo": 20000,
+                      "caracteristica": "Adicional",
+                      "valor": 10000,
+                      "tipoprotecao": "Família",
+                      "caracteristicaespecialvalor": null,
+                      "limiteminimo": 1000,
+                      "caracteristicaespecialtipo": null
+                    },
+                    {
+                      "franquia": null,
+                      "sigla": "CAN",
+                      "moeda": "BRL",
+                      "limitemaximo": 1000000,
+                      "caracteristica": "Adicional",
+                      "valor": 100000,
+                      "tipoprotecao": "Doenças",
+                      "caracteristicaespecialvalor": null,
+                      "limiteminimo": 10000,
+                      "caracteristicaespecialtipo": null
+                    },
+                    {
+                      "franquia": null,
+                      "sigla": "IPA",
+                      "moeda": "BRL",
+                      "limitemaximo": 10000000,
+                      "caracteristica": "Principal",
+                      "valor": 100000,
+                      "tipoprotecao": "Imprevistos",
+                      "caracteristicaespecialvalor": null,
+                      "limiteminimo": 100000,
+                      "caracteristicaespecialtipo": null
+                    },
+                    {
+                      "franquia": null,
+                      "sigla": "BAS",
+                      "moeda": "BRL",
+                      "limitemaximo": 10000000,
+                      "caracteristica": "Principal",
+                      "valor": 100000,
+                      "tipoprotecao": "Família",
+                      "caracteristicaespecialvalor": null,
+                      "limiteminimo": 100000,
+                      "caracteristicaespecialtipo": null
+                    },
+                    {
+                      "franquia": null,
+                      "sigla": "MAP",
+                      "moeda": "BRL",
+                      "limitemaximo": 10000000,
+                      "caracteristica": "Principal",
+                      "valor": 100000,
+                      "tipoprotecao": "Assistências e benefícios",
+                      "caracteristicaespecialvalor": null,
+                      "limiteminimo": 100000,
+                      "caracteristicaespecialtipo": null
+                    },
+                    {
+                      "franquia": null,
+                      "sigla": "TELEMED",
+                      "moeda": "BRL",
+                      "limitemaximo": 0,
+                      "caracteristica": "Serviço complementar",
+                      "valor": 0,
+                      "tipoprotecao": "Família",
+                      "caracteristicaespecialvalor": null,
+                      "limiteminimo": 0,
+                      "caracteristicaespecialtipo": null
+                    }
+                  ],
+                  "empresaQueTrabalha": "EMPRESA",
+                  "ramoAtividade": "",
+                  "ocupacaoProfissionalPrincipal": "2111-05",
+                  "faixaRenda": "4000",
+                  "formaTrabalho": "CLT",
+                  "beneficiarios": [
+                    {
+                      "nome": null,
+                      "cpf": null,
+                      "nascimento": null,
+                      "grauParentesco": null,
+                      "percentualIndenizacao": 100,
+                      "sexoBeneficiario": null,
+                      "tipoBeneficiario": "Herdeiros legais, conforme artigo 792 do código civil."
+                    }
+                  ],
+                  "responsavelFinanceiro": true,
+                  "questionario": {
+                    "idquestionario": null,
+                    "respostas": []
+                  }
+                }
+              ],
+              "nome": "Francis Liu",
+              "qtdeVidas": 1
+            }
+          ],
+          "pessoa": {
+            "tipo": "FIS",
+            "enderecos": [
+              {
+                "tipoEndereco": "RESIDENCIAL",
+                "logradouro": "Afonso Cláudio",
+                "numeroLogradouro": 10,
+                "bairro": "Vila Voturua",
+                "cidade": "São Vicente",
+                "uf": "SP",
+                "cep": "11380",
+                "complemento": "",
+                "complementoCep": "410"
+              },
+              {
+                "tipoEndereco": "COMERCIAL",
+                "logradouro": "",
+                "numeroLogradouro": null,
+                "bairro": "",
+                "cidade": "",
+                "uf": "",
+                "cep": "",
+                "complemento": ""
+              }
+            ],
+            "nome": "FRANCIS LIU",
+            "dadosPessoaFisica": {
+              "grupoProfissao": "DIT-A",
+              "cicloVacinal": "1",
+              "profissao": "2111-05",
+              "temDependentes": false,
+              "tipoContrato": "VOCE",
+              "tempoGarantiaRenda": "24",
+              "dataNascimento": "1964-05-22T00:00:00.000Z",
+              "sexo": "MASCULINO",
+              "fumante": false,
+              "regimeTrabalho": "CLT",
+              "numeroCpf": "518179180",
+              "digitoCpf": "87",
+              "estadoCivil": "SOLTEIRO",
+              "nacionalidade": "BRASILEIRA",
+              "tipoDocIdentificacao": "rg",
+              "docIdentificacao": "022222",
+              "orgaoExpedidor": "SSP",
+              "dataExpedicao": "2013-04-01",
+              "idade": 57,
+              "paisResidente": "Brasil",
+              "DataUltimaVacina": null,
+              "paisDeOrigem": "",
+              "resideBrasil": true
+            },
+            "email": "email@email.com",
+            "rendaMensal": "4000.00",
+            "telefones": [
+              {
+                "tipoTelefone": "CEL",
+                "numeroTelefone": "111111111",
+                "dddTelefone": "11"
+              },
+              {
+                "tipoTelefone": "RES",
+                "numeroTelefone": "222222222",
+                "dddTelefone": "22"
+              }
+            ],
+            "melhorPeriodo": "I",
+            "pessoaExpostaPoliticamente": "Nao"
+          },
+          "dadosPagamento": {
+            "opcao": 2,
+            "codigoFormaPagamento": 41,
+            "quantidadeParcelas": 1,
+            "cartaoCredito": null,
+            "dadosBancarios": null,
+            "formaPagamento": {
+              "codigo": 41,
+              "descricao": "Boleto bancário",
+              "idFormaPagamento": "a0aL0000007ApMDIA0",
+              "planoParcelamento": {
+                "idPlanoParcelamento": "1",
+                "quantidadeParcelas": 1
+              }
+            },
+            "responsavelPagamento": null,
+            "tipoResponsavelPagamento": "CON",
+            "vencimentoDemaisParcelas": "A cada 30 dias",
+            "vigenciaInicial": null,
+            "responsavelFinanceiro": true
+          }
+        }
+      ],
+      "canalDistribuicao": "COR",
+      "remuneracoes": [
+        {
+          "percentual": 10,
+          "tipoRemuneracao": "COR",
+          "favorecidos": [
+            {
+              "papel": "COR",
+              "participacao": 100,
+              "corretorLider": true,
+              "susep": "P5005J",
+              "pessoa": null,
+              "antecipaComissao": true
+            }
+          ]
+        }
+      ],
+      "segmento": "Individual",
+      "tempoRendaProtegida": "24",
+      "dependentesFinanceiros": false,
+      "formaReceberApolice": "DIGITAL",
+      "termoGuarda": false,
+      "termoResponsabilidade": true,
+      "assinaturaEletronica": true
+    }
+  ]
+}

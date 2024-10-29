@@ -1,0 +1,129 @@
+<!--
+ - Created by Alessndro Ponte on 11/07/2018.
+ -->
+
+<aura:component description="RemuneracaoProposta"
+                implements="flexipage:availableForAllPageTypes,force:hasRecordId,force:lightningQuickActionWithoutHeader"
+                controller="RemuneracaoPropostaController">
+  <ltng:require styles="{!join(',',$Resource.bigModalCss,$Resource.spinnerCSS)}" />
+
+  <aura:attribute name="listWrapper" type="List" default="[]"/>
+  <aura:attribute name="listRemuneracoesParaApagar" type="List" default="[]" />
+  <aura:attribute name="recordId" type="Id" />
+  <aura:attribute name="mensagemErro" type="String" default="" />
+
+  <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+  <aura:handler event="c:LookupParaUmObjetoEvent" action="{!c.handleApplicationEvent}"/>
+
+  <!-- Toast -->
+  <aura:attribute name="type" type="String" default="" />
+  <aura:attribute name="bodyToast" type="String" default="" />
+  <c:ToastParaModal aura:id="ToastParaModal" type="{!v.type}">{!v.bodyToast}</c:ToastParaModal>
+
+  <section aura:id="componenteRemuneracao" >
+
+    <lightning:spinner aura:id="spinner" alternativeText="Loading" />
+
+    <lightning:card>
+      <aura:set attribute="footer">
+        <lightning:buttonGroup>
+          <lightning:button label="Salvar" onclick="{!c.salvarRemuneracoes}" />
+        </lightning:buttonGroup>
+      </aura:set>
+
+      <aura:set attribute="title">
+        <p>Remuneração da Proposta</p>
+        <aura:if isTrue="{!(v.mensagemErro != '')}">
+          <p class="mensagem-erro">{!v.mensagemErro}</p>
+        </aura:if>
+      </aura:set>
+
+      <div class="slds-p-horizontal_small">
+
+        <aura:if isTrue="{!v.listWrapper.length == 0}">
+          Não há remuneração cadastrada no orçamento!
+        </aura:if>
+
+        <aura:iteration var="wrapper" items="{!v.listWrapper}" indexVar="indiceWrapper" >
+          <c:SecaoExpandivel title="{!wrapper.tipoRemuneracao}" titleHelp="{!wrapper.percentual + '%'}" >
+
+            <div>
+              <table style="{!(wrapper.temErro) ? 'background-color: indianred;' : '' }" class="slds-table slds-table_bordered slds-max-medium-table_stacked-horizontal" >
+                <thead>
+                <tr class="slds-text-title_caps">
+                  <th scope="col" style="width: 1rem;"></th>
+                  <aura:if isTrue="{!wrapper.tipoRemuneracao == 'CORRETAGEM' || wrapper.tipoRemuneracao == 'Corretagem'}">
+                    <th scope="col" style="width: 80px;">
+                      <span class="slds-truncate" title="Líder?">Líder?</span>
+                    </th>
+                  </aura:if>
+                  <th scope="col">
+                    <span class="slds-truncate" title="Conta">Conta</span>
+                  </th>
+                  <th scope="col">
+                    <span class="slds-truncate" title="Papel">Papel</span>
+                  </th>
+                  <th scope="col">
+                    <span class="slds-truncate" title="Participação">Participação</span>
+                  </th>
+                  <th scope="col" style="width: 80px;">
+                    <span class="slds-truncate" title="Ações">Ações</span>
+                  </th>
+                </tr>
+                </thead>
+                <tbody>
+                <aura:iteration items="{!wrapper.listRemuneracaoProposta}" var="remuneracao" indexVar="indice" >
+                  <tr style="{!(remuneracao.controle.temErro) ? 'background-color: indianred;' : ''}" class="slds-hint-parent" data-index="{!indice}">
+                    <td style="width: 1rem;"></td>
+                    <aura:if isTrue="{!wrapper.tipoRemuneracao == 'CORRETAGEM' || wrapper.tipoRemuneracao == 'Corretagem'}">
+                      <td data-label="Líder" style="width: 80px;">
+                        <div class="slds-truncate" title="Líder">
+                          <lightning:input type="checkbox" variant="label-hidden" name="lider" checked="{!remuneracao.Lider__c}" />
+                        </div>
+                      </td>
+                    </aura:if>
+                    <td data-label="Conta" >
+                      <div title="Conta">
+                        <c:LookupParaUmObjeto sObject="Account" label="Pesquisar Conta" variant="label-hidden" iconName="standard:account" listFields="['Papel__c']" value="{!remuneracao.Conta__r}" identifier="{!indiceWrapper + ':' + indice}" />
+                      </div>
+                    </td>
+                    <td data-label="Papel" >
+                      <div title="Papel">
+                        <lightning:combobox name="papel" label="Papel" disabled="{!(!remuneracao.controle.opcoesPapel) ? true : false}" value="{!remuneracao.Papel__c}" placeholder="Escolha o papel" variant="label-hidden" options="{!remuneracao.controle.opcoesPapel}" />
+                      </div>
+                    </td>
+                    <td data-label="Participação" >
+                      <div class="slds-truncate" title="Participação">
+                        <lightning:input type="number" variant="label-hidden" name="participacao" formatter="percent-fixed" step="0.01"  value="{!remuneracao.Participacao__c}"/>
+                      </div>
+                    </td>
+                    <td data-index="{!indice}" data-indexwrapper="{!indiceWrapper}" style="width: 80px;">
+                      <lightning:buttonIcon iconName="utility:delete" alternativeText="Excluir" onclick="{!c.excluir}" />
+                      <lightning:buttonIcon iconName="utility:add" alternativeText="Adicionar" onclick="{!c.adicionar}" />
+                    </td>
+                  </tr>
+                </aura:iteration>
+                <tr class="slds-hint-parent tr-total">
+                  <td style="width: 1rem;"></td>
+
+                    <td data-label="Total"  colspan="{!(wrapper.tipoRemuneracao == 'CORRETAGEM' || wrapper.tipoRemuneracao == 'Corretagem') ? '3' : '2'}">
+                      <div class="slds-truncate" title="Total">
+                        Total
+                      </div>
+                    </td>
+                  <td  style="padding-left: 20px;">
+                    <div class="slds-truncate" title="Total">
+                      <lightning:input type="number" variant="label-hidden" name="participacao" formatter="percent-fixed" step="0.01"  value="{!wrapper.percentualTotal}" readonly="true"/>
+                    </div>
+                  </td>
+                  <td></td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </c:SecaoExpandivel>
+        </aura:iteration>
+      </div>
+    </lightning:card>
+  </section>
+</aura:component>

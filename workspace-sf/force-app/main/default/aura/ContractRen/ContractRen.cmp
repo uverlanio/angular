@@ -1,0 +1,22 @@
+<aura:component>
+    <aura:attribute name="contract" type="Contract" /> 
+        <tr>
+            <td>
+                <dl class="slds-list_horizontal slds-wrap">
+                    <dt class="slds-item_label slds-text-color_weak slds-truncate" title="Contrato">Contrato:</dt>
+                    <dd class="slds-item_detail slds-truncate" title="Contrato"><a href="{!'/'+v.contract.Id}" target="_blank">{!v.contract.Name}</a></dd>
+                    <dt class="slds-item_label slds-text-color_weak slds-truncate" title="Nome">Nome:</dt>
+                    <dd class="slds-item_detail slds-truncate" title="Nome"><a href="{!'/'+v.contract.Account.Id}" target="_blank">{!v.contract.Account.Name}</a></dd>    
+                    <dt class="slds-item_label slds-text-color_weak slds-truncate" title="Início de Vigência">Início de vigência:</dt>
+                    <dd class="slds-item_detail slds-truncate" title="Início de Vigência"><ui:outputDate value="{!v.contract.StartDate}"/></dd>    
+                    <dt class="slds-item_label slds-text-color_weak slds-truncate" title="Final de vigência">Final de vigência:</dt>
+                    <dd class="slds-item_detail slds-truncate" title="Final de vigência"><ui:outputDate value="{!v.contract.VigenciaFinal__c}"/></dd>    
+                    <dt class="slds-item_label slds-text-color_weak slds-truncate" title="Prêmio total">Prêmio total:</dt>
+                    <dd class="slds-item_detail slds-truncate" title="Prêmio total">{!v.contract.CurrencyIsoCode}&nbsp;<lightning:formattedNumber value="{!v.contract.PremioTotal__c}" minimumFractionDigits="2" maximumFractionDigits="2"/></dd>    
+                    <dt class="slds-item_label slds-text-color_weak slds-truncate" title="Forma de pagamento">Forma de pagamento:</dt>
+                    <dd class="slds-item_detail slds-truncate" title="Forma de pagamento">{!v.contract.FormaPagamento__r.Codigo__c}-{!v.contract.FormaPagamento__r.Name }</dd>    
+                </dl>
+            </td>
+        </tr>
+        <br></br>
+</aura:component>

@@ -1,0 +1,156 @@
+<!-- PLV-3918 -INICIO -->
+<aura:component controller="PagamentoPrestadoras" implements="lightning:actionOverride,force:lightningQuickActionWithoutHeader,force:hasRecordId,force:hasSObjectName,lightning:hasPageReference" access="global">
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:attribute name="recordTypeId" type="String"/>
+    <aura:attribute name="recordTypeName" type="String"/>
+	<aura:attribute name="recordId" type="String" />
+    <!-- PLV-4148 - INICIO -->
+    <aura:attribute name="idsPagamentosGarantias" type="String[]" />
+    <aura:attribute name="moedasSelect" type="String[]" />
+    <!-- PLV-4148 - FIM -->
+    <aura:attribute name="IdsPagamentosSinistros" type="String[]" />
+    <aura:attribute name="valorTotal" type="String" default="0" />
+    <aura:attribute name="valorTotalItens" type="String" default="0" />
+    <aura:attribute name="tipoMoeda" type="String" />
+        
+    <aura:attribute name="gridColumns" type="List" access="PRIVATE" />
+    <aura:attribute name="gridData" type="Object" access="PRIVATE" />
+    <aura:attribute name="gridExpandedRows" type="List" access="PRIVATE" />
+
+    <!-- PLV-4604 - INICIO -->
+    <aura:attribute name="requisicao" type="Requisicao_de_Pagamento__c" default="{ 'sobjectType': 'Requisicao_de_Pagamento__c' }"/>
+    <!-- PLV-4604 - FIM -->
+ 
+    <lightning:card variant="Narrow" title="Requisição de pagamento" iconName="standard:account" footer="{! v.recordTypeName }">
+       
+      
+    </lightning:card>
+            <lightning:card>
+                <div class="slds-p-around_medium" >
+                <!-- PLV-4148 - INICIO -->
+                <lightning:recordEditForm aura:id="myform"
+                                      objectApiName="Requisicao_de_Pagamento__c"
+                                      onsubmit="{!c.handleSubmit}"
+                                      onsuccess="{!c.handleSuccess}"
+                                      recordId="{!v.recordId}"
+                                      recordTypeId="{!v.recordTypeId}">
+               <!-- PLV-4148 - FIM -->
+                    				  
+                    <lightning:messages/>					
+                              
+                    <lightning:inputField  aura:id="CurrencyIsoCode" fieldName="CurrencyIsoCode" label="Moeda Cotação" value="BRL" style="width:30%; float:left; display:none;" />  
+                    
+					<!-- PLV-4148 -INICIO -->
+                   
+					 <aura:if isTrue="{!v.recordTypeName == 'Operacional de sinistros'}">
+						<lightning:inputField required="true" aura:id="Tipo_Cotacao__c" fieldName="Tipo_Cotacao__c"  style="width:30%; float:left;  " />
+						<lightning:inputField required="true" onchange="{!c.atualizaValores}"  aura:id="Valor_da_Cotacao_de_Moeda_Estrangeira__c" fieldName="Valor_da_Cotacao_de_Moeda_Estrangeira__c" style="width:20%; float:left;" />
+					</aura:if>   
+					<!-- PLV-4148 -INICIO -->	
+                    <aura:if isTrue="{!v.recordTypeName == 'Indenização de sinistros'}">
+                        <div style="width:10%;">
+                        <lightning:select name="moedas" label="Moeda" aura:id="moedas" required="true" >
+                            <option text="SELECIONE" value="" />
+                            <aura:iteration items="{!v.moedasSelect}" var="option">
+                                <option text="{!option.IsoCode}" value="{!option.IsoCode}" />
+                            </aura:iteration>
+                        </lightning:select>
+                        </div>
+                   </aura:if>								
+
+				<!-- PLV-4501 -INICIO 
+				<aura:if isTrue="{!v.recordTypeName == 'Pagamento de Prestadora'}">																
+						<lightning:inputField required="true" label="Parceiro" aura:id="Contas_de_Parceiro__c" fieldName="Contas_de_Parceiro__c"  style="width:20%;" />
+				</aura:if>-->
+				<!-- PLV-4501 -FIM --> 																                       
+				<!-- PLV-4604 - INICIO -->
+                <aura:if isTrue="{!and(v.recordTypeName != 'Despesas com Sinistros Não Tributáveis', v.recordTypeName != 'Despesas com Sinistros Tributáveis')}">
+						<lightning:inputField required="true" aura:id="dtInicio" fieldName="Data_de_Inicio_de_Periodo__c"  style="width:20%; " />
+						<lightning:inputField required="true" aura:id="dtFim" fieldName="Data_de_Final_de_Periodo__c"  style="width:20%;" />
+                </aura:if>
+                <aura:if isTrue="{!v.recordTypeName == 'Pagamento de Prestadora'}">		
+					<lightning:inputField required="true"  aura:id="Valor_do_pagamento__c" fieldName="Valor_do_pagamento__c" style="width:20%; "/>																				
+				</aura:if>
+				<!-- PLV-4501 -FIM -->
+    
+                <!-- PLV-4604 - INICIO -->
+                <aura:if isTrue="{!and(v.recordTypeName != 'Despesas com Sinistros Não Tributáveis', v.recordTypeName != 'Despesas com Sinistros Tributáveis')}">
+                    <!-- PLV-4501 -INICIO -->
+						<lightning:inputField required="true" label="Parceiro" aura:id="Contas_de_Parceiro__c" fieldName="Contas_de_Parceiro__c"  style="width:30%;" />
+					<!-- PLV-4501 -FIM --> 
+                </aura:if>
+                    <aura:if isTrue="{!or(v.recordTypeName == 'Despesas com Sinistros Não Tributáveis', v.recordTypeName == 'Despesas com Sinistros Tributáveis')}">
+                        <lightning:inputField required="true" fieldName="Contas_de_Parceiro__c" value="{!v.requisicao.Contas_de_Parceiro__c}" style="width:30%;" />
+                        <lightning:inputField required="true" fieldName="Tipo_de_pagamento__c" value="{!v.requisicao.Tipo_de_pagamento__c}" style="width:30%;" />
+                        <lightning:inputField required="true" fieldName="Numero_do_Sinistro__c" value="{!v.requisicao.Numero_do_Sinistro__c}" style="width:30%;" />
+                        <lightning:inputField required="true" fieldName="Valor_Total_Prestadora__c" value="{!v.requisicao.Valor_Total_Prestadora__c}" style="width:30%;" />
+                    </aura:if>              
+                    <!-- PLV-4604 - FIM -->  
+                    <!-- PLV-4501 -INICIO -->
+				    <lightning:inputField aura:id="Status__c" fieldName="Status__c" value="Pendente" style="width:20%; display:none;" />  
+                    <lightning:inputField aura:id="Tipo_moeda__c" fieldName="Tipo_moeda__c" value="{!v.tipoMoeda}" style="width:20%; display:none;" />
+					<div class="slds-page-header">
+                      <lightning:button variant="neutral" label="Cancel" onclick="{!c.closeDialog}" />
+                    
+					<!-- PLV-4148 -INICIO -->
+                    <!-- PLV-4501 -INICIO -->
+					  <aura:if isTrue="{!v.recordTypeName == 'Indenização de sinistros'}">
+							<lightning:button variant="brand" aura:id="bpagamentos" label="Buscar Pagamentos Indenização" onclick="{!c.pagamentosSinistrosIndenizacao}" />						
+					  </aura:if>
+
+					  <aura:if isTrue="{!v.recordTypeName == 'Pagamento de Prestadora'}">
+							<lightning:button variant="brand" aura:id="bpagamentos" label="Criar Pagamento de Prestadora" onclick="{!c.criarPagamentoPrestadora}" />																						
+					  </aura:if>
+
+					  <aura:if isTrue="{!v.recordTypeName == 'Operacional de sinistros'}">
+						<lightning:button variant="brand" aura:id="bpagamentos" label="Buscar Pagamentos Operacional" onclick="{!c.pagamentosSinistros}" />   
+					  </aura:if>					
+					<!-- PLV-4148 -INICIO -->
+					<!-- PLV-4501 -FIM --> 
+                    <!-- PLV-4604 - INICIO -->  
+                        <aura:if isTrue="{!or(v.recordTypeName == 'Despesas com Sinistros Não Tributáveis', v.recordTypeName == 'Despesas com Sinistros Tributáveis')}">
+						    <lightning:button variant="brand" aura:id="bpagamentosDespesas" label="Criar pagamento de despesa" type="submit" />   
+					    </aura:if>              	
+                    <!-- PLV-4604 - FIM -->                				  
+                    
+					</div>
+                    <div class="gridPagamentos" id="gridPagamentos" style="display:none;">
+                        <hr></hr>
+                        <lightning:icon iconName="standard:account" alternativeText="Account" title="Pagamentos de Sinistro" /> Pagamentos de Sinistros
+                        <div style="overflow:auto;">
+                            <lightning:treeGrid
+                                columns="{! v.gridColumns }"
+                                data="{! v.gridData }"
+                                expandedRows="{! v.gridExpandedRows }"
+                                keyField="name" 
+                                aura:id="mytree"
+                                onrowselection="{!c.getSelectedRows}"
+                                selectedRows = "{!v.selectedIds}"
+                                isLoading="{!v.isLoading}"
+                            />
+                             <!-- <lightning:treeGrid 
+                                    columns="{! v.gridColumns }"
+                                    data="{! v.gridData }"
+                                    keyField="Id"
+                                    aura:id="mytree"
+                                />-->
+                        </div>
+                        <div>
+                             <lightning:inputField aura:id="Quantidade_total_de_sinistros_realizados__c" disabled="true" fieldName="Quantidade_total_de_sinistros_realizados__c" value='0' style="width:20%;" />  
+                             <lightning:inputField aura:id="Valor_Total_Prestadora__c" fieldName="Valor_Total_Prestadora__c" required="true" value="{!v.valorTotal}" disabled="true" label="Valor Total" style="width:20%;" />
+                          
+                        </div>
+                        <br></br>
+                        <div class="slds-page-header">
+                           <lightning:button variant="neutral" label="Cancel" onclick="{!c.closeDialog}" />
+                           <lightning:button type="submit" label="Criar" variant="brand"/>
+                        </div>
+                    </div>
+                  
+                </lightning:recordEditForm>
+                </div>
+                
+           </lightning:card>
+   
+</aura:component>
+<!-- PLV-3918 -FIM -->

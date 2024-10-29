@@ -1,0 +1,17 @@
+<!--INICIO | PLV-4433-VI (Digital)
+/*
+*  @author Squad Avanxo 
+*  @Descrição: Componente de topo do Kit de Boas Vindas e Endosso 
+*/-->
+<apex:component access="global">
+<table width="600" border="0" cellspacing="0" cellpadding="0" style="width:600px; background-color: #ffffff; margin-left: auto; margin-right: auto;">
+    <tbody>
+        <tr>
+            <td>
+                <apex:image value="{!$Setup.Email_Endosso_Individual__c.Porto_Seguro_Topo__c}" style="display:block;max-width:100%" />
+            </td>
+        </tr>
+    </tbody>
+</table>    
+</apex:component>
+<!--FIM | PLV-4433-VI (Digital) -->

@@ -1,0 +1,20 @@
+//ZSVEP-76-INICIO
+@isTest
+public class BCPNaoClientesTest {
+
+    @isTest
+    static void testParse() {
+        String json = '{"adicionaPessoaNaoClienteRequest":{"codigoOrigemMovimento":1,"dadosRastreamento":{"codigoAcessoCanal":1,"codigoOrigemMovimento":2,"codigoServico":3,"codigoTipoMeioAcessoCanal":4,"descricaoProtocoloInternet":"desc","numeroSessaoServico":"sessao","textoMeioAcesso":"texto","timeStampControleServico":"2024-06-28T12:00:00Z"},"dataHoraMovimento":"2024-06-28T12:00:00Z","grupoXml":1,"pessoaNaoClienteEBO":{"codigoEmpresa":"123","codigoPessoa":"456","codigoProduto":"789","codigoRacaHumana":"BR","codigoSexo":"M","codigoTipoIdentidadeGenero":"M","codigoTipoOrientacaoSexual":"H","codigoTipoPessoa":"F","codigoTipoSituacaoPessoa":"A","codigoTipoTratamentoPessoal":"Sr.","contasBancaria":[{"digitoContaBancariaPessoa":"1","numeroAgenciaBancariaOficial":"1234","numeroBancoOficial":456,"numeroContaBancariaPessoa":789}],"cpfPessoa":{"digitoCpf":"1","numeroRaizCpf":"123456789"},"dataFalecimentoPessoa":"2024-06-28T12:00:00Z","dataNascimentoPessoa":"2000-01-01","estadoCivil":{"codigoEstadoCivil":"S","dataFinalEstadoCivil":"2024-06-28T12:00:00Z","dataInicialEstadoCivil":"2000-01-01"},"flagTratamentoProntuarioMedico":"N","midiasSociaisPessoa":[{"codigoMidiaSocial":1,"codigoMidiaSocialPessoa":2,"nomePessoaMidiaSocial":"Twitter"}],"nomeLegalPessoa":"Fulano Silva","nomeSocialPessoa":"Beltrano Silva","nomeTratamentoPessoa":"Sr. Fulano","ocupacoesPessoaFisica":[{"dataFinalOcupacao":"2024-06-28T12:00:00Z","dataInicialOcupacao":"2000-01-01","numeroOcupacao":1}],"paisesNacionalidadesPessoa":[{"codigoPais":1}],"parentescosPessoaFisica":[{"codigoParentesco":1,"codigoTipoRelacionamento":2,"dataFinalParentesco":"2024-06-28T12:00:00Z","dataInicialParentesco":"2000-01-01","nomeParente":"Parente"}],"passaportePessoa":{"codigoPais":1,"codigoTipoPassaporte":2,"dataExpedicaoPassaporte":"2024-06-28T12:00:00Z","dataFinalValidadePassaporte":"2024-06-28T12:00:00Z","numeroPassaporte":123,"siglaSeriePassaporte":"ABC"},"registroNacionalEstrangeiro":{"codigoTipoCondicaoEstrangeiro":1,"dataEntradaPaisPessoaRegistroNacionalEstrangeiro":"2024-06-28T12:00:00Z","dataExpedicaoRegistroNacionalEstrangeiro":"2024-06-28T12:00:00Z","dataFinalValidadeRegistroNacionalEstrangeiro":"2024-06-28T12:00:00Z","digitoRegistroNacionalEstrangeiro":"1","numeroRaizRegistroNacionalEstrangeiro":"1234567890"},"religioesPessoaFisica":[{"codigoReligiao":1,"dataFinalReligiao":"2024-06-28T12:00:00Z","dataInicialReligiao":"2000-01-01"}],"telefonesPessoa":[{"codigoDdd":11,"codigoDdi":1,"codigoTelefone":"123456789","codigoTipoFinalidadeTelefon":1,"codigoTipoLinhaTelefonica":2,"nomeContato":"Contato","numeroRamalTelefone":"123","numeroTelefone":1234567890}],"textoNomeIntermediarioPessoa":"Nome Intermediário","textoPrenomePessoa":"Prenome","textoUltimoNomePessoa":"Último Nome","vinculoPessoaPoliticamenteExposta":{"codigoPessoaLocalFuncaoPessoaPoliticamenteExposta":"123","codigoPessoaPoliticamenteExposta":"456","codigoTipoRelacionamento":1,"codigoTipoVinculoPessoaPoliticamenteExposta":"2","codigoVinculoPessoaPoliticamenteExposta":"3","dataFinalFuncaoPublicaPessoaPoliticamenteExposta":"2024-06-28T12:00:00Z","dataFinalVinculoPessoaPoliticamenteExposta":"2024-06-28T12:00:00Z","dataInicialFuncaoPublicaPessoaPoliticamenteExposta":"2000-01-01","digitoCpfPessoaPoliticamenteExposta":"1","nomeOrgaoGovernamentalPessoaPoliticamenteExposta":"Orgão","nomePessoaPoliticamenteExposta":"Fulano"}}}}';
+
+        Test.startTest();
+        BCPNaoClientes parsedObject = BCPNaoClientes.parse(json);
+        Test.stopTest();
+
+        System.assertNotEquals(null, parsedObject);
+        System.assertNotEquals(null, parsedObject.adicionaPessoaNaoClienteRequest);
+        System.assertNotEquals(null, parsedObject.adicionaPessoaNaoClienteRequest.pessoaNaoClienteEBO);
+        System.assertNotEquals(null, parsedObject.adicionaPessoaNaoClienteRequest.dadosRastreamento);
+        System.assertEquals(1, parsedObject.adicionaPessoaNaoClienteRequest.codigoOrigemMovimento);
+    }
+}
+//ZSVEP-76-FIM

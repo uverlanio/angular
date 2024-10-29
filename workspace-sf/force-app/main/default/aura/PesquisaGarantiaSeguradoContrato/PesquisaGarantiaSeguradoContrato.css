@@ -1,0 +1,15 @@
+.THIS.slds-modal__header {
+	margin: 0rem -2rem;
+	padding: 0 0 1rem 0;
+}
+
+.THIS.slds-modal__footer {
+margin: 0 -2rem;
+   padding: 1.5rem 2.5rem 0 0;
+   box-shadow: unset;
+   background-color: #fff;
+}
+.THIS.slds-modal__body{
+  margin: 0 0rem;
+  height: 272px;
+}

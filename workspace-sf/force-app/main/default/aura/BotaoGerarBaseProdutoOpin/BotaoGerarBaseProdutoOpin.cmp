@@ -1,0 +1,4 @@
+<aura:component implements="force:lightningQuickActionWithoutHeader,force:hasRecordId,force:appHostable" controller="CatalogoOPINController">
+	<aura:handler name="init" value="{!this}" action="{!c.gerarBaseOpin}" />
+	<c:AcaoBotao aura:id="cmpModalAcaoBotao" mensagemPadraoErro="Não foi possível gerar a base de Produtos OPIN:" />
+</aura:component>

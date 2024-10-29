@@ -1,0 +1,177 @@
+<apex:component controller="BoasVindasController" access="global">
+<!--apex:attribute name="contrato" type="Contract" description="Contract" required="true"/-->
+<apex:attribute name="contratoId" type="Id" description="Contract Id" assignTo="{!assignedContratoId}"/>
+<html>
+        <head>
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+            <meta name="viewport" content="width=device-width,initial-scale=1"/>
+            <title>Porto Seguro - Boas Vindas</title>
+            <!--apex:stylesheet value="{!URLFOR($Resource.PortoSeguroTemplate, 'portoseguro.css')}"/-->
+            <style>
+              /*  table{
+                    border-collapse:collapse;
+                }
+                
+
+
+                
+
+                .informacoes{
+                    font-family: Arial, Helvetica, sans-serif;
+                    font-size: 12px;
+                    color: #b0b0b0;
+                    padding: 10px 20px 20px 20px !important;
+                    text-align: justify;
+                }
+
+                
+
+                @media screen and (max-width:600px) {
+                    #principal, .principal{
+                        width:100%;
+                    }
+                    
+                    #rodape-2016 {
+                        width:100%;
+                    }
+                    
+                    .rodape-2016-divisao {
+                        float:left;
+                        width:100%;
+                        margin:0px auto 20px auto;
+                    }
+                    
+                    .columns{
+                        width:100%;
+                    }
+                    
+                    .alingweb-mob{
+                        text-align:center;
+                    }
+
+                    .displaynone{
+                        display:none;
+                    }
+                }*/
+            </style>
+        </head>
+        <body style="font-family:Arial, Helvetica, sans-serif; margin:0; background-color: #efefef;">
+            <apex:outputpanel >
+                <table style="width:600px; background-color: #ffffff; margin-left: auto; margin-right: auto;">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <c:PortoSeguroTopo />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding:10px 30px 1px 30px; text-align: justify;">
+                                <p style="font-size:20px; line-height:26px; color:#00adee;">
+                                    <strong>Olá, {!if(contrato.Account.NomeSocial__c="", contrato.Account.Name, contrato.Account.NomeSocial__c)}. </strong><!--LECVPV 189 FIX02 - INICIO/FIM-->
+                                </p>
+                                <p style="font-size:15px; line-height:18px;">
+                                    Agradecemos a sua confiança em escolher o <strong>Porto Seguro Vida</strong>. 
+                                    Planejamento, inclusive financeiro, é fundamental para que você tenha mais tranquilidade para aproveitar o hoje ao máximo, sem precisar se preocupar com as incertezas do amanhã.
+                                    <br/><br/>
+                                    <a href="{!contrato.DistributionPublicUrl__c}">Clique aqui</a> com sua senha de acesso: {!contrato.Senha__c},  e confira a apólice do seu Seguro de Vida Individual, com as especificações de seguro e das coberturas contratadas.
+                                    <br/><br/>
+                                    Você pode consultar a sua apólice a qualquer momento na <strong>Área do Cliente</strong>, além de imprimir a 2ª via de boleto, acompanhar seus pagamentos, consultar as coberturas contratadas e muito mais.
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="center acesse" style="display: inline-block; text-align: center; width: 100%" >
+                                <a href="https://www.portoseguro.com.br/" target="_blank" style="text-decoration:none; display: inline-block;">
+                                        <p style="color:#ffffff; font-size:14px; background:#00adee; width:200px;padding:15px 0px;"><strong>Acesse e cadastre-se</strong></p>
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="dados" style="padding:0px 30px 30px 30px;">
+                                <table style="width: 100%;">
+                                    <tbody>
+                                        <tr>
+                                            <td style="padding-bottom:0px; border-bottom:1px solid #919191; text-align: justify;">
+                                                <p style="font-size:15px;">Confira abaixo se os dados do seu cadastro estão corretos. Se alguma informação estiver errada, entre em contato com seu Corretor para atualizá-los.<br/><br/>
+                                                    <strong>Apólice:</strong> {!contrato.NumeroApolice__c}<br/>
+                                                    <strong>E-mail:</strong> {!contrato.Account.PersonEmail}<br/>
+                                                    <strong>Cel.:</strong> {!contrato.Account.PersonMobilePhone}
+                                                </p>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="center clube" style="display: inline-block; text-align: center; width: 100%">
+                                <table width="90%" style="display: inline-block;">
+                                    <tbody>
+                                        <tr>
+                                            <td class="clube-container" style="background-color: #f1f5fa;">
+                                                <table width="45%" class="columns" style="float:left;">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td class="center clubeporto" style="display: flex; justify-content: center; text-align: center; align-items: center; padding:30px 0px;">
+                                                                <apex:image value="{!$Setup.Email_Endosso_Individual__c.Clube_Porto__c}" style="display: inline-block;"/>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                                <table width="49%" class="columns" style="float:left;">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>
+                                                                <p class="clube-cliente" style="font-size:15px; text-align: left;">Cliente <strong>Porto Seguro Vida</strong> tem descontos especiais em teatros e exposições, restaurantes, viagem e turismo, eletrodomésticos e muito mais. Acesse, cadastre-se e aproveite.</p>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="center clube-parte" style="display: inline-block;">
+                                                                <a href="https://www.portoplus.com.br/" target="_blank" style="text-decoration:none;"> <!-- PLV-4947 INICIO/FIM -->
+                                                                    <p style="font-size:15px; text-align:center; color:#ffffff; background:#00adee; width:200px; padding:15px;margin-top:0px;">Faça parte</p>
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="conte" style="padding: 0px 30px 30px 30px;">
+                                <table style="width: 100%;">
+                                    <tbody>
+                                        <tr>
+                                            <td style="border-bottom:1px solid #919191;">
+                                                <p class="conte-conosco" style="font-size:15px;"><strong>Conte sempre conosco e com seu Corretor.</strong><br/><br/>
+                                                    <span class="conte-corretor" style="color:#00adee;">{!corretor.Conta__r.Name}<br/>
+                                                        {!corretor.Conta__r.Email__c}<br/>
+                                                        {!corretor.Conta__r.Phone}
+                                                    </span><br/><br/>
+                                                    Um abraço,<br/><br/>
+                                                    <!-- PLV-4947 INICIO-->
+                                                    <strong>
+                                                        Carlos Eduardo Gondim<br/>
+                                                        Diretoria Porto Seguro Vida e Previdência
+                                                    </strong>
+                                                    <!-- PLV-4947 FIM-->
+                                                </p>
+                                                <p class="conte-conosco" style="font-size:15px;">
+                                                    <span class="conte-porto" style=" font-size:20px;">Porto Seguro <strong class="conte-vida" style="color:#e528a9;">Para Toda Vida</strong>.</span>
+                                                </p>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <c:PortoSeguroRodape hasChat="true" />
+            </apex:outputpanel>
+        </body>
+</html>
+</apex:component>

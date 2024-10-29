@@ -1,0 +1,413 @@
+<aura:component description="Caso Wizard"
+    implements="flexipage:availableForAllPageTypes,force:hasRecordId,force:lightningQuickActionWithoutHeader"
+    controller="CasoWizardPlusController" access="global">
+
+    <ltng:require styles="{!$Resource.bigModalCss}" />
+
+    <!-- VARIAVEIS GLOBAIS -->
+    <aura:attribute name="recordId"                 type="Id"       access="public"/>
+    <aura:attribute name="contratos"                type="List"     default="[]" access="public"/>
+    <aura:attribute name="garantiasModificadas"     type="List"     default="[]" access="public"/>
+    <aura:attribute name="CasosDuplicados"          type="Case[]"   access="public"/>
+    <aura:attribute name="casosCriados"             type="Case[]"   access="public"/>
+    <aura:attribute name="garantiasOriginais"       type="String"   default="" access="public"/>
+    <aura:attribute name="tipoEventoEscolhido"      type="String"   access="public"/>
+    <aura:attribute name="title"                    type="String"   default="Criar Sinistro" access="public" />
+
+    <!-- VARIAVEIS DE RESPONSE AO USUARIO -->
+    <aura:attribute name="tipoConfirm"              type="String"   default="" access="public" />
+    <aura:attribute name="showConfirmDialog"        type="Boolean"  default="false" access="public"/>
+    <aura:attribute name="confirmDialogMessage"     type="String"   default="" access="public" />
+    <aura:attribute name="errorInit"                type="String"   default="" access="public"/>
+    <aura:attribute name="saveMessage"              type="String"   default="" access="public"/>
+
+    <!-- VARIAVEIS DE NAVEGAÇÃO -->
+    <aura:attribute name="etapa"                    type="String"   default="" access="public"/>
+    <aura:attribute name="showSpinner"              type="Boolean"  default="true" access="public"/>
+    <aura:attribute name="bypassduplicate"          type="Boolean"  default="false" access="public"/>
+    <aura:attribute name="developerMode"            type="Boolean"  default="true" access="public"/>
+
+
+
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+
+    <lightning:card iconName="standard:record_update" title="{!v.title}">
+        <aura:if isTrue="{!v.showConfirmDialog}">
+            <div class="slds-m-around_xx-large">
+                <div role="dialog" class="slds-modal slds-fade-in-open ">
+                    <div class="slds-modal__container">
+                        <header class="slds-modal__header">
+                            <h1 class="slds-text-heading--medium">Confirmação</h1>
+                        </header>
+                        <div class="slds-modal__content slds-p-around--medium">
+                            <center>
+                                <aura:unescapedHtml value="{!v.confirmDialogMessage}" />
+                            </center>
+                        </div>
+                        <footer class="slds-modal__footer">
+                            <lightning:button name='Cancelar' label='Cancelar' onclick='{!c.handleConfirmDialogNo}' />
+                            <lightning:button variant="brand" name='Confirmar' label='Confirmar'
+                                onclick="{! v.tipoConfirm=='duplicate' ?  c.duplicateConfirm :  v.tipoConfirm=='reset' ? c.resetGarantias : v.tipoConfirm=='salvar' ? c.criarSinistros : '' }" />
+                        </footer>
+                    </div>
+                </div>
+                <div class="slds-backdrop slds-backdrop--open" onclick="{!c.handleConfirmDialogNo}"></div>
+            </div>
+        </aura:if>
+
+        <aura:if isTrue="{! !v.showSpinner}">
+            <div class="slds">
+
+                <aura:if isTrue="{!v.errorInit!=''}">
+                    <div class="slds-text-align_center" style="top: 25vh; position: relative;">
+                        <lightning:icon size="medium" aura:id="icone-error" iconName="action:close" alternativeText="Error!"
+                            variant="error" />
+                        <div class="slds-text-align_center slds-m-top_large">
+                            <center>
+                                <p>
+                                    <aura:unescapedHtml value="{!v.errorInit}" />
+                                </p>
+                            </center>
+                        </div>
+                        <aura:if isTrue="{! or(v.etapa=='1',v.etapa=='2')}">
+                            <div class="slds-text-align_center slds-m-top_large">
+                                <button type="button" onclick="{!c.corrigir}" class="slds-button slds-button_neutral">Corrigir</button>
+                            </div>
+                        </aura:if>
+                        <aura:if isTrue="{!v.etapa=='reiniciarEtapas'}">
+                            <div class="slds-text-align_center slds-m-top_large">
+                                <button type="button" onclick="{!c.reiniciarEtapas}" class="slds-button slds-button_neutral">Reiniciar Etapas</button>
+                            </div>
+                        </aura:if>
+                        <aura:if isTrue="{! and(v.etapa=='2',v.developerMode) }">
+                            <div class="slds-text-align_center slds-m-top_large">
+                                <button type="button" onclick="{!c.criarSinistros}" class="slds-button slds-button_brand">Criar Sinistros</button>
+                            </div>
+                        </aura:if>
+                    </div>
+                </aura:if>
+                
+
+                <!-- ETAPA 1 TIPO DE EVENTO -->
+                <aura:if isTrue="{! and(and(v.etapa == '1',empty(v.CasosDuplicados)), and(v.errorInit=='',v.saveMessage==''))}">
+                    <div id="wrapEventos" class="slds-m-around_xx-large">
+                        <lightning:recordEditForm recordId="{!v.recordId}" objectApiName="Case">
+                            <lightning:inputField fieldName="TipoEvento__c" value="{!v.tipoEventoEscolhido}" onchange="{!c.reiniciarEtapas}" />
+                        </lightning:recordEditForm>
+                    </div>
+                    
+                    <footer aura:id="footer" class="slds-show slds-m-around_xx-large slds-text-align_right">
+                        <button id="btnCancel" type="button" onclick="{!c.fechar}"
+                            class="slds-button slds-button_neutral">Cancelar</button>
+                        <button type="button" onclick="{!c.avancarEtapa}" class="slds-button slds-button_brand">Avançar</button>
+                    </footer>
+                </aura:if>
+
+                <!-- ETAPA 2 CASOS DUPLICADOS -->
+                <aura:if isTrue="{! not(empty(v.CasosDuplicados))}">
+                    <div class="slds-wrap slds-grid_align-center margin-auto slds-m-around_xx-large ">
+                        <div class="slds-align_absolute-center slds-m-around_x-small">
+                            <p>Existe um ou mais casos para o mesmo evento na mesma data de ocorrência. Deseja criar um ou mais novos casos?</p>
+                        </div>
+                        <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered slds-border_right slds-border_left slds-border_bottom slds-border_top">
+                            <thead>
+                                <tr class="slds-line-height_reset">
+                                    <th class="slds-p-around_x-small" scope="col">
+                                        <div class="slds-truncate" title="numeroCaso">Número do caso</div>
+                                    </th>
+                                    <th class="slds-p-around_x-small" scope="col">
+                                        <div class="slds-truncate" title="faseCaso">Fase</div>
+                                    </th>
+                                    <th class="slds-p-around_x-small" scope="col">
+                                        <div class="slds-truncate" title="statusCaso">Status do caso</div>
+                                    </th>
+                                    <th class="slds-p-around_x-small" scope="col">
+                                        <div class="slds-truncate" title="origemCaso">Origem do caso</div>
+                                    </th>
+                                    <th class="slds-p-around_x-small" scope="col">
+                                        <div class="slds-truncate" title="eventoCaso">Tipo de evento</div>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <aura:iteration items="{!v.CasosDuplicados}" var="caso">
+                                    <tr class="slds-hint-parent">
+                                        <th data-label="Case Numero" scope="row">
+                                            <div class="slds-text-body_x-small">
+                                                <a href="{!'/one/one.app?#/sObject/'+ caso.Id + '/view'}" target="_blank">
+                                                    {!caso.CaseNumber}
+                                                </a>
+                                            </div>
+                                        </th>
+                                        <th data-label="Case Status" scope="row">
+                                            <div class="slds-text-body_x-small">
+                                                {!caso.Status}
+                                            </div>
+                                        </th>
+                                        <th data-label="Case Status" scope="row">
+                                            <div class="slds-text-body_x-small">
+                                                {!caso.Status_Dependente__c}
+                                            </div>
+                                        </th>
+                                        <th data-label="Case Status" scope="row">
+                                            <div class="slds-text-body_x-small">
+                                                {!caso.Origin}
+                                            </div>
+                                        </th>
+                                        <th data-label="Case Status" scope="row">
+                                            <div class="slds-text-body_x-small">
+                                                {!caso.TipoEvento__c}
+                                            </div>
+                                        </th>
+                                    </tr>
+                                </aura:iteration>
+                            </tbody>
+                        </table>
+                        <div class="slds-m-top_large">
+                            <center>
+                                <input type="checkbox" style="width:15px; height:15px;" id="bypassduplicate" name="bypassduplicate"
+                                    value="{!v.bypassduplicate}" checked="{!v.bypassduplicate}" onchange="{!c.bypassconfirm}" />
+                                <label class="slds-checkbox__label" for="bypassduplicate">
+                                    <span class="slds-checkbox_faux"></span>
+                                    <span class="slds-form-element__label">Avaliei os casos duplicados e quero prosseguir!</span>
+                                </label>
+                            </center>
+                        </div>
+                        <div class="slds-m-top_large">
+                            <footer aura:id="footer" class="slds-m-top_large slds-show slds-text-align_right">
+                                <button id="btnCancel" type="button" onclick="{!c.fechar}" class="slds-button slds-button_neutral">Cancelar</button>
+                                <button type="button" onclick="{!c.voltar}" class="slds-button slds-button_neutral">Voltar</button>
+                                <button type="button" onclick="{!c.avancarEtapa}" class="slds-button slds-button_brand">Avançar</button>
+                            </footer>
+                        </div>
+                    </div>
+                </aura:if>
+
+                <!-- ETAPA 3 GARANTIAS DOS SINISTROS -->
+                <aura:if isTrue="{! and(v.etapa == '2',and(v.errorInit=='',v.saveMessage==''))}">
+                    <div class="slds-m-around_xx-large ">
+                        <lightning:layout class="slds-wrap" multipleRows="true">
+                            <lightning:layoutItem size="12">
+                                <lightning:accordion title="Contratos" allowMultipleSectionsOpen='true' >
+                                    <aura:iteration items="{!v.contratos}" var="contrato">
+                                        <lightning:accordionSection label="{!contrato.numero+' - '+contrato.segmento+' - '+contrato.tipo+' - '+contrato.inicioVigencia+' a '+contrato.fimVigencia}" name="{!contrato.numero}">
+                                            <div>
+                                                <a href="{! '/'+contrato.id}" target="_blank">Acessar o contrato</a>
+                                            </div>
+                                            <table class="slds-table">
+                                                <thead>
+                                                    <tr class="slds-text-title_caps">
+                                                        <th>
+                                                            <div class="slds-truncate" title="Column 1">Garantia</div>
+                                                        </th>
+                                                        <th>
+                                                            <div class="slds-truncate" title="Column 1">Valor/Dias/Franquia</div>
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <aura:iteration items="{!v.garantiasModificadas}" var="garantia">
+                                                        <aura:if isTrue="{! garantia.contratoId==contrato.id }">
+                                                            <tr class="slds-hint-parent">
+                                                                <td>
+                                                                    <input type="checkbox" style="" id="{!garantia.sigla +' - '+garantia.name+' - '+garantia.contratoId}"
+                                                                        name="{!garantia.sigla +' - '+garantia.name}"
+                                                                        data-value='{!garantia.selecionado}'
+                                                                        data-contratoid='{!garantia.contratoId}'
+                                                                        data-sigla='{!garantia.sigla}'
+                                                                        data-checkall='{!garantia.valorfixo}'
+                                                                        checked="{!garantia.selecionado}"
+                                                                        onclick="{!c.oncheckGarantia}"
+                                                                        />
+                                                                    <label class="slds-checkbox__label" for="{!garantia.sigla +' - '+garantia.name+' - '+garantia.contratoId}">
+                                                                        <span class="slds-checkbox_faux"></span>
+                                                                        <span class="slds-form-element__label">{!garantia.sigla +' - '+garantia.name}</span>
+                                                                    </label>
+                                                                </td>
+                                                                <td>
+                                                                    
+                                                                    <aura:if isTrue="{!garantia.valorfixo}">
+                                                                        <c:CurrencyInput aura:id="{! garantia.sigla+'-'+garantia.contratoId }" simbolo="R$" casasdecimais="2"
+                                                                            label="Valor" value="{!garantia.capital}"
+                                                                            nome="{! garantia.sigla+'-'+garantia.contratoId }" validarLimite="false"
+                                                                            showInput="false"/>
+                                                                            <aura:if isTrue="{! garantia.sigla=='IPA' }">
+                                                                                &nbsp;&nbsp;
+                                                                                <lightning:helptext
+                                                                                    content="IPA - Será aberta com 15% do Capital Contratado. Durante a análise o valor poderá ser ajustado." />
+                                                                            </aura:if>
+                                                                        <aura:set attribute="else">
+
+                                                                        
+
+                                                                            <aura:if isTrue="{!garantia.liberardiasfranquia == true}">
+                                                                                <lightning:layout class="slds-grid slds-gutters" multipleRows="true">
+                                                                                    <lightning:layoutItem size="6" class="slds-col">
+                                                                                        <c:CurrencyInput aura:id="{! garantia.sigla+'-'+garantia.contratoId }" simbolo="" casasdecimais="0" label="Dias"
+                                                                                            value="{!garantia.dias}" nome="{! garantia.sigla+'-'+garantia.contratoId }" validarLimite="true"
+                                                                                            limiteMinimo="{!garantia.minimodias}" limiteMaximo="{!garantia.maximodias}" helplabel="Dias solicitados pelo segurado"
+                                                                                            disabled="{! !garantia.selecionado}" />
+                                                                                    </lightning:layoutItem>
+                                                                                    <lightning:layoutItem size="6" class="slds-col">
+                                                                                        <c:CurrencyInput aura:id="{! garantia.sigla+'-'+garantia.contratoId }"
+                                                                                        simbolo=""
+                                                                                        casasdecimais="0"
+                                                                                        label="Franquia"
+                                                                                        value="{!garantia.franquia}"
+                                                                                        nome="{! garantia.sigla+'-'+garantia.contratoId }"
+                                                                                        validarLimite="true"
+                                                                                        limiteMinimo="{!garantia.minimofranquia}"
+                                                                                        limiteMaximo="{!garantia.maximofranquia}"
+                                                                                        disabled="{! !garantia.selecionado}" />
+                                                                                    </lightning:layoutItem>
+                                                                                </lightning:layout>
+                                                                                <center>
+                                                                                    <!--<aura:iteration items="{!v.franquias}" var="franquia">
+                                                                                        <aura:if isTrue="{! garantia.garantiaprodutoId==franquia.garantiaprodutoId }">
+                                                                                            <div>{!franquia.descricao}</div>
+                                                                                        </aura:if>
+                                                                                    </aura:iteration>-->
+                                                                                    <div>{! garantia.descricaofranquia}</div>
+                                                                                </center>
+                                                                                <aura:set attribute="else">
+                                                                                    <c:CurrencyInput aura:id="{! garantia.sigla+'-'+garantia.contratoId }"
+                                                                                        simbolo="R$"
+                                                                                        casasdecimais="2"
+                                                                                        label="Valor"
+                                                                                        value="{!garantia.capital}"
+                                                                                        nome="{! garantia.sigla+'-'+garantia.contratoId }" validarLimite="true"
+                                                                                        limiteMinimo="1"
+                                                                                        limiteMaximo="{!garantia.capitalmaximo}"
+                                                                                        disabled="{! !garantia.selecionado}" />
+                                                                                </aura:set>
+                                                                            </aura:if>
+
+                                                                        
+                                                                        </aura:set>
+                                                                    </aura:if>
+                                                                    
+                                                                </td>
+
+                                                            
+                                                            </tr>
+                                                        </aura:if>
+                                                    </aura:iteration>
+                                                    
+                                                    
+                                                </tbody>
+                                            </table>
+                                        </lightning:accordionSection>
+                                    </aura:iteration>
+                                    
+                                </lightning:accordion>
+                            </lightning:layoutItem>
+                        </lightning:layout>
+                        <div class="slds-m-top_x-large slds-m-bottom_x-large">
+                                <button class="slds-float_left slds-button" onclick="{!c.confirmaresetGarantias}">Resetar conforme Original</button>
+                                
+                                <lightning:button class="slds-float_right" variant="brand" label="Criar Sinistros" title="Criar Sinistros" onclick="{!c.avancarEtapa}" />
+                                <lightning:button class="slds-float_right" variant="neutral" label="Voltar" title="Voltar" onclick="{!c.voltar}" />
+                        </div>
+                    </div>
+                </aura:if>
+
+
+                
+
+                <!-- ETAPA 4 CONCLUSÃO SUCESSO -->
+                <aura:if isTrue="{!v.saveMessage!=''}">
+                    <div class="slds-text-align_center" style="top: 10vh; position: relative;">
+                        <lightning:icon size="medium" aura:id="icone-sucesso" iconName="action:approval" alternativeText="Error!"
+                            variant="error" />
+                        <div class="slds-text-align_center slds-m-top_large">
+                            <center>
+                                <p>
+                                    <aura:unescapedHtml value="{!v.saveMessage}" />
+                                </p>
+                            </center>
+                            <table
+                                class=" slds-m-top_large slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered slds-border_right slds-border_left slds-border_bottom slds-border_top">
+                                <thead>
+                                    <tr class="slds-line-height_reset">
+                                        <th class="slds-p-around_x-small" scope="col">
+                                            <div class="slds-truncate" title="numeroCaso"># - Visualizar</div>
+                                        </th>
+                                        <th class="slds-p-around_x-small" scope="col">
+                                            <div class="slds-truncate" title="numeroCaso">Contrato</div>
+                                        </th>
+                                        <th class="slds-p-around_x-small" scope="col">
+                                            <div class="slds-truncate" title="faseCaso">Fase</div>
+                                        </th>
+                                        <th class="slds-p-around_x-small" scope="col">
+                                            <div class="slds-truncate" title="statusCaso">Status do caso</div>
+                                        </th>
+                                        <th class="slds-p-around_x-small" scope="col">
+                                            <div class="slds-truncate" title="origemCaso">Origem do caso</div>
+                                        </th>
+                                        <th class="slds-p-around_x-small" scope="col">
+                                            <div class="slds-truncate" title="eventoCaso">Tipo de evento</div>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <aura:iteration items="{!v.casosCriados}" var="caso" indexVar='indice'>
+                                        <tr class="slds-hint-parent">
+                                            <th data-label="Case Status" scope="row">
+                                                <div class="slds-text-body_x-small">
+                                                    <a href="{!'/'+caso.Id}" target="_blank">
+                                                        {!(indice) + 1} - Visualizar caso
+                                                    </a>
+                                                </div>
+                                            </th>
+                                            <th data-label="Contrato" scope="row">
+                                                <div class="slds-text-body_x-small">
+                                                    <aura:iteration items="{!v.contratos}" var="contrato">
+                                                        <aura:if isTrue="{! contrato.id==caso.Contrato__c }">
+                                                            {!contrato.numero}
+                                                        </aura:if>
+                                                    </aura:iteration>
+                                                </div>
+                                            </th>
+                                            <th data-label="Case Status" scope="row">
+                                                <div class="slds-text-body_x-small">
+                                                    {!caso.Status}
+                                                </div>
+                                            </th>
+                                            <th data-label="Case Status" scope="row">
+                                                <div class="slds-text-body_x-small">
+                                                    {!caso.Status_Dependente__c}
+                                                </div>
+                                            </th>
+                                            <th data-label="Case Status" scope="row">
+                                                <div class="slds-text-body_x-small">
+                                                    {!caso.Origin}
+                                                </div>
+                                            </th>
+                                            <th data-label="Case Status" scope="row">
+                                                <div class="slds-text-body_x-small">
+                                                    {!caso.TipoEvento__c}
+                                                </div>
+                                            </th>
+                                        </tr>
+                                    </aura:iteration>
+                                </tbody>
+
+                            </table>
+                            <center>
+                                <button class="slds-button slds-button_brand slds-m-around_xx-large" onclick="{!c.fechar}">Fechar</button>
+                            </center>
+                        </div>
+                    </div>
+                </aura:if>
+
+            </div>
+            <aura:set attribute="else">
+                <lightning:spinner alternativeText="Loading" size="medium" class="slds-is-fixed" />
+            </aura:set>
+        </aura:if>
+
+    </lightning:card>
+
+
+</aura:component>

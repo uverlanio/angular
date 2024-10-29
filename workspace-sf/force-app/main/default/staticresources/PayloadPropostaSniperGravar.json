@@ -1,0 +1,259 @@
+{
+    "proposta": {
+        "numeroOrcamento": "32816382",
+        "numeroPortal": 0,
+        "origem": 18,
+        "tipoSeguro": "Novo",
+        "entradaNegocio": "Corretor 2.0",
+        "codigoProdutoVida": "SNIPER",
+        "dataTransmissao": "2019-05-30",
+        "meioComercializacao": "CO2",
+        "imprimirCertificadoSeguro": true,
+        "contratantes": [{
+            "numero": 1,
+            "tipo": "PRI",
+            "pessoa": {
+                "tipo": "FIS",
+                "nome": "WESLEY ZOPPI",
+                "email": "wesley@zoppi.com.br",
+                "rendaMensal": "2200.33",
+                "dadosPessoaFisica": {
+                    "sexo": "MASC",
+                    "profissao": 21111,
+                    "numeroCpf": "892912972",
+                    "digitoCpf": "24",
+                    "fumante": true,
+                    "nacionalidade": "BRA",
+                    "estadoCivil": "SOL",
+                    "dataNascimento": "1984-03-03T00:00:00.000Z"
+                },
+                "telefones": [{
+                        "tipoTelefone": "COM",
+                        "numeroTelefone": 70090101,
+                        "dddTelefone": 41
+                    },
+                    {
+                        "tipoTelefone": "FAX",
+                        "numeroTelefone": 98567725,
+                        "dddTelefone": 51
+                    }
+                ],
+                "enderecos": [{
+                    "tipoEndereco": "RES",
+                    "logradouro": "RUA RUA D",
+                    "numeroLogradouro": 666,
+                    "bairro": "",
+                    "cidade": "PORTO ALEGRE",
+                    "uf": "RS",
+                    "cep": "90046",
+                    "complementoCep": "901",
+                    "paisResidencia": "BRA"
+                }]  
+            },
+            "dadosPagamento": {
+                "quantidadeParcelas": 2,
+                "codigoFormaPagamento": 41,        
+                "vencimentoPrimeiraParcela": "2018-08-30",
+                "tipoResponsavelPagamento": "SEG",
+				"responsavelPagamento":{
+					"tipo": "FIS",
+						"nome": "WESLEY ZOPPI",
+						"rendaMensal": "2200.33",
+						"dadosPessoaFisica": {
+							"sexo": "MASC",
+							"numeroCpf": "892912972",
+							"digitoCpf": "24"                  
+						}
+				},
+                "formaPagamento":{
+                        "planoParcelamento":
+                            {
+                                "quantidadeParcelas": 1,
+                                "idPlanoParcelamento": "a14L0000003LbJpIAK",
+                                "codigoMeioRecebimento": "*"
+                            }
+                        ,                      
+                    "idFormaPagamento": "a0aL0000007ApCgIAK",                      
+                    "descricao": "A VISTA NA CIA",
+                    "codigo": 11
+                },         
+                "dadosBancarios": {
+                    "banco": 341,
+                    "agencia": "1234",
+                    "digitoAgencia": "1",
+                    "conta": "12345678",
+                    "digitoConta": "1"
+                },
+                "cartaoCredito":{
+                    "numero": "XXXX-XXXX-XXXX-6407",
+                    "ticket": "666",
+                    "cartaoPorto": true,
+                    "validade": "06-2018",
+                    "codigoSeguranca": "999",
+                    "nomeTitutar": "Nome do Titular do Cartão"
+                },
+               "responsavelFinanceiro": false,
+               "responsavelFinanceiroSeguro": {
+                  "nome": "JOSE ADEVAL NASCIMENTO FEITOSA",
+                  "cpf": "429.384.305-15",
+                  "vinculoComSegurado": "PAI",
+                  "email": "teste@teste.com.br",
+                  "dadosPessoaFisica": {
+                     "digitoCpf": "15",
+                     "numeroCpf": "429384305"
+                  },
+                  "telefones": [{
+                     "tipoTelefone": "CEL",
+                     "numeroTelefone": "111111111",
+                     "dddTelefone": "11"
+                  }, {
+                     "tipoTelefone": "RES",
+                     "numeroTelefone": "222222222",
+                     "dddTelefone": "22"
+                  }, {
+                     "tipoTelefone": "PES",
+                     "numeroTelefone": "333333333",
+                     "dddTelefone": "33"
+                  }],
+                  "enderecos": [{
+                     "tipoEndereco": "Comercial",
+                     "logradouro": "Luís Gama",
+                     "numeroLogradouro": 2,
+                     "bairro": "Jardim Monções",
+                     "cidade": "Santo André",
+                     "uf": "SP",
+                     "cep": "09180",
+                     "complemento": "",
+                     "complementoCep": "320"
+                  }]
+               }
+            },
+            "grupos": [{
+                "numero": 1,
+                "nome": "Seguro Individual",
+                "qtdeSegurados": 1,
+                "segurados": [{
+                    "numero": 1,
+                    "pessoa": {
+                        "tipo": "FIS",
+                        "nome": "THIAGO CASTRO COSTA",
+                        "email": "luis@efetivo.com.br ",
+                        "rendaMensal": "2200.33",
+                        "dadosPessoaFisica": {
+                            "sexo": "MASC",
+                            "numeroCpf": "892912972",
+                            "digitoCpf": "24",
+                            "nacionalidade": "BRA",
+                            "estadoCivil": "SOL",
+                            "dataNascimento": "1984-03-03T00:00:00.000Z"
+                        }
+                    },
+                    "coberturas": [{
+                            "sigla": "BAS",
+                            "valor": 50000.0
+                        },
+                        {
+                            "sigla": "IEA",
+                            "percentual": 100.0,
+                            "garantiaReferenciada": "BAS"
+                        },
+                        {
+                            "sigla": "IPA",
+                            "percentual": 100.0,
+                            "garantiaReferenciada": "BAS"
+                        },
+                        {
+                            "sigla": "AFT",
+                            "valor": 3000.0
+                        },
+                        {
+                            "sigla": "AFF",
+                            "valor": 3000.0
+                        }
+                    ],
+                    "questionario": {
+                        "respostas": [{
+                                "questao": "Pergunta 1",
+                                "resposta": "Resposta 1"
+                            },
+                            {
+                                "questao": "Pergunta 2",
+                                "resposta": "Resposta 2"
+                            }
+                        ]
+                    },
+                    "beneficiarios": [{
+                        "tipoBeneficiario": "Nome do beneficiário",
+                        "motivoSemCpfCnpj": "Não Desejo Informar",
+                        "grauParentesco": "Cônjuge",
+                        "participacao": 100,
+                        "pessoa": {
+                            "tipo": "FIS",
+                            "nome": "Matheus",
+                            "email": "wesley@zoppi.com.br",
+                            "rendaMensal": 4000.00,
+                            "dadosPessoaFisica": {
+                                "sexo": "MASC",
+                                "numeroCpf": "475034228",
+                                "profissao": "2885",
+                                "digitoCpf": "90",
+                                "estadoCivil": "SOL",
+                                "dataNascimento": "1984-03-03",
+                                "pep": "RelacionamentoProximo",
+                                "nomePessoaPep": "Nome PEP",
+                                "tipoRelacionamentoPep": "Pai",
+                                "cpfPep": "35958621807"
+ 
+                            }
+                        },
+                        "telefones": [{
+                            "tipoTelefone": "COM",
+                            "numeroTelefone": 70090101,
+                            "dddTelefone": 41
+                        }]
+                    }]
+                }]
+            }]
+        }],
+        "canalDistribuicao": "COR",
+        "remuneracoes": [{
+                "tipoRemuneracao": "AGE",
+                "percentual": 100,
+                "favorecidos": [{
+                    "papel": "AGE",
+                    "participacao": 100,
+                    "pessoa": {
+                        "tipo": "JUR",
+                        "nome": "DECOLAR.COM SITE VIAGENS",
+                        "dadosPessoaJuridica": {
+                            "numeroCnpj": "27351731",
+                            "ordemCnpj": "0001",
+                            "digitoCnpj": "38"
+                        }
+                    }
+                }]
+            },
+            {
+                "tipoRemuneracao": "COR",
+                "percentual": 20,
+                "favorecidos": [{
+                    "papel": "COR",
+                    "participacao": 100,
+                    "corretorLider": true,
+                    "susep": "P5005J",
+                    "susepEmissao": "P5005J",
+                    "susepOrcamento": "P5005J",
+                    "pessoa": {
+                        "tipo": "JUR",
+                        "nome": "CLARA ROSEMBLAT CORRETORA DE SEGUROS LTDA",
+                        "dadosPessoaJuridica": {
+                            "numeroCnpj": "61038592",
+                            "ordemCnpj": "0001",
+                            "digitoCnpj": "25"
+                        }
+                    }
+                }]
+            }
+        ]
+    }
+}

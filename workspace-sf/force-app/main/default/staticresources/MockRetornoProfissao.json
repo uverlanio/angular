@@ -1,0 +1,59 @@
+{
+	"ocupacoes": [
+        {
+            "numeroOcupacao": 1,
+            "codigoGrupo": 0,
+            "nomeOcupacao": "Membros das forcas armadas, policiais e bombeiros militares",
+            "dataAtualizacao": "2020-07-23",
+            "codigoSituacao": "A"
+        },
+        {
+            "numeroOcupacao": 11,
+            "codigoGrupo": 0,
+            "codigoSubgrupoPrincipal": 1,
+            "nomeOcupacao": "Membros das forcas armadas",
+            "dataAtualizacao": "2020-07-23",
+            "codigoSituacao": "A"
+        },        
+        {
+            "numeroOcupacao": 60,
+            "codigoGrupo": 0,
+            "codigoSubgrupoPrincipal": 1,
+            "codigoSubgrupo": 0,
+            "nomeOcupacao": "Membros das forcas armadas",
+            "dataAtualizacao": "2020-07-23",
+            "codigoSituacao": "A"
+        },
+        {
+            "numeroOcupacao": 254,
+            "codigoGrupo": 0,
+            "codigoSubgrupoPrincipal": 1,
+            "codigoSubgrupo": 0,
+            "codigoFamilia": 1,
+            "nomeOcupacao": "Oficiais generais das forcas armadas",
+            "dataAtualizacao": "2020-07-23",
+            "codigoSituacao": "A"
+        },
+		{
+            "numeroOcupacao": 256,
+            "codigoGrupo": 0,
+            "codigoSubgrupoPrincipal": 1,
+            "codigoSubgrupo": 0,
+            "codigoFamilia": 3,
+            "nomeOcupacao": "Praças das forcas armadas",
+            "dataAtualizacao": "2020-07-23",
+            "codigoSituacao": "A"
+        },
+        {
+            "numeroOcupacao": 866,
+            "codigoGrupo": 0,
+            "codigoSubgrupoPrincipal": 1,
+            "codigoSubgrupo": 0,
+            "codigoFamilia": 1,
+            "codigoOcupacao": 5,
+            "nomeOcupacao": "Oficial general da aeronáutica",
+            "dataAtualizacao": "2020-07-23",
+            "codigoSituacao": "A"
+        }
+	]		
+}	

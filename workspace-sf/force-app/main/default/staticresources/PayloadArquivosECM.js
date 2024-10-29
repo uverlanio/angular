@@ -1,0 +1,23 @@
+{
+  "dados":
+  [
+    {
+      "tipoarquivo":"Contrato",
+      "codfatura":"",
+      "codcontrato":"14889",
+      "idarquivo":"123456789aaaaa12"
+    },
+    {
+      "tipoarquivo":"Boleto",
+      "codfatura":"00000223",
+      "codcontrato":"",
+      "idarquivo":"123456789aaaaa13"
+    },
+    {
+      "tipoarquivo":"Anexo Fatura",
+      "codfatura":"00000224",
+      "codcontrato":"",
+      "idarquivo":"123456789aaaaa14"
+    }
+  ]
+}

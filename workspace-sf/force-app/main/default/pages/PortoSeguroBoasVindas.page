@@ -1,0 +1,141 @@
+<!--INICIO | PLV-4433-VI (Digital)
+/*
+*  @author Squad Avanxo 
+*  @Descrição: Pagina de Kit de Boas Vindas
+*/-->
+<apex:page standardController="Contract" applyHtmlTag="false" applyBodyTag="false" showHeader="false" standardStyleSheets="false">
+    <c:BoasVindasComponent contratoId="{!Contract.Id}"/>
+    <!--html>
+        <head>
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+            <meta name="viewport" content="width=device-width,initial-scale=1"/>
+            <title>Porto Seguro - Boas Vindas</title>
+            <apex:stylesheet value="{!URLFOR($Resource.PortoSeguroTemplate, 'portoseguro.css')}"/>
+        </head>
+        <body>
+            <apex:outputpanel rendered="{!errorMessage != null}">
+                <table width="600" border="0" cellspacing="0" cellpadding="0" align="center" class="principal">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <h1>{!errorMessage}</h1>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </apex:outputpanel>
+            <apex:outputpanel rendered="{!errorMessage == null}">
+                <table class="principal">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <c:PortoSeguroTopo />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="ola">
+                                <p class="nome">
+                                    <strong>Olá, {!contrato.Account.Name}.</strong>
+                                </p>
+                                <p class="agradecimento">
+                                    Agradecemos a sua confiança em escolher o <strong>Porto Seguro Vida</strong>. 
+                                    Planejamento, inclusive financeiro, é fundamental para que você tenha mais tranquilidade para aproveitar o hoje ao máximo, sem precisar se preocupar com as incertezas do amanhã.<br/><br/>
+                                    Você pode consultar a sua apólice a qualquer momento na <strong>Área do Cliente</strong>, além de imprimir a 2ª via de boleto, acompanhar seus pagamentos, consultar as coberturas contratadas e muito mais.
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="center acesse">
+                                <a href="https://www.portoseguro.com.br/" target="_blank">
+                                    <p><strong>Acesse e cadastre-se</strong></p>
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="dados">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <p>Confira abaixo se os dados do seu cadastro estão corretos. Se alguma informação estiver errada, entre em contato com seu Corretor para atualizá-los.<br/><br/>
+                                                    <strong>Apólice:</strong> {!contrato.NumeroApolice__c}<br/>
+                                                    <strong>E-mail:</strong> {!contrato.Account.PersonEmail}<br/>
+                                                    <strong>Cel.:</strong> {!contrato.Account.PersonMobilePhone}
+                                                </p>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="center clube">
+                                <table width="90%">
+                                    <tbody>
+                                        <tr>
+                                            <td class="clube-container">
+                                                <table width="45%" class="columns">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td class="center clubeporto">
+                                                                <apex:image value="{!URLFOR($Resource.PortoSeguroTemplate, 'ClubePORTO.jpg')}"/>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                                <table width="49%" class="columns">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>
+                                                                <p class="clube-cliente">Cliente <strong>Porto Seguro Vida</strong> tem descontos especiais em teatros e exposições, restaurantes, viagem e turismo, eletrodomésticos e muito mais. Acesse, cadastre-se e aproveite.</p>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="center clube-parte">
+                                                                <a href="https://www.clubeportoseguro.com.br/" target="_blank">
+                                                                    <p>Faça parte</p>
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="conte">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <p class="conte-conosco"><strong>Conte sempre conosco e com seu Corretor.</strong><br/><br/>
+                                                    <span class="conte-corretor">{!corretor.Conta__r.Name}<br/>
+                                                        {!corretor.Conta__r.Email__c}<br/>
+                                                        {!corretor.Conta__r.Phone}
+                                                    </span><br/><br/>
+                                                    Um abraço,<br/><br/>
+                                                    <strong>
+                                                        Fernanda Pasquarelli<br/>
+                                                        Diretoria Porto Seguro Vida e Previdência
+                                                    </strong>
+                                                </p>
+                                                <p class="conte-conosco">
+                                                    <span class="conte-porto">Porto Seguro <strong class="conte-vida">Para Toda Vida</strong>.</span>
+                                                </p>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <c:PortoSeguroRodape hasChat="true" />
+            </apex:outputpanel>
+        </body>
+    </html-->
+</apex:page>
+<!--FIM | PLV-4433-VI (Digital) -->

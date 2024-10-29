@@ -1,0 +1,98 @@
+<aura:component access="GLOBAL" implements="force:appHostable,flexipage:availableForAllPageTypes,force:hasRecordId" controller="ParcelasContratoController">
+    <aura:handler name="init" value="{! this }" action="{! c.init }" />
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="canEdit" type="Boolean" default="false" />
+    <aura:attribute name="lstParcelas" type="ParcelamentoContratoTO[]" default="[]" />
+
+    <aura:attribute type="Boolean" name="atualizou" default="false" />
+    <aura:handler name="change" value="{! v.atualizou }" action="{! c.atualizarComponente }" />
+
+    <lightning:spinner aura:id="mySpinner" class="slds-hide" />
+
+    <table class="slds-table slds-table_bordered slds-table_cell-buffer">
+        <thead>
+        <tr class="slds-text-title_caps">
+            <th scope="col">
+                <div class="slds-truncate" title="Número parcela">Número parcela</div>
+            </th>
+           
+            <th scope="col">
+                <div class="slds-truncate" title="Vencimento">Vencimento</div>
+            </th>
+            <th scope="col">
+                <div class="slds-truncate" title="status">status</div>
+            </th>
+            <th scope="col">
+                <div class="slds-truncate" title="Prêmio Líquido (R$)">Prêmio Líquido (R$)</div>
+            </th>
+            <th scope="col">
+                <div class="slds-truncate" title="IFO (R$)">IOF (R$)</div>
+            </th>
+            <th scope="col">
+                <div class="slds-truncate" title="Prêmio Total (R$)">Prêmio Total (R$)</div>
+            </th>
+            <!-- INICIO | PLV-2216 -->
+             <th scope="col">
+                <div class="slds-truncate" title="Data Pagamento Parceiro">Data Pagamento Parceiro</div>
+            </th>
+            <!-- FIM | PLV-2216 -->
+            <th scope="col">
+                <div class="slds-truncate" title="Ações">Ações</div>
+            </th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <aura:iteration items="{! v.lstParcelas }" var="parcela" indexVar="index">
+            <tr>
+                <td scope="row" data-label="Número parcela">
+                    <div class="slds-truncate" title="{!parcela.numeroParcela}">
+                        {!parcela.numeroParcela}
+                    </div>
+                </td>               
+                <td data-label="Vencimento">
+                    <div class="slds-truncate" title="{!parcela.dataVencimento}">
+                        <ui:outputDate value="{!parcela.dataVencimento}" />
+                    </div>
+                </td>
+                <td data-label="status">
+                    <div class="slds-truncate" title="{!parcela.status}">
+                        {!parcela.status}
+                    </div>
+                </td>
+                <td data-label="R$ Liquido">
+                    <div class="slds-truncate" title="{!parcela.valorLiquido}">
+                        {!parcela.valorLiquido}
+                    </div>
+                </td>
+                <td data-label="R$ IOF">
+                    <div class="slds-truncate" title="{!parcela.valorIOF}">
+                        {!parcela.valorIOF}
+                    </div>
+                </td>
+                <td data-label="R$ Total">
+                    <div class="slds-truncate" title="{!parcela.valorTotal}">
+                        {!parcela.valorTotal}
+                    </div>
+                </td>
+                <!-- INICIO | PLV-2216 -->
+                 <td scope="row" data-label="Data Pagamento Parceiro">
+                    <div class="slds-truncate" title="{!parcela.dataPagamentoParceiro}">
+                        <ui:outputDate value="{!parcela.dataPagamentoParceiro}" />
+                    </div>
+                </td>
+                <!-- FIM | PLV-2216 -->
+                <td data-label="">
+                    <!-- INICIO | PLV-3869 -->
+                    <aura:if isTrue="{! and(v.canEdit, and(parcela.status != 'PAGA', and(parcela.status != 'FATURADO',parcela.status != 'CANCELADA') ) ) }">
+                    <!-- FIM | PLV-3869 -->
+                        <lightning:buttonIcon iconName="utility:edit" alternativeText="editar parcela" onclick="{! c.editarParcela }" value="{! index }" />
+                    </aura:if>
+                </td>
+            </tr>
+        </aura:iteration>
+        </tbody>
+    </table>
+
+    <c:EditarParcelaContrato aura:id="edicaoParcela" ehVisivel="false" atualizou="{! v.atualizou }" />
+</aura:component>

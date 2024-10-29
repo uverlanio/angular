@@ -1,0 +1,63 @@
+<apex:component controller="EndossoController" access="global">
+<apex:attribute name="contratoId" type="Id" description="Contract Id" assignTo="{!assignedContratoId}"/>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<table align="center" bgcolor="#ffffff" border="0" cellpadding="0" cellspacing="0" class="principal" width="600">
+	<tbody>
+		<tr>
+			<td><img src="https://portoguide.campanhaporto.com.br/visual/EndossoVidaOn.png" style="display: block; max-width: 100%; width: 600px; height: 354px;" /></td>
+		</tr>
+		<tr>
+			<td style="padding:30px;">
+			<table border="0" cellpadding="0" cellspacing="0" width="100%">
+				<tbody>
+					<tr>
+						<td style="padding-bottom: 10px">
+						<p style="font-size:20px; line-height:20px;color: #0099ff;"><span style="font-family:verdana,geneva,sans-serif;"><span style="font-size:20px;"><strong>Ol&aacute;, {!if(contrato.Account.NomeSocial__c="", contrato.Account.Name, contrato.Account.NomeSocial__c)}.</strong></span></span></p>
+
+						<p><span style="font-family:verdana,geneva,sans-serif;"><span style="font-size: 14px; text-align: justify;">Informamos que a altera&ccedil;&atilde;o em seu Seguro de Vida&nbsp;foi realizada de acordo com a sua solicita&ccedil;&atilde;o.</span><br />
+						<br />
+						<span style="font-size: 14px;">Lembramos que o Seguro de Vida faz parte de um planejamento financeiro para aproveitar agora, sem se preocupar com o futuro e com os imprevistos do dia a dia.</span></span></p>
+
+						<p style="background-color: rgb(255, 255, 255); text-align: justify;"><span style="font-family:verdana,geneva,sans-serif;"><span style="font-size: 14px;">Para acessar o documento de Endosso,</span>&nbsp;<span style="font-size: 14px;">basta acessar o link e digitar a senha contida neste e-mail:</span></span><br />
+						&nbsp;</p>
+
+						<p style="font-family: Arial, Helvetica, sans-serif; text-align: justify; background-color: rgb(255, 255, 255); font-size: 15px; line-height: 18px;"><span style="font-family:verdana,geneva,sans-serif;"><strong style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Acesse:&nbsp;<a href="{!contrato.DistributionPublicUrl__c}"><span style="color:#00a1fc;">M</span></a><a href="{!contrato.DistributionPublicUrl__c}"><span style="color:#00a1fc;">eu Endosso</span></a></strong></span></p>
+
+						<p style="font-family: Arial, Helvetica, sans-serif; text-align: justify; background-color: rgb(255, 255, 255); font-size: 15px; line-height: 18px;"><span style="font-family:verdana,geneva,sans-serif;"><strong style="font-family: verdana, geneva, sans-serif; font-size: 14px;">Senha:&nbsp;<span style="color: rgb(0, 161, 252);">{!contrato.Senha__c}</span></strong></span></p>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			</td>
+		</tr>
+		<tr>
+			<td style="padding: 30px; line-height: 24px">
+			<table border="0" cellpadding="0" cellspacing="0" width="100%">
+				<tbody>
+					<tr>
+						<td style="padding-bottom: 20px; border-bottom: 1px solid #929292;">
+						<p><span style="font-family:verdana,geneva,sans-serif;"><span style="font-size: 14px;">Um abra&ccedil;o!</span></span></p>
+						<!-- II-138 FIX04 INICIO -->
+						<p><span style="font-family:verdana,geneva,sans-serif;"><strong><span style="font-size: 14px;">Carlos Eduardo Gondim <br/>Diretoria Porto Seguro Vida e Previd&ecirc;ncia</span></strong></span></p>
+						<!-- II-138 FIX04 FIM -->
+						<p><span style="font-family:verdana,geneva,sans-serif;"><strong><span style="font-size: 20px;">Todo cuidado &eacute; <u>Porto.</u></span></strong></span></p>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			</td>
+		</tr>
+		<tr>
+			<td style="padding: 30px; line-height: 24px; text-align: justify;"><span style="color:#696969;"><span style="font-size:12px;"><span style="font-family:arial,helvetica,sans-serif;">Porto Seguro Cia. de Seguros Gerais S.A. &ndash; CNPJ: 61.198.164/0001-60, Alameda Bar&atilde;o de Piracicaba n&ordm; 618 &ndash; Torre B &ndash; 3&ordm; Andar &ndash; Campos El&iacute;seos &ndash; S&atilde;o Paulo &ndash; CEP 01216-012. Informa&ccedil;&otilde;es reduzidas. Consulte as Condi&ccedil;&otilde;es Gerais do seguro contratado no site www.portoseguro.com.br/vida</span></span></span></td>
+		</tr>
+	</tbody>
+</table>
+
+<p>&nbsp;</p>
+</body>
+</html>
+</apex:component>

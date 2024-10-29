@@ -1,0 +1,30 @@
+<!--
+ - Created by Alessndro Ponte on 20/06/2018.
+ -->
+
+<aura:component description="Modal">
+
+  <aura:attribute name="isOpenModal" type="Boolean" default="false"/>
+  <aura:attribute name="title" type="Aura.Component"/>
+
+  <div class="demo-only" style="height: 640px;">
+    <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="{!(v.isOpenModal) ? 'slds-modal slds-fade-in-open' : 'slds-modal'}">
+      <div class="slds-modal__container">
+        <header class="slds-modal__header">
+          <lightning:buttonIcon iconName="utility:close" variant="bare-inverse" class="slds-modal__close" alternativeText="Close" onclick="{!c.closeModal}" />
+
+          <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">{!v.title}</h2>
+        </header>
+        <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+          {!v.body}
+        </div>
+        <footer class="slds-modal__footer">
+          <button class="slds-button slds-button_neutral" onclick="{!c.closeModal}">Cancelar</button>
+          <button class="slds-button slds-button_brand">Salvar</button>
+        </footer>
+      </div>
+    </section>
+    <div class="{!(v.isOpenModal) ? 'slds-backdrop slds-backdrop_open' : 'slds-backdrop'}"></div>
+  </div>
+
+</aura:component>

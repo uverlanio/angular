@@ -1,0 +1,89 @@
+<!-- BotaoPagamentoAdicionalGarantiaCMP -->
+<aura:component implements="flexipage:availableForAllPageTypes,force:hasRecordId,force:lightningQuickActionWithoutHeader" controller="BtnPagAdcGarController">
+
+	<aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:handler name="change" value="{!v.value}" action="{!c.change}"/>
+    <aura:handler event="force:refreshView" action="{!c.cancelar}" />
+    
+	<aura:attribute name="visivel" type="String" default="visivel" />
+	<aura:attribute name="recordId" type="Id" />
+	<aura:attribute name="justificativaPagamento" type="List"  default="[]" />
+    <aura:attribute name="showConfirmDialog" type="boolean" default="false"/>
+    <aura:attribute name="showSpinner" type="boolean" default="true"/>
+
+	<lightning:spinner aura:id="mySpinner" class="{! if(v.showSpinner,'','slds-hide')}" />
+
+		<article class="slds-card">
+			<div class="slds-card__header slds-grid">
+				<header class="slds-media slds-media_center slds-has-flexi-truncate">
+					<div class="slds-media__figure">
+						<div class="slds-media__body">
+							<h2 class="slds-card__header-title">
+								<span>Pagamento Novo/Adicional</span>
+							</h2>
+						</div>
+					</div>
+				</header>
+			</div>
+			
+			
+            <aura:if isTrue="{!v.visivel == 'visivel'}">
+                <!-- <div class="slds-card__body slds-card__body_inner "> -->
+                <div class="slds-card__body slds-card__body_inner">
+                    <lightning:combobox aura:id="cboJustificativa" label="Justificativa para pagamento adicional:"  options="{!v.justificativaPagamento}" placeholder="-- Selecione --" required="true" class="batata"/>
+                </div>
+                <div class="slds-card__body slds-card__body_inner">
+                    <lightning:input aura:id="valueNum" name="valueNum" placeholder=" -- Digite valor indenizado -- " type="number" formatter="currency"
+                        label="Valor indenizado:"   required="true"     value=""    step="0.01"
+                    />
+                </div>
+                <footer class="slds-card__footer">
+                    <lightning:button variant="brand" label="Criar Pagamento" onclick="{!c.salvar}" />
+                    <lightning:button variant="neutral" label="Cancelar" onclick="{!c.cancelar}" />
+                </footer>
+                <aura:set attribute="else">
+                    <aura:if isTrue="{!v.visivel == 'permissaoPerfil'}">
+                        <div class="slds-card__body slds-card__body_inner">
+                            Seu perfil não tem permissão para execultar esta ação.
+                        </div>
+                    </aura:if>
+                    <aura:if isTrue="{!v.visivel == 'casoFechado'}">
+                        <div class="slds-card__body slds-card__body_inner">
+                            Para que um novo pagamento possa ser adicionado o Sinistro relacionado deve ser reaberto.
+                        </div>
+                    </aura:if>
+                    <aura:if isTrue="{!v.visivel == 'statusPagamento'}">
+                        <div class="slds-card__body slds-card__body_inner">
+                            Um novo pagamento adicional NÂO pode ser criado para garantias com status de pagamento "Em análise", "Com Pendências"e "Aguardando Pagamento".
+                        </div>
+                    </aura:if>
+                    <aura:if isTrue="{!v.visivel == 'casoFase'}">
+                        <div class="slds-card__body slds-card__body_inner">
+                            Para que um novo pagamento possa ser adicionado o Sinistro relacionado deve estar com a Fase igual a "em regulação" ou "liquidação".
+                        </div>
+                    </aura:if>
+                </aura:set>
+            </aura:if>
+        </article>
+        
+    <aura:if isTrue="{!v.showConfirmDialog}">
+        <div class="slds-m-around_xx-large">         
+            <div role="dialog" class="slds-modal slds-fade-in-open ">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header">
+                        <h1 class="slds-text-heading--medium">Confirmação</h1>
+                    </header>
+                    <div class="slds-modal__content slds-p-around--medium">
+                        <center><b>Tem certeza que deseja criar este pagamento adicional ?</b></center>
+                    </div>
+                    <footer class="slds-modal__footer">
+                        <lightning:button name="Não" label="Não" onclick='{!c.handleConfirmDialogNao}'/>
+                        <lightning:button variant="brand" name="Sim" label="Sim" onclick='{!c.handleConfirmDialogSim}'/>
+                    </footer>
+                </div>
+            </div>
+            <div class="slds-backdrop slds-backdrop--open"></div>            
+        </div>
+    </aura:if>
+
+</aura:component>

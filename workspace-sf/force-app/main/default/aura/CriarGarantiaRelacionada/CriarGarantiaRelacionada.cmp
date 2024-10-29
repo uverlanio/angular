@@ -1,0 +1,152 @@
+<!--PLV_2583 - INICIO - Ajuste na busca de coberturas no objeto "Garantia Relacionada"-->
+<aura:component implements="force:hasrecordId,force:lightningQuickActionWithoutHeader" controller="CriarGarantiaRelacionadaController" access="global">
+    <aura:attribute name="recordId" type="Id"/>
+    <aura:attribute name="idGarantia" type="String"/>
+    <aura:attribute name="issearching" type="Boolean" default="false"/>
+    <aura:attribute name="nomeBotao" type="String" default="Avançar"/>
+    <aura:attribute name="tipoBotao" type="String" default="brand"/>
+    <aura:attribute name="buttonDisable" type="Boolean" default="false"/>
+    <aura:attribute name="search" type="String"/>
+    <aura:attribute name="data" type="CriarGarantiaRelacionadaController.GarantiaWrapper[]" default= "null"/>
+    <aura:attribute name="semgarantias" type="String"/>
+    <aura:attribute name="valueTipo" type="String"/>
+    <aura:attribute name="acumulativa" type="Boolean" default="false"/>
+    <aura:attribute name="incremento" type="Boolean" default="false"/>
+    <aura:attribute name="nomeGarantia" type="String"/>
+    <aura:attribute name="nomeGarantiaSelecionada" type="String"/>
+    <aura:attribute name="page" type="Integer" default="1"/>
+    <aura:attribute name="options" type="List" default="[
+    {'label': 'Produto Técnico', 'value': 'ProdutoTecnico'},
+    {'label': 'Produto Comercial', 'value': 'ProdutoComercial'}
+    ]"/>
+    <aura:attribute name="valueRadio" type="String" default=""/>
+    <aura:attribute name="optionsList" type="List"/>
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:html tag="style">
+        .cuf-content {
+            padding: 0 0rem !important;
+        }
+        .slds-p-around--medium {
+            padding: 0rem !important;
+        }       
+        .slds-modal__content{
+            overflow-y:hidden !important;
+            height:unset !important;
+            max-height:unset !important;
+        }
+    </aura:html>
+    
+    <div class="slds-modal_medium slds-m-bottom_none">
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" aura:id="Modalbox" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header">
+                        <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Criar Garantia relacionada</h2>
+					</header>
+					<div class="slds-modal__content " id="modal-content-id-1">
+                        <aura:if isTrue = "{!v.page == 1}">
+                            <div class = "slds-m-around_x-small">
+                                <lightning:radioGroup name="radioGroupRequired"
+                                  label="Selecione um tipo de registro"
+                                  options="{! v.options }"
+                                  value="{! v.valueRadio }"
+                                  type="radio"
+                                  required="true"/>
+                            </div>
+                        </aura:if>
+                        <aura:if isTrue = "{!v.page == 2}">
+                                <div class = "slds-m-around_x-small">
+                                    <lightning:input
+                                        aura:id="enter-search"
+                                        name="enter-search"
+                                        type="search"
+                                        value="{!v.search}"
+                                        onchange="{!c.handleOnChange}"
+                                        isLoading="{!v.issearching}"
+                                    />
+                                </div>
+                        <aura:if isTrue="{!v.data != null}">
+                            <div class="slds-scrollable_y">
+                                <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered slds-border_right slds-border_left">
+                                    <thead>
+                                        <tr class="slds-line-height_reset">
+                                            <th class="" scope="col" width="30%">
+                                                <div class="slds-truncate" title="Número">Número</div>
+                                            </th>
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate" title="Garantia">Garantia</div>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <aura:iteration items="{!v.data}" var="data" indexVar="index" >
+                                            <tr class="slds-hint-parent">
+                                                <td data-label="Name" scope="row" width="30%">
+                                                    <div class="slds-truncate" title="Name">
+                                                        <lightning:button variant="base" label="{!data.Name}" name="{!data.Name}" value="{!data.id}" onclick="{!c.savePagamento}" class="slds-m-left_x-small"></lightning:button> 
+                                                    </div>
+                                                </td>
+                                                <td data-label="Garantia">
+                                                    <div class="slds-truncate" title="Garantia">{!data.GarantiaName}</div>
+                                                </td>
+                                            </tr>
+                                        </aura:iteration>
+                                    </tbody>
+                                </table>
+                             </div>
+                        </aura:if>
+                        </aura:if>
+                           <aura:if isTrue = "{!v.page == 3}">
+                            	<div class="slds-section slds-is-open">
+                                    <h3 class="slds-section__title">
+                                        <lightning:button class="slds-theme_base slds-section__title-action" iconPosition="left" variant="base" label="Informações"></lightning:button>
+                                    </h3>
+                                    <div class="slds-section__content">
+                                        <div class="slds-form slds-form_stacked">
+                                                <lightning:layout class=" slds-wrap" multipleRows="true">
+                                                    <lightning:layoutItem size="6">
+                                                        <lightning:input class=" slds-m-around_xxx-small" label="Garantia do produto" disabled="true" type="text" variant="standard" value="{!v.nomeGarantia}"></lightning:input>
+                                                    </lightning:layoutItem>
+                                                    <lightning:layoutItem size="6">
+                                                        <lightning:input class=" slds-m-around_xxx-small slds-m-right_xxx-small" label="Garantia Relacionada" disabled="true"  type="text" variant="standard" value="{!v.nomeGarantiaSelecionada}"></lightning:input>
+                                                    </lightning:layoutItem>
+                                                </lightning:layout>
+                                            	<lightning:layout class=" slds-wrap" multipleRows="true">
+                                                <lightning:layoutItem size="5">
+                                                    <lightning:select class="slds-m-around_xxx-small" name="general" label="Tipo de Dependência" value="{!v.valueTipo}">
+                                                        <option text="--Nenhum--" value="no"/>
+                                                        <aura:iteration items="{!v.optionsList}" var="option">
+                                                            <option text="{!option}" value="{!option}"/>
+                                                        </aura:iteration>
+                                                    </lightning:select>
+                                                </lightning:layoutItem>
+                                                </lightning:layout>
+                                                <lightning:layout class=" slds-wrap" multipleRows="true">
+                                                    <lightning:layoutItem size="5">
+                                                            <lightning:input class=" slds-m-around_xxx-small" label="Acumulativa" type="checkbox" checked="{!v.acumulativa}" variant="standard"></lightning:input>
+                                                    </lightning:layoutItem>
+                                                    <lightning:layoutItem size="5">
+                                                            <lightning:input  class=" slds-m-around_xxx-small" label="Incremento" type="checkbox" checked="{!v.incremento}" variant="standard"></lightning:input>
+                                                    </lightning:layoutItem>
+                                            	</lightning:layout>
+                                        </div>
+                                    </div>
+                                </div>
+                            </aura:if>
+                        <aura:if isTrue="{!v.semgarantias != null}">
+                            <h2>{!v.semgarantias}</h2>
+                        </aura:if>
+					
+                    </div>
+                    <footer class="slds-modal__footer slds-show" aura:id="footer">
+                        <lightning:button onclick="{!c.voltarBox}" variant="neutral" label="Cancelar"/>
+                        <aura:if isTrue="{!or((v.page == 2), (v.page== 3))}">
+                        	<lightning:button onclick="{!c.voltar}" variant="neutral" label="Voltar"/>
+                        </aura:if>
+                        <lightning:button onclick="{!c.avancar}" disabled="{!v.buttonDisable}" variant="{!v.tipoBotao}" label="{!v.nomeBotao}"/>
+                    </footer>
+                </div>
+        </section>
+    </div>
+</aura:component>
+<!--PLV_2583 - FIM - Ajuste na busca de coberturas no objeto "Garantia Relacionada"-->

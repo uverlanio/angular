@@ -1,0 +1,59 @@
+.THIS {
+}
+
+.THIS .corpo {
+    width : 100%;
+}
+
+.THIS .cabecalho {
+    width : 100%;
+    font-weight: bold;
+    margin-bottom : 0px 0px 20px;   
+}
+
+.THIS .titulo{
+    font-weight : bold;
+}
+
+.THIS .separador{
+    margin-bottom : 20px;
+}
+
+.THIS .status {
+  padding: 5px;
+  font-size: 15px;
+}
+
+.THIS .erro {
+  width: 100%;
+  min-height: 200px;
+  padding: 50px;
+  text-align: center;
+}
+
+.THIS .positionbutton {
+  position: relative;
+  float: right;
+  width: 95%;
+  padding: 0px 1rem;
+}
+
+.THIS .slds-button{
+  float: right;
+}
+
+.THIS .row{
+  min-height: 200px;
+}
+
+.THIS .sucesso{
+  min-height: 200px;
+}
+
+.THIS .erro{
+  min-height: 200px;
+}
+
+.THIS .slds-docked-form-footer{
+  z-index: 0 !important;
+}

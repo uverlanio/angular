@@ -1,0 +1,19 @@
+.THIS {
+}
+
+.THIS .uiInput--checkbox input, .THIS input.uiInput--checkbox {
+	display: inline-block;
+}	
+
+.THIS .flag-prod-editavel{
+	margin-bottom: 9px;
+	color: rgb(112, 110, 107);
+}
+
+.THIS .slds-combobox_container {
+    bottom: 11px;
+}
+
+.THIS .slds-combobox__input{
+	line-height: 32px;
+}

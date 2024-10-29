@@ -1,0 +1,79 @@
+<!--
+ * @author Sys4B - Denisson Santos
+ * @date 2020-06-04
+ * @description: Componente do botão de aprovar oferta
+ * Criada para a história: PLV-3738 - MVP B - Criação de checklist para ativar configurador de oferta.
+-->
+<aura:component implements="force:lightningQuickActionWithoutHeader,force:hasRecordId"
+				controller="BotaoAprovarOfertaController">
+	
+	<aura:attribute name="recordId"			type="String" />
+
+	<aura:attribute name="comments"			type="String" />
+	<aura:attribute name="allValid"			type="Boolean" />
+	<aura:attribute name="validateItems"	type="List" />
+	
+	<aura:attribute name="showSpinner"		type="Boolean"	default="true" />
+	<aura:attribute name="showSpinnerPage"	type="Boolean"	default="false" />
+
+	<aura:handler name="init" value="{! this }" action="{! c.doInit }"/>
+	
+	<aura:if isTrue="{! v.showSpinnerPage }">
+		<lightning:spinner class="slds-is-fixed" />
+	</aura:if>
+
+	<div class="slds-is-relative quick-action-content">
+		
+		<aura:if isTrue="{! v.showSpinner }">
+			<lightning:spinner />
+		</aura:if>
+
+		<div class="modal-header slds-modal__header slds-size_1-of-1">
+			<h4 class="title slds-text-heading--medium">Enviar para aprovação</h4>
+		</div>
+        
+		<div class="slds-modal__content slds-scrollable_none slds-p-around_large slds-size_1-of-1">
+			<div class="slds-p-around_medium">
+				<aura:if isTrue="{! v.allValid == true }">
+					<div>
+						<lightning:textarea name="comments" label="Comentários" value="{! v.comments }" />
+					</div>
+				</aura:if>
+
+				<aura:if isTrue="{! v.allValid == false }">
+					<div class="slds-text-heading_small slds-text-color_error slds-m-bottom_medium">Antes de enviar para aprovação, tem alguns itens que precisam de sua atenção.</div>
+				
+					<div class="slds-grid slds-gutters slds-wrap">
+						<aura:iteration items="{! v.validateItems }" var="item">
+							<div class="validateItem slds-col slds-size_1-of-2 slds-m-bottom_medium">
+								<div class="status"><lightning:icon iconName="{! 'utility:' + ((item.isValid) ? 'success' : 'error') }" variant="{! (item.isValid) ? 'success' : 'error' }" size="small" /></div>
+								<div class="item">
+									<div class="slds-text-heading_small">{! item.title }</div>
+									<div class="slds-text-title slds-text-color_error">
+										<ul class="slds-list_dotted">
+											<aura:iteration items="{! item.errorMessages }" var="message">
+												<li>{! message }</li>
+											</aura:iteration>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</aura:iteration>
+					</div>
+					
+				</aura:if>
+			</div>
+		</div> 
+        
+		<div class="modal-footer slds-modal__footer slds-size_1-of-1">
+			<div class="forceChangeRecordTypeFooter">
+				<lightning:button variant="neutral" label="Cancelar" onclick="{! c.cancel }" />
+				<aura:if isTrue="{! v.allValid == true }">
+					<lightning:button variant="brand" label="Enviar" onclick="{! c.submit }" />
+				</aura:if>
+			</div>
+		</div>
+
+	</div>
+  
+</aura:component>

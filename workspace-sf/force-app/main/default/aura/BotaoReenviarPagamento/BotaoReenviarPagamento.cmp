@@ -1,0 +1,9 @@
+<!--
+ - Created by Fábio Rente on 17/04/2019.
+ -->
+
+<aura:component implements="force:lightningQuickActionWithoutHeader,force:hasRecordId,force:appHostable" controller="BotaoReenviarPagamentoController" description="BotaoReenviarPagamento">
+    <aura:attribute name="recordId" type="String" />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <c:AcaoBotao aura:id="cmpModalAcaoBotao" mensagemPadraoErro="Não é possível reenviar o pagamento:" />
+</aura:component>

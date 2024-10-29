@@ -1,0 +1,78 @@
+<apex:page controller="CtrConsultaOfertas" sidebar="false" showHeader="false" cache="false" applyHtmlTag="false" applyBodyTag="false" standardStylesheets="false">
+<html>
+        <head>
+            <meta charset="UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
+            <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+            <title>Projeto pra Porto Seguro</title>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
+            <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous" />
+            <apex:stylesheet value="{!URLFOR($Resource.pageSnipperLibsCss)}"/>
+            <apex:stylesheet value="{!URLFOR($Resource.pageSnippercss)}"/>
+        </head>
+        <body>
+            <header>
+                <div class="logo">
+                    <a href="https://www.portoseguro.com.br/">
+                        <img src="https://seeklogo.com/images/P/porto-seguro-logo-63BFAE3F99-seeklogo.com.png" alt="Logo Porto Seguro" />
+                    </a>
+                </div>
+            </header>
+            
+            <section id="consultaOfertas">
+                <div class="row formulario">
+                    <section class=" s12 l4 fixedResume">
+                        <div class="col s12 z-depth-1  white box">
+                            <div class="row titulo">
+                                <div class="col s12">
+                                    <h2>Consulta de Orçamentos</h2>
+                                    <span></span>
+                                </div>
+                            </div>
+                            <apex:form id="formulario" styleClass="col s12">
+                                <input type="hidden" class="jsonResponse" name="jsonConsultaOferta" />
+                                <div class="input-field col s12 on">
+                                    <input id="numOrcamento" minlength="4" required="required" type="text" class="validate" />
+                                    <label class="active" for="numOrcamento">Número do Orçamento: </label>
+                                    <span class="helper-text" data-error="Insira um número de orçamento"></span>
+                                </div>
+                                <div class="input-field col s12 on">
+                                    <apex:commandButton styleClass="buttonPorto" action="{!consultar}" value="Consultar" id="theButton" />
+                                </div>
+                            </apex:form>
+                        </div>
+                    </section>
+                    <section class="col s12 l8 hidden listOfertas">
+                        <div class="col s12 z-depth-1  white box">
+                            <apex:outputPanel styleClass="col s12 messageConsulta" rendered="{!msg != null}">
+                                <span>{!msg}</span>
+                            </apex:outputPanel>
+                            <apex:outputPanel styleClass="col s12 results" rendered="{!counter > 0}">
+                                <table class="tbl-results">
+                                    <tr>
+                                        <apex:repeat value="{!fields}" var="titulo">
+                                            <th>{!titulo}</th>
+                                        </apex:repeat>
+                                    </tr>
+                                    <apex:repeat value="{!setCounter}" var="line">
+                                        <tr>
+                                            <apex:repeat value="{!fields}" var="field">
+                                                <td>{!mapTable[line][field]}</td>
+                                            </apex:repeat>
+                                        </tr>
+                                    </apex:repeat>
+                                </table>
+                            </apex:outputPanel>
+                        </div>
+                    </section>
+                    
+                </div>   
+            </section>
+            
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js">
+            </script>
+            <apex:includeScript value="{!URLFOR($Resource.pageSnipperLibsJs)}"/>
+            <apex:includeScript value="{!URLFOR($Resource.pageSnipperJs)}"/>
+        </body>
+    </html>
+</apex:page>

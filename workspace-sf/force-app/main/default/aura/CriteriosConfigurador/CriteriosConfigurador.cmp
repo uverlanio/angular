@@ -1,0 +1,90 @@
+<aura:component controller="ConfiguradorOfertaController">
+  <!-- <aura:handler name="init" value="{!this}" action="{!c.inicializar}" /> -->
+  <aura:handler name="change" value="{!v.segmento}" action="{!c.inicializar}"/>
+
+  <aura:attribute name="componente" type="Object" default="{}"  />
+  <aura:attribute name="campos" type="List" default="[]"  />
+  <aura:attribute name="operadores" type="List" default="[]"  />
+  <aura:attribute name="criterios" type="List" default="[]"  />
+  <aura:attribute name="campo" type="String" default=""  />
+  <aura:attribute name="operador" type="String" default=""  />
+  <aura:attribute name="valor" type="String" default=""  />
+  <aura:attribute name="configuracaoId" type="String" default=""  />
+  <aura:attribute name="segmento" type="String" default="Individual"  />
+  <aura:attribute name="mapNomeCampos" type="Map" default="{}" />
+  <aura:attribute name="mapTipoCampos" type="Map" default="{}" />
+
+	<div class="slds-card container-form"> 
+		<c:Secao titulo="Critérios" idElementoToggle="divCriterios" componentePai="{!v.componente}"/>  
+		<div aura:id="divCriterios" class="slds-form slds-p-around--medium slds-form_compound">
+            <div class="slds-grid">
+              <div class="slds-col">
+                  <div class="slds-form-element">
+                    <label class="slds-form-element__label" for="input-id-01">Campo</label>
+                    <lightning:combobox value="{!v.campo}" options="{!v.campos}" />
+                  </div>
+              </div> 
+              <div class="slds-col">
+                  <div class="slds-form-element">
+                    <label class="slds-form-element__label" for="input-id-01">Operador</label>
+                    <lightning:combobox value="{!v.operador}" options="{!v.operadores}"/>
+                  </div>
+              </div> 
+              <div class="slds-col">
+                  <div class="slds-form-element">
+                    <label class="slds-form-element__label" for="input-id-01">Valor</label>
+                    <div class="slds-form-element__control input-configurador">
+                      <ui:inputText class="slds-input" placeholder="Placeholder Text" value="{!v.valor}"  />
+                    </div>
+                  </div>
+                    <!-- TOOGLE DE ACORDO COM O CAMPO <lightning:combobox /> -->
+              </div> 
+              <div class="slds-col">
+                  <div class="slds-form-element">
+                    <label class="slds-form-element__label" for="input-id-01">&nbsp;</label>
+                    <div class="slds-form-element__control input-configurador">
+                      <lightning:button variant="brand" label="OK" onclick="{!c.inserirCriterio}" />
+                    </div>
+                  </div>
+              </div>  
+            </div>
+            <br />
+            <h1 class="{!'info-tabela-vazia' + (v.criterios.length != 0 ? ' esconder' : '')}"> -- Nenhum critério encontrado -- </h1>
+      			<table role="grid" class="{!'slds-table slds-table_bordered slds-max-medium-table_stacked-horizontal slds-no-row-hover' + (v.criterios.length == 0 ? ' esconder' : '')}">	
+      				<thead>
+      				   <tr class="slds-hint-parent">
+                  <th scope="col" class="th-excluir"><div class="slds-truncate">&nbsp;</div></th>
+      				   	 <th scope="col"><div class="slds-truncate">Campo</div></th>
+      				   	 <th scope="col"><div class="slds-truncate">Operador</div></th>
+      				   	 <th scope="col"><div class="slds-truncate">Valor</div></th>
+      				    </tr>
+      				 </thead>
+      				<tbody>
+                <aura:iteration items="{!v.criterios}" var="criterio">
+        					<tr class="slds-hint-parent">
+                    <td scope="row" class="slds-text-align_left">
+                      <div class="slds-form-element"> 
+                          <div class="slds-form-element__control">
+                              <button class="icone" onclick="{!c.excluirCriterio}" data-criterioid="{!criterio.Id}">
+                                  <lightning:icon iconName="action:close" size="x-small" variant="error"/>
+                              </button>
+                          </div>
+                      </div>
+                    </td>
+        						<td scope="row" class="slds-text-align_left">
+                      <c:ValorMap mapObject="{!v.mapNomeCampos}" mapKey="{!criterio.Campo__c}"/>
+                      <!-- &nbsp;<c:ValorMap mapObject="{!v.mapTipoCampos}" mapKey="{!criterio.Campo__c}"/> -->
+        						</td>  
+        						<td scope="row" class="slds-text-align_left">
+        							{!criterio.Operador__c}
+        						</td> 
+        						<td scope="row" class="slds-text-align_left">
+        							{!criterio.Valor__c}
+        						</td>     
+        					</tr>
+                </aura:iteration>
+      				</tbody>
+      			</table> 
+      </div>	
+	</div>  
+</aura:component>

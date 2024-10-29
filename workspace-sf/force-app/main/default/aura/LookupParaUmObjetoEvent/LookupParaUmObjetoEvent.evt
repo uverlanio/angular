@@ -1,0 +1,8 @@
+<!--
+ - Created by Alessndro Ponte on 12/06/2018.
+ -->
+
+<aura:event type="APPLICATION" description="LookupParaUmObjetoEvent">
+  <aura:attribute name="recordFound" type="sObject" />
+  <aura:attribute name="identifier" type="String" />
+</aura:event>

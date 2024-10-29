@@ -1,0 +1,312 @@
+<!-- ****************************************************************************************************************
+* Proposta de Seguro Viagem Template
+* @author Edgar Peralta - Globant
+* @date 04/09/2020
+* Classe criada por conta da história PLV-4345
+*********************************************************************************************************************-->
+<apex:page showHeader="false" applyBodyTag="false" controller="PropostaSeguroViagemController" 
+           standardStyleSheets="false" renderAs="PDF" id="PDFSeguroViagem">
+    <head>       
+        
+        <apex:stylesheet id="design" value="{!URLFOR($Resource.PropostaSeguroViagem)}"/> 
+
+        <style type="text/css" media="print">
+            @page :first {
+                /*margin-top: 10mm;*/
+                background-image: none;
+                @top-left {
+                    content: "";
+                }
+                @top-center {
+                    content: "";
+                }
+                @top-right {
+                    content: "";
+                }                
+                @bottom-center {
+                    content: "";
+                }
+            }
+                    
+            @page 
+            {
+                margin-top: 20mm;
+                margin-left: 8mm;
+                margin-right: 8mm;
+                margin-bottom: 30mm;
+                background-image: url("{!URLFOR($Resource.PropostaIndividualPDFResources, 'images/bgBorderBlue.jpg')}");
+                background-repeat: repeat-x;                                
+
+                @top-left {
+                    content: "Orçamento Nº: \A {!Quote[0].Opportunity.Numero__c}";
+                    color: #555;
+                    font-size: 15px;
+                    white-space: pre-wrap;
+                    text-align: center;
+                    padding-bottom: 10px;
+                }
+                @top-center {
+                    content: "Origem proposta Nº: \A {!Quote[0].Name}";
+                    color: #555;
+                    font-size: 15px;
+                    white-space: pre-wrap;
+                    text-align: center;
+                    padding-bottom: 10px;                    
+                }
+                @top-right {
+                    content: "Nome do Segurado: \A {!Quote[0].Account.Name}";
+                    color: #555;
+                    font-size: 15px;
+                    white-space: pre-wrap;
+                    text-align: center;
+                    padding-bottom: 10px;
+                }
+
+                @bottom-center {                    
+                    content: "Para mais informações, entre em contato com o seu Corretor de seguros, ou ligue para nossa Central de Atendimento Vida, de segunda à sexta, das 8h15 às 18h30, nos telefones: (11) 3366-3377 (Grande São Paulo) / 0800 727 9393 (demais localidades) | 0800 727 2746 (SAC - informação, reclamação e cancelamento – 24 horas) | 0800 727 8736 (atendimento exclusivo para deficientes auditivos – 24 horas) | 0800 727 1184 (Ouvidoria). Informações reduzidas. Consulte as condições gerais. Seguro garantido por Porto Seguro Cia de Seguros Gerais S.A. CNPJ 60.198.164/0001-60. Seguro Viagem - Processo SUSEP: 15414.00476/2015-42. Seguro Viagem Aventura 15414.900707/2015-18. O registro deste plano na SUSEP não implica, por parte da Autarquia, incentivo ou recomendação à sua comercialização."; 
+                    font-size: 10px;
+                    text-align: justify;                    
+                }
+            } 
+            
+            .justificado{
+                text-align: justify;
+            }
+
+            .sublinhado {
+                text-decoration: underline;
+            } 
+       
+        </style>
+
+    </head>
+    <body>
+        <div class="content">
+            <div class="header">
+                <table class="tableHeader">
+                    <tr>
+                        <td class="logo">
+                            <apex:image value="{!$Resource.logoSeguroViagem}" width="160px;"/>
+                            <p>C.N.P.J.: 61.198.164/0001-60</p>
+                        </td>
+                        <td class="headerText"> 
+                            Proposta de Seguro Viagem<br/><br/>
+                            <apex:outputText value="{!Quote[0].Produto__r.Name}"/><br/><br/>
+                            Processo Susep Nº: <apex:outputText value="{!Quote[0].Produto__r.NumeroSusep__c}"/>       
+                        </td> 
+                    </tr>
+                </table>
+            </div>
+            <div class="separator">
+                <table class="tableSeparator">
+                    <tr>
+                    	<td>Orçamento Nº&nbsp;&nbsp;{!Quote[0].Opportunity.Numero__c}</td>
+                        <td>Origem proposta Nº&nbsp;&nbsp;{!Quote[0].Name}</td>
+                    </tr>
+                </table>
+            </div>            
+            <div class="dadosDoPassagerio">
+                <table class="tablePassagerio">
+                    <tr>
+                        <th colspan="4">DADOS DO PASSAGEIRO</th>
+                    </tr>
+                    <tr>
+                    	<td colspan="4">Nome:&nbsp;{!Quote[0].Account.Name}</td>
+                    </tr>
+                    <tr>
+                    	<td>Data de nascimento:&nbsp;<apex:outputText value="{0,date, dd/MM/yyyy}"> <apex:param value="{!Quote[0].Account.PersonBirthdate}" /> </apex:outputText></td>
+                        <td>CPF/CNPJ:&nbsp;{!Quote[0].Account.Cpf__c}</td>
+                        <td colspan="2">Sexo:&nbsp;{!Quote[0].Account.Sexo__c}</td>
+                    </tr>
+                    <tr>
+                    	<td>Nacionalidade:&nbsp;{!Quote[0].Account.Nacionalidade__c}</td>
+                        <td>Pais de Origem:&nbsp;Brasil</td>                        
+                        <td>Reside no Brasil:&nbsp;"{! If(seguradoEndereco[0].paisResidencial__c=='BRA' ,'Sim','Não') }"</td>  /*PLV - 4849 INICIO - FIM*/
+                        <!-- <td>Pessoa Politicamente Exposta<sup>1</sup>:&nbsp;{!Quote[0].Account.Pep__c}</td>   /* LECVPV-228-FIX01 - INICIO/FIM */ -->
+                    </tr>
+                    <tr>
+                        <!--PLV - 4849 INICIO-->
+                    	<td>CEP:&nbsp;{!seguradoEndereco[0].cepResidencial__c}</td>
+                        <td colspan="3">Endereço:&nbsp;{!seguradoEndereco[0].logradouroResidencial__c + ', ' + seguradoEndereco[0].numeroResidencial__c}</td>
+                        <!--PLV - 4849 Fim-->
+                    </tr>
+                    <tr>
+                        <!--PLV - 4849 INICIO-->
+                        <td>Cidade:&nbsp;{!seguradoEndereco[0].CidadeResidencial__c}</td>
+                        <td colspan="2">Estado:&nbsp;{!seguradoEndereco[0].UFResidencial__c}</td>
+                        <!--PLV - 4849 Fim-->
+                        <td colspan="4">E-mail:&nbsp;{!Quote[0].Account.PersonEmail}</td>
+                    </tr>
+                    <tr>
+                    	<td colspan="4">Em caso de acidente comunicar: Em construção</td>
+                    </tr>
+                </table>
+            </div>
+            <!-- LECVPV-228-FIX01 - INICIO -->
+            <!-- <div class="dadosDoPassagerioFooterText"> -->
+            <!--    <p> -->
+            <!--        ¹ Pessoa Politicamente Exposta (PEP): Pessoa que ocupa ou ocupou, nos últimos 5 anos, -->
+            <!--        cargo político ou posição relevante em  empresas públicas ou público-privadas, no Brasil ou no -->
+            <!--        exterior, assim como seus representantes, familiares e outras pessoas de seu  relacionamento próximo. -->
+            <!--    </p> -->
+            <!-- </div> -->
+            <!-- LECVPV-228-FIX01 - FIM -->
+            <div class="dadosDaViagem">
+                <table class="tableDadosDaViagem">
+                    <tr>
+                    	<th colspan="3">DADOS DA VIAGEM</th>
+                    </tr>
+                    <tr>
+                    	<td style="border-left:none;">INICIO DE VIGÊNCIA &nbsp;&nbsp; <apex:outputText value="{0,date, dd/MM/yyyy}" rendered="{!quoteSize > 0}"> <apex:param value="{!Quote[0].VigenciaInicial__c}" /> </apex:outputText></td>
+                        <td>FIM DE VIGÊNCIA DO SEGURO &nbsp;&nbsp; <apex:outputText value="{0,date, dd/MM/yyyy}" rendered="{!quoteSize > 0}"> <apex:param value="{!Quote[0].VigenciaFinal__c}" /> </apex:outputText></td>
+                    	<td style="border-right:none;">PERÍODO DA VIAGEM &nbsp;&nbsp; <apex:outputText value="{!periodoViagem}" rendered="{!quoteSize > 0}"></apex:outputText></td>
+                    </tr>
+                    <tr>
+                    	<td style="border-left:none;">ORIGEM DA VIAGEM &nbsp;&nbsp; <apex:outputText value="Brasil" rendered="{!quoteSize > 0}"></apex:outputText></td>
+                        <td colspan="2" style="border-right:none;">DESTINO DA VIAGEM &nbsp;&nbsp; <apex:outputText value="{!Quote[0].PaisesDestino__c}" rendered="{!quoteSize > 0}"></apex:outputText></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="dadosBeneficiarios">
+                <table class="tableBeneficiarios">
+                    <tr>
+                    	<th colspan="3">BENEFICIÁRIOS</th>
+                    </tr>
+                   <!-- <apex:variable value="1" var="" rendered="{!quoteSize > 0}">
+                        <tr>
+                            <td style="border-left: none;">Nome do(s) Beneficiario(s):</td>
+                            <td>Grau de Parentesco:</td>
+                            <td style="border-right: none;">%:</td>
+                        </tr>
+                        <apex:repeat value="{!lstBeneficiario}" var="Beneficiario">
+                            <tr>
+                                <td style="border-left: none;"><apex:outputText value="{!Beneficiario.Nome__c}"></apex:outputText></td>
+                                <td><apex:outputText value="{0,date, dd/MM/yyyy}"> <apex:param value="{!Beneficiario.GrauParentesco__c}" /> </apex:outputText></td>
+                                <td style="border-right: none;"><apex:outputText value="{!Beneficiario.Participacao__c}"></apex:outputText></td>
+                            </tr>
+                        </apex:repeat>
+                    </apex:variable>-->
+                    <tr>
+                        <td colspan="3"><apex:outputText value="Em construção"></apex:outputText></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="coberturasECapitais" id="coberturasECapitais">
+                <table class="tableCoberturas">
+                    <apex:variable value="{!1}" var="i"/>
+                    <tr>
+                        <th colspan="2">COBERTURAS E CAPITAIS</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <table class="tableCoberturas1">
+                                <apex:repeat value="{!Quote[0].GarantiasProposta__r}" var="cobertura" rows="{!coberturasSize/2+1}" rendered="{!coberturasSize != 0}">
+                                    <tr style="background-color:{!IF(mod(i,2)==0, 'rgb(0,176,240)', 'white')};">
+                                        <td><apex:outputText value="{!cobertura.Garantia__r.name}"></apex:outputText></td>
+                                        <td><apex:outputText value="{!IF(cobertura.CurrencyIsoCode=='BRL' || cobertura.CurrencyIsoCode=='' || cobertura.CurrencyIsoCode==Null, 'R$', 'US$')}"></apex:outputText><apex:outputText value="{!IF(cobertura.Capital__c=='' || cobertura.CurrencyIsoCode==Null, ' -', cobertura.Capital__c)}"></apex:outputText></td>
+                                    </tr>
+                                    <apex:variable value="{!i+1}" var="i" />
+                                </apex:repeat>                               
+                                <apex:pageMessage summary="Não há coberturas e capitais" severity="info" strength="2" rendered="{!coberturasSize == 0}"/>
+                            </table>
+                        </td>
+                        <td>
+                            <table class="tableCoberturas2">
+                                <apex:variable value="{!i+1}" var="i" />
+                                <apex:repeat value="{!Quote[0].GarantiasProposta__r}" var="cobertura" first="{!coberturasSize/2+1}" rendered="{!coberturasSize != 0}">
+                                    <tr style="background-color:{!IF(mod(i,2)==0, 'rgb(0,176,240)', 'white')};">                                        
+                                        <td><apex:outputText value="{!cobertura.Garantia__r.name}"></apex:outputText></td>
+                                        <td><apex:outputText value="{!IF(cobertura.CurrencyIsoCode=='BRL' || cobertura.CurrencyIsoCode=='' || cobertura.CurrencyIsoCode==Null, 'R$', 'US$')}"></apex:outputText><apex:outputText value="{!IF(cobertura.Capital__c=='' || cobertura.CurrencyIsoCode==Null, ' -', cobertura.Capital__c)}"></apex:outputText></td>                                        
+                                    </tr>                                    
+                                    <apex:variable value="{!i+1}" var="i" />
+                                </apex:repeat>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div>
+                <table class="tableCarencias">
+                    <tr>
+                    	<th>CARÊNCIAS E FRANQUIAS</th>
+                    </tr>
+                    <tr><td>Em construção</td></tr>
+                </table>
+            </div>           
+             <div class="fromaDePagamento">
+                <table class="tableFromaDePagamento">
+                    <tr>
+                    	<th>FORMA DE PAGAMENTO</th>
+                    </tr>
+                    <tr>
+                        <td><apex:outputText value="Em construção"></apex:outputText></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="informacoes">
+                <table class="tableInformacoes">
+                    <tr>
+                    	<th colspan="2">INFORMAÇÕES E DECLARAÇÃO DO CORRETOR</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <p class="declaracaoInformacoes justificado">
+                                Declaro que o proponente está ciente das Condições Gerais deste seguro e que segundo
+                                o meu conhecimento, todas as informações, respostas e declarações desta proposta 
+                                refletem a verdade, não contendo omissões ou incorreções.
+                            </p>
+                            <p class="declaracaoInformacoes justificado">    
+								Declaro, como Corretor responsável por esta intermediação, que, na forma da legislação 
+                                vigente, dei cumprimento integral às disposições contidas na Resolução CNSP nº 382/2020,
+                                inclusive quanto à prévia disponibilização ao proponente das informações previstas 
+                                no art. 4º, § 1º, da referida Resolução.
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                    	<td colspan="2">Corretor lider:&nbsp;<apex:outputText value="{!dadosCorrector[0].conta__r.Name}"></apex:outputText></td>
+                    </tr>
+                    <tr>
+                    	<td>Telefone:&nbsp;<apex:outputText value="{!dadosCorrector[0].conta__r.Phone}"></apex:outputText></td>
+                        <td>E-mail:&nbsp;<apex:outputText value="{!dadosCorrector[0].conta__r.Email__c}"></apex:outputText></td>
+                    </tr>
+                    <tr>
+                    	<td>Susep Porto:&nbsp;<apex:outputText value="{!dadosCorrector[0].Susep__c}"></apex:outputText></td>
+                        <td>Susep Oficial:&nbsp;<apex:outputText value="{!dadosCorrector[0].SusepOficialCorretor__c}"></apex:outputText></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="observacoes">
+                <table class="tableObservacoes">
+                    <tr>
+                    	<th>OBSERVAÇÕES</th>
+                    </tr>
+                    <tr>
+                    	<td>
+                        	<p class="observacoesText justificado">
+                                Em atendimento à Lei 12.741/12 informamos que incidem as alíquotas de 0,65% de PIS/PASEP
+                                e de 4% de COFINS, deduzidos do  estabelecido em legislação específica.
+                            </p>    
+                            <p class="observacoesText justificado">    
+                                O registro deste plano na SUSEP não implica, por parte da autarquia, incentivo ou 
+                                recomendação à sua comercialização.
+                                O Segurado poderá consultar a situação cadastral de seu corretor de seguros, no site
+                                <span class="sublinhado"><a href="http://www.susep.gov.br" target="_blank">www.susep.gov.br</a></span>, por meio do número de seu registro na SUSEP, nome completo, CNPJ ou CPF.
+                            </p>
+                            <p class="observacoesText justificado">    
+                                A aceitação do seguro estará sujeita à análise do risco.
+                            </p>
+                            <!--POR062-5 - FIX-02 - INICIO-->
+                            <p class="observacoesText justificado"><strong>    
+                                As condições contratuais/regulamento deste produto protocolizadas pela sociedade/entidade
+                                junto à Susep poderão ser consultadas  no endereço eletrônico <span class="sublinhado"><a href="http://www.susep.gov.br" target="_blank">www.susep.gov.br</a></span>, 
+                                de acordo com o número de processo constante da apólice, proposta, bilhete, certificado ou no título de capitalização. Telefone SUSEP: 0800 021 8484.
+                            </strong></p>
+                            <!--POR062-5 - FIX-02 - FIM-->                            
+                        </td>
+                    </tr>
+                </table>
+            </div>            
+        </div>
+    </body>
+</apex:page>

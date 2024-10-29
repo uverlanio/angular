@@ -1,0 +1,903 @@
+{
+  "retornosCalculo": [
+    {
+      "tarifa": "20/09/2021",
+      "dlls": [
+        "pmte4p1520210805_2"
+      ],
+      "numeroOferta": 23866,
+      "numeroOrcamento": "00057291",
+      "rankingApresentacao": " ",
+      "ofertaModelada": " ",
+      "opcao": 0,
+      "precificacao": {
+        "juros": 0,
+        "iof": 12.48,
+        "encargos": 0,
+        "custoDeApolice": 0,
+        "premio": {
+          "puro": 1345.9,
+          "puroCarregado": 3130.01,
+          "comercial": 3286.51,
+          "total": 3299.01
+        },
+        "descontoAgravo": [
+          {
+            "percentual": 5,
+            "monetario": 156.51,
+            "tipo": "FPG"
+          },
+          {
+            "percentual": 0,
+            "monetario": 0,
+            "tipo": "TEC"
+          },
+          {
+            "percentual": 0,
+            "monetario": 0,
+            "tipo": "COM"
+          },
+          {
+            "percentual": 0,
+            "monetario": 0,
+            "tipo": "BAT"
+          },
+          {
+            "percentual": 0,
+            "monetario": 0,
+            "tipo": "TPR"
+          }
+        ],
+        "coberturas": [
+          {
+            "sigla": "TELEMED",
+            "capitalContratacao": 0,
+            "iof": 0,
+            "premio": {
+              "comercial": 0,
+              "puro": 0,
+              "total": 0
+            },
+            "taxa": {
+              "comercial": 0.00816313953488,
+              "pura": 0.003343,
+              "total": 0.00819415946511
+            },
+            "descontoAgravo": [
+              {
+                "percentual": 0,
+                "monetario": 0,
+                "tipo": "FPG"
+              }
+            ]
+          },
+          {
+            "sigla": "BAS",
+            "iof": 8.93,
+            "premio": {
+              "puro": 962.78,
+              "puroCarregado": 2239.03,
+              "comercial": 2350.98,
+              "total": 2359.92
+            },
+            "descontoAgravo": [
+              {
+                "percentual": 5,
+                "monetario": 111.95,
+                "tipo": "FPG"
+              },
+              {
+                "percentual": 0,
+                "monetario": 0,
+                "tipo": "TEC"
+              },
+              {
+                "percentual": 0,
+                "monetario": 0,
+                "tipo": "COM"
+              },
+              {
+                "percentual": 0,
+                "monetario": 0,
+                "tipo": "BAT"
+              },
+              {
+                "percentual": 0,
+                "monetario": 0,
+                "tipo": "TPR"
+              }
+            ]
+          },
+          {
+            "sigla": "IPA",
+            "iof": 0.8,
+            "premio": {
+              "puro": 86.4,
+              "puroCarregado": 200.93,
+              "comercial": 210.98,
+              "total": 211.78
+            },
+            "descontoAgravo": [
+              {
+                "percentual": 5,
+                "monetario": 10.05,
+                "tipo": "FPG"
+              },
+              {
+                "percentual": 0,
+                "monetario": 0,
+                "tipo": "TEC"
+              },
+              {
+                "percentual": 0,
+                "monetario": 0,
+                "tipo": "COM"
+              },
+              {
+                "percentual": 0,
+                "monetario": 0,
+                "tipo": "BAT"
+              },
+              {
+                "percentual": 0,
+                "monetario": 0,
+                "tipo": "TPR"
+              }
+            ]
+          },
+          {
+            "sigla": "AFF",
+            "iof": 0.35,
+            "premio": {
+              "puro": 37.72,
+              "puroCarregado": 87.72,
+              "comercial": 92.11,
+              "total": 92.46
+            },
+            "descontoAgravo": [
+              {
+                "percentual": 5,
+                "monetario": 4.39,
+                "tipo": "FPG"
+              },
+              {
+                "percentual": 0,
+                "monetario": 0,
+                "tipo": "TEC"
+              },
+              {
+                "percentual": 0,
+                "monetario": 0,
+                "tipo": "COM"
+              },
+              {
+                "percentual": 0,
+                "monetario": 0,
+                "tipo": "BAT"
+              },
+              {
+                "percentual": 0,
+                "monetario": 0,
+                "tipo": "TPR"
+              }
+            ]
+          },
+          {
+            "sigla": "CAN",
+            "iof": 2.4,
+            "premio": {
+              "puro": 259,
+              "puroCarregado": 602.33,
+              "comercial": 632.44,
+              "total": 634.85
+            },
+            "descontoAgravo": [
+              {
+                "percentual": 5,
+                "monetario": 30.12,
+                "tipo": "FPG"
+              },
+              {
+                "percentual": 0,
+                "monetario": 0,
+                "tipo": "TEC"
+              },
+              {
+                "percentual": 0,
+                "monetario": 0,
+                "tipo": "COM"
+              },
+              {
+                "percentual": 0,
+                "monetario": 0,
+                "tipo": "BAT"
+              },
+              {
+                "percentual": 0,
+                "monetario": 0,
+                "tipo": "TPR"
+              }
+            ]
+          }
+        ],
+        "contratantes": [
+          {
+            "numero": 1,
+            "iof": 12.48,
+            "premio": {
+              "puro": 1345.9,
+              "puroCarregado": 3130.01,
+              "comercial": 3286.51,
+              "total": 3299.01
+            },
+            "descontoAgravo": [
+              {
+                "percentual": 5,
+                "monetario": 156.51,
+                "tipo": "FPG"
+              },
+              {
+                "percentual": 0,
+                "monetario": 0,
+                "tipo": "TEC"
+              },
+              {
+                "percentual": 0,
+                "monetario": 0,
+                "tipo": "COM"
+              },
+              {
+                "percentual": 0,
+                "monetario": 0,
+                "tipo": "BAT"
+              },
+              {
+                "percentual": 0,
+                "monetario": 0,
+                "tipo": "TPR"
+              }
+            ],
+            "coberturas": [
+              {
+                "sigla": "TELEMED",
+                "capitalContratacao": 0,
+                "iof": 0,
+                "premio": {
+                  "comercial": 0,
+                  "puro": 0,
+                  "total": 0
+                },
+                "taxa": {
+                  "comercial": 0.00816313953488,
+                  "pura": 0.003343,
+                  "total": 0.00819415946511
+                },
+                "descontoAgravo": [
+                  {
+                    "percentual": 0,
+                    "monetario": 0,
+                    "tipo": "FPG"
+                  }
+                ]
+              },
+              {
+                "sigla": "BAS",
+                "iof": 8.93,
+                "premio": {
+                  "puro": 962.78,
+                  "puroCarregado": 2239.03,
+                  "comercial": 2350.98,
+                  "total": 2359.92
+                },
+                "descontoAgravo": [
+                  {
+                    "percentual": 5,
+                    "monetario": 111.95,
+                    "tipo": "FPG"
+                  },
+                  {
+                    "percentual": 0,
+                    "monetario": 0,
+                    "tipo": "TEC"
+                  },
+                  {
+                    "percentual": 0,
+                    "monetario": 0,
+                    "tipo": "COM"
+                  },
+                  {
+                    "percentual": 0,
+                    "monetario": 0,
+                    "tipo": "BAT"
+                  },
+                  {
+                    "percentual": 0,
+                    "monetario": 0,
+                    "tipo": "TPR"
+                  }
+                ]
+              },
+              {
+                "sigla": "IPA",
+                "iof": 0.8,
+                "premio": {
+                  "puro": 86.4,
+                  "puroCarregado": 200.93,
+                  "comercial": 210.98,
+                  "total": 211.78
+                },
+                "descontoAgravo": [
+                  {
+                    "percentual": 5,
+                    "monetario": 10.05,
+                    "tipo": "FPG"
+                  },
+                  {
+                    "percentual": 0,
+                    "monetario": 0,
+                    "tipo": "TEC"
+                  },
+                  {
+                    "percentual": 0,
+                    "monetario": 0,
+                    "tipo": "COM"
+                  },
+                  {
+                    "percentual": 0,
+                    "monetario": 0,
+                    "tipo": "BAT"
+                  },
+                  {
+                    "percentual": 0,
+                    "monetario": 0,
+                    "tipo": "TPR"
+                  }
+                ]
+              },
+              {
+                "sigla": "AFF",
+                "iof": 0.35,
+                "premio": {
+                  "puro": 37.72,
+                  "puroCarregado": 87.72,
+                  "comercial": 92.11,
+                  "total": 92.46
+                },
+                "descontoAgravo": [
+                  {
+                    "percentual": 5,
+                    "monetario": 4.39,
+                    "tipo": "FPG"
+                  },
+                  {
+                    "percentual": 0,
+                    "monetario": 0,
+                    "tipo": "TEC"
+                  },
+                  {
+                    "percentual": 0,
+                    "monetario": 0,
+                    "tipo": "COM"
+                  },
+                  {
+                    "percentual": 0,
+                    "monetario": 0,
+                    "tipo": "BAT"
+                  },
+                  {
+                    "percentual": 0,
+                    "monetario": 0,
+                    "tipo": "TPR"
+                  }
+                ]
+              },
+              {
+                "sigla": "CAN",
+                "iof": 2.4,
+                "premio": {
+                  "puro": 259,
+                  "puroCarregado": 602.33,
+                  "comercial": 632.44,
+                  "total": 634.85
+                },
+                "descontoAgravo": [
+                  {
+                    "percentual": 5,
+                    "monetario": 30.12,
+                    "tipo": "FPG"
+                  },
+                  {
+                    "percentual": 0,
+                    "monetario": 0,
+                    "tipo": "TEC"
+                  },
+                  {
+                    "percentual": 0,
+                    "monetario": 0,
+                    "tipo": "COM"
+                  },
+                  {
+                    "percentual": 0,
+                    "monetario": 0,
+                    "tipo": "BAT"
+                  },
+                  {
+                    "percentual": 0,
+                    "monetario": 0,
+                    "tipo": "TPR"
+                  }
+                ]
+              }
+            ],
+            "grupos": [
+              {
+                "numero": 1,
+                "iof": 12.48,
+                "premio": {
+                  "puro": 1345.9,
+                  "puroCarregado": 3130.01,
+                  "comercial": 3286.51,
+                  "total": 3299.01
+                },
+                "descontoAgravo": [
+                  {
+                    "percentual": 5,
+                    "monetario": 156.51,
+                    "tipo": "FPG"
+                  },
+                  {
+                    "percentual": 0,
+                    "monetario": 0,
+                    "tipo": "TEC"
+                  },
+                  {
+                    "percentual": 0,
+                    "monetario": 0,
+                    "tipo": "COM"
+                  },
+                  {
+                    "percentual": 0,
+                    "monetario": 0,
+                    "tipo": "BAT"
+                  },
+                  {
+                    "percentual": 0,
+                    "monetario": 0,
+                    "tipo": "TPR"
+                  }
+                ],
+                "coberturas": [
+                  {
+                    "sigla": "TELEMED",
+                    "capitalContratacao": 0,
+                    "iof": 0,
+                    "premio": {
+                      "comercial": 0,
+                      "puro": 0,
+                      "total": 0
+                    },
+                    "taxa": {
+                      "comercial": 0.00816313953488,
+                      "pura": 0.003343,
+                      "total": 0.00819415946511
+                    },
+                    "descontoAgravo": [
+                      {
+                        "percentual": 0,
+                        "monetario": 0,
+                        "tipo": "FPG"
+                      }
+                    ]
+                  },
+                  {
+                    "sigla": "BAS",
+                    "iof": 8.93,
+                    "premio": {
+                      "puro": 962.78,
+                      "puroCarregado": 2239.03,
+                      "comercial": 2350.98,
+                      "total": 2359.92
+                    },
+                    "taxa": {
+                      "comercial": 0.00816313953488,
+                      "pura": 0.003343,
+                      "total": 0.00819415946511
+                    },
+                    "descontoAgravo": [
+                      {
+                        "percentual": 5,
+                        "monetario": 111.95,
+                        "tipo": "FPG"
+                      },
+                      {
+                        "percentual": 0,
+                        "monetario": 0,
+                        "tipo": "TEC"
+                      },
+                      {
+                        "percentual": 0,
+                        "monetario": 0,
+                        "tipo": "COM"
+                      },
+                      {
+                        "percentual": 0,
+                        "monetario": 0,
+                        "tipo": "BAT"
+                      },
+                      {
+                        "percentual": 0,
+                        "monetario": 0,
+                        "tipo": "TPR"
+                      }
+                    ]
+                  },
+                  {
+                    "sigla": "IPA",
+                    "iof": 0.8,
+                    "premio": {
+                      "puro": 86.4,
+                      "puroCarregado": 200.93,
+                      "comercial": 210.98,
+                      "total": 211.78
+                    },
+                    "taxa": {
+                      "comercial": 0.00073255813953,
+                      "pura": 0.0003,
+                      "total": 0.00073534186046
+                    },
+                    "descontoAgravo": [
+                      {
+                        "percentual": 5,
+                        "monetario": 10.05,
+                        "tipo": "FPG"
+                      },
+                      {
+                        "percentual": 0,
+                        "monetario": 0,
+                        "tipo": "TEC"
+                      },
+                      {
+                        "percentual": 0,
+                        "monetario": 0,
+                        "tipo": "COM"
+                      },
+                      {
+                        "percentual": 0,
+                        "monetario": 0,
+                        "tipo": "BAT"
+                      },
+                      {
+                        "percentual": 0,
+                        "monetario": 0,
+                        "tipo": "TPR"
+                      }
+                    ]
+                  },
+                  {
+                    "sigla": "AFF",
+                    "iof": 0.35,
+                    "premio": {
+                      "puro": 37.72,
+                      "puroCarregado": 87.72,
+                      "comercial": 92.11,
+                      "total": 92.46
+                    },
+                    "taxa": {
+                      "comercial": 0.00921069767441,
+                      "pura": 0.003772,
+                      "total": 0.00924569832558
+                    },
+                    "descontoAgravo": [
+                      {
+                        "percentual": 5,
+                        "monetario": 4.39,
+                        "tipo": "FPG"
+                      },
+                      {
+                        "percentual": 0,
+                        "monetario": 0,
+                        "tipo": "TEC"
+                      },
+                      {
+                        "percentual": 0,
+                        "monetario": 0,
+                        "tipo": "COM"
+                      },
+                      {
+                        "percentual": 0,
+                        "monetario": 0,
+                        "tipo": "BAT"
+                      },
+                      {
+                        "percentual": 0,
+                        "monetario": 0,
+                        "tipo": "TPR"
+                      }
+                    ]
+                  },
+                  {
+                    "sigla": "CAN",
+                    "iof": 2.4,
+                    "premio": {
+                      "puro": 259,
+                      "puroCarregado": 602.33,
+                      "comercial": 632.44,
+                      "total": 634.85
+                    },
+                    "taxa": {
+                      "comercial": 0.00632441860465,
+                      "pura": 0.00259,
+                      "total": 0.00634845139534
+                    },
+                    "descontoAgravo": [
+                      {
+                        "percentual": 5,
+                        "monetario": 30.12,
+                        "tipo": "FPG"
+                      },
+                      {
+                        "percentual": 0,
+                        "monetario": 0,
+                        "tipo": "TEC"
+                      },
+                      {
+                        "percentual": 0,
+                        "monetario": 0,
+                        "tipo": "COM"
+                      },
+                      {
+                        "percentual": 0,
+                        "monetario": 0,
+                        "tipo": "BAT"
+                      },
+                      {
+                        "percentual": 0,
+                        "monetario": 0,
+                        "tipo": "TPR"
+                      }
+                    ]
+                  }
+                ],
+                "segurados": [
+                  {
+                    "numero": 1,
+                    "iof": 12.48,
+                    "premio": {
+                      "puro": 1345.9,
+                      "puroCarregado": 3130.01,
+                      "comercial": 3286.51,
+                      "total": 3299.01
+                    },
+                    "descontoAgravo": [
+                      {
+                        "percentual": 5,
+                        "monetario": 156.51,
+                        "tipo": "FPG"
+                      },
+                      {
+                        "percentual": 0,
+                        "monetario": 0,
+                        "tipo": "TEC"
+                      },
+                      {
+                        "percentual": 0,
+                        "monetario": 0,
+                        "tipo": "COM"
+                      },
+                      {
+                        "percentual": 0,
+                        "monetario": 0,
+                        "tipo": "BAT"
+                      },
+                      {
+                        "percentual": 0,
+                        "monetario": 0,
+                        "tipo": "TPR"
+                      }
+                    ],
+                    "coberturas": [
+                      {
+                        "sigla": "TELEMED",
+                        "capitalContratacao": 0,
+                        "iof": 0,
+                        "premio": {
+                          "comercial": 0,
+                          "puro": 0,
+                          "total": 0
+                        },
+                        "taxa": {
+                          "comercial": 0.00816313953488,
+						  "pura": 0.003343,
+                          "total": 0.00819415946511
+                        },
+                        "descontoAgravo": [
+                          {
+                            "percentual": 0,
+                            "monetario": 0,
+                            "tipo": "FPG"
+                          }
+                        ]
+                      },
+                      {
+                        "sigla": "BAS",
+                        "capitalContratacao": 288000,
+                        "iof": 8.93,
+                        "premio": {
+                          "puro": 962.78,
+                          "puroCarregado": 2239.03,
+                          "comercial": 2350.98,
+                          "total": 2359.92
+                        },
+                        "taxa": {
+                          "comercial": 0.00816313953488,
+                          "pura": 0.003343,
+                          "total": 0.00819415946511
+                        },
+                        "descontoAgravo": [
+                          {
+                            "percentual": 5,
+                            "monetario": 111.95,
+                            "tipo": "FPG"
+                          },
+                          {
+                            "percentual": 0,
+                            "monetario": 0,
+                            "tipo": "TEC"
+                          },
+                          {
+                            "percentual": 0,
+                            "monetario": 0,
+                            "tipo": "COM"
+                          },
+                          {
+                            "percentual": 0,
+                            "monetario": 0,
+                            "tipo": "BAT"
+                          },
+                          {
+                            "percentual": 0,
+                            "monetario": 0,
+                            "tipo": "TPR"
+                          }
+                        ]
+                      },
+                      {
+                        "sigla": "IPA",
+                        "capitalContratacao": 288000,
+                        "iof": 0.8,
+                        "premio": {
+                          "puro": 86.4,
+                          "puroCarregado": 200.93,
+                          "comercial": 210.98,
+                          "total": 211.78
+                        },
+                        "taxa": {
+                          "comercial": 0.00073255813953,
+                          "pura": 0.0003,
+                          "total": 0.00073534186046
+                        },
+                        "descontoAgravo": [
+                          {
+                            "percentual": 5,
+                            "monetario": 10.05,
+                            "tipo": "FPG"
+                          },
+                          {
+                            "percentual": 0,
+                            "monetario": 0,
+                            "tipo": "TEC"
+                          },
+                          {
+                            "percentual": 0,
+                            "monetario": 0,
+                            "tipo": "COM"
+                          },
+                          {
+                            "percentual": 0,
+                            "monetario": 0,
+                            "tipo": "BAT"
+                          },
+                          {
+                            "percentual": 0,
+                            "monetario": 0,
+                            "tipo": "TPR"
+                          }
+                        ]
+                      },
+                      {
+                        "sigla": "AFF",
+                        "capitalContratacao": 10000,
+                        "iof": 0.35,
+                        "premio": {
+                          "puro": 37.72,
+                          "puroCarregado": 87.72,
+                          "comercial": 92.11,
+                          "total": 92.46
+                        },
+                        "taxa": {
+                          "comercial": 0.00921069767441,
+                          "pura": 0.003772,
+                          "total": 0.00924569832558
+                        },
+                        "descontoAgravo": [
+                          {
+                            "percentual": 5,
+                            "monetario": 4.39,
+                            "tipo": "FPG"
+                          },
+                          {
+                            "percentual": 0,
+                            "monetario": 0,
+                            "tipo": "TEC"
+                          },
+                          {
+                            "percentual": 0,
+                            "monetario": 0,
+                            "tipo": "COM"
+                          },
+                          {
+                            "percentual": 0,
+                            "monetario": 0,
+                            "tipo": "BAT"
+                          },
+                          {
+                            "percentual": 0,
+                            "monetario": 0,
+                            "tipo": "TPR"
+                          }
+                        ]
+                      },
+                      {
+                        "sigla": "CAN",
+                        "capitalContratacao": 100000,
+                        "iof": 2.4,
+                        "premio": {
+                          "puro": 259,
+                          "puroCarregado": 602.33,
+                          "comercial": 632.44,
+                          "total": 634.85
+                        },
+                        "taxa": {
+                          "comercial": 0.00632441860465,
+                          "pura": 0.00259,
+                          "total": 0.00634845139534
+                        },
+                        "descontoAgravo": [
+                          {
+                            "percentual": 5,
+                            "monetario": 30.12,
+                            "tipo": "FPG"
+                          },
+                          {
+                            "percentual": 0,
+                            "monetario": 0,
+                            "tipo": "TEC"
+                          },
+                          {
+                            "percentual": 0,
+                            "monetario": 0,
+                            "tipo": "COM"
+                          },
+                          {
+                            "percentual": 0,
+                            "monetario": 0,
+                            "tipo": "BAT"
+                          },
+                          {
+                            "percentual": 0,
+                            "monetario": 0,
+                            "tipo": "TPR"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

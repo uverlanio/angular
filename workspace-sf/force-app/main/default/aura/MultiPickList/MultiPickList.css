@@ -1,0 +1,16 @@
+.THIS .opcoes-combo {
+	display: none;
+}
+
+.THIS .span-icon{
+	display: none;
+}
+
+.THIS .item-selecionado{
+	display: block !important;
+}
+
+.THIS .slds-listbox_vertical {
+    height: 190px;
+    overflow: auto;
+}

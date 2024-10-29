@@ -1,0 +1,23 @@
+<apex:page >
+    <apex:includeLightning />
+    <div id="lightningout">Testes</div>
+
+    <script src="https://portoseguro--sniper.sandbox.my.salesforce.com/lightning/lightning.out.js"></script>
+    <script>
+      $Lightning.use(
+        'c:LightningOutDependencyApp', // nome do aplicativo Lightning
+        function () {
+          // Callback uma vez que o framework e o aplicativo são carregados
+          $Lightning.createComponent(
+            'c:helloWorld', // componente de nível superior do seu aplicativo
+            {}, // atributos para definir no componente ao ser criado
+            'lightningout', // localização do DOM para inserir o componente
+            function (cmp) {
+              // callback quando o componente é criado e ativo na página
+            }
+          );
+        },
+        'https://portoseguro--sniper.sandbox.my.salesforce-sites.com/HelloWord' // Site endpoint
+      );
+    </script>
+</apex:page>

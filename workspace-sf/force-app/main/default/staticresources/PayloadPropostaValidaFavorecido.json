@@ -1,0 +1,315 @@
+{
+    "proposta": {
+        "numeroOrcamento": "00003276",
+        "numeroPortal": 0,
+        "origem": 18,
+        "tipoSeguro": "Novo",
+        "entradaNegocio": "COR",
+        "dataTransmissao": "2019-09-26",
+        "meioComercializacao": "CO2",
+        "codigoProdutoVida": "SNIPER",
+        "imprimirCertificadoSeguro": true,
+        "contratantes": [
+            {
+                "tipo": "PRI",
+                "numero": 1,
+                "grupos": [
+                    {
+                        "numero": 1,
+                        "segurados": [
+                            {
+                                "pessoa": {
+                                    "tipo": "FIS",
+                                    "enderecos": [
+                                        {
+                                            "tipoEndereco": "0",
+                                            "logradouro": "Rua Colatina",
+                                            "numeroLogradouro": 200,
+                                            "bairro": "Cidade Patriarca",
+                                            "cidade": "São Paulo",
+                                            "uf": "SP",
+                                            "cep": "03550",
+                                            "complementoCep": "000",
+                                            "paisResidencia": "BRA"
+                                        }
+                                    ],
+                                    "nome": "Iskander Alexandre Bittencourt dos Santos",
+                                    "dadosPessoaFisica": {
+                                        "numeroCpf": "456841348",
+                                        "digitoCpf": "66",
+                                        "dataNascimento": "1997-09-27T00:00:00.000Z",
+                                        "fumante": false,
+                                        "sexo": "MASCULINO",
+                                        "estadoCivil": "SOLTEIRO",
+                                        "nacionalidade": "BRA"
+                                    },
+                                    "email": "iskander.bittencourt@hotmail.com",
+                                    "rendaMensal": "2000.00",
+                                    "telefones": [
+                                        {
+                                            "tipoTelefone": "RES",
+                                            "numeroTelefone": "976383012",
+                                            "dddTelefone": "11"
+                                        },
+                                        {
+                                            "tipoTelefone": "RES",
+                                            "numeroTelefone": "993813820",
+                                            "dddTelefone": "12"
+                                        },
+                                        {
+                                            "tipoTelefone": "RES",
+                                            "numeroTelefone": "",
+                                            "dddTelefone": ""
+                                        }
+                                    ]
+                                },
+                                "numero": 1,
+                                "coberturas": [
+                                    {
+                                        "sigla": "BAS",
+                                        "valor": 40000
+                                    },
+                                    {
+                                        "sigla": "MAP",
+                                        "valor": 40000
+                                    },
+                                    {
+                                        "sigla": "DIH",
+                                        "valor": 80
+                                    },
+                                    {
+                                        "sigla": "AFI",
+                                        "valor": 3000
+                                    },
+                                    {
+                                        "sigla": "DG 10",
+                                        "valor": 2000
+                                    }
+                                ],
+                                "questionario": {
+                                    "respostas": [
+                                        {
+                                            "questao": "Sniper Pergunta TESTE 1 para pergunta resumida",
+                                            "resposta": "Não"
+                                        },
+                                        {
+                                            "questao": "Teste Sniper Pergunta 1",
+                                            "resposta": "Sim"
+                                        },
+                                        {
+                                            "questao": "É fumante?",
+                                            "resposta": "Sim"
+                                        },
+                                        {
+                                            "questao": "Possui doenças degenerativas?",
+                                            "resposta": "NÃO"
+                                        },
+                                        {
+                                            "questao": "Algum familiar possui histórico de problemas cardíacos?",
+                                            "resposta": "NÃO"
+                                        },
+                                        {
+                                            "questao": "Abc Dfgh?",
+                                            "resposta": "132123"
+                                        },
+                                        {
+                                            "questao": "Abc Dfgh?",
+                                            "resposta": "1231324444"
+                                        },
+                                        {
+                                            "questao": "Como foi seu dia?",
+                                            "resposta": "askkjakdjasjd"
+                                        },
+                                        {
+                                            "questao": "Como foi seu dia?",
+                                            "resposta": "akjksdoaksjdas"
+                                        },
+                                        {
+                                            "questao": "Pergunta Teste: Tem ou teve doença ortopédicas ou reumatológicas (febre reumática, artrite reumática, lúpus, esclerodermia, hérnia de disco, problemas na coluna vertebral, deformidades, sequelas, amputações ou outras doenças ou alterações dos músculos, ossos, coluna vertebral ou articulações)?",
+                                            "resposta": "SIM"
+                                        }
+                                    ]
+                                },
+                                "beneficiarios": [
+                                    {
+                                        "tipoBeneficiario": "Nome do beneficiário",
+                                        "motivoSemCpfCnpj": "Não Desejo Informar",
+                                        "grauParentesco": "Avó",
+                                        "participacao": 10,
+                                        "pessoa": {
+                                            "tipo": "FIS",
+                                            "nome": "Iskander Alexandre Bittencourt dos Santos",
+                                            "email": "",
+                                            "rendaMensal": 2000,
+                                            "dadosPessoaFisica": {
+                                                "sexo": "",
+                                                "numeroCpf": "456841348",
+                                                "digitoCpf": "66",
+                                                "profissao": 222,
+                                                "estadoCivil": "",
+                                                "dataNascimento": "1997-09-27T00:00:00.000Z",
+                                                "pep": "Sim"
+                                            }
+                                        },
+                                        "telefones": [
+                                            {
+                                                "tipoTelefone": "COM",
+                                                "numeroTelefone": 976383012,
+                                                "dddTelefone": 11
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "nome": "Iskander Alexandre Bittencourt dos Santos",
+                        "qtdeVidas": 1
+                    }
+                ],
+                "pessoa": {
+                    "tipo": "FIS",
+                    "enderecos": [
+                        {
+                            "tipoEndereco": "0",
+                            "logradouro": "Rua Colatina",
+                            "numeroLogradouro": 200,
+                            "bairro": "Cidade Patriarca",
+                            "cidade": "São Paulo",
+                            "uf": "SP",
+                            "cep": "03550",
+                            "complementoCep": "000",
+                            "paisResidencia": "BRA"
+                        }
+                    ],
+                    "nome": "Iskander Alexandre Bittencourt dos Santos",
+                    "dadosPessoaFisica": {
+                        "numeroCpf": "456841348",
+                        "digitoCpf": "66",
+                        "dataNascimento": "1997-09-27T00:00:00.000Z",
+                        "fumante": false,
+                        "sexo": "MASCULINO",
+                        "estadoCivil": "SOLTEIRO",
+                        "nacionalidade": "BRA"
+                    },
+                    "email": "iskander.bittencourt@hotmail.com",
+                    "rendaMensal": "2000.00",
+                    "telefones": [
+                        {
+                            "tipoTelefone": "RES",
+                            "numeroTelefone": "976383012",
+                            "dddTelefone": "11"
+                        },
+                        {
+                            "tipoTelefone": "RES",
+                            "numeroTelefone": "993813820",
+                            "dddTelefone": "12"
+                        },
+                        {
+                            "tipoTelefone": "RES",
+                            "numeroTelefone": "",
+                            "dddTelefone": ""
+                        }
+                    ]
+                },
+                "dadosPagamento": {
+                    "codigoFormaPagamento": 25,
+                    "quantidadeParcelas": null,
+                    "cartaoCredito": null,
+                    "dadosBancarios": null,
+                    "formaPagamento": {
+                        "codigo": 25,
+                        "descricao": "1.A NA CIA, DEMAIS CARNE MELHOR DATA",
+                        "idFormaPagamento": "a0aL0000007ApMAIA0",
+                        "planoParcelamento": {
+                            "codigoMeioRecebimento": "O",
+                            "idPlanoParcelamento": "a14L0000003LamuIAC"
+                        }
+                    },
+                    "responsavelPagamento": null,
+                    "tipoResponsavelPagamento": "SEG",
+                    "vencimentoPrimeiraParcela": "2019-10-26"
+                },
+               "responsavelFinanceiro": false,
+               "responsavelFinanceiroSeguro": {
+                  "nome": "JOSE ADEVAL NASCIMENTO FEITOSA",
+                  "cpf": "429.384.305-15",
+                  "vinculoComSegurado": "PAI",
+                  "email": "teste@teste.com.br",
+                  "dadosPessoaFisica": {
+                     "digitoCpf": "15",
+                     "numeroCpf": "429384305"
+                  },
+                  "telefones": [{
+                     "tipoTelefone": "CEL",
+                     "numeroTelefone": "111111111",
+                     "dddTelefone": "11"
+                  }, {
+                     "tipoTelefone": "RES",
+                     "numeroTelefone": "222222222",
+                     "dddTelefone": "22"
+                  }, {
+                     "tipoTelefone": "PES",
+                     "numeroTelefone": "333333333",
+                     "dddTelefone": "33"
+                  }],
+                  "enderecos": [{
+                     "tipoEndereco": "Comercial",
+                     "logradouro": "Luís Gama",
+                     "numeroLogradouro": 2,
+                     "bairro": "Jardim Monções",
+                     "cidade": "Santo André",
+                     "uf": "SP",
+                     "cep": "09180",
+                     "complemento": "",
+                     "complementoCep": "320"
+                  }]
+               }
+            }
+        ],
+        "canalDistribuicao": "COR",
+        "remuneracoes": [
+            {
+                "percentual": 20,
+                "tipoRemuneracao": "COR",
+                "favorecidos": [
+                    {
+                        "papel": "COR",
+                        "participacao": 69,
+                        "corretorLider": true,
+                        "susep": "P5005J",
+                        "pessoa": null
+                    }
+                ]
+            },
+            {
+                "percentual": 20,
+                "tipoRemuneracao": "AGE",
+                "favorecidos": [
+                    {
+                        "papel": "COR",
+                        "participacao": 80,
+                        "pessoa": {
+                            "tipo": "FIS",
+                            "dadosPessoaFisica": {
+                                "numeroCpf": "427709828",
+                                "digitoCpf": "26"
+                            }
+                        }
+                    },
+                    {
+                        "papel": "COR",
+                        "participacao": 20,
+                        "pessoa": {
+                            "tipo": "JUR",
+                            "dadosPessoaJuridica": {
+                                "numeroCnpj": "61038592",
+                                "ordemCnpj": "0001",
+                                "digitoCnpj": "25"
+                            }
+                        }
+                    }
+                ]
+            }
+        ]
+    }
+}

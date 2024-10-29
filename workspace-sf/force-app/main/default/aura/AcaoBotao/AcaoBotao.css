@@ -1,0 +1,7 @@
+.THIS
+{
+	max-height:385px;
+	width: 100%;
+	overflow-y: auto;
+	z-index: 1000;
+}

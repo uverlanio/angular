@@ -1,0 +1,14 @@
+<template>
+    <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open">
+        <div class="slds-modal__container" style="width: 100%; height: 80px; margin-top: 12px">
+            <div class="slds-modal__content slds-p-around_medium" style="display: inline-table;">
+                <p style="text-align: center;">Infelizmente o link está expirado. Favor preencher o formulário clicando no link abaixo:</p>
+                <p style="text-align: center;"><a href={formLink} target="_blank">Clique aqui para preencher o formulário</a></p>
+            </div>
+            <footer class="slds-modal__footer">
+                <button class="slds-button slds-button_neutral" onclick={handleClose}>Fechar</button>
+            </footer>
+        </div>
+    </section>
+    <div class="slds-backdrop slds-backdrop_open"></div>
+</template>

@@ -1,0 +1,68 @@
+<aura:component controller="DependenciaPerguntasController" implements="flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickActionWithoutHeader" access="global" >
+	<style>
+		.slds-modal__container {
+			margin: 0 auto !important;
+			width: 60% !important;
+			max-width: 1000rem !important;
+			min-width: 20rem !important;
+		}
+	</style>
+	<aura:handler name="init" value="{!this}" action="{!c.inicializar}"/>
+	<aura:attribute name="recordId" type="Id"/>
+	<aura:attribute name="idPergunta" type="Id"/>
+	<!-- <aura:attribute name="idQuestionario" type="Id"/> -->
+	<aura:attribute name="idquestionario" type="Id"/> <!-- RVI-138 INICIO-FIM FIX01 -->
+	<aura:attribute name="opcoesResposta" type="List" default="[]"/>
+	<aura:attribute name="perguntasQuestionario" type="List" default="['Nenhuma pergunta encontrada']" />
+
+	<div class="modal-quickaction">
+		<div class="slds-modal__header">
+			<h2 class="slds-text-heading--medium">Dependência das perguntas</h2>
+		</div>
+		<div class="slds-modal__content slds-p-around--medium slds-grid slds-wrap ">
+			<div class="slds-scrollable slds-grow">
+
+				<table role="grid" class="slds-table slds-has-top-magnet slds-table_fixed-layout slds-table_bordered slds-no-row-hover ">
+					<thead>
+						<tr class="slds-line-height_reset">
+							<th scope="col" style="width: 3.75rem;"></th>
+							<th aria-label="Opção" class="slds-text-title_caps" scope="col">
+								<div class="slds-grid slds-grid_vertical-align-center">
+									<span class="slds-truncate" title="Opção">Opção</span>
+								</div>
+							</th>
+							<th aria-label="Próxima pergunta" class="slds-text-title_caps" scope="col">
+								<div class="slds-grid slds-grid_vertical-align-center">
+									<span class="slds-truncate" title="Próxima pergunta">Próxima pergunta</span>
+								</div>
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						<aura:iteration items="{!v.opcoesResposta}" var="item" >
+							<tr>
+								<td role="gridcell" tabindex="0" class="slds-grid_vertical-align-center" style="width: 3.75rem;">
+									<lightning:button variant="base" label="" title="" onclick="{!c.excluirOpcao}" value="{!item.idx}">
+										<lightning:icon iconName="action:delete" size="small" variant="error" class="slds-ajuste_botao-quadrado"/>
+									</lightning:button>
+								</td>
+								<th scope="row" class="slds-grid_vertical-align-center">
+									<div class="slds-truncate" title="{!item}">{!item.etiquetaOpcao}</div>
+								</th>
+								<td role="gridcell" class="slds-grid slds-grid_vertical-align-center">
+									<lightning:combobox name="pp" label="" placeholder="-- Nenhuma --" value="{!item.perguntaSelecionada}" options="{!v.perguntasQuestionario}" onchange="{!c.atualizarPerguntaEscolhida}" class="w-100p"/>
+								</td>
+							</tr>
+						</aura:iteration>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="modal-footer slds-modal__footer">
+			<div class="forceModalActionContainer--footerAction forceModalActionContainer">
+				<lightning:button variant="neutral" label="Cancelar" onclick="{!c.cancelar}" />
+				<lightning:button variant="brand" label="Salvar" onclick="{!c.salvarOpcoes}" />
+			</div>
+		</div>
+	</div>
+</aura:component>

@@ -1,0 +1,61 @@
+<aura:component >
+	<aura:handler name="change" value="{!v.itens}" action="{!c.inicializar}"/>
+	<aura:attribute name="itens" type="List" default="[]"/>
+	<aura:attribute name="itensFiltrados" type="List" default="[]"/>
+	<aura:attribute name="filtro" type="String" default=""  />
+	<aura:attribute name="produtoEscolhido" type="Object" default="{}" />
+	<div>
+		<div>
+			<div class="slds-form-element">
+				<div class="slds-form-element__control">
+				  <ui:inputText class="slds-input" placeholder="Filtro por nome de produto" updateOn="keyup" keyup="{!c.filtrar}" value="{!v.filtro}"  />
+				</div>
+			</div>
+			<br />
+			<div class="{!'slds-text-align_center' + (v.itensFiltrados.length == 0 ? '' : ' hide')}">-- Não foram encontrados produtos --</div>
+			<ul class="{!'slds-accordion ' + (v.itensFiltrados.length > 0 ? '' : 'hide')}">
+				<aura:iteration items="{!v.itensFiltrados}" var="item">
+				  <li class="slds-accordion__list-item">
+				    <section class="{!'slds-accordion__section' + (item.selecionado ? ' slds-is-open' : '')}">
+				    	<div style="position:relative" class="{!(item.selecionado ? '' : 'hide')}">
+							<span class="slds-visual-picker slds-icon_container slds-visual-picker__text-check slds-align_absolute-center">
+								<lightning:icon iconName="utility:check" size="x-small" class="slds-icon-text-check slds-check-picker slds-icon_x-small"/>
+							</span> 
+						</div>
+				      <div class="slds-accordion__summary">
+				        	<h3 class="slds-text-heading_small slds-accordion__summary-heading" onclick="{!c.escolherProduto}" data-produtoid="{!item.produto.Id}">
+								<button aria-expanded="true" class="slds-button slds-button_reset slds-accordion__summary-action">
+									<lightning:icon iconName="utility:switch" size="x-small" variant="border-filled" class="slds-accordion__summary-action-icon slds-button__icon slds-button__icon_left"/>
+			              			<span class="slds-truncate" title="Accordion summary">{!item.produto.Name}</span>
+			          			</button>		   
+				        	</h3>
+			      		</div>
+				      <div aria-hidden="false" class="slds-accordion__content">
+			      		<table role="grid" class="slds-table slds-table_bordered slds-max-medium-table_stacked-horizontal slds-no-row-hover">
+				     		<thead>
+							   <tr class="slds-hint-parent">
+							   	 <th scope="col"><div class="slds-truncate">&nbsp;</div></th>
+							   	 <th scope="col"><div class="slds-truncate">Garantia</div></th>
+							    </tr>
+							 </thead>
+							 <tbody>
+							 	<aura:iteration items="{!item.garantias}" var="garantia">
+								 	<tr class="slds-hint-parent">
+										<td scope="row" class="slds-text-align_left slds-size_1-of-5">
+											<ui:inputCheckbox value="{!garantia.selecionado}" />
+										</td>
+										<td scope="row" class="slds-text-align_left slds-size_4-of-5">
+											{!garantia.garantia.Garantia__r.Name}
+										</td>
+									</tr>	
+								</aura:iteration>
+							 </tbody>
+				     	</table>
+				      </div>
+				    </section>
+				  </li>
+	 			</aura:iteration>
+			</ul>
+		</div>
+	</div>	
+</aura:component>

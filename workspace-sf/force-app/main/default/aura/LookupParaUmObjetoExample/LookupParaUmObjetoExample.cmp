@@ -1,0 +1,8 @@
+<!--
+ - Created by Alessndro Ponte on 12/06/2018.
+ -->
+
+<aura:component description="LookupParaUmObjetoExample">
+  <c:LookupParaUmObjeto sObject="Contact" label="Pesquisar Contato" iconName="standard:contact" listFields="['Email','MobilePhone']" />
+  <aura:handler name="recordFound" event="c:LookupParaUmObjetoEvent" action="{!c.handleRecordFoundLookup}"/>
+</aura:component>

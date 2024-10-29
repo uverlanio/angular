@@ -1,0 +1,165 @@
+{
+  "properties": {
+      "content_type": "application/json"
+  },
+  "routing_key": "opin.seg_vida",
+  "payload_encoding": "string",
+  "payload": "{    
+    \"brand\": {
+      \"name\": \"PORTO SEGURO\",
+      \"company\": {
+        \"name\": \"PORTO SEGURO CIA DE SEGUROS GERAIS\",
+        \"cnpjNumber\": \"61.198.164/0001-60\",
+        \"product\": [
+          {
+            \"name\": \"Seguro Viagem | Porto Vida ON\",
+            \"code\": \"VIAGEM-PRATA\",
+			\"category\": \"SEGURO\",
+            \"insuranceModality\": \"VIDA\",
+            \"coverages\": [
+              {
+                \"coverage\": \"Seguro Viagem | Porto Vida ON\",
+                \"coverageOthers\": [
+                  \"\"
+                ],
+                \"coverageAttributes\": {
+                  \"indemnityPaymentMethod\": [
+                    \"À vista\"
+                  ],
+                  \"indemnityPaymentFrequency\": [
+                    \"1\"
+                  ],
+                  \"minValue\": [
+                    {
+                      \"amount\": 3000,
+                      \"unit\": {
+                        \"code\": \"AM\",
+                        \"description\": \"Acompanhamento de Menor\"
+                      }
+                    }
+                  ],
+                  \"maxValue\": [
+                    {
+                      \"amount\": 3000,
+                      \"unit\": {
+                        \"code\": \"AM\",
+                        \"description\": \"Acompanhamento de Menor\"
+                      }
+                    }
+                  ],
+                  \"indemnifiablePeriod\": [
+                    \"string\"
+                  ],
+                  \"maximumQtyIndemnifiableInstallments\": \"1\",
+                  \"currency\": \"BRL\",
+                  \"gracePeriod\": [
+                    {
+                      \"amount\": 30,                     
+                      \"unit\": \"DIAS\"
+                    }
+                  ],
+				  \"differentiatedGracePeriod\": [
+                    {
+                      \"amount\": 30,                     
+                      \"unit\": \"DIAS\"
+                    }
+                  ],
+				  
+                  \"deductibleDays\": [
+                    \"integer\"
+                  ],
+                  \"differentiatedDeductibleDays\": \"number\",
+				  \"deductibleBRL\": \"number\",
+                  \"differentiatedDeductibleBRL\": \"string\",
+                  \"excludedRisks\": [
+                    \"string\"
+                  ],
+				  \"excludedRisksURL\": \"string\",
+				  \"allowApartPurchase\": true,				  
+				  \"minCoverageGroupRequired\": [
+                    \"string\"
+                  ],
+				  \"minCoverageGroupRequiredOthers\": \"string\"
+                }
+              }
+            ],
+            \"assistanceType\": [
+              \"ACOMPANHANTE_CASO_HOSPITALIZACAO_PROLONGADA\" 
+            ],
+            \"additional\": [
+              \"SORTEIO\" 
+            ],
+            \"assistanceTypeOthers\": [
+              \"string\"
+            ],
+            \"termAndCondition\": [
+              {
+                \"susepProcessNumber\": \"string\",
+                \"definition\": \"string\"
+              }
+            ],
+            \"globalCapital\": true,
+            \"validity\": [
+              \"VITALICIA\"
+            ],
+            \"pmbacRemuneration\": {
+              \"interestRate\": 0,
+              \"pmbacUpdateIndex\": \"IPCA\",
+              \"capitalizationMethod\": \"FINANCEIRA\"
+            },
+            \"benefitRecalculation\": {
+              \"benefitRecalculationCriteria\": \"INDICE\",
+              \"benefitUpdateIndex\": \"IPCA\"
+            },
+            \"ageAdjustment\": {
+              \"criterion\": \"APOS_PERIODO_EM_ANOS\",
+              \"frequency\": 0
+            },
+            \"contractType\": \"REPARTICAO_SIMPLES\",
+            \"reclaim\": {
+              \"reclaimTable\": [
+                {
+                  \"initialMonthRange\": 0,
+                  \"finalMonthRange\": 0,
+                  \"percentage\": 0
+                }
+              ],			  
+              \"differentiatedPercentage\": \"string\",			  
+			  \"gracePeriod\": [
+				{
+				  \"amount\": 0,
+				  \"unit\": {
+					\"code\": \"string\",
+					\"description\": \"string\"
+				  }
+				}
+              ]
+            },
+            \"otherGuaranteedValues\": \"SALDAMENTO\",
+            \"portabilityGraceTime\": 0,
+            \"indemnityPaymentMethod\": [
+              \"UNICO\"
+            ],
+            \"indemnityPaymentIncome\": [
+              \"CERTA\"
+            ],
+            \"premiumPayment\": {
+              \"paymentMethod\": [
+                \"CARTAO_CREDITO\"
+              ],
+              \"frequency\": [
+                \"DIARIA\"
+              ],
+              \"premiumTax\": \"string\"
+            },
+            \"minimunRequirements\": {
+              \"contractingType\": \"COLETIVO\",
+              \"contractingMinRequirement\": \"string\"
+            },
+			\"targetAudience\": \"string\"
+          }
+        ]
+      }
+    }
+  }"
+}

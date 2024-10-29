@@ -1,0 +1,97 @@
+<aura:component implements="flexipage:availableForAllPageTypes,force:hasRecordId,force:lightningQuickActionWithoutHeader" controller="ConfiguradorOfertaController">
+  <style>
+      .slds-modal__container {
+          margin: 0 auto !important;
+          width: 80%  !important;
+          max-width: 1000rem  !important;
+          min-width: 20rem  !important;
+      }
+  </style>
+
+  <aura:handler name="init" value="{!this}" action="{!c.inicializar}" />
+  <aura:attribute name="recordId" type="Id" />
+	<aura:attribute name="componente" type="Object" default="{}"  />
+  <aura:attribute name="configuracao" type="Configuracao__c"  default="{ 'sobjectType': 'Configuracao__c' }"/>
+  <aura:attribute name="produtosConfiguracao" type="List" default="[]"  />
+  <aura:attribute name="criteriosConfiguracao" type="List" default="[]"  />
+
+  <div class="modal-quickaction">	
+  		<div class="slds-page-header">
+  		  <div class="slds-media">
+  		    <div class="slds-media__figure">
+  		      <lightning:icon iconName="custom:custom67" size="medium" />
+  		    </div>
+  		    <div class="slds-media__body">
+  		      <p class="slds-text-body_small slds-line-height_reset">Configurador</p>
+  		      <h1 class="slds-page-header__title slds-truncate slds-align-middle" title="">{!v.configuracao.Name}</h1>
+  		    </div>
+  		  </div>
+  		</div>
+      <br />
+
+      <div class="slds-modal__content slds-grid slds-wrap ">
+    		 <div class="slds-scrollable slds-grow">
+
+            <!-- CABEÇALHO
+            <div class="slds-card container-form"> 
+              <c:Secao titulo="Dados" idElementoToggle="divCabecalho" componentePai="{!v.componente}" />  
+              <div aura:id="divCabecalho" class="slds-form slds-p-around-medium slds-form_compound">
+                <fieldset class="slds-form-element">
+                  <legend class="slds-form-element__label slds-text-title_caps">{!v.papel}</legend>
+                  <div class="slds-form-element__group">
+                    <div class="slds-grid">
+                      <div class="slds-col">
+                          <div class="slds-form-element">
+                            <label class="slds-form-element__label" for="input-id-01">Text Input</label>
+                            <div class="slds-form-element__control input-configurador">
+                              <input class="slds-input" placeholder="Placeholder Text" type="text" disabled="true" value="{!v.configuracao.Campo_teste__c}" />
+                            </div>
+                          </div>
+                          <div class="slds-form-element">
+                            <label class="slds-form-element__label" for="input-id-01">Text Input</label>
+                            <div class="slds-form-element__control input-configurador">
+                              <input class="slds-input" placeholder="Placeholder Text" type="text" disabled="true" />
+                            </div>
+                          </div>                          
+                      </div>  
+                      <div class="slds-col">
+                          <div class="slds-form-element">
+                            <label class="slds-form-element__label" for="input-id-01">Text Input</label>
+                            <div class="slds-form-element__control input-configurador">
+                              <input class="slds-input" placeholder="Placeholder Text" type="text" disabled="true" />
+                            </div>
+                          </div>
+                          <div class="slds-form-element">
+                            <label class="slds-form-element__label" for="input-id-01">Text Input</label>
+                            <div class="slds-form-element__control input-configurador">
+                              <input class="slds-input" placeholder="Placeholder Text" type="text" disabled="true" />
+                            </div>
+                          </div>                          
+                      </div> 
+                    </div>
+                  </div>
+                </fieldset>
+              </div> 
+            </div>
+            -->
+
+            <!-- SELECAO PRODUTOS -->
+            <c:ProdutosConfigurador aura:id="cmpProdutosConf" produtosConfiguracao="{!v.produtosConfiguracao}" segmento="{!v.configuracao.Segmento__c}"/>
+
+            <!-- SELECAO CRITERIOS -->
+            <c:CriteriosConfigurador configuracaoId="{!v.recordId}" segmento="{!v.configuracao.Segmento__c}" criterios="{!v.criteriosConfiguracao}"/>
+    		 </div>
+    	</div>
+
+      <br />
+    	<div class="slds-modal__footer">  
+        <div class="slds-grid">
+  				<div class="slds-col" >
+            <lightning:button variant="brand" label="Salvar" onclick="{!c.salvar}" />
+            <lightning:button variant="neutral" label="Cancelar" onclick="{!c.cancelar}" />
+  				</div>
+          <div class="slds-col"/>
+  		 </div>   
+      </div>
+  </div> 	
+</aura:component>

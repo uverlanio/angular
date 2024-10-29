@@ -1,0 +1,1223 @@
+<aura:component description="RecalculoProposta"
+    implements="flexipage:availableForAllPageTypes,force:hasRecordId,force:lightningQuickActionWithoutHeader"
+    controller="RecalculoPropostaController" access="global">
+
+    <aura:html tag="style">
+        ::-webkit-scrollbar {
+        display: none;
+        }
+    </aura:html>
+
+    <ltng:require styles="{!$Resource.bigModalCss}" />
+
+    <aura:attribute name="dadosCriticas" type="Object[]" />
+    <aura:attribute name="colunasCriticas" type="List" default="[] " />
+
+    <aura:attribute name="propostaOriginal" type="Object" default="{}" />
+    <aura:attribute name="propostaModificada" type="Object" default="{}" />
+    <aura:attribute name="propostaRecalculada" type="Object" default="{}" />
+    <aura:attribute name="garantiasPrincipais" type="Object" default="{}" />
+    <aura:attribute name="garantiaDesconto" type="Object" default="{}" />
+    <aura:attribute name="propostaTipo" type="Object" default="{}" />
+    <aura:attribute name="salvarResponse" type="Object" default="{}" />
+
+    <aura:attribute name="jsonResponseRecalculo" type="String" default="" />
+    <aura:attribute name="jsonModificada" type="String" default="" /> <!-- II-54 - INICIO/FIM -->
+    <aura:attribute name="tipoConfirm" type="String" default="" />
+    <aura:attribute name="confirmDialogMessage" type="String" default="" />
+    <aura:attribute name="errorInit" type="String" default="" />
+    <aura:attribute name="saveMessage" type="String" default="" />
+    <aura:attribute name="etapa" type="Integer" default="1" />
+    <aura:attribute name="etapaTela2" type="Integer" default="1" /> <!--II-206 FIX02 - INICIO/FIM-->
+    <aura:attribute name="showSpinner" type="Boolean" default="true" />
+    <aura:attribute name="showConfirmDialog" type="Boolean" default="false" />
+    <aura:attribute name="showConfirmRecalculo" type="Boolean" default="false" /> <!-- FNPVVEP-147 - INICO/FIM -->
+
+    <!--II-166 - INICIO-->
+    <aura:attribute name="recordId" type="String" default="" />
+    <aura:attribute name="isRecalculoOut" type="Boolean" default="" /> <!--FNPVVEP-126 INICIO/FIM -->
+    <aura:attribute name="proposta" type="String" /> <!-- FNPVVEP-147 - INICO/FIM -->
+    <aura:attribute name="cliente" type="String" /> <!-- FNPVVEP-147 - INICO/FIM -->
+    <aura:attribute name="produto" type="String" /> <!-- FNPVVEP-147 - INICO/FIM -->
+    <aura:attribute name="formaPagamentoAtual" type="String" />
+    <aura:attribute name="parcelamento" type="String" />
+    <aura:attribute name="valorPremioAtual" type="Decimal" />
+    <aura:attribute name="novaFormaPagamento" type="String" />
+    <aura:attribute name="produtoId" type="String" />
+    <aura:attribute name="opcoesParcelas" type="List" default="[]" />
+    <aura:attribute name="opcoesMelDtPgto" type="List" default="[]" />
+    <aura:attribute name="showMelhorDtPgto" type="Boolean" default="false" />
+    <aura:attribute name="showFormPgtoADC" type="Boolean" default="false" />
+    <aura:attribute name="showFormPgtoCartao" type="Boolean" default="false" />
+    <aura:attribute name="isDadosCriticasValida" type="Boolean" default="false" />
+    <!--II-166 - FIM-->
+    <aura:attribute name="codFormPag" type="String" /> <!--II-174 - INICIO/FIM-->
+    <aura:attribute name="showFormPgtoBoleto" type="Boolean" default="false" /> <!--II-174 - INICIO/FIM-->
+    <aura:attribute name="selectDisable" type="Boolean" default="false" /> <!--II-174 - INICIO/FIM-->
+    <!--II-176 - INICIO -->
+    <aura:attribute name="ShowAntecipacao" type="Boolean" default="false" />
+    <aura:attribute name="antecipar" type="Boolean" default="false" />
+    <aura:attribute name="naoAntecipar" type="Boolean" default="false" />
+    <aura:attribute name="anteciparCondCobranca" type="Boolean" default="false" />
+    <aura:attribute name="antecipacaoIndisponivel" type="Boolean" default="false" />
+    <aura:attribute name="antecipacaoSelecionada" type="Boolean" default="false" />
+    <aura:attribute name="limite" type="Boolean" default="false" />
+    <!--II-176 - FIM-->
+    <!--II-175 - INICIO -->
+    <aura:attribute name="alteracaoFormPag" type="Boolean" default="false" />
+    <aura:attribute name="descontoAgravo" type="String" default="" />
+    <!--II-175 - FIM-->
+
+    <!--II-206 - INICIO -->
+    <aura:attribute name="opcoesBancos" type="List" default="[]" />
+    <aura:attribute name="liberarCalculo" type="Boolean" default="false" />
+    <aura:attribute name="liberarCartao" type="Boolean" default="false" />
+    <aura:attribute name="liberarADC" type="Boolean" default="false" />
+    <aura:attribute name="liberarBoleto" type="Boolean" default="false" />
+    <aura:attribute name="responsavelFinanceiro" type="Object" default="{}" />
+    <aura:attribute name="infoNumero" type="String" default="" />
+    <aura:attribute name="infoNome" type="String" default="" />
+    <aura:attribute name="infoVencimento" type="String" default="" />
+    <aura:attribute name="infoMelDtPgto" type="String" default="" />
+    <aura:attribute name="infoQtdParcelas" type="String" default="" />
+    <aura:attribute name="infocpf1" type="String" default="" />
+    <aura:attribute name="codigoPagamento" type="String" default="" />
+    <aura:attribute name="infoBanco" type="String" default="" />
+    <aura:attribute name="infoAgencia" type="String" default="" />
+    <aura:attribute name="infoContaCorrente" type="String" default="" />
+    <aura:attribute name="infoDigito" type="String" default="" />
+    <!--II-206 - FIM-->
+    <aura:attribute name="quantidadeParcelasContratante" type="Decimal" default="" /> <!--II-206 FIX01 - INICIO/FIM-->
+    <aura:attribute name="ajusteParcelas" type="Boolean" default="true" /> <!--II-206 FIX01 - INICIO/FIM-->
+    <!--II-172 - INICIO-->
+    <aura:attribute name="showOutroRespFin" type="Boolean" default="false" />
+    <aura:attribute name="cpf1" type="String" default="" />
+    <aura:attribute name="cpf2" type="String" default="" />
+    <aura:attribute name="telefone1" type="String" default="" />
+    <aura:attribute name="telefone2" type="String" default="" />
+    <aura:attribute name="cep" type="String" default="" />
+    <aura:attribute name="nascimento" type="String" default="" />
+    <aura:attribute name="opcoesEndereco" type="List" default="[]" />
+    <aura:attribute name="opcoesEstado" type="List" default="[]" />
+    <aura:attribute name="logradouro" type="String" default="" />
+    <aura:attribute name="bairro" type="String" default="" />
+    <aura:attribute name="cidade" type="String" default="" />
+    <aura:attribute name="estado" type="String" default="" />
+    <aura:attribute name="numeroCartaoCredito" type="String" default="" />
+    <aura:attribute name="dataVencimento" type="String" default="" />
+    <!--II-172 - FIM-->
+
+    <aura:attribute name="codigoEmpresa" type="String" /> <!--FNPVVEP-146 INICIO/FIM -->
+    <aura:attribute name="idCartao" type="String" /> <!--FNPVVEP-146 INICIO/FIM -->
+
+    <aura:handler name="init" value="{!this}" action="{!c.init}" />
+    <!--FNPVVEP-126 INICIO -->
+    <aura:if isTrue="{!not(v.isRecalculoOut)}">
+        <lightning:card iconName="standard:record_update" title="Recálculo de proposta - Fluxo de aceitação">
+            <aura:if isTrue="{!v.showConfirmDialog}">
+                <div class="slds-m-around_xx-large">
+                    <div role="dialog" class="slds-modal slds-fade-in-open ">
+                        <div class="slds-modal__container">
+                            <header class="slds-modal__header">
+                                <h1 class="slds-text-heading--medium">Confirmação</h1>
+                            </header>
+                            <div class="slds-modal__content slds-p-around--medium">
+                                <center>
+                                    <aura:unescapedHtml value="{!v.confirmDialogMessage}" />
+                                </center>
+                            </div>
+                            <footer class="slds-modal__footer">
+                                <lightning:button name='Cancelar' label='Cancelar'
+                                    onclick='{!c.handleConfirmDialogNo}' />
+                                <lightning:button variant="brand" name='Confirmar' label='Confirmar'
+                                    onclick="{! v.tipoConfirm=='reset' ? c.resetForm : v.tipoConfirm=='salvar' ? c.salvarForm : '' }" />
+                            </footer>
+                        </div>
+                    </div>
+                    <div class="slds-backdrop slds-backdrop--open" onclick="{!c.handleConfirmDialogNo}"></div>
+                </div>
+            </aura:if>
+
+            <div class="slds">
+
+                <aura:if isTrue="{!v.showSpinner}">
+                    <lightning:spinner alternativeText="Loading" size="medium" class="slds-is-fixed" />
+                </aura:if>
+                <aura:if isTrue="{!v.errorInit!=''}">
+                    <div class="slds-text-align_center" style="top: 25vh; position: relative;">
+                        <lightning:icon size="medium" aura:id="icone-error" iconName="action:close"
+                            alternativeText="Error!" variant="error" />
+                        <div class="slds-text-align_center slds-m-top_large">
+                            <center>
+                                <p>
+                                    <aura:unescapedHtml value="{!v.errorInit}" />
+                                </p>
+                            </center>
+                        </div>
+                    </div>
+                </aura:if>
+                <aura:if isTrue="{!v.saveMessage!=''}">
+                    <div class="slds-text-align_center" style="top: 25vh; position: relative;">
+                        <lightning:icon size="medium" aura:id="icone-sucesso" iconName="action:approval"
+                            alternativeText="Error!" variant="error" />
+                        <div class="slds-text-align_center slds-m-top_large">
+                            <center>
+                                <p>
+                                    <aura:unescapedHtml value="{!v.saveMessage}" />
+                                </p>
+                            </center>
+                        </div>
+                    </div>
+                </aura:if>
+                <aura:if isTrue="{! and(and(not(v.showSpinner),v.etapa == 1),and(v.errorInit=='',v.saveMessage==''))}">
+                    <lightning:accordion aura:id="accordion" activeSectionName="descontosAgravos"
+                        allowMultipleSectionsOpen="true">
+                        <lightning:accordionSection name="criticas" label="Informações de críticas">
+                            <aura:set attribute="body">
+                                <div style="height: 200px;">
+                                    <lightning:datatable keyField="id" data="{!v.dadosCriticas}"
+                                        columns="{!v.colunasCriticas}" hideCheckboxColumn="true" />
+                                </div>
+                            </aura:set>
+                        </lightning:accordionSection>
+                        <lightning:accordionSection name="descontosAgravos" label="Descontos e Agravos">
+                            <aura:set attribute="body">
+
+                                <h2 class="slds-text-title_bold">Proposta</h2>
+                                <div class="tblProposta slds-m-left_medium">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th class="slds-text-align_left slds-text-title slds-p-around_xx-small">
+                                                    Nº
+                                                    Proposta</th>
+                                                <th class="slds-text-align_left slds-text-title slds-p-around_xx-small">
+                                                    Prêmio total</th>
+                                                <th
+                                                    class="slds-text-align_center slds-text-title slds-p-around_xx-small">
+                                                    Tipo Agravo/Desconto</th>
+                                                <th
+                                                    class="slds-text-align_center slds-text-title slds-p-around_xx-small">
+                                                    Agravo/Desconto</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="slds-p-around_xx-small slds-text-align_left">
+                                                    {!v.propostaModificada.numero}
+                                                </td>
+                                                <!--PLV - 4694 INICIO -->
+                                                <td class="slds-p-around_xx-small slds-text-align_left">
+                                                    <c:CurrencyInput aura:id="proposta_premioAtual"
+                                                        simbolo="{!v.propostaModificada.isoCode}" casasdecimais="2"
+                                                        label="" showInput="false"
+                                                        value="{!v.propostaModificada.premioTotal}"
+                                                        nome="proposta_premioAtual" />
+                                                </td>
+                                                <td class="slds-p-around_xx-small">
+                                                    <!-- <ui:inputSelect aura:id="proposta_tipoDescontoAgravo" class="field">
+                                                        <ui:inputSelectOption text="Selecione" disabled="true"/>
+                                                        <aura:iteration items="{!v.propostaModificada.tipoOpcoes}" var="op">
+                                                            <ui:inputSelectOption text="{!op}" value="{!op == v.propostaModificada.tipoDescontoAgravo}"/>
+                                                        </aura:iteration>
+                                                    </ui:inputSelect>-->
+                                                    <!--PLV - 4694 FIM -->
+
+
+                                                    <div class="slds-form-element">
+                                                        <div class="slds-form-element__control">
+                                                            <div class="slds-select_container">
+                                                                <select class="slds-select" id="select-01"
+                                                                    onchange="{!c.changeTipoProposta}"
+                                                                    data-tipoOriginal="{!v.propostaModificada.tipoDescontoAgravo}"
+                                                                    data-campo="proposta_descontoAgravo"
+                                                                    value="{!v.propostaModificada.tipoDescontoAgravo}">
+                                                                    <option value="" disabled="true">Selecione</option>
+                                                                    <aura:iteration
+                                                                        items="{!v.propostaModificada.tipoOpcoes}"
+                                                                        var="op">
+                                                                        <option value="{!op}"
+                                                                            selected="{! if(op == v.propostaModificada.tipoDescontoAgravo,true,false)}">
+                                                                            {!op}</option>
+                                                                    </aura:iteration>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="slds-p-around_xx-small">
+                                                    <!--<ui:inputNumber aura:id="proposta_descontoAgravo" class="field" value="{!v.propostaModificada.descontoAgravo}"/>-->
+
+                                                    <!--PLV - 4694 INICIO -->
+                                                    <c:CurrencyInput aura:id="proposta_descontoAgravo"
+                                                        simbolo="{! v.propostaModificada.tipoDescontoAgravo=='Porcentagem' ? '%' : v.propostaModificada.isoCode }"
+                                                        fim="true" casasdecimais="2" label=""
+                                                        value="{!v.propostaModificada.descontoAgravo}"
+                                                        nome="proposta_descontoAgravo" campo="proposta_descontoAgravo"
+                                                        propostaTipo="{!v.propostaTipo}"
+                                                        propostaOriginal="{!v.propostaOriginal}"
+                                                        propostaModificada="{!v.propostaModificada}" />
+                                                </td>
+                                                <!--PLV - 4694 FIM -->
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <h2 class="slds-text-title_bold">Coberturas</h2>
+                                <div class="tblCoberturas slds-m-left_medium">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th
+                                                    class="slds-p-around_xx-small slds-text-align_center slds-text-title">
+                                                    Cobertura</th>
+                                                <th
+                                                    class="slds-p-around_xx-small slds-text-align_center slds-text-title">
+                                                    Capital solicitado</th>
+                                                <th
+                                                    class="slds-p-around_xx-small slds-text-align_center slds-text-title">
+                                                    Prêmio atual</th>
+                                                <th
+                                                    class="slds-p-around_xx-small slds-text-align_center slds-text-title">
+                                                    Tipo Agravo/Desconto</th>
+                                                <th
+                                                    class="slds-p-around_xx-small slds-text-align_center slds-text-title">
+                                                    Agravo/Desconto</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <aura:iteration items="{!v.propostaModificada.garantias}" var="garantia"
+                                                indexVar="indice">
+                                                <tr>
+                                                    <td class="slds-p-around_xx-small">
+                                                        <input type="checkbox" style="width:15px; height:15px;"
+                                                            id="{! 'cobertura_contratado_'+garantia.cobertura }"
+                                                            name="{! 'cobertura_contratado_'+garantia.cobertura }"
+                                                            value="{!garantia.contratado}"
+                                                            data-cobertura="{!garantia.cobertura}"
+                                                            data-caracteristica="{!garantia.caracteristica}"
+                                                            data-obrigatorio="{!garantia.obrigatorio}"
+                                                            data-index="indice" checked="{!garantia.contratado}"
+                                                            onclick="{!c.verifyObrigatorias}" />
+
+                                                    </td>
+                                                    <td class="slds-p-around_xx-small">
+                                                        <lightning:helptext content="{!garantia.name}" />
+                                                        &nbsp;&nbsp;
+                                                        <span
+                                                            class="{!if(garantia.caracteristica=='Principal','slds-badge slds-theme_warning','')}">
+                                                            {!
+                                                            garantia.obrigatorio?garantia.cobertura+'*':garantia.cobertura}
+                                                        </span>
+                                                    </td>
+                                                    <td class="slds-p-around_xx-small capital">
+
+                                                        <c:CurrencyInput
+                                                            aura:id="{! 'cobertura_capital_'+garantia.cobertura }"
+                                                            simbolo="{!garantia.isoCode}" casasdecimais="2" label=""
+                                                            cobertura="{!garantia.cobertura}"
+                                                            value="{!garantia.capital}"
+                                                            nome="{! 'cobertura_capital_'+garantia.cobertura }"
+                                                            validarLimite="true"
+                                                            limiteMinimo="{!garantia.limiteCapitalMinimo}"
+                                                            limiteMaximo="{!garantia.limiteCapitalMaximo}" />
+                                                    </td>
+                                                    <td class="slds-p-around_xx-small slds-text-align_center">
+                                                        <!--<ui:inputCurrency aura:id="{! 'cobertura_premioAtual_'+garantia.cobertura }" class="field" value="{!garantia.premioAtual}" updateOn="keyup"/>-->
+
+                                                        <c:CurrencyInput
+                                                            aura:id="{! 'cobertura_premioAtual_'+garantia.cobertura }"
+                                                            simbolo="{!garantia.isoCode}" casasdecimais="2" label=""
+                                                            cobertura="{!garantia.cobertura}"
+                                                            value="{! garantia.premioAtual }" showInput="false"
+                                                            nome="{! 'cobertura_premioAtual_'+garantia.cobertura }" />
+                                                    </td>
+                                                    <td class="slds-p-around_xx-small">
+                                                        <div class="slds-form-element">
+                                                            <div class="slds-form-element__control">
+                                                                <div class="slds-select_container">
+                                                                    <select class="slds-select" id="select-01"
+                                                                        onchange="{!c.changeTipo}"
+                                                                        data-tipoOriginal="{!garantia.tipoDescontoAgravo}"
+                                                                        data-cobertura="{!garantia.cobertura}"
+                                                                        value="{!garantia.tipoDescontoAgravo}">
+                                                                        <!--PLV - 4694 INICIO/FIM -->
+                                                                        <option value="" disabled="true">Selecione
+                                                                        </option>
+                                                                        <aura:iteration items="{!garantia.tipoOpcoes}"
+                                                                            var="op">
+                                                                            <option value="{!op}"
+                                                                                selected="{! if(op == garantia.tipoDescontoAgravo,true,false)}">
+                                                                                {!op}</option>
+                                                                        </aura:iteration>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+
+
+                                                    </td>
+                                                    <!--PLV - 4694 INICIO -->
+                                                    <td class="slds-p-around_xx-small">
+                                                        <c:CurrencyInput
+                                                            aura:id="{! 'cobertura_descontoAgravo_'+garantia.cobertura }"
+                                                            simbolo="{! garantia.tipoDescontoAgravo=='Porcentagem' ? '%' : garantia.isoCode }"
+                                                            fim="true" casasdecimais="2" label=""
+                                                            value="{! garantia.descontoAgravo }"
+                                                            nome="{! 'cobertura_descontoAgravo_'+garantia.cobertura }"
+                                                            garantiaDesconto="{!v.garantiaDesconto}"
+                                                            cobertura="{!garantia.cobertura}"
+                                                            propostaOriginal="{!v.propostaOriginal}"
+                                                            propostaModificada="{!v.propostaModificada}" />
+
+
+
+                                                    </td>
+                                                    <!--PLV - 4694 FIM -->
+                                                </tr>
+                                            </aura:iteration>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </aura:set>
+                        </lightning:accordionSection>
+                        <!--PLV-4851 INICIO -->
+                        <aura:if isTrue="{!v.propostaModificada.remuneracoes}">
+                            <lightning:accordionSection name="remuneraçõesProposta" label="Remunerações da Proposta">
+                                <aura:set attribute="body">
+                                    <div class="tblRemuneracoes slds-text-body_small slds-grid slds-wrap">
+                                        <aura:iteration items="{!v.propostaModificada.remuneracoes}" var="remuneracao">
+                                            <div
+                                                class="tblCorretagem slds-m-left_medium  slds-m-bottom_medium slds-col slds-size_3-of-12">
+                                                <h2 class="slds-text-title_bold"></h2>
+
+
+                                                <aura:if isTrue="{!remuneracao.tipoRemuneracao == 'CORRETAGEM'}">
+                                                    <div class="slds-form-element__control slds-grow">
+                                                        <label
+                                                            class="slds-form-element__label slds-m-right_xxx-small">{!remuneracao.tipoRemuneracao}</label>
+                                                        <c:CurrencyInput
+                                                            aura:id="{! 'remuneracao-'+remuneracao.id+'-'+remuneracao.tipoRemuneracao }"
+                                                            simbolo="{!remuneracao.simbolo}" fim="true"
+                                                            casasdecimais="0" label="" value="{!remuneracao.percentual}"
+                                                            nome="{! 'remuneracao-'+remuneracao.id+'-'+remuneracao.tipoRemuneracao }"
+                                                            validarLimite="true"
+                                                            limiteMinimo="{!remuneracao.limiteMinimo}"
+                                                            limiteMaximo="{!remuneracao.limiteMaximo}" />
+                                                    </div>
+                                                </aura:if>
+                                                <aura:if isTrue="{!remuneracao.tipoRemuneracao == 'AGENCIAMENTO'}">
+                                                    <lightning:select name="mySelect" aura:id="mySelect"
+                                                        value="{!remuneracao.percentual}"
+                                                        label="{!remuneracao.tipoRemuneracao}">
+                                                        <aura:iteration items="{!remuneracao.opcoes}" var="item">
+                                                            <option text="{!item}" value="{!item}"
+                                                                selected="{!if(item == remuneracao.percentual,true,false)}" />
+                                                        </aura:iteration>
+                                                    </lightning:select>
+                                                </aura:if>
+
+
+
+
+                                            </div>
+                                        </aura:iteration>
+                                    </div>
+                                </aura:set>
+                            </lightning:accordionSection>
+                        </aura:if>
+                        <!--PLV-4851 FIM -->
+                    </lightning:accordion>
+                    <!--PLV-4851 INICIO -->
+                    <div class="slds-m-top_x-large slds-m-bottom_x-large">
+                        <button class="slds-float_left slds-button" onclick="{!c.resetProposta}">Resetar conforme
+                            Original</button>
+                        <lightning:button class="slds-float_right" variant="brand" label="Recalcular" title="Recalcular"
+                            onclick="{!c.recalcular}" />
+                    </div>
+                    <!--PLV-4851 FIM -->
+                </aura:if>
+
+                <aura:if isTrue="{! and(and(not(v.showSpinner),v.etapa == 2),and(v.errorInit=='',v.saveMessage==''))}">
+                    <div class="recalculada slds-m-top_xx-medium">
+                        <div class="slds-text-heading_medium slds-text-align_center slds-m-bottom_xx-medium">Proposta
+                            Recalculada</div>
+                        <h2 class="slds-text-title_bold">Proposta</h2>
+                        <div class="tblProposta slds-m-bottom_medium slds-text-body_small">
+                            <table class="slds-table slds-table_bordered">
+                                <thead>
+                                    <tr>
+                                        <th class="slds-text-title slds-p-around_xx-small">Nº Proposta</th>
+                                        <th class="slds-text-title slds-p-around_xx-small">Prêmio total</th>
+                                        <aura:if isTrue="{! !v.alteracaoFormPag }"> <!--II-175 INICIO -->
+                                            <th class="slds-text-title slds-p-around_xx-small">Tipo Agravo/Desconto</th>
+                                            <th class="slds-text-title slds-p-around_xx-small">Agravo/Desconto</th>
+                                        </aura:if> <!--II-175 FIM -->
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="slds-p-around_xx-small">
+                                            {!v.propostaRecalculada.numero}
+                                        </td>
+                                        <td class="slds-p-around_xx-small">
+                                            <lightning:formattedNumber value="{!v.propostaRecalculada.premioTotal}"
+                                                style="currency" currencyCode="BRL" currencyDisplayAs="code" />
+                                        </td>
+                                        <aura:if isTrue="{! !v.alteracaoFormPag }"> <!--II-175 INICIO -->
+                                            <td class="slds-p-around_xx-small">
+                                                {!v.propostaRecalculada.tipoDescontoAgravo}
+                                            </td>
+                                            <td class="slds-p-around_xx-small">
+                                                <!--PLV - 4694 INICIO -->
+                                                <c:CurrencyInput aura:id="proposta_recalculo_descontoAgravo"
+                                                    simbolo="{!v.propostaRecalculada.tipoDescontoAgravo == 'Porcentagem'?'%':v.propostaRecalculada.isoCode}"
+                                                    casasdecimais="2" label="" showInput="false"
+                                                    value="{!v.propostaRecalculada.descontoAgravo}"
+                                                    nome="proposta_recalculo_descontoAgravo" />
+                                                <!--
+                                                        <aura:set attribute="else">
+                                                            <c:CurrencyInput aura:id="proposta_recalculo_descontoAgravo"
+                                                                simbolo="{! garantia.isoCode}"
+                                                                casasdecimais="2"
+                                                                label=""
+                                                                showInput="false"
+                                                                value="{!v.propostaRecalculada.descontoAgravo}"
+                                                                nome="proposta_recalculo_descontoAgravo"
+                                                                />
+                                                        </aura:set>
+                                                </aura:if>
+                                                        -->
+                                                <!--PLV - 4694 FIM -->
+                                            </td>
+                                        </aura:if> <!--II-175 FIM -->
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h2 class="slds-text-title_bold">Coberturas</h2>
+                        <div class="tblCoberturas slds-text-body_small">
+                            <table class="slds-table slds-table_bordered">
+                                <thead>
+                                    <tr>
+                                        <th class="slds-p-around_xx-small slds-text-title">Cobertura</th>
+                                        <th class="slds-p-around_xx-small slds-text-title">Capital solicitado</th>
+                                        <th class="slds-p-around_xx-small slds-text-title">Prêmio atual</th>
+                                        <aura:if isTrue="{! !v.alteracaoFormPag }"> <!--II-175 INICIO -->
+                                            <th class="slds-p-around_xx-small slds-text-title">Tipo Agravo/Desconto</th>
+                                            <th class="slds-p-around_xx-small slds-text-title">Agravo/Desconto</th>
+                                        </aura:if> <!--II-175 FIM -->
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <aura:iteration items="{!v.propostaRecalculada.garantias}" var="garantia">
+                                        <tr>
+                                            <td class="slds-p-around_xx-small">
+                                                {!garantia.cobertura}
+                                            </td>
+                                            <td class="slds-p-around_xx-small">
+                                                <c:CurrencyInput
+                                                    aura:id="{!'garantia_recalculo_capital_'+garantia.cobertura}"
+                                                    simbolo="{!garantia.isoCode}" casasdecimais="2" label=""
+                                                    showInput="false" value="{!garantia.capital}"
+                                                    nome="{!'garantia_recalculo_capital_'+garantia.cobertura}" />
+                                            </td>
+                                            <td class="slds-p-around_xx-small">
+                                                <c:CurrencyInput
+                                                    aura:id="{!'garantia_recalculo_premioAtual_'+garantia.cobertura}"
+                                                    simbolo="{!garantia.isoCode}" casasdecimais="2" label=""
+                                                    showInput="false" value="{!garantia.premioAtual}"
+                                                    nome="{!'garantia_recalculo_premioAtual_'+garantia.cobertura}" />
+                                            </td>
+                                            <aura:if isTrue="{! !v.alteracaoFormPag }"> <!--II-175 INICIO -->
+                                                <td class="slds-p-around_xx-small">
+                                                    {!garantia.tipoDescontoAgravo}
+                                                </td>
+                                                <td class="slds-p-around_xx-small">
+                                                    <!--PLV - 4694 INICIO -->
+                                                    <c:CurrencyInput
+                                                        aura:id="{!'garantia_recalculo_descontoAgravo_'+garantia.cobertura}"
+                                                        simbolo="{!garantia.tipoDescontoAgravo == 'Porcentagem'?'%':garantia.isoCode}"
+                                                        casasdecimais="2" label="" showInput="false"
+                                                        value="{!garantia.descontoAgravo}"
+                                                        nome="{!'garantia_recalculo_descontoAgravo_'+garantia.cobertura}" />
+                                                    <!--
+                                                                            <aura:set attribute="else">
+                                                                                <c:CurrencyInput aura:id="{!'garantia_recalculo_descontoAgravo_'+garantia.cobertura}"
+                                                                                    simbolo="{! garantia.isoCode}"
+                                                                                    casasdecimais="2"
+                                                                                    label=""
+                                                                                    showInput="false"
+                                                                                    value="{!garantia.premioAtual}"
+                                                                                    nome="{!'garantia_recalculo_descontoAgravo_'+garantia.cobertura}"
+                                                                                    />
+                                                                            </aura:set>
+                                                    </aura:if>
+                                                    PLV - 4694 FIM-->
+
+                                                </td>
+                                            </aura:if> <!--II-175 FIM -->
+                                        </tr>
+                                    </aura:iteration>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!--PLV-4851 INICIO -->
+                        <div class="tblRemuneracoes slds-text-body_small slds-grid slds-wrap slds-m-top_x-large">
+                            <aura:if isTrue="{!v.propostaRecalculada.remuneracoes}">
+                                <aura:iteration items="{!v.propostaRecalculada.remuneracoes}" var="remuneracao">
+                                    <div
+                                        class="tblCorretagem slds-m-left_medium  slds-m-bottom_medium slds-col slds-size_3-of-12">
+                                        <h2 class="slds-text-title_bold">{!remuneracao.tipoRemuneracao}</h2>
+                                        <c:CurrencyInput
+                                            aura:id="{! 'remuneracao-recalculada-'+remuneracao.id+'-'+remuneracao.tipoRemuneracao }"
+                                            simbolo="{!remuneracao.simbolo}" fim="true" casasdecimais="0" label=""
+                                            value="{!remuneracao.percentual}" showInput="false"
+                                            nome="{! 'remuneracao-recalculada-'+remuneracao.id+'-'+remuneracao.tipoRemuneracao }" />
+                                    </div>
+                                </aura:iteration>
+                            </aura:if>
+                        </div>
+                        <!--PLV-4851 FIM -->
+                    </div>
+                    <!--PLV-4851 INICIO -->
+                    <div class="slds-m-top_x-large slds-m-bottom_x-large">
+                        <lightning:button class="slds-float_left slds-m-top_medium" variant="brand-outline"
+                            label="Voltar" title="Voltar" onclick="{!c.voltar}" />
+                        <lightning:button class="slds-float_right slds-m-top_medium" variant="brand" label="Salvar"
+                            title="Salvar" onclick="{!c.salvar}" />
+                    </div>
+                    <!--PLV-4851 FIM -->
+                </aura:if>
+            </div>
+        </lightning:card>
+        <!--II-166 - INICIO-->
+        <br />
+        <br />
+    </aura:if>
+    <div class="cardAlterarFormaPagto slds-var-m-top_xx-large"
+        style="{!not(v.isRecalculoOut) ? 'margin-top: 20%;' : ''}">
+        <!--FNPVVEP-126 FIM -->
+        <lightning:card iconName="utility:change_record_type" title="Alterar Forma de Pagamento">
+            <lightning:accordion aura:id="accordion2" activeSectionName="formaPagamento"
+                allowMultipleSectionsOpen="true">
+                <lightning:accordionSection name="alterarFormaPagamento" label="Formas de Pagamento">
+                    <aura:set attribute="body">
+                        <!--FNPVVEP-126 INICIO -->
+                        <aura:if isTrue="{!v.isRecalculoOut}">
+                            <aura:if isTrue="{!v.showConfirmDialog}">
+                                <div class="slds-m-around_xx-large">
+                                    <div role="dialog" class="slds-modal slds-fade-in-open ">
+                                        <div class="slds-modal__container">
+                                            <header class="slds-modal__header">
+                                                <h1 class="slds-text-heading--medium">Confirmação</h1>
+                                            </header>
+                                            <div class="slds-modal__content slds-p-around--medium">
+                                                <center>
+                                                    <aura:unescapedHtml value="{!v.confirmDialogMessage}" />
+                                                </center>
+                                            </div>
+                                            <footer class="slds-modal__footer">
+                                                <lightning:button name='Cancelar' label='Cancelar'
+                                                    onclick='{!c.handleConfirmDialogNo}' />
+                                                <lightning:button variant="brand" name='Confirmar' label='Confirmar'
+                                                    onclick="{! v.tipoConfirm=='reset' ? c.resetForm : v.tipoConfirm=='salvar' ? c.salvarForm : '' }" />
+                                            </footer>
+                                        </div>
+                                    </div>
+                                    <div class="slds-backdrop slds-backdrop--open" onclick="{!c.handleConfirmDialogNo}">
+                                    </div>
+                                </div>
+                            </aura:if>
+                            <aura:if isTrue="{!v.showSpinner}">
+                                <lightning:spinner alternativeText="Loading" size="medium" class="slds-is-fixed" />
+                            </aura:if>
+                        </aura:if>
+                        <!-- FNPVVEP-147 - INICO -->
+                        <aura:if isTrue="{!v.showConfirmRecalculo}">
+                            <div class="slds-m-around_xx-large">
+                                <div role="dialog" class="slds-modal slds-fade-in-open ">
+                                    <div class="slds-modal__container">
+                                        <header class="slds-modal__header">
+                                            <h1 class="slds-text-heading--medium">Recalculo realizado</h1>
+                                        </header>
+                                        <div class="slds-modal__content slds-p-around--medium">
+                                            Olá, {!v.cliente}!<br/>
+                                            A alteração da forma de pagamento do seu Seguro de Vida da Porto foi realizada com sucesso!<br/>
+                                            Todo cuidado é Porto.
+                                        </div>
+                                        <footer class="slds-modal__footer">
+                                            <lightning:button name='Fechar' label='Fechar'
+                                                onclick='{!c.handleConfirmRecalculo}' />
+                                        </footer>
+                                    </div>
+                                </div>
+                                <div class="slds-backdrop slds-backdrop--open" onclick="{!c.handleConfirmDialogNo}">
+                                </div>
+                            </div>
+                        </aura:if>
+                        <!--FNPVVEP-126 FIM -->
+                        <!--FNPVVEP-126 INICIO -->
+                        <div class="slds-text-align_left slds-m-top_large">
+                                <label class="slds-text-heading_medium" for="proposta">Proposta: {!v.proposta} | Cliente: {!v.cliente} | Produto: {!v.produto}</label>
+                            <aura:if isTrue="{!v.etapaTela2 != 2}">
+                                <div class="slds-m-top_medium" style="background-color: white; padding: 1.2rem;">
+                                    <div style="display: flex;">
+                                        <div class="pagamento-container">
+                                            <div class="slds-form-element slds-size_small slds-m-top_large">
+                                                <label class="slds-form-element__label" for="formaPagamentoAtual">Forma de
+                                                    Pagamento Atual:</label>
+                                                <div class="slds-form-element__control">
+                                                    <input type="text" id="formaPagamentoAtual"
+                                                        class="slds-input slds-input--small"
+                                                        value="{!v.formaPagamentoAtual}" disabled="true" />
+                                                </div>
+                                            </div>
+                                            <div class="slds-form-element slds-size_small slds-m-top_large">
+                                                <label class="slds-form-element__label" for="novaFormaPagamento">Nova Forma
+                                                    de Pagamento:
+                                                </label>
+                                                <div class="slds-form-element__control slds-m-left_small">
+                                                    <select id="novaFormaPagamento"
+                                                        class="slds-select slds-align_absolute-center"
+                                                        onfocus="{!c.removerOpEmp}" onchange="{!c.gerarParcelas}">
+                                                        <option value="">Escolher</option>
+                                                        <option value="41">Boleto bancário</option>
+                                                        <option value="52">Débito em conta</option> 
+                                                        <option value="97">Cartão Porto Seguro</option>
+                                                        <option value="62">Cartão Demais Bandeiras</option>
+                                                        <option value="98">Cartão Porto</option>
+                                                        <option value="70">Cartão de Credito Demais Bandeiras</option>
+                                                    </select>
+                                                </div>
+                                                <div id="mensagemErronovaFormaPagamento"
+                                                    class="slds-form-element__help slds-text-color_error"></div>
+                                                <!-- II-209 FIX01 - INICO/FIM -->
+                                            </div>
+                                            <aura:if isTrue="{!v.showFormPgtoADC}">
+                                                <!--II-206 - INICIO -->
+                                                <div class="slds-form-element slds-size_small slds-m-top_large">
+                                                    <label class="slds-form-element__label" for="banco">Banco:</label>
+                                                    <div class="slds-form-element__control">
+                                                        <select type="text" id="banco" class="slds-select">
+                                                            <option value="">Selecione um banco</option>
+                                                            <aura:iteration items="{!v.opcoesBancos}" var="option">
+                                                                <option value="{!option.value}" text="{!option.label}">
+                                                                </option>
+                                                            </aura:iteration>
+                                                        </select>
+                                                    </div>
+                                                    <div id="mensagemErroBanco"
+                                                        class="slds-form-element__help slds-text-color_error"></div>
+                                                </div>
+                                                <div class="slds-form-element slds-size_small slds-m-top_large">
+                                                    <table>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>
+                                                                    <label class="slds-form-element__label"
+                                                                        for="agenciaContaEDigito">Agência:</label>
+                                                                    <input type="text" id="agencia" class="slds-input"
+                                                                        style="width: 80px" />
+                                                                </td>
+                                                                <td>
+                                                                    <label class="slds-form-element__label"
+                                                                        for="agenciaContaEDigito">Conta Corrente:</label>
+                                                                    <input type="text" id="contaCorrente" class="slds-input"
+                                                                        style="width: 90px" />
+                                                                </td>
+                                                                <td>
+                                                                    <label class="slds-form-element__label"
+                                                                        for="agenciaContaEDigito">Dígito:</label>
+                                                                    <input type="text" id="digito" class="slds-input"
+                                                                        style="width: 40px" />
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                    <div id="mensagemErroAgencia"
+                                                        class="slds-form-element__help slds-text-color_error"></div>
+                                                    <div id="mensagemErroContaCorrente"
+                                                        class="slds-form-element__help slds-text-color_error"></div>
+                                                    <div id="mensagemErroDigito"
+                                                        class="slds-form-element__help slds-text-color_error"></div>
+                                                </div>
+                                                <!--II-206 - FIM -->
+                                            </aura:if>
+                                            <aura:if isTrue="{!v.showFormPgtoADC}">
+                                                <div class="slds-form-element slds-size_small slds-m-top_large">
+                                                    <label class="slds-form-element__label" for="cpf1">Tipo de Pessoa (CPF):
+                                                    </label>
+                                                    <div class="slds-form-element__control">
+                                                        <input type="text" id="cpf1"
+                                                            class="slds-input slds-input--x-small slds-m-left_small"
+                                                            value="{!v.cpf1}" onchange="{!c.verificarCPF}"
+                                                            onkeyup="{!c.formatarCPF}" maxlength="14" />
+                                                        <div id="mensagemErroCPF1"
+                                                            class="slds-form-element__help slds-text-color_error"></div>
+                                                        <!--II-206 - INICIO/FIM-->
+                                                    </div>
+                                                </div>
+                                            </aura:if>
+                                            <aura:if isTrue="{!v.showFormPgtoCartao}">
+                                                <div class="slds-form-element slds-size_small slds-m-top_large">
+                                                    <label class="slds-form-element__label" for="numero">Número do
+                                                        Cartão:</label>
+                                                    <input type="text" id="numeroCardCred" class="slds-input"
+                                                        value="{!v.numeroCartaoCredito}"
+                                                        onchange="{!c.verificarCartaoCredito}"
+                                                        onkeyup="{!c.formatarNumCartCred}" maxlength="19" />
+                                                    <div id="mensagemErroNumeroCardCred" style="color: red"></div>
+                                                </div>
+                                                <div class="slds-form-element slds-size_small slds-m-top_large">
+                                                    <label class="slds-form-element__label" aura:id="nome" for="nome">Nome
+                                                        no Cartão:</label>
+                                                    <input type="text" id="nome" class="slds-input" maxlength="30" />
+                                                    <div id="mensagemErroNome" style="color: red"></div>
+                                                    <!--II-206 - INICIO/FIM-->
+                                                </div>
+                                                <div class="slds-form-element slds-size_small slds-m-top_large">
+                                                    <label class="slds-form-element__label" for="dataVencimento">Vencimento
+                                                        do Cartão:</label><br />
+                                                    <input type="text" id="dataVencimento" class="slds-input" maxlength="5"
+                                                        placeholder="MM/AA" value="{!v.dataVencimento}"
+                                                        onchange="{!c.verificarValCartCred}"
+                                                        onkeyup="{!c.formatarValCartCred}" style="width: 80px" />
+                                                    <div id="mensagemErroValCartCred" style="color: red"></div>
+                                                </div>
+                                            </aura:if>
+                                            <div class="slds-form-element slds-size_small slds-m-top_large">
+                                                <label class="slds-form-element__label" for="melhorDataPagamento">
+                                                    Melhor data de pagamento:
+                                                    <span class="info-icon" title="A melhor data será considerada sempre a partir da segunda parcela">ℹ️</span>
+                                                </label>
+                                                <div class="slds-form-element">
+                                                    <aura:if isTrue="{!v.selectDisable == false}">
+                                                        <div class="slds-select_container">
+                                                            <select id="melDtPgto"
+                                                                class="slds-select slds-m-left_small remove-scrollbar">
+                                                                <aura:iteration items="{!v.opcoesMelDtPgto}" var="option">
+                                                                    <option value="{!option.value}"
+                                                                        text="{!option.label}" />
+                                                                </aura:iteration>
+                                                            </select>
+                                                        </div>
+                                                    </aura:if>
+                                                    <aura:if isTrue="{!v.selectDisable}">
+                                                        <div class="slds-select_container">
+                                                            <select id="melDtPgtoDisable"
+                                                                class="slds-select slds-m-left_small remove-scrollbar"
+                                                                disabled="true">
+                                                                <option value="A cada 30 dias" text="A cada 30 dias" />
+                                                                <!--II-206 - INICIO/FIM-->
+                                                            </select>
+                                                        </div>
+                                                    </aura:if>
+                                                </div>
+                                            </div>
+                                            <div class="slds-form-element slds-size_small slds-m-top_large">
+                                                <label class="slds-form-element__label" for="valorPremioAtual">Valor do
+                                                    Prêmio Atual:
+                                                </label>
+                                                <div class="slds-form-element__control">
+                                                    <input type="text" id="valorPremioAtual"
+                                                        class="slds-input slds-input--small" value="{!v.valorPremioAtual}"
+                                                        disabled="true" />
+                                                </div>
+                                            </div>
+                                            <div class="slds-form-element slds-size_small slds-m-top_large">
+                                                <label class="slds-form-element__label" for="quantidadeParcelas">Quantidade
+                                                    de parcelas:
+                                                </label>
+                                                <div class="slds-select_container">
+                                                    <select id="selectOpcoesParcelas" class="slds-select"
+                                                        onchange="{!c.ocultarFrase}">
+                                                        <!-- II-176 INICO/FIM -->
+                                                        <aura:iteration items="{!v.opcoesParcelas}" var="option">
+                                                            <option value="{!option}" text="{!option}" />
+                                                        </aura:iteration>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="slds-form-element slds-size_small slds-m-top_medium">
+                                        <label class="slds-form-element__label" for="responsavelFinanceiro">É responsável
+                                            financeiro pelo seguro?</label>
+                                        <div class="slds-form-element__control">
+                                            <div class="slds-radio_button-group" style="border-color: transparent;">
+                                                <label class="slds-radio_button__label slds-radio_button--border-filled"
+                                                    for="responsavelFinanceiroSim">
+                                                    <input type="radio" id="responsavelFinanceiroSim"
+                                                        name="responsavelFinanceiro" value="Sim"
+                                                        onchange="{!c.showRespFinan}" class="sim-resp" />
+                                                    <span class="slds-radio_faux"></span>
+                                                    <span class="slds-form-element__label slds-p-left_x-small">Sim</span>
+                                                </label>
+                                                <label class="slds-radio_button__label slds-radio_button--border-filled"
+                                                    for="responsavelFinanceiroNao">
+                                                    <input type="radio" id="responsavelFinanceiroNao"
+                                                        name="responsavelFinanceiro" value="Não"
+                                                        onchange="{!c.showOutroRespFinan}" class="nao-resp" />
+                                                    <span class="slds-radio_faux"></span>
+                                                    <span class="slds-form-element__label slds-p-left_x-small">Não</span>
+                                                </label>
+                                            </div>
+                                            <div id="mensagemErroResponsavelFinanceiro" style="color: red;"></div>
+                                            <!--II-206 - INICIO/FIM-->
+                                        </div>
+                                    </div><!--II-172 - FIM-->
+                                    <aura:if isTrue="{!v.showOutroRespFin}"><!--II-172 - INICIO-->
+                                        <div class="slds-m-top_medium">
+                                            <!--II-206 - INICIO -->
+                                            <form class="slds-form" id="formId">
+                                                <div class="slds-grid slds-gutters">
+                                                    <div class="formulario-container">
+                                                        <div class="slds-col slds-size_1-of-2">
+                                                            <label class="slds-form-element__label" for="responsavel">Nome
+                                                                do responsável:</label>
+                                                            <input class="slds-input" type="text" id="responsavel"
+                                                                required="true" />
+                                                        </div>
+                                                        <div class="slds-col slds-size_1-of-5">
+                                                            <label class="slds-form-element__label" for="cpf2">CPF
+                                                                responsável:</label>
+                                                            <input class="slds-input" type="text" id="cpf2"
+                                                                value="{!v.cpf2}" onchange="{!c.verificarCPF}"
+                                                                onkeyup="{!c.formatarCPF}" maxlength="14"
+                                                                required="true" /><!--II-172 - INICIO/FIM-->
+                                                            <div id="mensagemErroCPF2" style="color: red;"></div>
+                                                        </div>
+                                                        <div class="slds-col slds-size_1-of-4">
+                                                            <label class="slds-form-element__label" for="vinculo">Vínculo
+                                                                com o segurado:</label>
+                                                            <input class="slds-input" type="text" id="vinculo"
+                                                                onclick="{!c.verificarVinculo}" required="true" />
+                                                            <div id="mensagemErroVinculo" style="color: red;"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="slds-grid slds-gutters">
+                                                    <div class="formulario-container">
+                                                        <div class="slds-col slds-size_1-of-6">
+                                                            <label class="slds-form-element__label" for="sexo">Sexo:</label>
+                                                            <select class="slds-select" id="sexo" required="true">
+                                                                <option value="">Selecione</option>
+                                                                <option value="Feminino">Feminino</option>
+                                                                <option value="Masculino">Masculino</option>
+                                                            </select>
+                                                            <div id="mensagemErroSexo" style="color: red; display: none;">
+                                                                Selecione uma opção</div>
+                                                        </div>
+                                                        <div class="slds-col slds-size_1-of-6">
+                                                            <label class="slds-form-element__label"
+                                                                for="nascimento">Nascimento:</label>
+                                                            <input class="slds-input" type="text" id="nascimento"
+                                                                value="{!v.nascimento}" onchange="{!c.verificarNascimento}"
+                                                                onkeyup="{!c.formatarNascimento}" maxlength="10"
+                                                                required="true" />
+                                                            <div id="mensagemErroNascimento" style="color: red;"></div>
+                                                        </div>
+                                                        <div class="slds-col slds-size_1-of-4">
+                                                            <label class="slds-form-element__label" for="estadoCivil">Estado
+                                                                Civil:</label>
+                                                            <select class="slds-select" id="estadoCivil" required="true">
+                                                                <option value="">Selecione</option>
+                                                                <option value="Solteiro (a)">Solteiro (a)</option>
+                                                                <option value="Casado (a)">Casado (a)</option>
+                                                                <option value="Viúvo(a)">Viúvo(a)</option>
+                                                                <option value="Desquitado(a)">Desquitado(a) </option>
+                                                                <option value="Divorciado(a)">Divorciado(a)</option>
+                                                                <option value="Vive maritalmente">Vive maritalmente</option>
+                                                                <option value="União estável">União estável</option>
+                                                                <option value="Separado(a)">Separado(a)</option>
+                                                            </select>
+                                                            <div id="mensagemErroEstadoCivil"
+                                                                style="color: red; display: none;">Selecione uma opção</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="slds-grid slds-gutters">
+                                                    <div class="formulario-container">
+                                                        <div class="slds-col slds-size_1-of-3">
+                                                            <label class="slds-form-element__label"
+                                                                for="email">E-mail:</label>
+                                                            <input class="slds-input" type="text" id="email"
+                                                                required="true" />
+                                                            <div id="mensagemErroEmail" style="color: red;"></div>
+                                                        </div>
+                                                        <div class="slds-col slds-size_1-of-3">
+                                                            <label class="slds-form-element__label"
+                                                                for="confirmarEmail">Confirmação do e-mail:</label>
+                                                            <input class="slds-input" type="text" id="confirmarEmail"
+                                                                required="true" onclick="{!c.verificarEmails}" />
+                                                            <div id="mensagemErroEmail" style="color: red;"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="slds-grid slds-gutters">
+                                                    <div class="formulario-container">
+                                                        <div class="slds-col slds-size_1-of-6">
+                                                            <label class="slds-form-element__label" for="cep">CEP:</label>
+                                                            <input class="slds-input" type="text" id="cep" value="{!v.cep}"
+                                                                onchange="{!c.consultarCEP}" onkeyup="{!c.formatarCEP}"
+                                                                maxlength="9" required="true" />
+                                                            <div id="mensagemErroCEP" style="color: red;"></div>
+                                                        </div>
+                                                        <div class="slds-col slds-size_1-of-6">
+                                                            <label class="slds-form-element__label" for="tipoEndereco">Tipo
+                                                                de endereço:</label>
+                                                            <select class="slds-select" id="tipoEndereco" required="true"
+                                                                messageWhenValueMissing="Choose one!">
+                                                                <option value="">Selecione</option>
+                                                                <option value="Comercial">Comercial</option>
+                                                                <option value="Recado">Recado</option>
+                                                                <option value="Residencial">Residencial</option>
+                                                                <option value="Veraneio">Veraneio</option>
+                                                            </select>
+                                                            <div id="mensagemErroTipoEnd"
+                                                                style="color: red; display: none;">Selecione uma opção</div>
+                                                        </div>
+                                                        <div class="slds-col slds-size_1-of-2">
+                                                            <label class="slds-form-element__label"
+                                                                for="endereco">Endereço:</label>
+                                                            <select id="enderecos"
+                                                                class="slds-select slds-m-left_small remove-scrollbar"
+                                                                onchange="{!c.carregarComplementos}">
+                                                                <aura:iteration items="{!v.opcoesEndereco}" var="option">
+                                                                    <option value="{!option.value}"
+                                                                        text="{!option.label}" />
+                                                                </aura:iteration>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="slds-grid slds-gutters">
+                                                    <div class="formulario-container">
+                                                        <div class="slds-col slds-size_1-of-4">
+                                                            <label class="slds-form-element__label"
+                                                                for="logradouro">Logradouro:</label>
+                                                            <input class="slds-input" type="text" id="logradouro"
+                                                                value="{!v.logradouro}" disabled="true" required="true" />
+                                                        </div>
+                                                        <div class="slds-col slds-size_1-of-4">
+                                                            <label class="slds-form-element__label"
+                                                                for="bairro">Bairro:</label>
+                                                            <input class="slds-input" type="text" id="bairro"
+                                                                value="{!v.bairro}" disabled="true" required="true" />
+                                                        </div>
+                                                        <div class="slds-col slds-size_1-of-4">
+                                                            <label class="slds-form-element__label"
+                                                                for="cidade">Cidade:</label>
+                                                            <input class="slds-input" type="text" id="cidade"
+                                                                value="{!v.cidade}" disabled="true" required="true" />
+                                                        </div>
+                                                        <div class="slds-col slds-size_1-of-6">
+                                                            <label class="slds-form-element__label"
+                                                                for="estado">Estado:</label>
+                                                            <select id="estados"
+                                                                class="slds-select slds-m-left_small remove-scrollbar"
+                                                                disabled="true" required="true">
+                                                                <aura:iteration items="{!v.opcoesEstado}" var="option">
+                                                                    <option value="{!option.value}"
+                                                                        text="{!option.label}" />
+                                                                </aura:iteration>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="slds-grid slds-gutters">
+                                                    <div class="formulario-container">
+                                                        <div class="slds-col slds-size_1-of-3">
+                                                            <label class="slds-form-element__label"
+                                                                for="complemento">Complemento:</label>
+                                                            <input class="slds-input" type="text" id="complemento" />
+                                                        </div>
+                                                        <div class="slds-col slds-size_1-of-6">
+                                                            <label class="slds-form-element__label" for="semNumero">Sem
+                                                                número?</label>
+                                                            <select class="slds-select" id="semNumero">
+                                                                <option value="">Selecione</option>
+                                                                <option value="Sim">Sim</option>
+                                                                <option value="Não">Não</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="slds-col slds-size_1-of-6">
+                                                            <label class="slds-form-element__label"
+                                                                for="numero">Número:</label>
+                                                            <input class="slds-input" type="text" id="numero" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="slds-grid slds-gutters">
+                                                    <div class="formulario-container">
+                                                        <div class="slds-col slds-size_1-of-6">
+                                                            <label class="slds-form-element__label" for="telefone1">Telefone
+                                                                1:</label>
+                                                            <input class="slds-input" type="text" id="telefone1"
+                                                                value="{!v.telefone1}" onchange="{!c.verificarTelefone1}"
+                                                                onkeyup="{!c.formatarTelefone1}" maxlength="14"
+                                                                required="true" />
+                                                            <div id="mensagemErroTel1" style="color: red;"></div>
+                                                        </div>
+                                                        <div class="slds-col slds-size_1-of-6">
+                                                            <label class="slds-form-element__label" for="telefone2">Telefone
+                                                                2:</label>
+                                                            <input class="slds-input" type="text" id="telefone2"
+                                                                value="{!v.telefone2}" onchange="{!c.verificarTelefone2}"
+                                                                onkeyup="{!c.formatarTelefone2}" maxlength="13" />
+                                                            <div id="mensagemErroTel2" style="color: red;"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                            <!--II-206 - FIM -->
+                                        </div>
+                                    </aura:if><!--II-172 - FIM-->
+                                    <!--II-176 - INICIO-->
+                                    <br />
+                                    <!-- <aura:if isTrue="{!v.ShowAntecipacao}">
+                                        <div class="slds-form-element">
+                                            <label class="" for="antecipaComissao" style="font-weight: bold;">A forma de
+                                                pagamento escolhida permite a antecipação da sua comissão. Deseja antecipar
+                                                a comissão?</label>
+                                            <div class="slds-form-element__control">
+                                                <div class="slds-radio_button-group" style="border-color: transparent;">
+                                                    <label class="slds-radio_button__label slds-radio_button-border-filled"
+                                                        for="antecipaComissaoSim">
+                                                        <input type="radio" id="antecipaComissaoSim" name="antecipaComissao"
+                                                            value="Sim" onchange="{!c.antComissao}" class="sim-radio" />
+                                                        <span class="slds-radio_faux"></span>
+                                                        <span
+                                                            class="slds-form-element__label slds-p-left_x-small">Sim</span>
+                                                    </label>
+                                                    <label class="slds-radio_button__label slds-radio_button-border-filled"
+                                                        for="antecipaComissaoNao">
+                                                        <input aura:id="antecipaComissaoNao" type="radio"
+                                                            id="antecipaComissaoNao" name="antecipaComissao" value="Não"
+                                                            onchange="{!c.notAntComissao}" class="nao-radio" />
+                                                        <span class="slds-radio_faux"></span>
+                                                        <span
+                                                            class="slds-form-element__label slds-p-left_x-small">Não</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </aura:if> 
+                                    <aura:if isTrue="{!v.antecipacaoIndisponivel}">
+                                        <div class="slds-form-element">
+                                            <div style="font-weight: bold;">As condições escolhidas não permitem a
+                                                antecipação da sua comissão.</div>
+                                        </div>
+                                    </aura:if> -->
+                                    <div class="slds-text-align_center slds-m-top_medium">
+                                        <button class="slds-button slds-button_brand"
+                                            onclick="{!c.recalculoFormPag}">Calcular</button> <!--II-206 - INICIO/FIM-->
+                                    </div>
+                                    <!--II-176 - FIM-->
+                                </div>
+                            </aura:if>
+                            <!-- FNPVVEP-147 - INICO/FIM -->
+                        </div><br /><br /> <!--II-206 FIX02 - INICIO --> 
+                        <!--FNPVVEP-126 FIM -->
+                        <aura:if isTrue="{! and(and(not(v.showSpinner),v.etapaTela2 == 2))}">
+                            <div class="recalculada slds-m-top_xx-medium">
+                                <div class="slds-text-heading_medium slds-text-align_center slds-m-bottom_xx-medium">
+                                    Proposta
+                                    Recalculada</div>
+                                <h2 class="slds-text-title_bold">Proposta</h2>
+                                <div class="tblProposta slds-m-bottom_medium slds-text-body_small">
+                                    <table class="slds-table slds-table_bordered">
+                                        <thead>
+                                            <tr>
+                                                <th class="slds-text-title slds-p-around_xx-small">Nº Proposta</th>
+                                                <th class="slds-text-title slds-p-around_xx-small">Prêmio total</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="slds-p-around_xx-small">
+                                                    {!v.propostaRecalculada.numero}
+                                                </td>
+                                                <td class="slds-p-around_xx-small">
+                                                    <lightning:formattedNumber
+                                                        value="{!v.propostaRecalculada.premioTotal}" style="currency"
+                                                        currencyCode="BRL" currencyDisplayAs="code" />
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <h2 class="slds-text-title_bold">Coberturas</h2>
+                                <div class="tblCoberturas slds-text-body_small">
+                                    <table class="slds-table slds-table_bordered">
+                                        <thead>
+                                            <tr>
+                                                <th class="slds-p-around_xx-small slds-text-title">Cobertura</th>
+                                                <th class="slds-p-around_xx-small slds-text-title">Capital solicitado
+                                                </th>
+                                                <th class="slds-p-around_xx-small slds-text-title">Prêmio atual</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <aura:iteration items="{!v.propostaRecalculada.garantias}" var="garantia">
+                                                <tr>
+                                                    <td class="slds-p-around_xx-small">
+                                                        {!garantia.name}
+                                                    </td>
+                                                    <td class="slds-p-around_xx-small">
+                                                        <c:CurrencyInput
+                                                            aura:id="{!'garantia_recalculo_capital_'+garantia.cobertura}"
+                                                            simbolo="{!garantia.isoCode}" casasdecimais="2" label=""
+                                                            showInput="false" value="{!garantia.capital}"
+                                                            nome="{!'garantia_recalculo_capital_'+garantia.cobertura}" />
+                                                    </td>
+                                                    <td class="slds-p-around_xx-small">
+                                                        <c:CurrencyInput
+                                                            aura:id="{!'garantia_recalculo_premioAtual_'+garantia.cobertura}"
+                                                            simbolo="{!garantia.isoCode}" casasdecimais="2" label=""
+                                                            showInput="false" value="{!garantia.premioAtual}"
+                                                            nome="{!'garantia_recalculo_premioAtual_'+garantia.cobertura}" />
+                                                    </td>
+                                                </tr>
+                                            </aura:iteration>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- <div
+                                    class="tblRemuneracoes slds-text-body_small slds-grid slds-wrap slds-m-top_x-large">
+                                    <aura:if isTrue="{!v.propostaRecalculada.remuneracoes}">
+                                        <aura:iteration items="{!v.propostaRecalculada.remuneracoes}" var="remuneracao">
+                                            <div
+                                                class="tblCorretagem slds-m-left_medium  slds-m-bottom_medium slds-col slds-size_3-of-12">
+                                                <h2 class="slds-text-title_bold">{!remuneracao.tipoRemuneracao}</h2>
+                                                <c:CurrencyInput
+                                                    aura:id="{! 'remuneracao-recalculada-'+remuneracao.id+'-'+remuneracao.tipoRemuneracao }"
+                                                    simbolo="{!remuneracao.simbolo}" fim="true" casasdecimais="0"
+                                                    label="" value="{!remuneracao.percentual}" showInput="false"
+                                                    nome="{! 'remuneracao-recalculada-'+remuneracao.id+'-'+remuneracao.tipoRemuneracao }" />
+                                            </div>
+                                        </aura:iteration>
+                                    </aura:if>
+                                </div> -->
+                            </div>
+                            <div class="slds-m-top_x-large slds-m-bottom_x-large">
+                                <lightning:button class="slds-float_left slds-m-top_medium" variant="brand-outline"
+                                    label="Voltar" title="Voltar" onclick="{!c.voltarFormPag}" />
+                                <lightning:button class="slds-float_right slds-m-top_medium" variant="brand"
+                                    label="Salvar" title="Salvar" onclick="{!c.salvar}" />
+                            </div><br /><br />
+                        </aura:if>
+                    </aura:set> <!--II-206 FIX02 - FIM -->
+                </lightning:accordionSection>
+            </lightning:accordion>
+        </lightning:card>
+    </div>
+    <!--II-166 - FIM-->
+</aura:component>

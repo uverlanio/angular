@@ -1,0 +1,99 @@
+<aura:component implements="flexipage:availableForAllPageTypes,force:hasRecordId,force:lightningQuickActionWithoutHeader" controller="ComplementoOrcamentoController">
+
+  <ltng:require styles="{!$Resource.bigModalCss}" />
+
+  <aura:handler name="init" value="{!this}" action="{!c.inicializar}" />
+  <aura:attribute name="recordId" type="Id" />
+  <aura:attribute name="oportunidade" type="Opportunity"  default="{ 'sobjectType': 'Opportunity' }" />
+  <aura:attribute name="ehEditavel" type="Boolean" default="{! v.oportunidade.StageName == 'Em criação' }" />
+  <!--<aura:attribute name="garantias" type="List" default="[{garantia:{Id:'4234324', Name: 'Garantia 1', Valor__c: 0}, selecionado: false}, {garantia:{Id:'4234322', Name: 'Garantia 2', Valor__c: 0}, selecionado: false}]" />-->
+  <aura:attribute name="grupos" type="List" default="[{grupos:{Id:'4234324', Name: 'Garantia 1', Valor__c: 0}, selecionado: false}, {grupos:{Id:'4234322', Name: 'Garantia 2', Valor__c: 0}, selecionado: false}]" />
+  <aura:attribute name="modoEscolha" type="Boolean" default="true" />
+
+  <aura:attribute name="alternaFuncao" type="Boolean" />
+  <aura:attribute name="camposComplemento" type="FieldSetMember[]" access="private" />
+
+  <aura:handler event="c:ComplementoOrcamentoEvent" action="{!c.calcularPasso2}"/>
+
+
+  <lightning:spinner aura:id="spinner" alternativeText="Loading" size="large" class="slds-hide" />
+
+  <!-- Toast -->
+  <aura:attribute name="type" type="String" default="" />
+  <aura:attribute name="bodyToast" type="String" default="" />
+  <c:ToastParaModal aura:id="ToastParaModal" type="{!v.type}" >{!v.bodyToast}</c:ToastParaModal>
+
+  <div class="modal-quickaction">
+    <div class="slds-page-header">
+      <div class="slds-media">
+        <div class="slds-media__figure">
+          <lightning:icon iconName="standard:opportunity" size="medium" />
+        </div>
+        <div class="slds-media__body">
+          <p class="slds-text-body_small slds-line-height_reset">Orçamento</p>
+          <h1 class="slds-page-header__title slds-truncate slds-align-middle" title="">{!v.oportunidade.Name}</h1>
+        </div>
+      </div>
+    </div>
+    <br />
+
+    <div class="slds-modal__content slds-grid slds-wrap ">
+      <div class="slds-scrollable slds-grow">
+        <div class="{! v.ehEditavel ? 'slds-box' : 'slds-box--big'}">
+          <div class="slds-card container-form">
+            <div>
+
+              <div class="slds-tabs_default">
+                <ul class="slds-tabs_default__nav" role="tablist">
+                  <li id="tabItemComplemento" class="slds-tabs_default__item slds-is-active" aura:id="tabItem" data-target="tabAdicionais" title="Complemento" role="presentation">
+                    <a class="slds-tabs_default__link" href="javascript:void(0);" role="tab" tabindex="0"
+                       aria-selected="true" aria-controls="tabAdicionais" id="tabAdicionais__item"
+                       onclick="{!c.alternaTab}">
+                      Complemento
+                    </a>
+                  </li>
+                  <li id="tabItemGarantia" class="slds-tabs_default__item" aura:id="tabItem" data-target="tabGarantias" title="Garantias" role="presentation">
+                    <a class="slds-tabs_default__link" href="javascript:void(0);" role="tab" tabindex="-1"
+                       aria-selected="false" aria-controls="tabGarantias" id="tabGarantias__item"
+                       onclick="{!c.alternaTab}">
+                      Garantias
+                    </a>
+                  </li>
+                  <li class="slds-tabs_default__item" aura:id="tabItem" data-target="tabComplementares" title="Informações Complementares" role="presentation">
+                    <a class="slds-tabs_default__link" href="javascript:void(0);" role="tab" tabindex="-1" aria-selected="false" aria-controls="tabComplementares" id="tabComplementares__item"
+                       onclick="{!c.alternaTab}">
+                      Informações Complementares
+                    </a>
+                  </li>
+                </ul>
+                <div id="tabAdicionais" aura:id="tabContent" class="slds-tabs_default__content slds-show" role="tabpanel" aria-labelledby="tabAdicionais__item">
+                  <c:ComplementoOrcamentoDadosAdicionais aura:id="cmpDadosAdicionais" oportunidade="{!v.oportunidade}"  />
+                </div>
+                <div id="tabGarantias" aura:id="tabContent" class="slds-tabs_default__content slds-hide" role="tabpanel" aria-labelledby="tabGarantias__item">
+                  <c:ComplementoOrcamentoGarantias aura:id="cmpGarantias" oportunidade="{!v.oportunidade}" />
+                </div>
+                <div id="tabComplementares" aura:id="tabContent" class="slds-tabs_default__content slds-hide" role="tabpanel" aria-labelledby="tabComplementares__item">
+                  <c:ComplementoOrcamentoResumo aura:id="orcamentoResumo" oportunidade="{!v.oportunidade}" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <br />
+    <aura:if isTrue="{!v.ehEditavel}">
+      <div class="slds-modal__footer">
+        <div class="slds-grid">
+          <div class="slds-col" >
+            <lightning:button variant="brand" label="Salvar" onclick="{!c.salvar}"  />
+            <lightning:button variant="neutral" label="Calcular" onclick="{!c.calcular}" />
+            <lightning:button variant="neutral" label="Cancelar" onclick="{!c.cancelar}" />
+          </div>
+          <div class="slds-col"/>
+        </div>
+      </div>
+    </aura:if>
+  </div>
+</aura:component>

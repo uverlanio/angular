@@ -1,0 +1,18 @@
+{ 
+   "data":{ 
+      "retornosConsulta":[ 
+         { 
+            "status":"Disponível para contratação",
+            "numero":"00005900",
+            "nomeproduto":"Seguro de Pessoas Individual Sniper",
+            "nome":"CO2-00005900"
+         }
+      ]
+   },
+   "meta":{ 
+      "dataExecucao":"2019-12-30T18:54:40.362Z",
+      "mensagem":"OK",
+      "servico":"ConsultaOferta",
+      "statusHttp":200
+   }
+}

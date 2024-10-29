@@ -1,0 +1,100 @@
+<aura:component controller="ComplementoOrcamentoController" >
+	<aura:attribute name="oportunidade" type="Opportunity"/>
+	<aura:attribute name="ehEditavel" type="Boolean" default="{!v.oportunidade.StageName == 'Em criação'}" />
+	<aura:attribute name="contratantes" type="List" default="[]"/>
+	<aura:attribute name="garantias" type="List" default="[]"/>
+	<aura:attribute name="mapContratanteIdPorGrupoId" type="Map" default="{}"/>
+	<aura:attribute name="optionsOpcaoEdicao" type="List" default="[{'label': 'Grupos', 'value': 'grupo'}, {'label': 'Segurados', 'value': 'segurados'}]"/>
+	<aura:attribute name="valorTotal" type="String" default="R$ 0,00" />
+
+	<aura:handler name="change" value="{!v.oportunidade}" action="{!c.inicializar}"/>
+    <aura:handler event="c:LookupParaUmObjetoEvent" action="{!c.gerarGarantiasSegurado}"/>
+
+	<aura:method name="inicializarAbaGarantias" action="{!c.inicializar}" />
+	<aura:method name="salvarAbaGarantias" action="{!c.salvarGarantias}" />
+	
+	<div>
+		<aura:iteration var="contratante" items="{!v.contratantes}" indexVar="index">
+			<c:Secao titulo="{!contratante.nome}" iniciarFechado="true">
+				<div>
+					<div class="slds-grid">
+						<div class="slds-col">
+							<div class="slds-form-element">
+								<div class="slds-form-element__control">
+								    <lightning:radioGroup name="{! contratante.id }" label="" options="{! v.optionsOpcaoEdicao }" value="{! contratante.opcaoEdicao }" type="radio" onchange="{!c.alterarTipoEdicao}"/>
+								</div>
+								  <!-- <lightning:button variant="success" label="TESTE SALVAR" title="TESTE SALVAR" onclick="{! c.salvarGarantias }"/> -->
+							</div>		
+						</div>
+						<div class="slds-col">
+							<div class="slds-form-element">
+								<div class="slds-form-element__control" style="width: 80%">
+									<lightning:combobox label="Grupo" options="{! contratante.grupoOptions }" placeholder="Selecione um grupo" value="{! contratante.grupoSelecionadoId }" onchange="{!c.selecionarGrupo}"  />
+								</div>
+							</div>		
+						</div>
+						<div class="slds-col">
+							<div class="{!'' + (contratante.opcaoEdicao == 'grupo' || contratante.grupoSelecionadoVidaId == null ? 'invisivel' : '')}">
+									<c:LookupParaUmObjeto aura:id="lookupVida" sObject="SeguradoOrcamento__c" label="Segurado" iconName="standard:contact" listFields="['CPF__c', 'GrupoOrcamento__c']" mapFieldsController="{!contratante.grupoSelecionadoVidaId}" />
+	  						</div>
+						</div>
+					</div>	
+					<br />
+					<div class="{!'slds-text-align_center' + (contratante.grupoSelecionadoId == '' || contratante.grupoSelecionado.garantias.length == 0 ? '' : ' hide')}">-- Não foram encontradas garantias --</div>
+					<table role="grid" class="{!'slds-table slds-table_bordered slds-max-medium-table_stacked-horizontal slds-no-row-hover' + (contratante.grupoSelecionadoId == ''  || contratante.grupoSelecionado.garantias.length == 0 ? ' hide' : '')}">
+						<thead>
+						   <tr class="slds-hint-parent">
+						   	 <th scope="col"><div class="slds-truncate">&nbsp;</div></th>
+						   	 <th scope="col"><div class="slds-truncate">Nome</div></th>
+						   	 <th scope="col"><div class="slds-truncate">Capital</div></th>
+						   	 <th scope="col"><div class="slds-truncate">Prêmio</div></th>
+						    </tr>
+						 </thead>
+						<tbody>
+							<aura:iteration items="{!contratante.grupoSelecionado.garantias}" var="item">
+								<tr class="{!'slds-hint-parent' + (item.selecionado ? ' garantia-selecionada' : '')}" >
+									<td scope="row" class="slds-text-align_left slds-size_1-of-8">
+										<div class="slds-form-element">
+											<div class="slds-form-element__control">
+												<aura:if isTrue="{! v.ehEditavel }">
+		                              			<button class="{!'icone slds-button_icon slds-button_icon-brand' + (item.selecionado ? ' hide' : '')}" onclick="{!c.escolherGarantia}" data-contratanteid="{!contratante.id}" data-chave="{!item.chave}">
+		                                  			<lightning:buttonIcon iconName="utility:add" variant="border-filled" class="slds-button_icon" />
+		                              			</button>
+		                              			<button class="{!'icone slds-button_icon slds-button_icon-brand' + (item.selecionado ? ' ' : ' hide')}" onclick="{!c.escolherGarantia}" data-contratanteid="{!contratante.id}" data-chave="{!item.chave}">
+		                              				<lightning:buttonIcon iconName="utility:check" variant="border-filled" iconClass="green-icon" class="slds-button_icon slds-button_icon-check" />
+		                              			</button>
+												</aura:if>
+											</div>
+										</div>
+									</td>  
+									<td scope="row" class="slds-text-align_left slds-size_3-of-8">
+										<span>{!item.nome}</span>
+									</td>   
+									<td scope="row" class="slds-text-align_left slds-size_2-of-8">
+										<lightning:input label="" class="{! (item.selecionado ? '' : ' esconder')}" disabled="{! !v.ehEditavel }" value="{!item.garantiaGrupo.Capital__c}" />
+										<!--
+										SIMULAÇAO REGRA DE REMUNERAÇAO DA HISTÓRIA 715
+										 <aura:if isTrue="{!item.garantiaGrupo.Id == '4234324'}">
+										    	<lightning:input label="" name="xpto" class="{! (item.selecionado ? '' : ' esconder')}" disabled="true" value="3.000" />
+										    <aura:set attribute="else">
+										      	<lightning:input label="" name="xpto" class="{! (item.selecionado ? '' : ' esconder')}" />
+										    </aura:set>
+										 </aura:if> 
+										-->
+									</td>
+									<td scope="row" class="slds-text-align_left slds-size_2-of-8">
+										<span class="{! (item.selecionado ? '' : ' esconder')}">{!item.garantiaGrupo.PremioComercial__c}</span>
+									</td>   
+								</tr>
+							</aura:iteration>
+							<tr class="slds-hint-parent tr-total">
+								<td scope="row" colspan="3" class="slds-text-align_left slds-size_7-of-8">Total: </td>
+								<td scope="row" class="slds-text-align_left slds-size_1-of-8">{! contratante.grupoSelecionado.premioTotal }</td>
+							</tr>	
+						</tbody>
+					</table> 
+				</div>
+			</c:Secao>
+		</aura:iteration>
+	</div>	
+</aura:component>

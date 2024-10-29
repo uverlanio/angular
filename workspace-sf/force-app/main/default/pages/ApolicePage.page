@@ -1,0 +1,561 @@
+<!--PLV-3705 inicio-->
+<apex:page showHeader="false" renderAs="pdf" applyBodyTag="false" controller="ApoliceController">
+    <head>
+        <style type="text/css" media="print"> 
+            /* PLV-4947 Inicio */
+            .center{
+                text-align: center;
+            }
+            /* PLV-4947 Inicio */
+            @page {
+            margin-top: 1cm; 
+            margin-bottom: 0.5cm; 
+            margin-left: 0.5cm;
+            margin-right: 1cm;
+            
+            /* @top-center {                 
+            content: element(header);
+            } */
+            @bottom-left {  
+            content: element(footer);
+            }
+            }
+            .pagenumber:before {
+            content: counter(page);
+            }
+            .pagecount:before {
+            content: counter(pages);
+            }
+            div.header {
+            position: running(header);
+            display: inline-block;
+            
+            }
+            div.footer {
+            /* padding: 20px; */
+            position: running(footer);
+            /* border-top:solid 1px #C0C0C0; */
+            }
+            div.footer table{
+            width: 100%;
+            border-spacing: 0;
+            border: none;
+            }
+            div.footer table td{
+            text-align: center;
+            border: none;
+            width: 33.33%;
+            }
+            div.content{
+            }
+            
+            .textDiv {text-align: font-family: Calibri;padding-bottom:0px;padding-top:0px;}
+        </style>
+        
+        <style>
+            html{
+            font-family: Calibri, Helvetica, sans-serif;
+            }
+            div#header div.infos{
+            font-size: 11px;
+            }
+            div#header div.infos p {
+            font-size: 11px;
+            margin: 0;
+            }
+            div#header div.infos b {
+            font-size: 11px;
+            font-weight: 700;
+            }
+            /* SVEP-61 INICIO */
+            div#header div.title {
+            text-align: left;
+            font-size: 11px;
+            }
+            /* SVEP-61 FIM */
+            div#header table{
+            width: 100%;
+            }
+            div.content > table{
+            border-spacing: 0px;
+            width: 100%;
+            page-break-inside: avoid;
+            margin-bottom: 10px;
+            }
+            div.content > table tr td{
+            font-size: 11px;
+            border-top: 1px solid #000;
+            border-right: 1px solid #000;
+            padding: 5px;
+            }
+            div.content > table tr td span{
+            font-size: 11px;
+            word-spacing: normal;
+            }
+            div.content > table tr th{
+            font-size: 11px;
+            text-align: center;
+            border-top: 1px solid #000;
+            }
+            table#corretor td,
+            table#disposicoes td,
+            table#beneficiario td,
+            table#garantias td,
+            table#assist td,
+            table#condicoes td,
+            table#assinatura td,
+            table#pagamento td{
+            border: none;
+            font-size: 11px;
+            padding: 3px;
+            }
+            table#segurado td{
+            font-size: 11px;
+            padding: 3px
+            }
+            .headerRow .TableTitle{
+            font-size: 11px;
+            padding: 5px;
+            }
+            .TableValue{
+            font-size: 11px;
+            padding: 7px;
+            }
+            /* PLV-4947 Inicio */
+            table#assinatura tr{
+                width: 100%;
+            }
+            table#assinatura td{
+                width: 25%;
+            }
+            table#assinatura td span{
+                width: 100%;
+                text-align: center
+            }
+            /* PLV-4947 Fim */
+            /* BDD - VIA RAPIDA - 10.26 INICIO */
+            .titleLeft {
+                width: 50%; 
+                float:left
+            }
+            .titleRight {
+                width: 50%; 
+                float:right
+            }
+            .pTitle {
+                text-align:right
+            }
+            /* BDD - VIA RAPIDA - 10.26 FIM */
+        </style>
+    </head>
+    <body >    
+        <!-- PAGE CONTENT  -->	
+        <!-- 3404 INICIO  -->
+        <div class="content">
+            <div id="header">
+                <table>
+                    <tr>
+                        <!-- PLV-5382 - INICIO-->
+                        <td style="width:150px;">
+                             <!-- PLV 3606 Inicio -->
+                            <apex:image value="{!$Resource.NovoLogoApolice}" width="250px"
+                            height="100px" />
+                             <!-- PLV 3606 Fim -->
+                             <!-- PLV-5382 - FIM-->
+                        </td>
+                        <td style="vertical-align: middle;"> 
+                            <div class="title">
+                                <!-- BDD - VIA RAPIDA - 10.26 INICIO -->
+                                <div class="titleLeft">
+                                    <p> Porto Seguro Cia de Seguros Gerais <br/>
+                                        CNPJ:61.198.16/0001-60 <br/>
+                                        Registro Susep: – 05886 
+                                    </p>                                    
+                                 </div>
+                                 
+                                 <div class="titleRight">
+                                    <p class="pTitle"><apex:outputText value="{!tituloPDF}"/><br/>
+                                        <apex:outputText value="{!nomeProduto}"/><br/>
+                                        Processo Susep nº: <apex:outputText value="{!numeroSusep}"/> 
+                                    </p>
+                                 </div>                                                                
+                                <!-- BDD - VIA RAPIDA - 10.26 FIM -->
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            
+            <table style="margin-bottom: 0px;"> 
+                <tr >
+                    <td style="width: 50%">
+                        <span>APÓLICE N°: </span><apex:outputText styleClass="TableValue" value="{!numeroApolice}"/>
+                    </td>
+                    <td style="border-right: solid 1px #FFF!important; width: 50%; text-align: right;">
+                        <span>PROPOSTA Nº: </span><apex:outputText styleClass="TableValue" value="{!numeroProposta}"/>
+                    </td>
+                </tr>
+            </table>
+            <table id="Header2">
+                <tr>
+                    <td>
+                        <span>INICIO DE VIGÊNCIA DO SEGURO</span>
+                        <apex:outputText styleClass="TableValue" value="{!vigenciaInicio}"/>
+                    </td>
+                    <td>
+                        <span>FIM DE VIGÊNCIA DO SEGURO</span>
+                        <apex:outputText styleClass="TableValue" value="{!vigenciaFinal}"/>
+                    </td>
+                    <td style="border-right: solid 1px #FFF!important;">
+                        <span>DATA DE EMISSÃO DA APÓLICE</span>
+                        <apex:outputText styleClass="TableValue" value="{!dataEmissao}"/>
+                    </td>                
+                </tr>
+                <tr>
+                    <td>
+                        <span>ORIGEM DA VIAGEM</span>
+                    </td>
+                    <td>
+                        <span>DESTINO DA VIAGEM</span>
+                    </td>
+                    <td style="border-right: solid 1px #FFF!important;">
+                        <span>PERÍODO DA VIAGEM</span>
+                    </td>                
+                </tr>                
+                <tr>
+                    <td style="border-top: none;">
+                        <apex:outputText styleClass="TableValue" value="{!origemViagem}"/>
+                    </td>
+                    <td style="border-top: none;border-right:solid 1px">
+                        <apex:outputText styleClass="TableValue" value="{!destinoViagem}"/>
+                    </td>
+                    <td style="border-top: none;border-right: solid 1px #FFF!important;border-left:none">
+                        <apex:outputText styleClass="TableValue" value="{!periodoViagem}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="border-right:none;">
+                    </td>
+                    <td style="border-right:none;">
+                    </td>
+                    <td style="border-right:none;">
+                    </td>
+                </tr>
+            </table>
+            
+            <table id="segurado">
+                
+                <tr >
+                    <th style="border:none;background-color:#D1D0DE;" colspan="3">DADOS DO SEGURADO </th>
+                </tr>
+                <tr>
+                    <td style="border-right: solid 1px #FFF!important;">
+                        <span>Nome: </span> <apex:outputText styleClass="TableValue" value="{!nomeSegurado}"/>
+                    </td>
+                    <!--LECVPV 189 - INICIO-->
+                    <td colspan="3" style="border-right: solid 1px #FFF!important;">
+                        <apex:outputPanel rendered="{!hasSocialName}">
+                             <span>Nome Social: </span> <apex:outputText styleClass="TableValue" value="{!nomeSocial}"/>
+                        </apex:outputPanel>		
+                    </td>
+                    <!--LECVPV 189 - FIM-->
+                </tr>
+                <tr>
+                    <td style="border-right: solid 1px #FFF!important;">
+                        <span>Data de nascimento: </span> <apex:outputText styleClass="TableValue" value="{!dataNascSegurado}"/>
+                    </td>
+                    <td style="border-right: solid 1px #FFF!important;">
+                        <span>CPF/CNPJ: </span> <apex:outputText styleClass="TableValue" value="{!docSegurado}"/>
+                    </td>
+                    <td style="border-right: solid 1px #FFF!important;">
+                        <span>E-mail: </span>  <apex:outputText styleClass="TableValue" value="{!emailSegurado}"/>
+                    </td>
+                </tr>          
+                <tr>
+                    <td style="border-right: solid 1px #FFF!important;">
+                        <span>CEP: </span>  <apex:outputText styleClass="TableValue" value="{!cepSegurado}"/>
+                    </td>
+                    <td colspan="2" style="border-right: solid 1px #FFF!important;">
+                        <span>Endereço: </span>  <apex:outputText styleClass="TableValue" value="{!enderecoSegurado}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="border-right: solid 1px #FFF!important;">
+                        <span>Bairro: </span>  <apex:outputText styleClass="TableValue" value="{!bairroSegurado}"/>
+                    </td>
+                    <td style="border-right: solid 1px #FFF!important;">
+                        <span>Cidade: </span>  <apex:outputText styleClass="TableValue" value="{!cidadeSegurado}"/>
+                    </td>
+                    <td  style="border-right: solid 1px #FFF!important;">
+                        <span>Estado: </span>  <apex:outputText styleClass="TableValue" value="{!estadoSegurado}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3" style="border-right: solid 1px #FFF!important;">
+                        <span>Complemento: </span>  <apex:outputText styleClass="TableValue" value="{!complementoSegurado}"/>
+                    </td>
+                </tr>                
+            </table>
+            
+            <table id="corretor">
+                <tr>
+                    <th colspan="3" style="border:none; background-color:#D1D0DE;">DADOS DO CORRETOR </th>
+                </tr>
+                <tr>
+                    <td style="border: solid 1px;border-right:none;border-left:none; ">
+                        Corretor lider: <apex:outputText styleClass="TableValue" value="{!corretorLider}"/>
+                    </td>
+                    <td style="border: solid 1px;border-right:none;border-left:none; ">
+                    </td>
+                </tr>
+                <tr>
+                    <td style="border:solid 1px;border-top:none;border-right:none;border-left:none;">Telefone: <apex:outputText styleClass="TableValue" value="{!telCorretor}"/></td>
+                    <td style="border:solid 1px;border-top:none;border-right:none;border-left:none;">E-mail: <apex:outputText styleClass="TableValue" value="{!emailCorretor}"/></td>   
+                </tr>
+                <tr>
+                    <td style="border:solid 1px;border-top:none;border-right:none;border-left:none;">Susep Porto: <apex:outputText styleClass="TableValue" value="{!susepPortoCorretor}"/></td>
+                    <td style="border:solid 1px;border-top:none;border-right:none;border-left:none;">Susep oficial: <apex:outputText styleClass="TableValue" value="{!susepOficialCorretor}"/></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    
+                </tr>
+            </table>
+            <table id="garantias">
+                <tr>
+                    <th colspan="5" style="border:none;background-color:#D1D0DE;">COBERTURAS</th>
+                </tr>
+                <!-- AV-86 INICIO -->
+                <apex:pageBlock >
+                    <apex:pageblockSection collapsible="false" columns="5">
+                        <apex:outputPanel rendered="{!ocultarCoberturasVidaOn}">
+                            <apex:pageBlockTable value="{!lWrapGarantiaContratante}" var="gccWrap" id="a" rendered="{!lWrapGarantiaContratante.size>0}">
+                                <apex:column headerValue="RAMO" headerClass="TableTitle" value="{!gccWrap.codigoRamoCobertura}" style="width:5%"  styleClass="TableValue" />
+                                <apex:column headerValue="COBERTURAS" headerClass="TableTitle"  value="{!gccWrap.nomeCobertura}" style="width: 35%" styleClass="TableValue"/>
+                                <apex:column headerValue="VALIDADE DA COBERTURA" headerClass="TableTitle" value="{!gccWrap.validadeCobertura}" style="width:22%" styleClass="TableValue"/>
+                                <apex:column headerValue="CAPITAL SEGURADO" headerClass="TableTitle" value="{!gccWrap.capitalSeguradoCobertura}" style="width:20%" styleClass="TableValue"/>
+                                <apex:column headerValue="VALOR DO SEGURO" headerClass="TableTitle" value="{!gccWrap.valorSeguroCobertura}" style="width:18%" styleClass="TableValue"/>
+                            </apex:pageBlockTable>
+                        </apex:outputPanel>
+                        <apex:outputPanel rendered="{!exibirCoberturasVidaOn}">
+                            <apex:pageBlockTable value="{!lWrapGarantiaContratante}" var="gccWrap" id="b" rendered="{!lWrapGarantiaContratante.size>0}">
+                                <apex:column headerValue="RAMO" headerClass="TableTitle" value="{!gccWrap.codigoRamoCobertura}" style="width:5%"  styleClass="TableValue" />
+                                <apex:column headerValue="COBERTURAS" headerClass="TableTitle"  value="{!gccWrap.nomeCobertura}" style="width: 35%" styleClass="TableValue"/>
+                                <apex:column headerValue="VALIDADE DA COBERTURA" headerClass="TableTitle" value="{!gccWrap.validadeCobertura}" style="width:22%" styleClass="TableValue"/>
+                                <apex:column headerValue="CAPITAL SEGURADO" headerClass="TableTitle" value="{!gccWrap.capitalSeguradoCobertura}" style="width:20%" styleClass="TableValue"/>
+                                <apex:column headerValue="VALOR DO SEGURO*" headerClass="TableTitle" value="{!gccWrap.valorSeguroCobertura}" style="width:18%" styleClass="TableValue"/>
+                            </apex:pageBlockTable>
+                        </apex:outputPanel>
+                    </apex:pageblockSection>
+                </apex:pageBlock>
+                <!-- AV-86 FIM -->
+            </table>
+            
+            <table>
+                <tr>
+                    <th style="border:none;background-color:#D1D0DE;">CARÊNCIAS E FRANQUIAS</th>
+                </tr>
+                <tr>
+                    <td style="border:none">
+                        <p>
+                            Não há carências e franquias
+                        </p>
+                    </td>
+                </tr>
+            </table>
+            
+            <table id="assist">
+                <tr>
+                    <th colspan="3" style="border:none;background-color:#D1D0DE;">ASSISTÊNCIAS E BENEFÍCIOS</th>
+                </tr>
+                <apex:pageBlock >
+                    <apex:pageblockSection collapsible="false" columns="4" >
+                        <apex:pageBlockTable value="{!lWrapAssistenciasBeneficios}" var="assistWrap" id="a" rendered="{!lWrapAssistenciasBeneficios.size>0}">
+                            <apex:column headerValue="Assistência(s) e Beneficio(s)" headerClass="TableTitle" value="{!assistWrap.nomeAssistencia}" styleClass="TableValue" width="50%"/>
+                            <apex:column headerValue="Validade da Assistência" headerClass="TableTitle"  value="{!assistWrap.validadeAssistencia}" styleClass="TableValue"  width="40%"/>
+                            <apex:column headerValue="Valor da Assistência" headerClass="TableTitle" value="{!assistWrap.valorAssistencia}" styleClass="TableValue" width="33%"/>
+                        </apex:pageBlockTable>                                      
+                    </apex:pageblockSection>
+                </apex:pageBlock>
+            </table>
+            <table id="beneficiario">	
+                <tr>
+                    <th colspan="5" style="border:none;background-color:#D1D0DE;">BENEFICIÁRIO</th><!--LECVPV 189 FIX02 - INICIO/FIM-->
+                </tr>
+                <apex:pageBlock > 
+                    <apex:pageblockSection collapsible="false" columns="5"><!--LECVPV 189 FIX02 - INICIO/FIM-->
+                        <apex:pageBlockTable value="{!lWrapBeneficiarios}" var="beneWrap" id="a">
+                            <apex:column rendered="{!IF(beneWrap.nomeBeneficiario != null,false,true)}" value="{!beneWrap.tipoBeneficiario}" styleClass="TableValue" />
+                            <apex:column rendered="{!IF(beneWrap.nomeBeneficiario != null,true,false)}" headerValue="Nome do(s) Beneficiario(s)" headerClass="TableTitle" value="{!beneWrap.nomeBeneficiario}" styleClass="TableValue" />
+                            <apex:column rendered="{!IF(beneWrap.nomeSocialBeneficiario != null,true,false)}" headerValue="Nome Social do(s) Beneficiario(s)" headerClass="TableTitle" value="{!beneWrap.nomeSocialBeneficiario}" styleClass="TableValue" /><!--LECVPV 189 FIX02 - INICIO/FIM-->
+                            <apex:column rendered="{!IF(beneWrap.grauParentesco != null,true,false)}" headerValue="Grau de Parentesco" headerClass="TableTitle"  value="{!beneWrap.grauParentesco}" styleClass="TableValue" />
+                            <apex:column rendered="{!IF(beneWrap.participacao != null,true,false)}" headerValue="Participação" headerClass="TableTitle" value="{!beneWrap.participacao}" styleClass="TableValue" />
+                        </apex:pageBlockTable>                                      
+                    </apex:pageblockSection>
+                </apex:pageBlock>
+            </table>
+            
+            <table id="pagamento">
+                <tr>
+                    <th colspan="6" style="border:none;background-color:#D1D0DE;">VALORES E PAGAMENTOS</th>
+                </tr>
+                <tr>
+                    <td>Valor Liquido Total</td>
+                    <td>Valor Total de Assistência</td>
+                    <td>IOF</td>
+                    <!-- AV-86 INICIO -->
+                    <td>
+                        <apex:outputPanel rendered="{!ocultarObservacaoVidaOn}">
+                            Valor Total
+                        </apex:outputPanel>
+                        <apex:outputPanel rendered="{!exibirObservacaoVidaOn}">
+                            Valor Total*
+                        </apex:outputPanel>
+                    </td>
+                    <!-- AV-86 FIM -->
+                </tr>
+                <tr>
+                    <td style="border-top: none;">
+                        <apex:outputText styleClass="TableValue" value="{!valorLiquidoTotal}"/>
+                    </td>
+                    <td style="border-top: none;">
+                        <apex:outputText styleClass="TableValue" value="{!valorTotalAssistenciaConvert}"/>
+                    </td>
+                    <td style="border-top: none;">
+                     <apex:outputText styleClass="TableValue" value="{!valorIof}"/> 
+                   
+                    </td>
+                    <td style="border-top: none;">
+                        <apex:outputText styleClass="TableValue" value="{!valorTotalS}"/>
+                    </td>
+                </tr>
+                <tr style="{!IF(exibirPagamentos, '', 'display: none')}"> <!-- AV-86 INICIO/FIM -->
+                    <td>Forma de Pagamento</td>
+                    <td>Periocidade de Pagamento</td>
+                    <td>Quantidade de Parcelas</td>
+                    <td>Valor da Parcela</td>
+                </tr>
+                <tr style="{!IF(exibirPagamentos, '', 'display: none')}"> <!-- AV-86 INICIO/FIM -->
+                    <td style="border-top: none;">
+                        <apex:outputText styleClass="TableValue" value="{!formaPagamento}"/>
+                    </td>
+                    <td style="border-top: none;">
+                        <apex:outputText styleClass="TableValue" value="{!periocidadePagamento}"/>
+                    </td>
+                    <td style="border-top: none;">
+                        <apex:outputText styleClass="TableValue" value="{!qtdParcelas}"/>
+                    </td>
+                    <td style="border-top: none;">
+                        <apex:outputText styleClass="TableValue" value="{!valorParcela}"/>
+                    </td>
+                </tr>
+            </table>
+            
+            <table id = "disposicoes">
+                <tr>
+                    <th style="border:none;background-color:#D1D0DE;">DISPOSIÇÕES GERAIS</th>
+                </tr>
+                <tr>
+                <!-- AV-86 INICIO -->
+                    <td> 
+                        <apex:outputPanel rendered="{!ocultarObservacaoVidaOn}">
+                        Importante <br/> <!-- SVEP-61 INICIO/FIM -->
+                        Âmbito territorial: <apex:outputText styleClass="TableValue" value="{!ambitoTerritorial}"/> <br/> <!-- PLV - 4250 inicio/fim -->
+                        (*) Vide percentual da tabela de Invalidez Permanente Total ou Parcial por Acidente Constante nas Condições Gerais.
+                        </apex:outputPanel>
+                        <apex:outputPanel rendered="{!exibirObservacaoVidaOn}">
+                            Importante <br/>
+                            Âmbito territorial: <apex:outputText styleClass="TableValue" value="{!ambitoTerritorial}"/> <br/> <!-- PLV - 4250 inicio/fim -->
+                            * Benefício seguro Porto Vida ON - Prêmio pago integralmente pela Porto Seguro
+                        </apex:outputPanel>
+                    </td>
+                <!-- AV-86 FIM -->   
+                </tr>
+            </table>
+            
+            <table id="condicoes">
+                <tr>
+                    <th colspan="6" style="border:none;background-color:#D1D0DE;">CONDIÇÕES GERAIS</th>
+                </tr>
+                <tr>
+                    <td>
+                        <p>As condições gerais, contendo mais informações sobre as coberturas contratadas estão disponíveis em nosso site www.portoseguro.com.br/seguro-viagem</p>
+                        <p>Clique em Manuais e Condições Gerais;</p>
+						<!-- PLV-5232 - INICIO -->
+						<p>Condição Especial/Particular do Seguro Viagem Individual (para eventos vinculados direta ou indiretamente ao Covid-19):  
+						   item 5 - Riscos Excluídos, a alínea 'c' do item 5.1 da referida Condição Geral, onde são excluídos eventos decorrentes de epidemias ou pandemias declaradas por órgãos competentes, 
+                           não será aplicada para os casos decorrentes de COVID-19, observando-se os demais termos e coberturas contratadas.
+                        </p>
+						<!-- PLV-5232 - FIM -->
+                        <p>Selecione as condições gerais de acordo com o número do Processo SUSEP localizado na parte superior desta apólice.</p>
+                        <p><strong>As condições contratuais/regulamento deste produto protocolizadas pela sociedade/entidade junto à Susep poderão ser consultadas no endereço eletrônico www.susep.gov.br, de acordo com o número de processo constante da apólice, proposta, bilhete, certificado ou no título de capitalização. Telefone SUSEP: 0800 021 8484.</strong></p> <!-- POR062-5 - FIX-02 - INICIO/FIM -->
+                        <p>Conforme Decreto Lei 6.339 de 03/01/2008, 
+                            sobre os prêmios dos seguros de vida deve incidir o percentual de 0,38% 
+                            referente a alíquota de IOF (Imposto sobre Operações Financeiras).
+                            Em atendimento à Lei 12.741/12 informamos que incidem as alíquotas de 0,65% de PIS/PASEP e 
+                            de 4% de COFINS, deduzidos do estabelecido em legislação específica.
+                        </p>
+                        <!-- BDD - VIA RAPIDA - 10.27 INICIO -->
+                        <p>
+                            Plataforma digital para registros de reclamação dos consumidores: www.consumidor.gov.br. Consulte regras e condições da plataforma.
+                        </p>
+                        <!-- BDD - VIA RAPIDA - 10.27 FIM -->
+                        <p>
+                            Para validade do presente contrato, a Seguradora, representa por seu diretor presidente assina esta Apólice.
+                        </p>
+                    </td>
+                </tr>
+            </table>
+            <table id="assinatura">              
+                <tr>
+                    <td>Local</td>
+                    <td>Data</td>
+                    <!-- PLV-4947 Inicio -->
+                    <td style="padding-left: 75px;">
+                        <span>Diretor</span>
+                    </td> 
+                    <td style="padding-left: 60px;">
+                        <span>Diretor</span>    
+                    </td> 
+                    <!-- PLV-4947 Fim --> 
+                </tr>           
+                <tr>
+                    <td style="border-top: none;">
+                        <apex:outputText value="{!local}"/>
+                    </td>
+                    <td style="border-top: none;"> 
+                        <apex:outputText value="{!data}"/>
+                    </td>
+                    <!-- PLV-4947 Inicio -->
+                    <td style="border-top: none;">
+                        <!-- PLV 3606 Inicio -->
+                        <apex:image id="assinaturaVoucher" value="{!$Resource.NovaAssinaturaApolice}" height="50" alt=""/>
+                        <p style="margin-left:20px;">
+                            <span style="margin-left:14px;">Carlos Eduardo Gondim</span><br/>
+                            <span style="margin-left:-7px; padding-top:0px;"><b>Diretoria vida e Previdência</b></span>
+                        <!-- PLV 3606 fim -->
+
+                        </p>
+                    </td>
+                    <td style="border-top: none;">
+                        
+                        <apex:image id="assinaturaVoucherDiretoriaGeral" value="{!$Resource.AssinaturaDiretorGeral}" height="50" alt=""/>
+                        <p style="margin-left:20px;">
+                            <span style="margin-left:20px;">Marcelo Picanço</span><br/>
+                            <span style="margin-left:20px; padding-top:0px;"><b>Diretoria Geral</b></span>
+                        </p>
+                    </td>
+                    <!-- PLV-4947 fim -->
+                </tr>   	
+            </table>
+            <div style="border-top: 1px solid #000; border-bottom: 1px solid #000; font-size: 10px; line-height: 14px; padding: 5px 0;">
+                Porto Seguro Vida e Previdência S/A - 05886 - Al. Barão de Piracicaba, nº 618 - Torre B - 3º Andar - Campos Elíseos - São Paulo
+                - CEP 01216-012 - CNPJ 61.198.164/0001-60. Central de Atendimento: (11) 3366-3377 (Grande São Paulo) - 0800-727-9393
+                (demais localidades). SAC: 0800-727-2746. Horário de atendimento: de segunda a sexta-feira, das 8h15 às 18h30. Atendimento
+                exclusivo para deficientes auditivos: 0800-727-8736. Ouvidoria: 0800-727-1184. Acesse nosso site: www.portoseguro.com.br/vida
+            </div>
+        </div>
+    </body>
+    <!-- 3404 FIM  -->	    
+</apex:page>
+<!--PLV-3705 fim-->

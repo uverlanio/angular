@@ -1,0 +1,42 @@
+<template>
+    <div class="spinner">
+        <template if:true={isLoading}>
+             <lightning-spinner alternative-text="Loading" variant="brand" size="large">
+             </lightning-spinner>
+        </template>
+    </div>
+    <lightning-card  title="Bloquear Planos" icon-name="standard:cancel_checkout">
+        <div class="slds-m-around_medium">
+            <lightning-messages>
+            </lightning-messages>
+            <template if:true={Account.data}>  
+              <lightning-record-edit-form
+                object-api-name={Account} 
+                record-id={recordId}
+             >         
+            <lightning-dual-listbox
+                name="ProdutosBloqueados"
+                class="slds-m-around_small" 
+                label="Selecione os produtos"
+                source-label="Disponiveis" 
+                selected-label="Bloqueados" 
+                field-level-help="Selecione os produtos"
+                options={options}
+                value={currentOptions} 
+                onchange={handleChange}
+                ></lightning-dual-listbox>
+            
+          
+            <lightning-button 
+                label="Confirmar Bloqueio"
+                variant="brand"
+                disabled={desabilitado}
+                onclick={updateDadosCorretor} 
+                >
+            </lightning-button>
+          </lightning-record-edit-form>
+        </template>
+   
+        </div>
+    </lightning-card>  
+</template>

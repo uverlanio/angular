@@ -1,0 +1,974 @@
+{
+	"ofertas": [{
+		"orcamento": {
+			"tipoVigencia": "Periódico",
+			"tipoSeguro": "Novo",
+			"vigenciaFinal": "2021-01-06",
+			"numeroOrcamento": "00004195",
+			"numeroPortal": 0,
+			"codigoProdutoVida": "CONSULTIVO",
+			"contratantes": [{
+				"tipo": "PRI",
+				"numero": 1,
+				"grupos": [{
+					"numero": 1,
+					"tipoCalculo": "Sintetico",
+					"nome": "Acima de 70 anos",
+					"qtdeVidas": 2,
+					"coberturas": [{
+						"sigla": "BAS",
+						"valor": 4000
+					}, {
+						"sigla": "MAP",
+						"valor": 4000
+					}, {
+						"sigla": "MAP",
+						"valor": 1000
+					}, {
+						"sigla": "AFI",
+						"valor": 3000
+					}, {
+						"sigla": "DG 10",
+						"valor": 2000
+					}]
+				}, {
+					"numero": 2,
+					"tipoCalculo": "Sintetico",
+					"nome": "Abaixo de 70 anos",
+					"qtdeVidas": 1,
+					"coberturas": [{
+						"sigla": "BAS",
+						"valor": 4000
+					}, {
+						"sigla": "MAP",
+						"valor": 4000
+					}, {
+						"sigla": "MAP",
+						"valor": 8000
+					}, {
+						"sigla": "AFI",
+						"valor": 3000
+					}, {
+						"sigla": "DG 10",
+						"valor": 2000
+					}]
+				}]
+			}],
+			"canalDistribuicao": "COR",
+			"viagem": {
+				"tipoViagem": "NACIONAL",
+				"praticaEsportesAventura": true,
+				"destinos": [
+                        {
+                            "codigo": "DESTINO_01",
+                            "pais": "Brasil"
+                        }
+				],
+				"utilizaraMotocicleta": true,
+				"passageirosNaoIdosos": "2",
+				"passageirosIdosos": "1"
+			},
+			"meioComercializacao": "CO2",
+			"varConsultivo": true,
+			"segmento": "Individual",
+			"orcnum": "00004195",
+			"ordemPortal": 1,
+			"rotulo": "Viagem - Brasil Terra",
+			"susepOrcamento": "P5005J",
+			"remuneracoes": [{
+				"percentual": 15,
+				"tipoRemuneracao": "Corretagem"
+			}],
+			"vigenciaInicial": "2020-01-06",
+			"dataCalculo": "2020-01-06"
+		},
+		"retornosCalculo": [{
+			"precificacao": {
+				"encargos": 0,
+				"taxa": {},
+				"iof": 84.28,
+				"premio": {
+					"comercial": 22179.56,
+					"total": 22263.84
+				},
+				"custoDeApolice": 0,
+				"juros": 0,
+				"grupos": [{
+					"taxa": {},
+					"iof": 37.22,
+					"numero": 1,
+					"premio": {
+						"comercial": 9830.74,
+						"total": 9830.74
+					},
+					"segurados": [{
+						"taxa": {},
+						"iof": 37.22,
+						"numero": 1,
+						"premio": {
+							"comercial": 3276.91,
+							"total": 3276.91
+						},
+						"coberturas": [{
+							"taxa": {
+								"pura": 1.0684E-6
+							},
+							"sigla": "MAP",
+							"premio": {
+								"comercial": 107.74,
+								"total": 107.74,
+								"puro": 64.643835
+							}
+						}, {
+							"taxa": {
+								"pura": 5.47E-8
+							},
+							"sigla": "IPA",
+							"premio": {
+								"comercial": 5.53,
+								"total": 5.53,
+								"puro": 3.315068
+							}
+						}, {
+							"taxa": {},
+							"sigla": "EB",
+							"premio": {
+								"comercial": 4.85,
+								"total": 4.85,
+								"puro": 2.91
+							}
+						}, {
+							"taxa": {
+								"pura": 1.334734E-4
+							},
+							"sigla": "IV",
+							"premio": {
+								"comercial": 140.55,
+								"total": 140.55,
+								"puro": 84.327983
+							}
+						}, {
+							"taxa": {},
+							"sigla": "CAN",
+							"premio": {
+								"comercial": 7.73,
+								"total": 7.73,
+								"puro": 4.64
+							}
+						}, {
+							"taxa": {
+								"pura": 14.1923403397
+							},
+							"sigla": "DMHO",
+							"premio": {
+								"comercial": 2862.12,
+								"total": 2862.12,
+								"puro": 1717.2731
+							}
+						}, {
+							"taxa": {
+								"pura": 1.1414484515
+							},
+							"sigla": "AHP",
+							"premio": {
+								"comercial": 230.19,
+								"total": 230.19,
+								"puro": 138.1152
+							}
+						}, {
+							"taxa": {
+								"pura": 0.2592703079
+							},
+							"sigla": "AM",
+							"premio": {
+								"comercial": 52.29,
+								"total": 52.29,
+								"puro": 31.3717
+							}
+						}, {
+							"taxa": {
+								"pura": 0.0116178082
+							},
+							"sigla": "AFI",
+							"premio": {
+								"comercial": 2.34,
+								"total": 2.34,
+								"puro": 1.4057
+							}
+						}, {
+							"taxa": {
+								"pura": 16.150432
+							},
+							"sigla": "DBAG",
+							"premio": {
+								"comercial": 26.92,
+								"total": 26.92,
+								"puro": 16.1504
+							}
+						}, {
+							"taxa": {
+								"pura": 1.6921811086
+							},
+							"sigla": "DF",
+							"premio": {
+								"comercial": 341.26,
+								"total": 341.26,
+								"puro": 204.7539
+							}
+						}, {
+							"taxa": {
+								"pura": 0.0096400569
+							},
+							"sigla": "DJ",
+							"premio": {
+								"comercial": 1.94,
+								"total": 1.94,
+								"puro": 1.1664
+							}
+						}, {
+							"taxa": {
+								"pura": 0.0013151132
+							},
+							"sigla": "FISIO",
+							"premio": {
+								"comercial": 0.27,
+								"total": 0.27,
+								"puro": 0.1591
+							}
+						}, {
+							"taxa": {
+								"pura": 1.1414484515
+							},
+							"sigla": "RPR",
+							"premio": {
+								"comercial": 230.19,
+								"total": 230.19,
+								"puro": 138.1152
+							}
+						}, {
+							"taxa": {
+								"pura": 0.0592989266
+							},
+							"sigla": "HAH",
+							"premio": {
+								"comercial": 11.96,
+								"total": 11.96,
+								"puro": 7.1751
+							}
+						}, {
+							"taxa": {
+								"pura": 0.7665795901
+							},
+							"sigla": "RMF",
+							"premio": {
+								"comercial": 154.59,
+								"total": 154.59,
+								"puro": 92.7561
+							}
+						}, {
+							"taxa": {
+								"pura": 0.0096400569
+							},
+							"sigla": "PF",
+							"premio": {
+								"comercial": 1.94,
+								"total": 1.94,
+								"puro": 1.1664
+							}
+						}, {
+							"taxa": {
+								"pura": 0.5268665863
+							},
+							"sigla": "RS",
+							"premio": {
+								"comercial": 106.25,
+								"total": 106.25,
+								"puro": 63.7508
+							}
+						}, {
+							"taxa": {
+								"pura": 0.191312526
+							},
+							"sigla": "TC",
+							"premio": {
+								"comercial": 38.58,
+								"total": 38.58,
+								"puro": 23.1488
+							}
+						}, {
+							"taxa": {
+								"pura": 0.0186333369
+							},
+							"sigla": "TM",
+							"premio": {
+								"comercial": 3.76,
+								"total": 3.76,
+								"puro": 2.2546
+							}
+						}, {
+							"taxa": {
+								"pura": 0.1074794489
+							},
+							"sigla": "HAHP",
+							"premio": {
+								"comercial": 21.68,
+								"total": 21.68,
+								"puro": 13.005
+							}
+						}]
+					}],
+					"coberturas": [{
+						"taxa": {
+							"pura": 1.0684E-6
+						},
+						"sigla": "MAP",
+						"premio": {
+							"comercial": 323.22,
+							"total": 323.22,
+							"puro": 64.643835
+						}
+					}, {
+						"taxa": {
+							"pura": 5.47E-8
+						},
+						"sigla": "IPA",
+						"premio": {
+							"comercial": 16.58,
+							"total": 16.58,
+							"puro": 3.315068
+						}
+					}, {
+						"taxa": {},
+						"sigla": "EB",
+						"premio": {
+							"comercial": 14.55,
+							"total": 14.55,
+							"puro": 2.91
+						}
+					}, {
+						"taxa": {
+							"pura": 1.334734E-4
+						},
+						"sigla": "IV",
+						"premio": {
+							"comercial": 421.64,
+							"total": 421.64,
+							"puro": 84.327983
+						}
+					}, {
+						"taxa": {},
+						"sigla": "CAN",
+						"premio": {
+							"comercial": 23.2,
+							"total": 23.2,
+							"puro": 4.64
+						}
+					}, {
+						"taxa": {
+							"pura": 14.1923403397
+						},
+						"sigla": "DMHO",
+						"premio": {
+							"comercial": 8586.37,
+							"total": 8586.37,
+							"puro": 1717.2731
+						}
+					}, {
+						"taxa": {
+							"pura": 1.1414484515
+						},
+						"sigla": "AHP",
+						"premio": {
+							"comercial": 690.58,
+							"total": 690.58,
+							"puro": 138.1152
+						}
+					}, {
+						"taxa": {
+							"pura": 0.2592703079
+						},
+						"sigla": "AM",
+						"premio": {
+							"comercial": 156.86,
+							"total": 156.86,
+							"puro": 31.3717
+						}
+					}, {
+						"taxa": {
+							"pura": 0.0116178082
+						},
+						"sigla": "AFI",
+						"premio": {
+							"comercial": 7.03,
+							"total": 7.03,
+							"puro": 1.4057
+						}
+					}, {
+						"taxa": {
+							"pura": 16.150432
+						},
+						"sigla": "DBAG",
+						"premio": {
+							"comercial": 80.75,
+							"total": 80.75,
+							"puro": 16.1504
+						}
+					}, {
+						"taxa": {
+							"pura": 1.6921811086
+						},
+						"sigla": "DF",
+						"premio": {
+							"comercial": 1023.77,
+							"total": 1023.77,
+							"puro": 204.7539
+						}
+					}, {
+						"taxa": {
+							"pura": 0.0096400569
+						},
+						"sigla": "DJ",
+						"premio": {
+							"comercial": 5.83,
+							"total": 5.83,
+							"puro": 1.1664
+						}
+					}, {
+						"taxa": {
+							"pura": 0.0013151132
+						},
+						"sigla": "FISIO",
+						"premio": {
+							"comercial": 0.8,
+							"total": 0.8,
+							"puro": 0.1591
+						}
+					}, {
+						"taxa": {
+							"pura": 1.1414484515
+						},
+						"sigla": "RPR",
+						"premio": {
+							"comercial": 690.58,
+							"total": 690.58,
+							"puro": 138.1152
+						}
+					}, {
+						"taxa": {
+							"pura": 0.0592989266
+						},
+						"sigla": "HAH",
+						"premio": {
+							"comercial": 35.88,
+							"total": 35.88,
+							"puro": 7.1751
+						}
+					}, {
+						"taxa": {
+							"pura": 0.7665795901
+						},
+						"sigla": "RMF",
+						"premio": {
+							"comercial": 463.78,
+							"total": 463.78,
+							"puro": 92.7561
+						}
+					}, {
+						"taxa": {
+							"pura": 0.0096400569
+						},
+						"sigla": "PF",
+						"premio": {
+							"comercial": 5.83,
+							"total": 5.83,
+							"puro": 1.1664
+						}
+					}, {
+						"taxa": {
+							"pura": 0.5268665863
+						},
+						"sigla": "RS",
+						"premio": {
+							"comercial": 318.75,
+							"total": 318.75,
+							"puro": 63.7508
+						}
+					}, {
+						"taxa": {
+							"pura": 0.191312526
+						},
+						"sigla": "TC",
+						"premio": {
+							"comercial": 115.74,
+							"total": 115.74,
+							"puro": 23.1488
+						}
+					}, {
+						"taxa": {
+							"pura": 0.0186333369
+						},
+						"sigla": "TM",
+						"premio": {
+							"comercial": 11.27,
+							"total": 11.27,
+							"puro": 2.2546
+						}
+					}, {
+						"taxa": {
+							"pura": 0.1074794489
+						},
+						"sigla": "HAHP",
+						"premio": {
+							"comercial": 65.03,
+							"total": 65.03,
+							"puro": 13.005
+						}
+					}]
+				}, {
+					"taxa": {},
+					"iof": 47.07,
+					"numero": 2,
+					"premio": {
+						"comercial": 12433.11,
+						"total": 12433.11
+					},
+					"segurados": [{
+						"taxa": {},
+						"iof": 47.07,
+						"numero": 2,
+						"premio": {
+							"comercial": 6216.55,
+							"total": 6216.55
+						},
+						"coberturas": [{
+							"taxa": {
+								"pura": 1.0684E-6
+							},
+							"sigla": "MAP",
+							"premio": {
+								"comercial": 107.74,
+								"total": 107.74,
+								"puro": 64.6438
+							}
+						}, {
+							"taxa": {
+								"pura": 5.47E-8
+							},
+							"sigla": "IPA",
+							"premio": {
+								"comercial": 5.53,
+								"total": 5.53,
+								"puro": 3.315
+							}
+						}, {
+							"taxa": {},
+							"sigla": "EB",
+							"premio": {
+								"comercial": 4.85,
+								"total": 4.85,
+								"puro": 2.91
+							}
+						}, {
+							"taxa": {
+								"pura": 1.334734E-4
+							},
+							"sigla": "IV",
+							"premio": {
+								"comercial": 161.5,
+								"total": 161.5,
+								"puro": 96.9017
+							}
+						}, {
+							"taxa": {},
+							"sigla": "CAN",
+							"premio": {
+								"comercial": 11.38,
+								"total": 11.38,
+								"puro": 6.83
+							}
+						}, {
+							"taxa": {
+								"pura": 28.7291150904
+							},
+							"sigla": "DMHO",
+							"premio": {
+								"comercial": 5793.7,
+								"total": 5793.7,
+								"puro": 3476.2229
+							}
+						}, {
+							"taxa": {
+								"pura": 2.282896903
+							},
+							"sigla": "AHP",
+							"premio": {
+								"comercial": 460.38,
+								"total": 460.38,
+								"puro": 276.2305
+							}
+						}, {
+							"taxa": {
+								"pura": 0.5185406158
+							},
+							"sigla": "AM",
+							"premio": {
+								"comercial": 104.57,
+								"total": 104.57,
+								"puro": 62.7434
+							}
+						}, {
+							"taxa": {
+								"pura": 0.0232356164
+							},
+							"sigla": "AFI",
+							"premio": {
+								"comercial": 4.69,
+								"total": 4.69,
+								"puro": 2.8115
+							}
+						}, {
+							"taxa": {
+								"pura": 17.649312
+							},
+							"sigla": "DBAG",
+							"premio": {
+								"comercial": 29.42,
+								"total": 29.42,
+								"puro": 17.6493
+							}
+						}, {
+							"taxa": {
+								"pura": 1.6921811086
+							},
+							"sigla": "DF",
+							"premio": {
+								"comercial": 341.26,
+								"total": 341.26,
+								"puro": 204.7539
+							}
+						}, {
+							"taxa": {
+								"pura": 0.0096400569
+							},
+							"sigla": "DJ",
+							"premio": {
+								"comercial": 1.94,
+								"total": 1.94,
+								"puro": 1.1664
+							}
+						}, {
+							"taxa": {
+								"pura": 0.0013151132
+							},
+							"sigla": "FISIO",
+							"premio": {
+								"comercial": 0.27,
+								"total": 0.27,
+								"puro": 0.1591
+							}
+						}, {
+							"taxa": {
+								"pura": 2.282896903
+							},
+							"sigla": "RPR",
+							"premio": {
+								"comercial": 460.38,
+								"total": 460.38,
+								"puro": 276.2305
+							}
+						}, {
+							"taxa": {},
+							"sigla": "HAH",
+							"premio": {}
+						}, {
+							"taxa": {
+								"pura": 1.5331591802
+							},
+							"sigla": "RMF",
+							"premio": {
+								"comercial": 309.19,
+								"total": 309.19,
+								"puro": 185.5122
+							}
+						}, {
+							"taxa": {
+								"pura": 0.0096400569
+							},
+							"sigla": "PF",
+							"premio": {
+								"comercial": 1.94,
+								"total": 1.94,
+								"puro": 1.1664
+							}
+						}, {
+							"taxa": {
+								"pura": 1.5805484274
+							},
+							"sigla": "RS",
+							"premio": {
+								"comercial": 318.74,
+								"total": 318.74,
+								"puro": 191.2463
+							}
+						}, {
+							"taxa": {
+								"pura": 0.4011043945
+							},
+							"sigla": "TC",
+							"premio": {
+								"comercial": 80.89,
+								"total": 80.89,
+								"puro": 48.5336
+							}
+						}, {
+							"taxa": {
+								"pura": 0.0256657534
+							},
+							"sigla": "TM",
+							"premio": {
+								"comercial": 5.18,
+								"total": 5.18,
+								"puro": 3.1055
+							}
+						}, {
+							"taxa": {
+								"pura": 0.148247445
+							},
+							"sigla": "HAHP",
+							"premio": {
+								"comercial": 29.9,
+								"total": 29.9,
+								"puro": 17.9379
+							}
+						}]
+					}],
+					"coberturas": [{
+						"taxa": {
+							"pura": 1.0684E-6
+						},
+						"sigla": "MAP",
+						"premio": {
+							"comercial": 215.48,
+							"total": 215.48,
+							"puro": 64.6438
+						}
+					}, {
+						"taxa": {
+							"pura": 5.47E-8
+						},
+						"sigla": "IPA",
+						"premio": {
+							"comercial": 11.05,
+							"total": 11.05,
+							"puro": 3.315
+						}
+					}, {
+						"taxa": {},
+						"sigla": "EB",
+						"premio": {
+							"comercial": 9.7,
+							"total": 9.7,
+							"puro": 2.91
+						}
+					}, {
+						"taxa": {
+							"pura": 1.334734E-4
+						},
+						"sigla": "IV",
+						"premio": {
+							"comercial": 323.01,
+							"total": 323.01,
+							"puro": 96.9017
+						}
+					}, {
+						"taxa": {},
+						"sigla": "CAN",
+						"premio": {
+							"comercial": 22.77,
+							"total": 22.77,
+							"puro": 6.83
+						}
+					}, {
+						"taxa": {
+							"pura": 28.7291150904
+						},
+						"sigla": "DMHO",
+						"premio": {
+							"comercial": 11587.41,
+							"total": 11587.41,
+							"puro": 3476.2229
+						}
+					}, {
+						"taxa": {
+							"pura": 2.282896903
+						},
+						"sigla": "AHP",
+						"premio": {
+							"comercial": 920.77,
+							"total": 920.77,
+							"puro": 276.2305
+						}
+					}, {
+						"taxa": {
+							"pura": 0.5185406158
+						},
+						"sigla": "AM",
+						"premio": {
+							"comercial": 209.14,
+							"total": 209.14,
+							"puro": 62.7434
+						}
+					}, {
+						"taxa": {
+							"pura": 0.0232356164
+						},
+						"sigla": "AFI",
+						"premio": {
+							"comercial": 9.37,
+							"total": 9.37,
+							"puro": 2.8115
+						}
+					}, {
+						"taxa": {
+							"pura": 17.649312
+						},
+						"sigla": "DBAG",
+						"premio": {
+							"comercial": 58.83,
+							"total": 58.83,
+							"puro": 17.6493
+						}
+					}, {
+						"taxa": {
+							"pura": 1.6921811086
+						},
+						"sigla": "DF",
+						"premio": {
+							"comercial": 682.51,
+							"total": 682.51,
+							"puro": 204.7539
+						}
+					}, {
+						"taxa": {
+							"pura": 0.0096400569
+						},
+						"sigla": "DJ",
+						"premio": {
+							"comercial": 3.89,
+							"total": 3.89,
+							"puro": 1.1664
+						}
+					}, {
+						"taxa": {
+							"pura": 0.0013151132
+						},
+						"sigla": "FISIO",
+						"premio": {
+							"comercial": 0.53,
+							"total": 0.53,
+							"puro": 0.1591
+						}
+					}, {
+						"taxa": {
+							"pura": 2.282896903
+						},
+						"sigla": "RPR",
+						"premio": {
+							"comercial": 920.77,
+							"total": 920.77,
+							"puro": 276.2305
+						}
+					}, {
+						"taxa": {},
+						"sigla": "HAH",
+						"premio": {}
+					}, {
+						"taxa": {
+							"pura": 1.5331591802
+						},
+						"sigla": "RMF",
+						"premio": {
+							"comercial": 618.37,
+							"total": 618.37,
+							"puro": 185.5122
+						}
+					}, {
+						"taxa": {
+							"pura": 0.0096400569
+						},
+						"sigla": "PF",
+						"premio": {
+							"comercial": 3.89,
+							"total": 3.89,
+							"puro": 1.1664
+						}
+					}, {
+						"taxa": {
+							"pura": 1.5805484274
+						},
+						"sigla": "RS",
+						"premio": {
+							"comercial": 637.49,
+							"total": 637.49,
+							"puro": 191.2463
+						}
+					}, {
+						"taxa": {
+							"pura": 0.4011043945
+						},
+						"sigla": "TC",
+						"premio": {
+							"comercial": 161.78,
+							"total": 161.78,
+							"puro": 48.5336
+						}
+					}, {
+						"taxa": {
+							"pura": 0.0256657534
+						},
+						"sigla": "TM",
+						"premio": {
+							"comercial": 10.35,
+							"total": 10.35,
+							"puro": 3.1055
+						}
+					}, {
+						"taxa": {
+							"pura": 0.148247445
+						},
+						"sigla": "HAHP",
+						"premio": {
+							"comercial": 59.79,
+							"total": 59.79,
+							"puro": 17.9379
+						}
+					}]
+				}],
+				"coberturas": [],
+				"contratantes": []
+			},
+			"numeroOferta": 123,
+			"orcnum": "PPW-00004195",
+			"uuid": "97f7eca9.f9534"
+		}],
+		"retornoAceitacao": {},
+		"retornoIntegracoes": {}
+	}],
+	"versoesCalculo": [
+      {
+         "opcao": 0,
+         "tipo": null,
+         "descontoAgravo": 0
+      },
+      {
+         "opcao": 1,
+         "tipo": "FPG",
+         "descontoAgravo": -5
+      },
+      {
+         "opcao": 2,
+         "tipo": "FPG",
+         "descontoAgravo": 5
+      }
+   ]
+}

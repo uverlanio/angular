@@ -1,0 +1,60 @@
+<aura:component controller="ConfiguradorOfertaController">
+	<aura:handler name="init" value="{!this}" action="{!c.inicializar}" />
+	<aura:handler name="change" value="{!v.segmento}" action="{!c.buscarProdutos}"/>
+	<!-- <aura:handler name="change" value="{!v.produtosConfiguracao}" action="{!c.adicionarProdutosComponenteFilho}"/> -->
+
+	<aura:attribute name="componente" type="Object" default="{}"  />
+	<aura:attribute name="segmento" type="String" default="teste"  />
+	<aura:attribute name="produtos" type="List" default="[]"  />
+	<aura:attribute name="produtosFiltrados" type="List" default="[]"  />
+	<aura:attribute name="produtosConfiguracao" type="List" default="[]"  />
+	<aura:attribute name="filtro" type="String" default=""  />
+	<aura:attribute name="mapNomeProduto" type="Map" default="{}" />
+
+	<aura:method name="buscarProdutosEscolhidos" action="{!c.retornarProdutosConfigurador}">
+		<aura:attribute name="mapProdutosConfigurador" type="Object"  />
+	</aura:method>
+
+	<div class="slds-card container-form"> 
+		<!-- Produtos disponiveis para serem escolhidos -->	
+		<c:Secao titulo="Produtos" idElementoToggle="divProdutos" componentePai="{!v.componente}"/>  
+		<div aura:id="divProdutos" class="divOverflow slds-form slds-p-around--medium slds-form_compound">
+			<div class="slds-form-element">
+				<div class="slds-form-element__control">
+				  <ui:inputText class="slds-input" placeholder="Filtro por nome de produto" updateOn="keyup" keyup="{!c.filtrar}" value="{!v.filtro}"  />
+				</div>
+			</div>
+			<br />
+			<h1 class="{!'info-tabela-vazia' + (v.produtosFiltrados.length != 0 ? ' esconder' : '')}"> -- Nenhum produto encontrado -- </h1>
+			<table role="grid" class="{!'slds-table slds-table_bordered slds-max-medium-table_stacked-horizontal slds-no-row-hover' + (v.produtosFiltrados.length == 0 ? ' esconder' : '')}">	
+				<thead>
+				   <tr class="slds-hint-parent">
+				   	 <th scope="col"><div class="slds-truncate">&nbsp;</div></th>
+				   	 <th scope="col"><div class="slds-truncate">Nome produto</div></th>
+				    </tr>
+				 </thead>
+				<tbody>
+					<aura:iteration items="{!v.produtosFiltrados}" var="produto">	
+						<tr class="slds-hint-parent">
+							<td scope="row" class="slds-text-align_left slds-size_1-of-6">
+								<div class="slds-form-element">
+									<div class="slds-form-element__control">
+										<button class="icone slds-button_icon slds-button_icon-brand" onclick="{!c.selecionar}" data-produtoid="{!produto.Id}">
+                                  			<lightning:buttonIcon iconName="utility:add" variant="border-filled" class="slds-button_icon" />
+                              			</button>
+									</div>
+								</div>
+							</td>  
+							<td scope="row" class="slds-text-align_left slds-size_5-of-6">
+								{!produto.Name}
+							</td>     
+						</tr>
+					</aura:iteration>
+				</tbody>
+			</table> 
+		</div>
+	</div> 
+
+	<!-- Produtos escolhidos para edição das garantias -->
+	<c:ProdutosSelecionadosConfigurador aura:id="cmpProdutosSelecioandosConf" produtos="{!v.produtosConfiguracao}" mapNomeProduto="{!v.mapNomeProduto}" />
+</aura:component>

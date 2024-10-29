@@ -1,0 +1,88 @@
+<!--
+ - Created by Alessndro Ponte on 19/06/2018.
+ -->
+
+<aura:component description="QuestionarioAnaliseRiscoView">
+
+  <aura:attribute type="Aura.Component" name="indiceQuestionario" >
+    <span>{!v.totalPerguntas}</span><span>/</span><span>{!v.perguntasRespondidas}</span>
+  </aura:attribute>
+
+  <aura:attribute name="wrapperPerguntas" type="Object" />
+  <aura:attribute name="vida" type="Object" />
+
+  <aura:handler event="c:QuestionarioAnaliseRiscoEvent" action="{!c.handleApplicationEvent}"/>
+
+  <aura:if isTrue="{!v.wrapperPerguntas}">
+    <lightning:card class="slds-has-bottom-magnet card-b-bottom" title="{!v.vida.Conta__r.Name}">
+      <aura:set attribute="actions">
+        <lightning:button label="{!v.wrapperPerguntas.respondidas + '/' + v.wrapperPerguntas.total}" onclick="{!c.responderProxima}"/>
+      </aura:set>
+      <div class="slds-p-horizontal_small">
+
+        <section class="slds-card ">
+          <header class="slds-theme_shade slds-p-around_medium slds-m-bottom_small">
+            <div>
+              <lightning:progressBar variant="circular" value="{!(v.wrapperPerguntas.respondidas / v.wrapperPerguntas.total) * 100}"/>
+            </div>
+          </header>
+          <aura:iteration items="{!v.wrapperPerguntas.perguntas}" var="pergunta" indexVar="indice" >
+            <ol class="slds-setup-assistant">
+              <li class="slds-setup-assistant__item">
+                <article class="slds-setup-assistant__step">
+                  <div class="{!(v.viewResponse) ? 'slds-summary-detail slds-is-open' : 'slds-summary-detail'}">
+                    <div style="width: 100%;">
+                      <div class="slds-summary-detail__title">
+                        <div class="slds-setup-assistant__step-summary">
+                          <div class="slds-media">
+                            <div class="slds-media__figure">
+                              <div class="slds-progress-ring slds-progress-ring_large">
+                                <div class="slds-progress-ring__content">{!pergunta.Numero__c}</div>
+                              </div>
+                            </div>
+                            <div class="slds-media__body slds-m-top_x-small">
+                              <div class="slds-media">
+                                <div class="slds-setup-assistant__step-summary-content slds-media__body">
+                                  <h3 class="slds-setup-assistant__step-summary-title slds-text-heading_small">
+                                    {!pergunta.Pergunta__r.Name}
+                                  </h3>
+                                  <aura:iteration items="{!pergunta.RespostasQuestionario__r}" var="resposta" start="0" end="1">
+                                    <aura:if isTrue="{!pergunta.Pergunta__r.TipoResposta__c == 'Data'}">
+                                      <ui:outputDate value="{!resposta.Resposta__c}" />
+                                      <aura:set attribute="else">
+                                        {!resposta.Resposta__c}
+                                      </aura:set>
+                                    </aura:if>
+
+                                  </aura:iteration>
+                                </div>
+                                <div class="slds-media__figure slds-media__figure_reverse">
+                                  <button data-numero="{!pergunta.Numero__c}" data-index="{!indice}" onclick="{!c.ResponderPergunta}" class="slds-button slds-button_outline-brand">Responder</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div aria-hidden="true" class="slds-summary-detail__content" id="step-3-summary-action">
+                        <div class="slds-setup-assistant__step-detail">
+                          <div style="max-width: none;" >
+                            <aura:iteration items="{!pergunta.RespostasQuestionario__r}" var="resposta" start="0" end="1">
+                              {!resposta.Resposta__c}
+                            </aura:iteration>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+              </li>
+            </ol>
+          </aura:iteration>
+        </section>
+      </div>
+    </lightning:card>
+    <c:QuestionarioAnaliseRiscoEdit aura:id="questionarioEditComponent" wrapperPerguntas="{!v.wrapperPerguntas}" vida="{!v.vida}"/>
+  </aura:if>
+
+</aura:component>

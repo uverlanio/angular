@@ -1,0 +1,71 @@
+<aura:component implements="flexipage:availableForAllPageTypes,force:hasRecordId,force:lightningQuickActionWithoutHeader" >
+  <style>
+      .slds-modal__container {
+          margin: 0 auto !important;
+          width: 80%  !important;
+          max-width: 1000rem  !important;
+          min-width: 20rem  !important;
+      }
+  </style>
+
+  <aura:handler name="init" value="{!this}" action="{!c.inicializar}" />
+  <aura:attribute name="recordId" type="Id" />
+  <aura:attribute name="oportunidade" type="Opportunity"  default="{ 'sobjectType': 'Opportunity' }" />
+  <aura:attribute name="produtoEscolhido" type="Object" default="{}" />
+  <aura:attribute name="produtosSugeridos" type="List" default="[]" />
+  <aura:attribute name="produtosComerciais" type="List" default="[]" />
+  <aura:attribute name="modoEscolha" type="Boolean" default="true" />
+
+  <div class="modal-quickaction">	
+  		<div class="slds-page-header">
+  		  <div class="slds-media">
+  		    <div class="slds-media__figure">
+  		      <lightning:icon iconName="standard:product" size="medium" />
+  		    </div>
+  		    <div class="slds-media__body">
+  		      <p class="slds-text-body_small slds-line-height_reset">Orçamento</p>
+  		      <h1 class="slds-page-header__title slds-truncate slds-align-middle" title="">{!v.oportunidade.Name}</h1>
+  		    </div>
+  		  </div>
+  		</div>
+      <br />
+
+      <div class="slds-modal__content slds-grid slds-wrap ">
+    	<div class="slds-scrollable slds-grow">
+    		<div class="slds-box">
+	    		<div class="slds-card container-form">
+	    			<div class="{!(v.modoEscolha ? '' : 'hide')}">
+		    			<lightning:tabset >
+							<lightning:tab label="batata">
+								<c:AdicaoProdutosOportunidadesItens itens="{!v.produtosComerciais}" produtoEscolhido="{!v.produtoEscolhido}" />
+							</lightning:tab>
+							<lightning:tab label="Garantias">
+								<c:AdicaoProdutosOportunidadesItens itens="{!v.produtosSugeridos}" produtoEscolhido="{!v.produtoEscolhido}"/>
+							</lightning:tab>
+              <lightning:tab label="XPTO">
+
+              </lightning:tab>
+						</lightning:tabset>
+					</div>
+					<div class="{!(v.modoEscolha ? 'hide' : '')}">
+						TODO:
+					</div>
+				</div>
+			</div>
+    	</div>
+    </div>
+
+      <br />
+    	<div class="slds-modal__footer">  
+        <div class="slds-grid">
+			<div class="slds-col" >
+            	<lightning:button variant="brand" label="Avançar" onclick="{!c.avancar}" class="{!(v.modoEscolha ? '' : 'hide')}"/>
+            	<lightning:button variant="brand" label="Salvar" onclick="{!c.salvar}" class="{!(v.modoEscolha ? 'hide' : '')}" />
+            	<lightning:button variant="neutral" label="Voltar" onclick="{!c.voltar}" class="{!(v.modoEscolha ? 'hide' : '')}"/>
+            	<lightning:button variant="neutral" label="Cancelar" onclick="{!c.cancelar}" />
+			</div>
+          <div class="slds-col"/>
+  		 </div>   
+      </div>
+  </div> 	
+</aura:component>

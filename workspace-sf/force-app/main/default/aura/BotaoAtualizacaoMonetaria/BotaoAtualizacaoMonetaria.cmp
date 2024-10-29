@@ -1,0 +1,48 @@
+<aura:component
+    implements="flexipage:availableForAllPageTypes,force:hasRecordId,force:lightningQuickActionWithoutHeader,force:appHostable"
+    controller="BotaoAtualizacaoMonetariaController">
+    <!-- PLV-4535 - INICIO -->
+    <aura:attribute name="recordId" type="String" />
+    <aura:handler name="init" value="{!this}" action="{!c.possuiComplemento}" />
+    <aura:attribute name="criarOuSubstituir" type="boolean" default="false" />
+    <aura:attribute name="spinnerAberto" type="Boolean" default="true" />
+    <lightning:spinner aura:id="mySpinner" class="{!(v.spinnerAberto)?'':'slds-hide'}" />
+    <aura:attribute name="showContent" type="Boolean" default="false" />
+
+    <aura:if isTrue="{!v.criarOuSubstituir}">
+        <center>
+            <h1 class="slds-text-heading--medium"><b>Confirmação</b></h1>
+            <br></br>
+            <p>
+                Este beneficiário já possui um Complemento de Indenização. <br></br>Deseja substituir ou criar outro
+                complemento
+                para este beneficiário ?
+                <br></br>
+            </p>
+            <div>
+                <br></br>
+                <br></br>
+                <lightning:button name='No' title='Criar Outro' label='Criar Outro' onclick="{!c.criarOutro}" />
+                <lightning:button variant="brand" name='Yes' title='Substituir' label='Substituir'
+                    onclick="{!c.substituir}" />
+            </div>
+        </center>
+
+        <aura:set attribute="else">
+            <center>
+                <br></br>
+                <h1 class="slds-text-heading--medium"><b>Gerando Atualização...</b></h1>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <p>
+                    Por favor, aguarde a geração da Atualização Monetária.
+                    <br></br>
+                </p>
+
+            </center>
+        </aura:set>
+    </aura:if>
+    <!-- PLV-4535 - FIM -->
+</aura:component>

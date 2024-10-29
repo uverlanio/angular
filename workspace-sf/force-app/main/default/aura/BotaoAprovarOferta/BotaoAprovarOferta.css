@@ -1,0 +1,41 @@
+/*
+ * @author Sys4B - Denisson Santos
+ * @date 2020-06-04
+ * @description: Componente do botão de aprovar oferta
+ * Criada para a história: PLV-3738 - MVP B - Criação de checklist para ativar configurador de oferta.
+*/
+.THIS .modal-header {
+    height: 60px;
+}
+
+.THIS .slds-modal__content {
+    height: 285px;
+    padding: 0px;
+}
+
+.THIS .modal-footer {
+    height: 55px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+}
+
+.THIS.quick-action-content {
+    height: 400px;
+    margin-top: -1rem;
+    margin-bottom: -1rem;
+    margin-left: -2rem;
+    margin-right: -2rem;
+}
+
+.THIS .validateItem {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+}
+.THIS .validateItem .status {
+    width: 30px;
+}
+.THIS .validateItem .item {
+    width: calc(100% - 30px);
+}

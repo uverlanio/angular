@@ -1,0 +1,5 @@
+<aura:component>
+    <article class="slds-card">
+        <div class="slds-card__body slds-card__body_inner">Hello World Lightning Out Lightning Web Component</div>
+    </article>
+</aura:component>

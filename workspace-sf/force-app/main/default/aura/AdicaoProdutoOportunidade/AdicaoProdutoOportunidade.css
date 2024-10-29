@@ -1,0 +1,50 @@
+.THIS {
+}
+
+.THIS .hide{
+	display: none;
+}
+
+.THIS .slds-is-open {
+    border: 2px solid #1589ee;
+    border-radius: 4px;
+}
+
+.THIS .slds-visual-picker__text-check {
+    position: absolute;
+    top: -0.0625rem;
+    right: 0.625rem;
+    width: 0.5rem;
+    height: 0.5rem;
+}
+
+.THIS .slds-visual-picker {
+    content: '';
+    position: absolute;
+    top: -14px;
+    right: -14px;
+    border-color: transparent;
+    border-style: solid;
+    border-radius: 0.5rem;
+    border-width: 1rem;
+    border-right-color: #1589ee;
+    border-top-color: #1589ee;
+}
+
+.THIS .slds-check-picker .slds-icon {
+    left: 6px;
+    position: relative;
+    bottom: 5px;
+    fill: white !important;
+}
+
+.THIS .slds-accordion__content {
+    max-height: 140px;
+    overflow: auto;
+}
+
+.THIS .slds-box {
+    min-height: 400px;
+    max-height: 400px;
+    overflow: auto;
+}

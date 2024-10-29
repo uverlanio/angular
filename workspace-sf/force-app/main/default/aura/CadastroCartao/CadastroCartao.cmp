@@ -1,0 +1,28 @@
+<aura:component implements="force:hasRecordId,force:lightningQuickActionWithoutHeader" access="global">
+    <aura:html tag="style">       
+        .cuf-content {
+        	padding: 0 0rem !important;
+        }
+        .slds-p-around--medium {
+        	padding: 0rem !important;
+        }
+        .slds-modal__content {
+   	    	overflow-y: hidden !important;
+   	     	height: auto !important; 
+   	     	max-height: unset !important;
+        }
+        .slds-spinner_container {
+            top: 50% !important;
+            bottom: 50% !important;
+        }
+        .slds-modal__container {
+            height: auto;
+			max-width: 70rem;
+			min-width: 20rem;
+        }
+        
+    </aura:html>
+
+    <c:cadastroCartaoLWC recordId="{!v.recordId}" onclose="{!c.handleCloseAction}"/>
+
+</aura:component>

@@ -1,0 +1,10 @@
+.THIS {
+}
+
+.THIS .slds-icon-action-new {
+    background-color: #0eb58a;
+}
+
+.THIS .slds-button_icon-border-filled, .THIS .slds-button--icon-border-filled, .THIS .slds-button_icon-border, .THIS .slds-button--icon-border {
+    color: #0070d2;
+}

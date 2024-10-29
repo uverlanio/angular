@@ -1,0 +1,74 @@
+<aura:component implements="flexipage:availableForAllPageTypes,force:hasRecordId,force:lightningQuickActionWithoutHeader" controller="DocumentosNaoNecessariosController">
+  <style>
+      .slds-modal__container {
+          margin: 0 auto !important;
+          width: 60%  !important;
+          max-width: 60rem  !important;
+          min-width: 20rem  !important;
+      }
+  </style>
+
+  <aura:handler name="init" value="{!this}" action="{!c.inicializar}" />
+  <aura:attribute name="recordId" type="Id" />
+  <aura:attribute name="produtoCanal" type="ProdutoCanal__c" default="{ 'sobjectType': 'ProdutoCanal__c' }"/>
+  <aura:attribute name="documentosEntrada" type="List" default="[]"  />
+  <aura:attribute name="documentosSaida" type="List" default="[]"  />
+
+  <div class="modal-quickaction">	
+  		<div class="slds-page-header">
+  		  <div class="slds-media">
+  		    <div class="slds-media__figure">
+  		      <lightning:icon iconName="custom:custom37" size="medium" />
+  		    </div>
+  		    <div class="slds-media__body">
+  		      <p class="slds-text-body_small slds-line-height_reset">Produto do canal</p>
+  		      <h1 class="slds-page-header__title slds-truncate slds-align-middle" title="">{!v.produtoCanal.Name}</h1>
+  		    </div>
+  		  </div>
+  		</div>
+
+      <br />
+
+      <div class="slds-modal__content slds-grid slds-wrap ">
+    		 <div class="slds-scrollable slds-grow">
+            <div class="slds-card container-form"> 
+              <div class="slds-form slds-p-around--medium slds-form_compound">
+                <fieldset class="slds-form-element">
+                  <legend class="slds-form-element__label slds-text-title_caps">{!v.papel}</legend>
+                  <div class="slds-form-element__group">
+                    <div class="slds-grid">
+                      <div class="slds-col">
+                          <div class="slds-form-element">
+                            <label class="slds-form-element__label" for="input-id-01">Documentos não necessários de entrada</label>
+                            <div class="slds-form-element__control input-configurador">
+                              <c:MultiPickList valor="{!v.produtoCanal.DocumentosNaoNecessariosEntrada__c}" opcoes="{!v.documentosEntrada}" />
+                            </div>
+                          </div>
+                      </div>     
+                      <div class="slds-col">
+                          <div class="slds-form-element">
+                            <label class="slds-form-element__label" for="input-id-01">Documentos não necessários de saída</label>
+                            <div class="slds-form-element__control input-configurador">
+                              <c:MultiPickList valor="{!v.produtoCanal.DocumentosNaoNecessariosSaida__c}" opcoes="{!v.documentosSaida}" />
+                            </div>
+                          </div>
+                      </div>    
+                    </div>
+                  </div>
+                </fieldset>
+              </div> 
+            </div>
+    		 </div>
+    	</div>
+
+    	<div class="slds-modal__footer">  
+        <div class="slds-grid">
+  				<div class="slds-col" >
+            <lightning:button variant="brand" label="Salvar" onclick="{!c.salvar}" />
+            <lightning:button variant="neutral" label="Cancelar" onclick="{!c.cancelar}" />
+  				</div>
+          <div class="slds-col" />
+  		 </div>   
+      </div>
+  </div> 	
+</aura:component>

@@ -1,0 +1,256 @@
+<aura:component controller="AssociacaoPapeisController">
+	<aura:handler name="init" value="{!this}" action="{!c.inicializar}" />
+	<aura:handler name="change" value="{!v.bancoEscolhido}" action="{!c.insereBancoEscolhido}"/>
+
+	<aura:attribute name="idx" type="String" />
+	<aura:attribute name="papeisConta" type="List" />
+	<aura:attribute name="papelOptions" type="List" default="[]" />
+	<aura:attribute name="servicoPrestadorOptions" type="List" default="[]" />
+	<aura:attribute name="servicoParceiroOptions" type="List" default="[]" />
+	<aura:attribute name="listaBancos" type="List" default="[]"/>
+	
+	<aura:attribute name="conta" type="Account" />
+	<aura:attribute name="dadosBancarioPrestador" type="InformacaoBancaria__c" />
+	<aura:attribute name="dadosBancarioParceiro" type="InformacaoBancaria__c" />
+	<aura:attribute name="dadosBancarioAgenciador" type="InformacaoBancaria__c" />
+	<aura:attribute name="bancoEscolhido" type="Banco__c" default="" />
+	<aura:attribute name="papel" type="String" default="" />
+	<aura:attribute name="iniciando" type="Boolean" default="true" />
+	
+	<tr class="slds-hint-parent">
+		<td scope="row" class="slds-text-align_left">
+			<div class="slds-form-element">
+				<div class="slds-form-element__control">
+					<button class="excluir" onclick="{!c.excluir}">
+						<lightning:icon iconName="action:close" size="small" variant="error" />
+					</button>
+				</div>
+			</div>
+		</td>
+		<td scope="row" class="slds-text-align_left">
+			<div class="slds-form-element">
+				<div class="slds-form-element__control">
+					<lightning:combobox
+					value="{!v.papel}"
+					options="{!v.papelOptions}"
+					placeholder="-- Selecione --"
+					variant="label-hidden"
+					/>
+				</div>
+			</div>
+		</td>
+		<td scope="row" class="slds-text-align_left">
+			<div class="slds-form-element">
+				<div class="slds-form-element__control">
+					<button class="{!'excluir' + ( v.papel != '' ? '' : ' escondido')}" onclick="{!c.exibirCampos}">
+						<lightning:icon iconName="action:record" size="small" />
+					</button>
+				</div>
+			</div>
+		</td>
+	</tr>
+	<tr aura:id="trForm" class="invisivel">
+		<td colspan="4">
+			<div class="slds-card container-form">
+				<div class="slds-form slds-form_compound">
+					<fieldset class="slds-form-element">
+						<legend class="slds-form-element__label slds-text-title_caps">{!v.papel}</legend>
+						<div class="slds-form-element__group">
+							<!-- FORM papel Parceiro -->
+							<div class="{!'slds-grid' + (v.papel == 'Parceiro' ? '' : ' invisivel')}">
+								<div class="slds-col">
+									<div class="slds-form-element">
+										<!-- PLV-4473 -->
+										<!-- <label class="slds-form-element__label" for="input-unique-id">Banco</label> -->
+										<div class="slds-form-element__control">
+											<!-- PLV-4473 INICIO -->
+											<!-- <force:inputField value="{!v.dadosBancarioParceiro.Banco__c}" /> -->
+											<c:LookupParaUmObjeto sObject="Banco__c" value="{!v.bancoEscolhido}" label="Banco" iconName="custom:custom16" listFields="['Name','CodigoBanco__c', 'Id']" />
+											<!-- PLV-4473 FIM -->
+										</div>
+									</div>
+									<div class="slds-form-element">
+										<label class="slds-form-element__label" for="input-unique-id">Agência</label>
+										<div class="slds-form-element__control">
+											<force:inputField value="{!v.dadosBancarioParceiro.Agencia__c}" />
+										</div>
+									</div>
+									<div class="slds-form-element">
+										<label class="slds-form-element__label" for="input-unique-id"
+											>Número do contrato dos serviços</label
+										>
+										<div class="slds-form-element__control">
+											<force:inputField value="{!v.conta.NumeroContratoParceiro__c}" />
+										</div>
+									</div>
+								</div>
+								<div class="slds-col">
+									<div class="slds-form-element">
+										<label class="slds-form-element__label" for="input-unique-id">Conta</label>
+										<div class="slds-form-element__control">
+											<force:inputField value="{!v.dadosBancarioParceiro.NumeroConta__c}" />
+										</div>
+									</div>
+									<!-- PLV-4473 INICIO -->
+									<div class="slds-form-element">
+									  <label class="slds-form-element__label" for="input-unique-id">Dígito</label>
+									  <div class="slds-form-element__control">
+									    <force:inputField value="{!v.dadosBancarioParceiro.Digito__c}"/>
+									  </div>
+									</div>
+									<!-- PLV-4473 FIM -->
+									<div class="slds-form-element">
+										<label class="slds-form-element__label" for="input-unique-id">Serviço</label>
+										<div class="slds-form-element__control">
+											<c:MultiPickList
+												valor="{!v.conta.ServicosParceiro__c}"
+												opcoes="{!v.servicoParceiroOptions}"
+											/>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<!-- FORM papel  Prestador -->
+							<div class="{!'slds-grid' + (v.papel == 'Prestador' ? '' : ' invisivel')}">
+								<div class="slds-col">
+									<div class="slds-form-element">
+										<!-- PLV-4473 -->
+										<!-- <label class="slds-form-element__label" for="input-unique-id">Banco</label> -->
+										<div class="slds-form-element__control">
+											<!-- PLV-4473 INICIO -->
+											<!-- <force:inputField value="{!v.dadosBancarioPrestador.Banco__c}" /> -->
+											<c:LookupParaUmObjeto sObject="Banco__c" value="{!v.bancoEscolhido}" label="Banco" iconName="custom:custom16" listFields="['Name','CodigoBanco__c', 'Id']" />
+											<!-- PLV-4473 FIM -->
+										</div>
+									</div>
+									<div class="slds-form-element">
+										<label class="slds-form-element__label" for="input-unique-id">Agência</label>
+										<div class="slds-form-element__control">
+											<force:inputField value="{!v.dadosBancarioPrestador.Agencia__c}" />
+										</div>
+									</div>
+									<div class="slds-form-element">
+										<label class="slds-form-element__label" for="input-unique-id"
+											>Número do contrato dos serviços</label
+										>
+										<div class="slds-form-element__control">
+											<force:inputField value="{!v.conta.NumeroContratoPrestador__c}" />
+										</div>
+									</div>
+								</div>
+								<div class="slds-col">
+									<div class="slds-form-element">
+										<label class="slds-form-element__label" for="input-unique-id">Conta</label>
+										<div class="slds-form-element__control">
+											<force:inputField value="{!v.dadosBancarioPrestador.NumeroConta__c}" />
+										</div>
+									</div>
+									<!-- PLV-4473 INICIO -->
+									<div class="slds-form-element">
+										<label class="slds-form-element__label" for="input-unique-id">Dígito</label>
+										<div class="slds-form-element__control">
+											<force:inputField value="{!v.dadosBancarioPrestador.Digito__c}"/>
+										</div>
+									</div>
+									<!-- PLV-4473 FIM -->
+
+									<div class="slds-form-element">
+										<label class="slds-form-element__label" for="input-unique-id">Serviço</label>
+										<div class="slds-form-element__control">
+											<c:MultiPickList
+												valor="{!v.conta.ServicosPrestador__c}"
+												opcoes="{!v.servicoPrestadorOptions}"
+											/>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<!-- FORM papel Corretor -->
+							<div class="{!'slds-grid' + (v.papel == 'Corretor' ? '' : ' invisivel')}">
+								<div class="slds-col">
+									<div class="slds-form-element">
+										<label class="slds-form-element__label" for="input-unique-id"
+											>Código da susep do corretor</label
+										>
+										<div class="slds-form-element__control">
+											<force:inputField value="{!v.conta.CodigoSusepCorretor__c}" />
+										</div>
+									</div>
+									<div class="slds-form-element">
+										<label class="slds-form-element__label" for="input-unique-id">Sucursal</label>
+										<div class="slds-form-element__control">
+											<force:inputField value="{!v.conta.Sucursal__c}" />
+										</div>
+									</div>
+								</div>
+								<div class="slds-col">
+									<div class="slds-form-element">
+										<label class="slds-form-element__label" for="input-unique-id"
+											>Código da susep na Cia</label
+										>
+										<div class="slds-form-element__control">
+											<force:inputField value="{!v.conta.CodigoSusepCia__c}" />
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<!-- FORM papel Representante de Seguros -->
+							<div class="{!'slds-grid' + (v.papel == 'Representante de Seguros' ? '' : ' invisivel')}">
+								<div class="slds-col">
+									<div class="slds-form-element">
+										<label class="slds-form-element__label" for="input-unique-id"
+											>Número do contrato</label
+										>
+										<div class="slds-form-element__control">
+											<force:inputField value="{!v.conta.NumeroContratoRespresentante__c}" />
+										</div>
+									</div>
+								</div>
+								<div class="slds-col"></div>
+							</div>
+
+							<!-- FORM papel Agenciador -->
+							<div class="{!'slds-grid' + (v.papel == 'Agenciador' ? '' : ' invisivel')}">
+								<div class="slds-col">
+									<div class="slds-form-element">
+										<!-- PLV-4473 -->
+										<!-- <label class="slds-form-element__label" for="input-unique-id">Banco</label> -->
+										<div class="slds-form-element__control">
+											<!-- PLV-4473 INICIO -->
+											<!-- <force:inputField value="{!v.dadosBancarioAgenciador.Banco__c}" /> -->
+											<c:LookupParaUmObjeto sObject="Banco__c" value="{!v.bancoEscolhido}" label="Banco" iconName="custom:custom16" listFields="['Name','CodigoBanco__c', 'Id']" />
+											<!-- PLV-4473 FIM -->
+										</div>
+									</div>
+									<div class="slds-form-element">
+										<label class="slds-form-element__label" for="input-unique-id">Agência</label>
+										<div class="slds-form-element__control">
+											<force:inputField value="{!v.dadosBancarioAgenciador.Agencia__c}" />
+										</div>
+									</div>
+								</div>
+								<div class="slds-col">
+									<div class="slds-form-element">
+										<label class="slds-form-element__label" for="input-unique-id">Conta</label>
+										<div class="slds-form-element__control">
+											<force:inputField value="{!v.dadosBancarioAgenciador.NumeroConta__c}" />
+										</div>
+									</div>
+									<div class="slds-form-element">
+										<label class="slds-form-element__label" for="input-unique-id">Dígito</label>
+										<div class="slds-form-element__control">
+											<force:inputField value="{!v.dadosBancarioAgenciador.Digito__c}" />
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</fieldset>
+				</div>
+			</div>
+		</td>
+	</tr>
+</aura:component>

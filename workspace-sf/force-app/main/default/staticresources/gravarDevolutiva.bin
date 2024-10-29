@@ -1,0 +1,68 @@
+{
+   "proposta":{
+      "origem":18,
+      "numero":"00001348"
+   },
+   "retornoAceitacao":{
+      "avisos":[
+         {
+            "codigo":10080,
+            "descricao":"Segurado com risco de fraude.",
+            "area":"ACE",
+            "procedimento":"Informar ao sinistro e monitorar assistências solicitadas",
+            "mensagens":{
+        	"interna":"Inteligência artificial alerta para risco de fraude em assistências de viagem"
+            }
+         }
+      ],
+      "analises":[
+         {
+            "codigo":10080,
+            "descricao":"Segurado com risco de fraude.",
+            "area":"ACE",
+            "severidade":123,
+            "procedimento":"Informar ao sinistro e monitorar assistências solicitadas",
+            "mensagens":{
+        	"interna":"Inteligência artificial alerta para risco de fraude em assistências de viagem"
+            }
+         }
+      ],
+      "recusas":[
+         {
+            "codigo":10080,
+            "descricao":"Segurado com risco de fraude.",
+            "area":"ACE",
+            "procedimento":"Informar ao sinistro e monitorar assistências solicitadas",
+            "severidade":123,
+            "mensagens":{
+        	"interna":"Inteligência artificial alerta para risco de fraude em assistências de viagem"
+            }
+         }
+      ],
+      "pendencias":[
+         {
+            "codigo":10080,
+            "identificacao":"identificacao",
+            "atendida":true,
+            "descricao":"Segurado com risco de fraude.",
+            "area":"ACE",
+            "procedimento":"Informar ao sinistro e monitorar assistências solicitadas",
+            "severidade":123,
+            "mensagens":{
+        	"interna":"Inteligência artificial alerta para risco de fraude em assistências de viagem"
+            }
+         }
+      ]
+   },
+   "retornoFinanceiro":{
+      "autorizacaoCartao":{
+         "autorizado":true,
+         "stargate":{
+            "codigo":2,
+            "mensagem":"APROVADO",
+            "codigoGateway":0,
+            "mensagemGateway":"CAPTURED"
+         }
+      }
+   }
+}

@@ -1,0 +1,29 @@
+<!--
+	Valida direcionamento para realizar o Endosso
+ 	Jeferso santana 08/12/2020
+ 	PLV-4578
+-->
+<apex:page standardController="Contract" extensions="GerarEndossoPorTipo" action="{!validarRedirect}">
+	<!-- PLV-4695-FIX6-INICIO -->
+	<head>
+        <title>Endosso de Seguro Viagem - Contrato {!contract.name}</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous" />
+        <apex:stylesheet value="{!URLFOR($Resource.GerarEndossoViagem, 'libs.min.css')}" />
+        <apex:stylesheet value="{!URLFOR($Resource.GerarEndossoViagem, 'styles.css')}" />
+	</head>	
+	<body>
+	
+	<div class="main-container">
+		<div class="main-title">
+			<h3>{!mensagem}</h3>
+		</div>
+		<div class="row main-action-button-bar">
+			<div class="col s12">
+				<a class="waves-effect waves-light btn-large" onclick="window.history.back();">Voltar</a>
+			</div>
+		</div>
+	</div>
+	</body>
+	<!-- PLV-4695-FIX6-FIM -->
+</apex:page>

@@ -1,0 +1,122 @@
+<aura:component controller="SolicitarPagamentoCasoController" implements="lightning:actionOverride,force:lightningQuickActionWithoutHeader,force:hasRecordId,force:hasSObjectName" access="global">
+    <ltng:require styles="/resource/SLDS282/assets/styles/salesforce-lightning-design-system.css"/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:attribute name="recordId" type="Id"/>
+    <aura:attribute name="msg" type="String"/>
+    <aura:attribute name="bene" type="List"/>
+    <aura:attribute name="pagamentos" type="List"/>
+    <aura:attribute name="sucursales" type="List"/>
+    <aura:attribute name="idBenef" type="String" />
+    <aura:attribute name="Likedisable" type="Boolean" default="false" />
+    <aura:attribute name="isPagamento" type="Boolean[]" default="false" />
+    <aura:attribute name="percValorIndenizado" type="currency" />
+    <aura:attribute name="recordByEvent" type="sObject"/>
+    <aura:attribute name="selectedId" type="String[]" />
+    
+    <lightning:card>
+        <div class="corpo">
+            <div aura:id="spinner" class="demo-only">
+                <div role="status" class="slds-spinner slds-spinner_medium slds-spinner_brand">
+                    <span class="slds-assistive-text">Loading</span>
+                    <div class="slds-spinner__dot-a"></div>
+                    <div class="slds-spinner__dot-b"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div aura:id="erro" class="slds-hide">
+                    <div class="erro">
+                        <lightning:icon size="medium" aura:id="icone-error" iconName="action:close" alternativeText="Error!" variant="error"/>
+                        <p class="status">
+                            {!v.msg}
+                        </p>
+                    </div>
+                    <div style="bottom:initial;" aura:id="footer" class="slds-docked-form-footer">
+                        <div class="positionbutton">
+                            <button type="button" onclick="{!c.voltarBox}" class="slds-button slds-button_brand">Ok</button>
+                        </div>
+                    </div>
+                </div>
+                <div aura:id="lessdays" class="slds-hide">
+                    <div class="erro">
+                        <lightning:icon size="medium" aura:id="change_record_type" iconName="action:change_record_type" alternativeText="Aviso" variant="aviso"/>
+                        <p class="status">
+                            {!v.msg}
+                        </p>
+                    </div>
+                </div>
+                <div aura:id="sucesso" class="slds-hide">
+                    <div class="sucesso">
+                        <aura:if isTrue="{!v.bene.length > 0}">
+                            <aura:iteration items="{!v.bene}" var="item">
+                                <br/>
+                                <lightning:input aura:id="nome" type="String"  name="nome" label="Nome" value="{!item.Conta__r.Name}" disabled="true"/>
+                                <lightning:input aura:id="valorL" maxlength="7" type="number"  name="input2" label="Valor a ser indenizado" formatter="currency" step="0.01" value="{!item.ValorIndenizacao__c}" disabled="true"/>
+                                <aura:if isTrue="{!empty(item.Pagamento_de_Sinistro__c)}">
+                                    <lightning:select aura:id="tipoPagamento" class="tipoPagamento" name="tipo" label="Tipo de Pagamento" required="true" value="{!item.Tipo_de_Pagamento__c}">
+                                        <aura:iteration items="{!v.pagamentos}" var="pagamento">
+                                            <option value="{!pagamento}" text="{!pagamento}"></option>
+                                        </aura:iteration>
+                                    </lightning:select>
+                                    <aura:if isTrue="{!item.Tipo_de_Pagamento__c == 'Cheque'}">
+                                        <lightning:select aura:id="sucursal" class="sucursal" name="sucursal" label="Sucursal Destino de Cheque" required="false" value="{!item.Sucursal_Destino_de_Cheque__c}">
+                                            <aura:iteration items="{!v.sucursales}" var="sucursal">
+                                                <option value="{!sucursal}" text="{!sucursal}"></option>
+                                            </aura:iteration>
+                                        </lightning:select>
+                                        <aura:set attribute="else">
+                                            <c:Pesquisa 
+                                                        aura:id="{!item.Id}"
+                                                        objectAPIName="InformacaoBancaria__c" 
+                                                        label="Informação Bancaria"
+                                                        returnFields="['Agencia__c','BancoNew__r.Name','NumeroConta__c','Digito__c']" 
+                                                        queryFields="['Name','BancoNew__r.Name','Agencia__c','NumeroConta__c','Digito__c']"
+                                                        idConta="{!item.Conta__c}"
+                                                        selectedId="{!item.Informacao_bancaria__c}" 
+                                                        required="true"/>
+                                                            
+                                            <lightning:input aura:id="email" type="String"  name="email" label="Email" value="{!item.Email__c}" disabled="true"/> <!-- PLV-5316 - INICIO/FIM -->
+                                        </aura:set>
+                                    </aura:if>
+                                    <aura:set attribute="else">
+                                        <lightning:select aura:id="tipoPagamento" class="{!'tipoPagamento ' + item.Id}" name="tipo" label="Tipo de Pagamento" required="true" value="{!item.Pagamento_de_Sinistro__r.Tipo_de_Pagamento__c}">
+                                            <aura:iteration items="{!v.pagamentos}" var="pagamento">
+                                                <option value="{!pagamento}" text="{!pagamento}"></option>
+                                            </aura:iteration>
+                                        </lightning:select>
+                                        <aura:if isTrue="{!item.Pagamento_de_Sinistro__r.Tipo_de_Pagamento__c == 'Cheque'}">
+                                            <lightning:select aura:id="sucursal" class="sucursal" name="sucursal" label="Sucursal Destino de Cheque" required="false" value="{!item.Pagamento_de_Sinistro__r.Sucursal_Destino_de_Cheque__c}">
+                                                <aura:iteration items="{!v.sucursales}" var="sucursal">
+                                                    <option value="{!sucursal}" text="{!sucursal}"></option>
+                                                </aura:iteration>
+                                            </lightning:select>
+                                            <aura:set attribute="else">
+                                                <c:Pesquisa 
+                                                            aura:id="{!item.Id}"
+                                                            objectAPIName="InformacaoBancaria__c"
+                                                            label="Informação Bancaria"
+                                                            returnFields="['Agencia__c','BancoNew__r.Name','NumeroConta__c','Digito__c']" 
+                                                            queryFields="['Name','BancoNew__r.Name','Agencia__c','NumeroConta__c','Digito__c']"
+                                                            idConta="{!item.Conta__c}"
+                                                            selectedId="{!item.Pagamento_de_Sinistro__r.Dados_Bancarios__c}" 
+                                                            required="true"/>
+                                                            
+                                                <lightning:input aura:id="email" type="String"  name="email" label="Email" value="{!item.Email__c}" disabled="true"/> <!-- PLV-5316 - INICIO/FIM -->
+                                            </aura:set>
+                                        </aura:if>
+                                    </aura:set>
+                                </aura:if>
+                                
+                            </aura:iteration>
+                        </aura:if>
+                        <div style="bottom:initial;" aura:id="footer">
+                            <div class="positionbutton">
+                                <lightning:button  label="Solicitar Pagamento" disabled="{!v.Likedisable}" class="slds-button slds-button_brand" title="Salvar" onclick="{!c.clickbutton}"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>        
+    </lightning:card> 
+</aura:component>

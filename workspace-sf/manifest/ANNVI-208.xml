@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+	<fullName>ANNVI-208</fullName>
+	<types>
+		<members>API_Domain_Mulesoft</members>
+		<members>Mulesoft_Token_URL</members>
+		<name>RemoteSiteSetting</name>
+	</types>
+	<types>
+		<members>Dominios_Mulesoft__mdt</members>
+		<name>CustomObject</name>		
+	</types>
+	<types>
+		<members>CredencialOAuth2.Mulesoft</members>
+		<members>Dominios_Mulesoft.AWS_EXTERNO</members>
+		<members>Dominios_Mulesoft.AWS_INTERNO</members>
+		<members>Servico.Consulta_Dados_BCP_Mulesoft</members>
+		<members>Servico.Token_Mulesoft</members>
+		<name>CustomMetadata</name>
+	</types>
+	<types>
+		<members>Dominios_Mulesoft__mdt-Dominios Mulesoft Layout</members>
+		<members>CredencialOAuth2__mdt-LayoutCredencialOAuth2</members>
+		<name>Layout</name>
+	</types>
+	<types>		
+		<members>CredencialOAuth2__mdt.ClientId__c</members>
+		<members>CredencialOAuth2__mdt.ClientSecret__c</members>
+		<members>CredencialOAuth2__mdt.GrantType__c</members>
+		<members>CredencialOAuth2__mdt.Password__c</members>
+		<members>CredencialOAuth2__mdt.Username__c</members>
+		<members>Dominios_Mulesoft__mdt.Endpoint__c</members>
+		<members>Dominios_Mulesoft__mdt.Nome_credencial__c</members>
+		<name>CustomField</name>
+	</types>
+	<types>
+		<members>ConsultarDadosPessoaBCP</members>
+		<members>ConsultarDadosPessoaBCPTO</members>
+		<members>ConsultarDadosPessoaBCPTest</members>
+		<members>CtrFormularioSnipper</members>
+		<members>MetadataDAO</members>
+		<members>MulesoftServices</members>
+		<members>MulesoftServicesTest</members>
+		<name>ApexClass</name>
+	</types>
+	<version>60.0</version>
+</Package>

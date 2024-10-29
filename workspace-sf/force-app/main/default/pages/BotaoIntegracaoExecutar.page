@@ -1,0 +1,48 @@
+<apex:page cache="false" standardController="Integracao__c" recordSetVar="integracoes" extensions="AcaoBotaoExecutarIntegracao" showHeader="false" standardStylesheets="false" sidebar="false" lightningStyleSheets="true">
+    <apex:slds />
+    <style> body { padding: 22px; } </style>
+    <script>
+        (function init(){
+            var registrosSelecionados = JSON.parse('<apex:outputText value="{!registrosSelecionados}"/>');
+
+            if (registrosSelecionados.length == 1) {
+                Visualforce.remoting.Manager.invokeAction(
+                    '{!$RemoteAction.AcaoBotaoExecutarIntegracao.executarIntegracao}',
+                    registrosSelecionados[0], 
+                    function(result, event){
+                        console.log('Result: ', result);
+                        console.log('event: ', event);
+                        if (event.status) {
+                            sforce.one.navigateToURL('/lightning/o/Integracao__c/list', true);
+                        } else {
+                            document.getElementById("divEspera").style.display = "none";
+                            document.getElementById("erroDiv").style.display = "block";
+                        }
+                    }, 
+                    {escape: true, timeout: 120000}
+                );
+            }else {
+                alert('Você precisa selecionar apenas uma integração.');
+            }
+        }())
+        
+
+    </script>
+
+    <div class="slds-scope" id="divEspera">
+        <div class="slds-text-heading_medium">Executando integração</div>
+        <div>Por favor, aguarde...</div>
+    </div>
+
+    <div class="slds-scope2" id="erroDiv" style="display: none;">
+        <div class="slds-text-heading_medium">Falha na integração</div>
+        <apex:form ><apex:commandButton value="Voltar" oncomplete="doRedirect();"/></apex:form>
+    </div>
+
+    <script type="text/javascript">
+        function doRedirect(){
+            window.history.back();
+        }
+    </script>
+
+</apex:page>

@@ -1,0 +1,26 @@
+<aura:component implements="flexipage:availableForAllPageTypes" controller="BackgroundConsoleController" access="global" >
+    <lightning:omniToolkitAPI aura:id="omniToolkit" /> 
+    <lightning:workspaceAPI aura:id="workspace" />
+    <lightning:utilityBarAPI aura:id="utilitybar" />
+   
+   
+    <aura:attribute name="isOpeningAnRoute" type="boolean" default="false"/>
+    <aura:attribute name="Oportunidade" type="Opportunity"/>
+
+    <aura:handler event="lightning:omniChannelLoginSuccess" action="{! c.onOmniChannelLoginSuccess}" />
+    <aura:handler event="lightning:omniChannelLogout" action="{! c.onOmniChannelLogout}" />
+    <aura:handler event="lightning:omniChannelStatusChanged" action="{! c.onOmniChannelStatusChanged}" />
+    <aura:handler event="lightning:omniChannelWorkAccepted" action="{! c.onOmniChannelWorkAccepted}" />
+    <aura:handler event="lightning:omniChannelWorkAssigned" action="{! c.onOmniChannelWorkAssigned}" />
+    <aura:handler event="lightning:omniChannelWorkClosed" action="{! c.onOmniChannelWorkClosed}" />
+    <aura:handler event="lightning:omniChannelWorkDeclined" action="{! c.onOmniChannelWorkDeclined}" />
+    <aura:handler event="lightning:omniChannelWorkloadChanged" action="{! c.onOmniChannelWorkloadChanged}" />
+    
+    <aura:handler event="lightning:tabClosed" action="{! c.onTabClosed }" />
+    <aura:handler event="lightning:tabCreated" action="{! c.onTabCreated }" />
+    <aura:handler event="lightning:tabFocused" action="{! c.onTabFocused }" />
+    <aura:handler event="lightning:tabRefreshed" action="{! c.onTabRefreshed }" />
+    <aura:handler event="lightning:tabReplaced" action="{! c.onTabReplaced }" />
+    <aura:handler event="lightning:tabUpdated" action="{! c.onTabUpdated }" />
+    
+</aura:component>

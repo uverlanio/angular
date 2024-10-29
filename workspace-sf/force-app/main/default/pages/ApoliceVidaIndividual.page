@@ -1,0 +1,675 @@
+<!--INICIO | PLV-4368 
+/*
+*  @author Squad Avanxo 
+*  @Descrição: Pagina de ApoliceVidaIndividual
+*/-->
+<apex:page showHeader="false" renderAs="pdf" applyBodyTag="false" controller="ApoliceVidaIndividualController">
+    <head>
+        <apex:stylesheet value="{!URLFOR($Resource.ApoliceVidaIndividual)}" />
+    </head>
+    <body >   
+        <!-- PAGE CONTENT-->	
+        <div class="content">
+            <div id="header">
+                <table id="general">
+                    <tr>
+                        <!-- PLV-5382 - INICIO-->
+                        <!-- RVI-98 - INICIO -->
+                        <td style="width:150px;">
+                          <apex:image value="{!$Resource.NovoLogoApolice}" width="200px"
+                          height="33px" />
+                        </td>
+                        <!-- PLV-5382 - FIM -->
+                        <!-- RVI-98 - FIM -->
+                        <!-- RVI-41-INICIO -->
+                        <td >
+                            <p> <apex:outputText value="{!contract.Produto__r.Empresa__r.Name}" /><br/>
+							CNPJ: <apex:outputText value="{!contract.Produto__r.Empresa__r.Cnpj__c}"/><br/>
+							Registro Susep: <apex:outputText value="{!contract.Produto__r.RegistroSusep__c}"/> </p>
+                        </td>
+                        <!-- RVI-41-FIM -->
+                        <td> <!-- style="vertical-align: middle;" --> 
+                            <div class="title">
+                                <p>{! pageTitle} </p> <!-- PLV-5032 INICIO / FIM  -->
+                               <p><apex:outputText value="{!contract.Produto__r.Name}"/></p> 
+                              Processo SUSEP nº:<apex:outputText value="{!contract.Produto__r.NumeroSusep__c}"/>                        
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            
+            <!--PLV-5231 - INICIO -->
+            <table  id="general"> 
+                <tr >
+                    <td colspan = "1" class="tdTitleRightBorder">
+                        <span>APÓLICE N°: </span><apex:outputText styleClass="TableValue" value="{!contract.NumeroApolice__c}"/>
+                    </td>
+                    <td colspan = "2" class="tdTitleRightBorderNoWidth">
+                        <span>PROPOSTA Nº: </span><apex:outputText styleClass="TableValue" value="{!contract.Proposta__r.NumeroProposta__c}"/>
+                    </td>
+                </tr>                
+            </table>
+            <!--PLV-5231 - FIM -->
+
+            <table id="valores">
+                <tr>
+                    <td class="tdTitleRightBorderNoWidth">
+                        <span>INICIO DE VIGÊNCIA DO SEGURO:</span>
+                    </td>
+                    <td class="tdTitleRightBorderNoWidth">
+                        <span>FIM DE VIGÊNCIA DO SEGURO:</span>
+                    </td>
+                    <td class="tdTitleRightBorderNoWidth">
+                        <span>DATA DE EMISSÃO DA APÓLICE:</span>
+                    </td>                
+                </tr>
+                <tr>     
+                    <td> <apex:outputText value="{0,date,dd/MM/yyyy }"> <apex:param value="{!contract.StartDate}" /> </apex:outputText> </td>
+                    <td><apex:outputText styleClass="TableValue" value="{0,date,dd/MM/yyyy }"> <apex:param value="{!contract.VigenciaFinal__c}" /></apex:outputText> </td>
+                    <td><apex:outputText styleClass="TableValue" value="{0,date,dd/MM/yyyy }"> <apex:param value="{!contract.DataEmissao__c}" /></apex:outputText> </td>
+                </tr>
+            </table>
+            
+            <table id="general">                     
+                <tr >
+                    <!-- PLV-5231 - INICIO -->
+                    <th class="tdTitle" colspan="4">DADOS DO SEGURADO </th>
+                </tr>
+                <!-- TKCL-246 INICIO FIX01 -->
+                <!-- TKCL-246 INICIO FIX06 -->
+                <apex:outputPanel rendered="{!NOT(isCodigoPrecificacaoAPTLMKT)}" layout="none" >
+                    <tr>                    
+                        <!--PLV-5120 - FIX01 - INICIO-->
+                        <td class="tdTitleRightBorderNoWidth"> <!-- II-144 - INICIO/FIM -->
+                        <!--PLV-5120 - FIX01 - FIM-->    
+                            <span>Nome: </span> <apex:outputText styleClass="TableValue" value="{!contract.Account.Name}"/>
+                        </td>
+                        <!--PLV-5120 - INICIO-->
+                        <!-- AV-697 INICIO -->
+                        <!-- II-144 - INICIO - MarceloRatton -->
+                        <!-- <apex:outputPanel rendered="{!ocultarCicloVacinal}" layout="none">
+                            <td colspan="1" class="tdTitleRightBorderNoWidth">
+                                <span>Ciclo Vacinal: </span> <apex:outputText styleClass="TableValue" value="{!dadosVacinacao.CicloVacinal__c}"/>
+                            </td>
+                        </apex:outputPanel> -->
+                        <!-- II-144 - FIM -->
+                        <!-- AV-697 FIM -->
+                        <!-- PLV-5231 - FIM -->
+                        <!--
+                        <td class="tdTitleRightBorderNoWidth">
+                            <span>Última Vacina Ciclo Vacinal: </span>
+                            <apex:outputPanel rendered="{!IF(hasVaccinationDate == true, true, false)}">                    
+                            <apex:outputText value="{!dadosVacinacao.UltimaVacinaCicloVacinal__c}" />
+                            </apex:outputPanel>
+                            <apex:outputPanel rendered="{!IF(hasVaccinationDate == false, true, false)}">
+                                <apex:outputText styleClass="TableValue" value="-" />
+                            </apex:outputPanel>
+                        </td>
+                        -->
+                        <!--PLV-5120 - FIM-->
+                        <!--LECVPV 189 - INICIO-->
+                        <td colspan="3" class="tdTitleRightBorderNoWidth">
+                            <apex:outputPanel rendered="{!hasSocialName}">
+                                <span>Nome Social: </span> <apex:outputText styleClass="TableValue" value="{!nomeSocial}"/>
+                            </apex:outputPanel>
+                        </td>
+                        <!--LECVPV 189 - FIM-->    
+                    </tr>
+                </apex:outputPanel>
+                <!-- TKCL-246 FIM FIX01 -->
+                <!-- TKCL-246 INICIO FIX03 -->
+                <apex:outputPanel rendered="{!isCodigoPrecificacaoAPTLMKT}" layout="none" >
+                    <tr>                    
+                        <!--PLV-5120 - FIX01 - INICIO-->
+                        <td class="tdTitleRightBorderNoWidth">
+                        <!--PLV-5120 - FIX01 - FIM-->    
+                            <span>Nome: </span> <apex:outputText styleClass="TableValue" value="{!contract.Account.Name}"/>
+                        </td>
+                        <!-- <td colspan="3" class="tdTitleRightBorderNoWidth">
+                            <span></span> <apex:outputText styleClass="TableValue"/>
+                        </td> -->
+                        <td colspan="3" class="tdTitleRightBorderNoWidth">
+                            <apex:outputPanel rendered="{!hasSocialName}">
+                                <span>Nome Social: </span> <apex:outputText styleClass="TableValue" value="{!nomeSocial}"/>
+                            </apex:outputPanel>
+                        </td>
+                        <!--LECVPV 189 - FIM--> 
+                    </tr>
+                </apex:outputPanel>
+                <!-- TKCL-246 FIM FIX06 -->
+                <!-- TKCL-246 INICIO FIX03 -->
+                <tr>
+                    <td class="tdTitleRightBorderNoWidth">
+                        
+                        <span>Data de nascimento: </span>   <apex:outputText styleClass="TableValue" value="{0,date,dd/MM/yyyy }"> <apex:param value="{!contract.Account.PersonBirthdate}" /></apex:outputText> 
+                    </td>
+                    <td colspan="3" class="tdTitleRightBorderNoWidth"> <!-- II-119 INICIO-FIM -->
+                     <span>CPF/CNPJ: </span>
+                        <apex:outputText styleClass="TableValue" value="{!IF((contract.Account.Cpf__c==null)||(contract.Account.Cpf__c==''),'Não Informado',contract.Account.Cpf__c)}"/>  <!-- PLV-5677 - INICIO/FIM-->  
+                    </td>
+                    <!-- PLV-5231 - INICIO -->
+                    <!-- II-119 INICIO                  
+                    <td colspan="3" class="tdTitleRightBorderNoWidth">
+                        <apex:outputPanel rendered="{!hasRNE}">
+                          <span>RNE:</span> <apex:outputText styleClass="TableValue" value="{!IF((contract.Account.DocIndentificacao__c==null)||(contract.Account.DocIndentificacao__c==''),'Não Informado',contract.Account.DocIndentificacao__c)}"/>                          
+                        </apex:outputPanel>
+                        <apex:outputPanel rendered="{!hasClasse}">
+                          <span>CLASSE:</span> <apex:outputText styleClass="TableValue" value="{!IF((contract.Account.DocIndentificacao__c==null)||(contract.Account.DocIndentificacao__c==''),'Não Informado',contract.Account.DocIndentificacao__c)}"/>                          
+                        </apex:outputPanel>               
+                        <apex:outputPanel rendered="{!hasRG}">
+                          <span>RG:</span> <apex:outputText styleClass="TableValue" value="{!IF((contract.Account.DocIndentificacao__c==null)||(contract.Account.DocIndentificacao__c==''),'Não Informado',contract.Account.DocIndentificacao__c)}"/>                          
+                        </apex:outputPanel>
+                    </td>
+                    II-119 FIM -->                      
+                    <!-- PLV-5231 - FIM -->
+                </tr>
+                <tr>
+                    <!-- PLV-5231 - INICIO -->
+                    <td class="tdTitleRightBorderNoWidth">
+                        <span>E-mail: </span> <apex:outputText styleClass="TableValue" value="{!IF(contract.Account.PersonEmail=='','',contract.Account.PersonEmail)}"/>
+                    </td>                    
+                    <td colspan="3" class="tdTitleRightBorderNoWidth">
+                        <span>Endereço: </span> <apex:outputText styleClass="TableValue" value="{!IF(endereco.Logradouro=='','Não Informado',endereco.Logradouro)}"/>
+                    </td>
+                    <!-- PLV-5231 - FIM -->
+                </tr>
+                <!-- PLV-5139 - INICIO -->
+                <tr>
+                    <td class="tdTitleRightBorderNoWidth">
+                        <span>Número: </span> <apex:outputText styleClass="TableValue" value="{!IF((endereco.Numero==null)||(endereco.Numero==''),'',endereco.Numero)}"/>
+                    </td>
+                    <!-- PLV-5231 - INICIO -->
+                    <td colspan="3" class="tdTitleRightBorderNoWidth">
+                        <span>Complemento: </span> <apex:outputText styleClass="TableValue" value="{!IF(endereco.Complemento=='','Não Informado',endereco.Complemento)}"/>
+                    </td>
+                    <!-- PLV-5231 - FIM -->
+                </tr> 
+                <!-- PLV-5139 - FIM -->
+                <tr>
+                    <td class="tdTitleRightBorderNoWidth">
+                        <span>Bairro: </span> <apex:outputText styleClass="TableValue" value="{!IF(endereco.Bairro=='','Não Informado',endereco.Bairro)}"/>
+                    </td>
+                    <td class="tdTitleRightBorderNoWidth">
+                        <span>Cidade: </span>  <apex:outputText styleClass="TableValue" value="{!IF(endereco.Cidade=='','Não Informado',endereco.Cidade)}"/>
+                    </td>
+                    <td  class="tdTitleRightBorderNoWidth">
+                        <span>Estado: </span>  <apex:outputText styleClass="TableValue" value="{!IF(endereco.Estado=='','Não Informado',endereco.Estado)}"/>
+                    </td>
+                    <!-- PLV-5231 - INICIO -->
+                    <td class="tdTitleRightBorderNoWidth">
+                        <span>CEP: </span> <apex:outputText styleClass="TableValue" value="{!IF(endereco.CEP=='','Não Informado',endereco.CEP)}"/>
+                    </td>
+                    <!-- PLV-5231 - FIM -->
+                </tr>
+            </table>
+            
+            <table id="general">
+                <apex:repeat value="{!corretores}" var="corretor"><!--II-157 - INICIO/FIM-->
+                    <tr>
+                        <th colspan="3" class="tdTitle">DADOS DO CORRETOR </th>
+                    </tr>
+                    <tr>
+                        <td colspan="3" class="tdTitleRightBorderNoWidth">
+                            Corretor{!IF(corretor.CorretorLider__c," líder: ",": ")}<apex:outputText styleClass="TableValue" value="{!corretor.Conta__r.Name}"/><!--II-157 - INICIO/FIM-->
+                        </td>
+                    </tr>
+                    <tr>
+                        <!-- PLV-5843 - INICIO -->
+                        <td class="tdTitleRightBorderNoWidth">Telefone: <apex:outputText styleClass="TableValue" value="{!telCorretor}"/></td>
+                        <td class="tdTitleRightBorderNoWidth">E-mail: <apex:outputText styleClass="TableValue" value="{!emailCorretor}"/></td> 
+                        <!-- PLV-5843 - FIM    -->  
+                    </tr>
+                    <tr>
+                        <td class="tdTitleRightBorderNoWidth">Susep Porto:<apex:outputText styleClass="TableValue" value="{!corretor.Susep__c}"/></td>
+                        <td class="tdTitleRightBorderNoWidth">Susep oficial: <apex:outputText styleClass="TableValue" value="{!corretor.SusepOficialCorretor__c}"/></td>
+                    </tr>
+                </apex:repeat><!--II-157 - INICIO/FIM-->
+            </table>
+            <table id="general" >
+                <tr>
+                    <th colspan="7" class="tdTitle">COBERTURAS</th>
+                </tr>
+                <td class="tdTitleRightBorderNoWidth">
+                    <span>Ramo:</span>
+                    <p>
+                       
+                    </p>
+                </td>
+                 <td class="tdTitleRightBorderNoWidth">
+                    <span>Cobertura(s):</span>
+                    <p>
+                       
+                    </p>
+                </td>
+                 <td class="tdTitleRightBorderNoWidth">
+                    <span>Validade da Cobertura:</span>
+                    <p>
+                       
+                    </p>
+                </td>
+                <td colspan="2"  class="tdTitleRightBorderNoWidth">
+                    <span>Capital Segurado(R$):</span>
+                    
+                </td>
+                <td  colspan="2"  class="tdTitleRightBorderNoWidth">
+                    <span>Valor do Seguro(R$):</span>
+                    
+                </td>
+                <apex:repeat value="{!wrapGarantias}" var="gar">                           
+                    <tr style="tdTitleRightBorderNoWidth">
+                        <td align="center" class="tdTitleRightBorderNoWidth"> 
+                           <apex:outputText value="{!gar.ramoCobertura}"/>
+                        </td>
+                        <!-- PLV-4817 INICIO -->
+                        <td align="left" class="tdTitleRightBorderNoWidth" >
+                            <apex:outputText value="{!gar.nome}"/>
+                        </td>
+                        <td align="center" class="tdTitleRightBorderNoWidth">
+                            <apex:outputText value="{!gar.validade}"/>
+                        </td>
+                        <td  colspan="2"  align="center" class="tdTitleRightBorderNoWidth" >
+                            <apex:outputText value="{!gar.capital}"/>
+                        </td>
+                        <td  colspan="2"  align="center" class="tdTitleRightBorderNoWidth">
+                            <apex:outputText value="{!gar.valorSeguroCobertura}"/>
+                        </td>
+                        <!-- PLV-4817 FIM -->
+                    </tr>              
+            </apex:repeat>
+            </table>
+            
+            <table id="general">
+                <tr>
+                    <th class="tdTitle">CARÊNCIAS E FRANQUIAS</th>
+                </tr>
+                <!-- PLV-4817 INICIO -->
+                <apex:outputPanel rendered="{!lstCarenciasFranquias.size == 0}" layout="none">
+                    <tr class="tdTitleRightBorderNoWidth">
+                        <td class="tdTitleRightBorderNoWidth">Não há carência e/ou franquias para as coberturas contratadas.</td>
+                    </tr>  
+                </apex:outputPanel>
+                <apex:repeat value="{!lstCarenciasFranquias}" var="item">                           
+                    <tr >
+                        <td class="tdTitleRightBorderNoWidth">{!item}</td>
+                    </tr>
+                </apex:repeat>
+                <!-- PLV-4817 FIM -->
+            </table>
+            
+            <!-- PLV-4817 INICIO -->
+            <apex:outputPanel rendered="{!lWrapAssistenciasBeneficios.size > 0}" layout="none">
+                <table id="general">
+                    <tr>
+                        <th colspan="3" class="tdTitle">ASSISTÊNCIAS E BENEFÍCIOS</th>
+                    </tr>
+                        <tr class="tdTitleRightBorderNoWidth">
+                            <td class="tdTitleRightBorderNoWidth">
+                                <span>Assistência(s) e Benefício (s):</span>
+                                <p>
+                                
+                                </p>
+                            </td>
+                            <td class="tdTitleRightBorderNoWidth">
+                                <span>Validade da Assistência:</span>
+                                <p>
+                                
+                                </p>
+                            </td>
+                            <td class="tdTitleRightBorderNoWidth">
+                                <span>Valor da Assistência (R$):</span>
+                                <p>
+                                
+                                </p>
+                            </td>
+                        </tr>  
+                    
+                    <apex:repeat value="{!lWrapAssistenciasBeneficios}" var="assis">                           
+                            <tr class="tdTitleRightBorderNoWidth">
+                                <td align="left" class="tdTitleRightBorderNoWidth"> 
+                                    <apex:outputText value="{!assis.nome}"/>
+                                </td>
+                                <td align="center" class="tdTitleRightBorderNoWidth" >
+                                    <apex:outputText value="{!assis.validade}"/>
+                                </td>
+                                <td align="center" class="tdTitleRightBorderNoWidth">
+                                    <apex:outputText value="{!assis.valor}"/>
+                                </td>
+                            </tr>  
+                    </apex:repeat>
+                    
+                </table>
+            </apex:outputPanel>
+            <!-- PLV-4817 FIM -->
+
+            <table id="general">	
+                <tr>
+                    <th colspan="5" class="tdTitle">BENEFICIÁRIO</th><!--LECVPV 189 FIX02 - INICIO/FIM-->
+                </tr>
+                <!-- PLV-4817 INICIO -->
+                <apex:outputPanel rendered="{!beneneficiarioText != ''}" layout="none">
+                    <tr class="tdTitleRightBorderNoWidth">
+                        <td class="tdTitleRightBorderNoWidth">
+                            <apex:outputText value="{!beneneficiarioText}"/>
+                        </td>
+                    </tr>  
+                </apex:outputPanel>
+                <apex:outputPanel rendered="{!beneneficiarioText == ''}" layout="none">
+                    <td class="tdTitleRightBorderNoWidth">
+                        <span>Nome do(s) Beneficiario(s):</span>
+                        <p>
+                           
+                        </p>
+                    </td>
+                    <!--LECVPV 189 FIX02 - INICIO-->
+                    <td class="tdTitleRightBorderNoWidth">
+                        <span>Nome Social do(s) Beneficiario(s):</span>
+                        <p>
+                           
+                        </p>
+                    </td>
+                    <!--LECVPV 189 FIX02 - FIM-->
+                     <td class="tdTitleRightBorderNoWidth">
+                        <span>Data de nascimento:</span>
+                        <p>
+                           
+                        </p>
+                    </td>
+                     <td class="tdTitleRightBorderNoWidth">
+                        <span>Grau de parentesco:</span>
+                        <p>
+                           
+                        </p>
+                    </td>
+
+                    <td class="tdTitleRightBorderNoWidth">
+                        <span>%:</span>
+                        <p>
+                           
+                        </p>
+                    </td>
+                    <apex:repeat value="{!lstBeneficiario}" var="ben">                           
+                        <tr class="tdTitleRightBorderNoWidth">
+                            <td class="tdTitleRightBorderNoWidth">{!ben.nome}</td>
+                            <td class="tdTitleRightBorderNoWidth">{!ben.nomeSocial}</td><!--LECVPV 189 FIX02 - INICIO/FIM-->
+                            <td class="tdTitleRightBorderNoWidth">{!ben.dataNascimento}</td>
+                            <td class="tdTitleRightBorderNoWidth">{!ben.parentesco}</td>                             
+                            <td class="tdTitleRightBorderNoWidth">{!ben.participacao}</td>
+                        </tr>  
+                    </apex:repeat>
+                </apex:outputPanel>
+                <!-- PLV-4817 FIM -->
+            </table>
+            
+            <table id="valores">
+                <tr>
+                    <th colspan="6" class="tdTitle">VALORES E PAGAMENTOS</th>
+                </tr>
+                <tr>
+                    <td>Valor Liquido Total:</td>
+                    <td>Valor Total de Assistência:</td>
+                    <td>IOF:</td>
+                    <td>Valor Total:</td>
+                </tr>
+                <tr>
+                    <td class="tdBorderTopNone">
+                        <apex:outputText styleClass="TableValue" value="{!valorLiquidoTotal}"/>
+                    </td>
+                    <td class="tdBorderTopNone">
+                        <apex:outputText styleClass="TableValue" value="{!valorTotalAssistenciaConvert}"/>
+                    </td>
+                    <td class="tdBorderTopNone">
+                        <apex:outputText styleClass="TableValue" value="{!valorIof}"/>
+                    </td>
+                    <td class="tdBorderTopNone">
+                        <apex:outputText styleClass="TableValue" value="{!valorTotalS}"/>
+                    </td>
+                </tr>
+            	<!-- PLV-4817 INICIO -->
+                <tr>
+                    <td class="tdBorderTop">Forma de Pagamento:</td>
+                    <td class="tdBorderTop">Quantidade de Parcelas:</td>
+                    <td class="tdBorderTop">Primeira Parcela</td>
+                    <td class="tdBorderTop">Demais Parcelas</td>
+                </tr>      
+                <tr>
+                    <td class="tdBorderTopNone">
+                        <apex:outputText styleClass="TableValue" value="{!formaPagamento}"/>
+                    </td>
+                    <td class="tdBorderTopNone">
+                        <apex:outputText styleClass="TableValue" value="{!quantidadeParcelas}"/>
+                    </td>
+                    <td class="tdBorderTopNone">
+                        <apex:outputText styleClass="TableValue" value="{!primeiraParcela}"/>
+                    </td>
+                    <td class="tdBorderTopNone">
+                        <apex:outputText styleClass="TableValue" value="{!ultimaParcela}"/>
+                    </td>
+                </tr>    
+                <!-- PLV-4817 FIM -->
+                <!-- II-125 INÍCIO -->
+                <apex:outputPanel rendered="{!formaPagamento == 'ADC, TODAS AS PARCELAS'}" layout="none">
+                    <tr>
+                        <td class="tdBorderTop">Banco:</td>
+                        <td class="tdBorderTop">Agência:</td>
+                        <td class="tdBorderTop">Conta:</td>
+                        <td class="tdBorderTop"></td>
+                    </tr>      
+                    <tr>
+                        <td class="tdBorderTopNone">
+                            <apex:outputText styleClass="TableValue" value="{!banco}"/>
+                        </td>
+                        <td class="tdBorderTopNone">
+                            <apex:outputText styleClass="TableValue" value="{!agencia}"/>
+                        </td>
+                        <td class="tdBorderTopNone">
+                            <apex:outputText styleClass="TableValue" value="{!numeroConta}"/>
+                        </td>
+                        <td class="tdBorderTopNone">
+                            <apex:outputText styleClass="TableValue"/>
+                        </td>
+                    </tr>  
+                </apex:outputPanel>  
+                <!-- II-125 FIM -->
+                <!-- II-66 INÍCIO -->
+                <tr class="tdTitle">
+                    <th class="tdBorderTop" align="center" >Número Parcela</th>
+                    <th class="tdBorderTop" align="center">Data Vencimento</th>
+                    <th class="tdBorderTop" align="center">Valor IOF</th>
+                    <th class="tdBorderTop" align="center">Prêmio Total (R$)</th>
+                    <!-- Add more headers as needed -->
+                </tr>
+                <apex:repeat value="{!lstParcelas}" var="parcela">
+                    <tr>
+                        <td align="center" class="tdBorderTopNone">{!parcela.numeroparcela__c}</td>
+                        <td align="center">
+                            <apex:outputText value="{0,date,dd/MM/yyyy}">
+                                <apex:param value="{!parcela.datavencimento__c}" />
+                            </apex:outputText>
+                        </td>
+                        <td align="center">
+                            R$ {!IF(parcela.Valoriof__c < 0, 
+                                "-", 
+                                "") & 
+                                IF(ABS(parcela.Valoriof__c) >= 1000000, 
+                                    TEXT(FLOOR(ABS(parcela.Valoriof__c) / 1000000)) & ".", 
+                                    "") & 
+                                IF(ABS(parcela.Valoriof__c) >= 1000, 
+                                    RIGHT(TEXT(FLOOR(ABS(parcela.Valoriof__c) / 1000)), 3) & ".", 
+                                    "") & 
+                                RIGHT(TEXT(FLOOR(ABS(parcela.Valoriof__c))), 3) & "," & 
+                                IF(MOD(ABS(parcela.Valoriof__c) , 1) * 100 < 10, 
+                                    "0" & TEXT(ROUND(MOD(ABS(parcela.Valoriof__c), 1), 2) * 100), 
+                                    TEXT(MIN(ROUND(MOD(ABS(parcela.Valoriof__c) , 1), 2) * 100, 99))
+                                )}
+
+                        </td>
+                        <td align="center">
+                            R$ {!IF(parcela.Valorliquido__c < 0, 
+                                "-", 
+                                "") & 
+                                IF(ABS(parcela.Valorliquido__c) >= 1000000, 
+                                    TEXT(FLOOR(ABS(parcela.Valorliquido__c) / 1000000)) & ".", 
+                                    "") & 
+                                IF(ABS(parcela.Valorliquido__c) >= 1000, 
+                                    RIGHT(TEXT(FLOOR(ABS(parcela.Valorliquido__c) / 1000)), 3) & ".", 
+                                    "") & 
+                                RIGHT(TEXT(FLOOR(ABS(parcela.Valorliquido__c))), 3) & "," & 
+                                IF(MOD(ABS(parcela.Valorliquido__c) , 1) * 100 < 10, 
+                                    "0" & TEXT(ROUND(MOD(ABS(parcela.Valorliquido__c), 1), 2) * 100), 
+                                    TEXT(MIN(ROUND(MOD(ABS(parcela.Valorliquido__c) , 1), 2) * 100, 99))
+                                )}
+                            
+                        </td>
+                        
+                        <!-- Add more columns as needed -->
+                    </tr>
+                </apex:repeat>
+            <!-- II-66 FIM -->
+            </table>
+            
+			<!-- PLV-4817 INICIO -->
+            <table id="general">
+                <tr>
+                    <th colspan="6" class="tdTitle">DISPOSIÇÕES GERAIS</th>
+                </tr>
+                <tr>
+                    <td class="tdTitleRightBorderNoWidth">
+                        <!-- PLV-5034 INICIO -->
+                        <apex:outputPanel rendered="{!contract.Observacoes__c != ''}" >
+                            <p style="margin-bottom: 0px;margin-top:5px">{!contract.Observacoes__c}</p>
+                        </apex:outputPanel>
+                         <!-- PLV-5034 FIM -->
+                         <!-- TKCL-246 INICIO -->
+                        <apex:outputPanel rendered="{!NOT(isCodigoPrecificacaoAPTLMKT)}" ><!--II-116 - INICIO/FIM-->
+                            <p style="margin-bottom:-5px;margin-top:5px">Capital de Morte e Morte Acidental, quando contratadas, se acumulam para eventos decorrentes de acidentes.</p>
+                        </apex:outputPanel>
+                        <!-- TKCL-246 FIM-->
+                        <apex:outputPanel rendered="{!invalidez}">
+                            <p  style="margin-bottom:-5px">(*)O valor do capital demonstrado na cobertura de IPA refere-se à Invalidez Total. No caso de Invalidez Parcial, a indenização será de acordo com os percentuais estabelecidos na Tabela de Invalidez constante nas Condições Gerais.</p> <!-- PLV-5139 - INICIO/FIM --> <!-- PLV-5139 - FIX03 - INICIO/FIM -->
+                        </apex:outputPanel>
+                                 
+                        <p>Os Capitais Segurados e Prêmios deste Seguro serão atualizados anualmente,
+                             no aniversário da apólice, com base na variação positiva do IPCA/IBGE (Índice de Preços ao Consumidor
+                             Amplo do Instituto Brasileiro de Geografia e Estatística), conforme descrito no item 
+                             “Atualização Monetária” das Condições Gerais.</p>
+
+                        <!--PLV-5120 - INICIO -->
+                        <!-- TKCL-246 INICIO -->
+                        <!-- AV-697 INICIO -->
+                        <apex:outputPanel rendered="{!ocultarCicloVacinal}">
+                            <!--II-105 - INICIO-->
+                            <apex:outputPanel rendered="{!hasVaccination && !isCodigoPrecificacaoAPTLMKT}">
+                                <!-- II-144 - INICIO - MarceloRatton -->
+                                <!-- Foi aplicado desconto no prêmio pela vacinação de COVID-19, de acordo com o ciclo vacinal informado. Este desconto é válido para toda vigência da apólice. -->
+                                O desconto referente ao Ciclo Vacinal COVID-19, se aplicado na contratação, é válido por toda vigência da apólice.
+                                <!-- II-144 - FIM -->
+                            </apex:outputPanel>
+                            <!--II-105 - FIM-->
+                        </apex:outputPanel>
+                        <!-- AV-697 INICIO -->                        
+                        <!-- TKCL-246 FIM -->
+                        <!--PLV-5120 - FIM-->       
+
+                        <p>
+                        	Este seguro é por prazo determinado tendo a sociedade seguradora a faculdade de não renovar a apólice na data de vencimento, sem devolução dos prêmios pagos nos termos da apólice.
+						</p>
+                        <p><!-- FCVEP-39 - INICIO -->
+                            Reemissão: {!numeroReemissao}
+                        </p><!-- FCVEP-39 - FIM -->
+                    </td>
+                       
+                </tr>
+            </table>
+            
+            <table id="general">
+                <tr>
+                    <th colspan="6" class="tdTitle">PROTEÇÃO DE DADOS PESSOAIS</th>
+                </tr>
+                <tr>
+                    <td class="tdTitleRightBorderNoWidth">
+                       <p>
+                           1.A PORTO SEGURO (aqui compreendida por todas as empresas pertencentes ao seu grupo econômico), tem o compromisso de respeitar e garantir a privacidade e a proteção dos dados pessoais dos titulares e por isso, declara que o tratamento de dados pessoais se dá para o desempenho de suas atividades legais, observando a legislação aplicável sobre segurança da informação, privacidade e proteção de dados e demais normas setoriais ou gerais sobre o tema.
+                        </p>
+                        <p>
+                            2.A coleta de dados pessoais pode ocorrer de diversas formas, como por exemplo: na cotação e/ou contratação de seus diversos produtos e serviços, utilizações do site e aplicativos, bem como nas interações com os diversos canais de comunicação, mas sempre respeitando os princípios finalidade, adequação, necessidade, transparência, livre acesso, segurança, prevenção e não discriminação e obrigações legais.
+                        </p>
+                        <p>
+                            3.A PORTO SEGURO implementará as medidas técnicas e organizacionais apropriadas para proteger os dados pessoais, levando em conta técnicas avançadas disponíveis, o contexto e as finalidades do tratamento. As medidas de segurança atenderão as (i) exigências das leis de proteção de dados; e (ii) medidas de segurança correspondentes com as boas práticas de mercado.
+                        </p>
+                        <p>
+                            4.Os dados pessoais serão, em regra, armazenados pelo tempo que perdurará a relação entre as partes. Entretanto, há situações em que esses dados deverão ser armazenados além do período de relacionamento e essas situações advêm de exigências legais e/ou regulatórias, ou quando for necessário para exercer direitos em processos judiciais ou administrativos.
+                        </p>
+                        <p>
+                            5.A PORTO SEGURO possui uma Política de Privacidade, a qual encontra-se disponível no seguinte endereço www.portoseguro.com.br
+                        </p>
+                    </td>
+                </tr>
+            </table>
+            <!-- PLV-4817 FIM -->
+
+            <table id="general">
+                <tr>
+                    <th colspan="6" class="tdTitle">CONDIÇÕES GERAIS</th>
+                </tr>
+                <tr>
+                    <td class="tdTitleRightBorderNoWidth">
+                        <p>As condições gerais, contendo mais informações sobre as coberturas contratadas estão disponíveis em nosso site www.portoseguro.com.br. Selecione as condições gerais de acordo com o número do Processo SUSEP localizado na parte superior desta apólice.</p>
+                        <!-- PLV-5795 INICIO -->
+                        <apex:outputPanel rendered="{!isGarantAFE == true}">
+                            <p>Este seguro possui o benefício da prestação de serviço ou reembolso das despesas referentes à funeral extensivo aos pais, limitado ao capital informado neste documento.</p>
+                        </apex:outputPanel>
+                        <!-- PLV-5795 FIM -->
+                        <p><strong>As condições contratuais/regulamento deste produto protocolizadas pela sociedade/entidade junto à Susep poderão ser consultadas no endereço eletrônico www.susep.gov.br, de acordo com o número do processo constante de apólice/proposta, bilhete, certificado ou no título de capitalização. Telefone SUSEP: 0800 021 8484.</strong></p> <!-- POR062-5 - FIX-01 - INICIO/FIM -->
+                        <!--PLV-5120 - INICIO -->
+                        <!--PLV-5120 - FIM-->                        
+                        <p>Conforme Decreto Lei 6.339 de 03/01/2008, sobre os prêmios dos seguros de vida deve incidir o percentual de 0,38% referente a alíquota de IOF (Imposto sobre Operações Financeiras). Em atendimento à Lei 12.741/12 informamos que incidem as alíquotas de 0,65% de PIS/PASEP e de 4% de COFINS, deduzidos do estabelecido em legislação específica.</p>
+                        <!-- BDD - VIA RAPIDA - 10.27 INICIO -->
+                        <p>
+                            Plataforma digital para registros de reclamação dos consumidores: www.consumidor.gov.br. Consulte regras e condições da plataforma.
+                        </p>
+                        <!-- BDD - VIA RAPIDA - 10.27 FIM -->
+                        <p>Para validade do presente contrato, a Seguradora, representada por seu diretor presidente, assina esta Apólice.                       </p>
+                    </td>
+                </tr>
+            </table>
+            <!-- PLV-4864 INICIO -->
+            <!-- PLV-4947 INICIO -->
+            <table id="signature">                          
+                <tr>
+                    <td class="borderTop">
+                        <apex:outputText value="{!local}"/>
+                    </td>
+                    <td class="borderTop"> 
+                        <apex:outputText value="{!data}"/>
+                    </td>
+                    <td class="borderTop">
+                        <apex:image id="assinaturaVoucher" value="{!$Resource.NovaAssinaturaApolice}" height="50" alt=""/>
+                        <p class="spanParagraph">
+                            <span style="margin-left:5px;"><apex:outputText value="{!nome1}"/></span><br/>
+                            <span style="margin-left:-7px; padding-top:0px;"><b><apex:outputText value="{!descricaoCargo1}"/></b></span>
+                        </p>
+                    </td>
+                    <td class="borderTop">
+                        
+                        <apex:image id="assinaturaVoucherDiretoriaGeral" value="{!$Resource.AssinaturaDiretorGeral}" height="50px" width="150px" alt=""/> <!-- RVI-98-INICIO/FIM-->
+                        <p class="spanParagraph">
+                            <span class="center" style="margin-left:-15px;"><apex:outputText value="{!nome2}"/></span><br/>
+                            <span class="center" style="margin-left:-7px; padding-top:0px;"><b><apex:outputText value="{!descricaoCargo2}"/></b></span>
+                        </p>
+                    </td>
+                </tr>   	
+            </table>
+            <!-- PLV-4947 FIM -->
+            <!-- PLV-4864 FIM -->
+            <!-- PLV-5139 - INICIO -->
+            <!-- RVI-41-INICIO -->
+            <div style="border-top: 1px solid #000; border-bottom: 1px solid #000; font-size: 10px; line-height: 14px; padding: 5px 0;">
+                <apex:outputText value="{!contract.Produto__r.Empresa__r.Name}" /> – &nbsp; <apex:outputText value="{!contract.Produto__r.RegistroSusep__c}"/> – Al. Barão de Piracicaba, 618 – Torre B – 3º andar – Campos Elísios – São Paulo – CEP:01216-012 – CNPJ:<apex:outputText value="{!contract.Produto__r.Empresa__r.Cnpj__c}"/>. Central de Atendimento: (11) 3366-3377 (Grande São Paulo) – 0800 727 9393 (Demais Localidades). SAC: 0800 727 2746. Horário de atendimento: de segunda a sexta-feira, das 8h15 as 18h30. Atendimento exclusivo para deficientes auditivos: 0800 727 8736. Ouvidoria: 0800 727 1184. Acesse nosso site: www.portoseguro.com.br/vida.
+            </div>
+            <!-- RVI-41-FIM -->
+            <!-- PLV-5139 - FIM -->
+        </div>
+    </body>	    
+</apex:page>
+<!--FIM | PLV-4368 -->

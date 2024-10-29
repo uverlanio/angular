@@ -1,0 +1,79 @@
+<apex:page showHeader="false" renderAs="pdf"  applyBodyTag="false" controller="CartaRecusaController">
+    <head>       
+
+        <style>
+            
+            html{
+            font-family: Arial, Helvetica, sans-serif;
+            font-size:11px;
+            }
+            body{
+            margin:0;
+            }
+            body div{ padding:5px 0px 10px 40px;}
+            .headervoucher{
+            text-align:center;
+            }
+           
+        </style>
+    </head>
+    
+     <body>
+        <div style="text-align:right;">
+            <span style="margin-right:400px;">São Paulo, {!dia} de {!mes} de 2020</span>
+            <img src="{!$Resource.newVoucherLogo4}" height="65" alt="Porto Seguro Viagem" />
+        </div>
+         
+        <div>
+            ________________________________________________________________________________________________________________________________
+        </div>
+        <div>
+             {!nomeSegurado}
+        </div>
+   		<div>
+              Corretor : {!nomeCorretor}
+        </div>
+        <div>
+            REF.: {!mumeroSinistro} - {!produto}
+        </div>
+       	<div>
+           
+       	</div>
+        <!-- PLV-4632 - FIX2 - INICIO -->
+        <div>
+            <apex:outputText value="Segurado: {!nomeSegurado}"></apex:outputText>
+            <br/><br/>
+           
+            <apex:outputText value="{!SUBSTITUTE(observacao,'\n','\\\n')}" style="white-space: pre-line;"/>
+            
+            
+        </div>
+        <!-- PLV-4632 - FIX2 - FIM -->
+        <div>
+           
+       	</div>
+          <div>
+            <apex:outputText value="Produtos Vida e Previdência"></apex:outputText>
+        </div>
+        <div>
+            <apex:outputText value="Atendimento Vida e Previdência - Segunda a sexta - feira das 8h15 às 18h30."></apex:outputText>
+            <br/>
+        	<apex:outputText value="(11) 3366 – 3377 (Grande São Paulo) - 0800 – 727 - 9393 (demais localidades)"></apex:outputText> 
+            <br/>
+        	SAC: 0800 - 727 - 2746 (cancelamento, reclamação e informações).
+            <br/>
+        	0800 - 727 - 8736 (atendimento exclusivo para deficientes auditivos, através de equipamento especializado para esta finalidade).
+        	Ouvidoria: 0800 – 727 – 1184.
+        </div>
+        <div>
+            <span style="color:#4169E1; font-size:9px;">
+            ________________________________________________________________________________________________________________________________
+            </span>
+        	
+				Corporação Porto Seguro
+            <br/>
+				|| Av. Barão De Piracicaba, 618/634 | São Paulo | SP | 01216-012 || Av. Rio Branco, 1489 | São Paulo | SP | 01205-905 ||    
+        </div>
+       
+    </body>
+</apex:page>

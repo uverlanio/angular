@@ -1,0 +1,8 @@
+<!--PLV-4535 - INICIO-->
+<aura:documentation>
+	<aura:description>Documentation</aura:description>
+	<aura:example name="ExampleName" ref="exampleComponentName" label="Label">
+		Example Description
+	</aura:example>
+</aura:documentation>
+<!--PLV-4535 - FIM-->

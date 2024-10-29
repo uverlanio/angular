@@ -1,0 +1,58 @@
+{
+   "devolutivas":[
+      {
+         "proposta":{
+            "origem":"18",
+            "numero":"1349",
+            "indice":1
+         },
+         "retornoAceitacao":{
+            
+         }
+      },
+	  {
+         "proposta":{
+            "origem":"18",
+            "numero":"1350",
+            "indice":2
+         },
+         "retornoAceitacao":{
+            "avisos":[
+            {
+                "codigo":10080,
+                "descricao":"Verifique a natureza dos afastamentos",
+                "area":"ACE",
+                "procedimento":"Informar os afastados de alto risco à Atuária.",
+                "mensagens":{
+                    "interna":"Verifique a natureza dos afastamentos, alto risco deve ser mapeado"
+                }
+            }
+		],
+        "pendencias":[
+            {
+                "codigo":874343,
+                "descricao":"Falta enviar declaracao de saude",
+                "area":"UNI",
+                "severidade":1,
+                "procedimento":"Aguardar envio da DS e verificar sua autenticidade",
+                "mensagens":{
+                    "interna":"Pendente de envio de DS",
+                    "cliente":"Prezado cliente, precisamos da sua declaração de saúde para prosseguir com a contratação.",
+                    "representante":"Caro ?, favor solicitar ao cliente a Declaração de Saúde."
+                }
+            }
+        ]
+       }
+      }
+   ],
+   "retornoFinanceiro":{
+      "autorizacaoCartao":{
+         "stargate":{
+            "codigo":1,
+            "mensagem":"REPROVADO",
+            "codigoGateway":0,
+            "mensagemGateway":"CAPTURED"
+         }
+      }
+   }
+}

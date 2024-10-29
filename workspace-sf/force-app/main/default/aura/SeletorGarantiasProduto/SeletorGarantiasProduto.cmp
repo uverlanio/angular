@@ -1,0 +1,248 @@
+<aura:component controller="SeletorGarantiasProdutoController"  implements="flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickActionWithoutHeader" access="global" >
+    <!-- external js/css -->
+    <ltng:require styles="{! $Resource.modalCSS }" scripts="{! $Resource.UtilJs }" />
+
+    <!-- attributes -->
+    <aura:attribute name="aDemonstracaoPremio" type="String" />
+    <aura:attribute name="selectedRows" type="Object[]" />
+    <aura:attribute name="selectedRows2" type="Object[]" />
+    <!-- PLV_3046 - INICIO - Cadastro de Limite de garantia do produto - Viagem -->
+    <aura:attribute name="data" type="SeletorGarantiasProdutoController.GarantiaProdutoWrapper" default="[]"/>
+    <aura:attribute name="data2" type="SeletorGarantiasProdutoController.GarantiaProdutoWrapper" default="[]" />
+    <!-- PLV_3046 - FIM - Cadastro de Limite de garantia do produto - Viagem -->
+    <aura:attribute name="isInvalid" type="Boolean" default="true" />
+    <aura:attribute name="buttonVariant" type="String" default="brand" />
+    <aura:attribute name="buttonLabel" type="String" default="Selecionar" />
+    <aura:attribute name="abaSelecionada" type="String" default="disponiveis" />
+    <!-- PLV_3046 - INICIO - Cadastro de Limite de garantia do produto - Viagem -->
+    <aura:attribute name="lstSelectedQuotasSAPId" type="String[]" />
+    <aura:attribute name="valueMoeda" type="String" />
+    <aura:attribute name="mapMoeda" type="Map" />
+    <aura:attribute name="moedaPicklist" type="String[]" />
+    
+    
+    <!-- PLV_3046 - FIM - Cadastro de Limite de garantia do produto - Viagem -->
+    <!-- PLV-3312 - INICIO -->
+	<aura:attribute name="garantiasVinculadas" type="String[]" />
+	<!-- PLV-3312 - FIM -->
+    
+    <!-- lds1 -->
+    <aura:attribute name="record1" type="Product2" />
+    <aura:attribute name="simpleRecord1" type="Product2" />
+    <aura:attribute name="recordError1" type="String" />
+    <force:recordData aura:id="produtoComercial"
+        recordId="{! v.recordId }"
+        layoutType="FULL"
+        fields="Id, Name, ProductCode, ProdutoTecnico__c, ProdutoTecnico__r.Name, ProdutoTecnico__r.ProductCode, RecordTypeId, RecordType.Name, Status__c"
+        mode="VIEW"
+        targetRecord="{! v.record1 }"
+        targetFields="{! v.simpleRecord1 }"
+        targetError="{! v.recordError1 }"
+        recordUpdated="{! c.recordUpdated }"
+    />
+
+    <!-- handlers -->
+    <aura:handler name="init" value="{!this }" action="{!c.inicializar}" />
+    <aura:handler name="onRowSelection" event="c:DataTableSelector_onRowSelection" action="{! c.onRowSelection }"/>
+	
+    <!-- markup -->
+    <section aura:id="editDialog" role="dialog" class="slds-modal slds-fade-in-open slds-modal_medium" aria-modal="true">
+        <div class="slds-modal__container" style="width: 110% !important">
+            <header class="slds-modal__header">
+                <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" onclick="{! c.fechar }" title="Fechar">
+                    <lightning:icon iconName="utility:close" size="small" alternativeText="Fechar"/>
+                    <span class="slds-assistive-text">Fechar</span>
+                </button>
+                <h2 aura:id="modalHeader" class="slds-text-heading_medium">Garantias do produto</h2>
+                <p class="slds-m-top_x-small">{! 'Produto técnico: ' + v.simpleRecord1.ProdutoTecnico__r.Name + ', Código produto: ' + v.simpleRecord1.ProdutoTecnico__r.ProductCode }</p>
+            </header>
+            <div class="slds-modal__content slds-grid slds-grow" id="modal-content-id-1">
+                <div class="slds-grid slds-grid_vertical margin-auto">
+                    <div class="slds-scrollable">
+                        <aura:if isTrue="{!v.simpleRecord1.Status__c == 'Ativo'}">
+                            <p class="mensagem-alerta">Produto ativo, não é possível alterar suas garantias.</p>
+                            <aura:set attribute="else">
+                                <lightning:tabset onselect="{! c.handleSelect }" >
+                                    <lightning:tab label="Disponíveis" id="disponiveis">
+                                        <p class="slds-m-around_x-small">
+                                            Selecione as garantias de produto técnico que deseja salvar neste produto comercial.
+                                        </p>
+                                        <!-- PLV_3046 - INICIO - Cadastro de Limite de garantia do produto - Viagem -->
+                                        <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered slds-border_right slds-border_left slds-border_bottom slds-border_top">
+                                            <thead>
+                                                <tr class="slds-line-height_reset">
+                                                    <th class="slds-p-around_xx-small" scope="col">
+                                                        <div class="slds-truncate"></div>
+                                                    </th>
+                                                    <th class="slds-p-around_xx-small" scope="col">
+                                                        <div class="slds-truncate" title="Número">Número</div>
+                                                    </th>
+                                                    <th class="slds-p-around_xx-small" scope="col">
+                                                        <div class="slds-truncate" title="Garantia">Garantia</div>
+                                                    </th>
+                                                    <th class="slds-p-around_xx-small" scope="col">
+                                                        <div class="slds-truncate" title="Ramo de seguro">Ramo de seguro</div>
+                                                    </th>
+                                                    <th class="slds-p-around_xx-small" scope="col">
+                                                        <div class="slds-truncate" title="Tipo de garantia">Tipo de garantia</div>
+                                                    </th>                 
+                                                    <th class="slds-p-around_xx-small" scope="col">
+                                                        <div class="slds-truncate" title="Demonstração de prêmio">Demonstração de prêmio</div>
+                                                    </th>                         
+                                                        <th class="slds-p-around_xx-small" scope="col">
+                                                            <div class="slds-truncate" title="Moeda">Moeda</div>
+                                                        </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <aura:iteration items="{!v.data}" var="data" indexVar="index">
+                                                    <tr class="slds-hint-parent">
+                                                        <th data-label="Opportunity Name" scope="row">
+                                                            <div class="slds-text-body_small">
+                                                                <lightning:input type="checkbox" aura:id="ckGarantias" name="{!data}" onchange="{!c.checkChange}"/>
+                                                            </div>
+                                                        </th>
+                                                        <th data-label="Opportunity Name" scope="row">
+                                                            <div class="slds-text-body_small" >
+                                                                {!data.Name}
+                                                            </div>
+                                                        </th>
+                                                        <td data-label="Account Name">
+                                                            <div class="slds-text-body_small" >
+                                                                {!data.GarantiaName}
+                                                            </div>
+                                                        </td>
+                                                        <td data-label="Close Date">
+                                                            <div class="slds-text-body_small" >
+                                                                {!data.RamoSeguroName}
+                                                            </div>
+                                                        </td>
+                                                        <td data-label="Prospecting">
+                                                            <div class="slds-text-body_small" >
+                                                                {!data.TipoGarantia}
+                                                            </div>
+                                                        </td>
+
+                                                        <td data-label="DemonstracaoPremio">
+                                                            <div class="slds-text-body_small" >
+                                                            <lightning:select name="{!data.DemonstracaoPremio}" value="{!data.DemonstracaoPremio}" >
+                                                                    <option value="Default" text="Selecione"></option>
+                                                                        <aura:iteration items="{!data.DemonstracaoPremioList}" var="demonstracaoPremio">
+                                                                            <option value="{!demonstracaoPremio}" text="{!demonstracaoPremio}"></option>
+                                                                        </aura:iteration>
+                                                                </lightning:select>
+                                                            </div> 
+                                                        </td>
+                                      
+                                                        <td data-label="Amount">
+                                                                <div class="slds-text-body_small" >
+                                                                        <lightning:select name="{!data.CurrencyIsoCode}" value="{!data.CurrencyIsoCode}">
+                                                                            <option value="Default" text="Selecione"></option>
+                                                                                <aura:iteration items="{!data.CurrencyIsoList}" var="moeda">
+                                                                                    <option  value="{!moeda}" text="{!moeda}"></option>
+                                                                                </aura:iteration>
+                                                                        </lightning:select>
+                                                                </div>                                                            
+                                                        </td>                                                                                                            
+                                                    </tr>
+                                                </aura:iteration>
+                                               
+                                            </tbody>
+                                        </table>
+                                        <!-- PLV_3046 - FIM - Cadastro de Limite de garantia do produto - Viagem -->
+                                        <div class="slds-m-around_x-small">
+                                            <p>{! v.selectedRows.length } itens selecionados.</p>
+                                              <!--aura:iteration items="{! v.selectedRows }" var="item">
+                                                <p>{! item.Id } - {! item.Name }</p>
+                                            </@aura:iteration--> 
+                                        </div> 
+                                    </lightning:tab>
+                                    <lightning:tab label="Selecionadas" id="selecionadas">
+                                        <p class="slds-m-around_x-small">
+                                            Selecione as garantias de produto comercial que deseja remover do produto comercial.
+                                        </p>
+                                        <!-- PLV_3046 - INICIO - Cadastro de Limite de garantia do produto - Viagem -->
+                                        <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered slds-border_right slds-border_left slds-border_bottom slds-border_top">
+                                            <thead>
+                                                <tr class="slds-line-height_reset">
+                                                    <th class="slds-p-around_xx-small" scope="col">
+                                                        <div class="slds-truncate"></div>
+                                                    </th>
+                                                    <th class="slds-p-around_xx-small" scope="col">
+                                                        <div class="slds-truncate" title="Número">Número</div>
+                                                    </th>
+                                                    <th class="slds-p-around_xx-small" scope="col">
+                                                        <div class="slds-truncate" title="Garantia">Garantia</div>
+                                                    </th>
+                                                    <th class="slds-p-around_xx-small" scope="col">
+                                                        <div class="slds-truncate" title="Ramo de seguro">Ramo de seguro</div>
+                                                    </th>
+                                                    <th class="slds-p-around_xx-small" scope="col">
+                                                        <div class="slds-truncate" title="Tipo de garantia">Tipo de garantia</div>
+                                                    </th>
+                                                    <th class="slds-p-around_xx-small" scope="col">
+                                                        <div class="slds-truncate" title="Moeda">Moeda</div>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <aura:iteration items="{!v.data2}" var="data1" indexVar="index">
+                                                    <tr class="slds-hint-parent">
+                                                        <th data-label="Opportunity Name" scope="row">
+                                                            <div class="slds-truncate slds-p-around_xx-small">
+                                                                <lightning:input type="checkbox" aura:id="ckGarantias2" name="{!data1.id}" onchange="{!c.checkChange}"/>
+                                                            </div>
+                                                        </th>
+                                                        <th data-label="Opportunity Name2" scope="row">
+                                                            <div class="slds-truncate slds-p-around_xx-small" >
+                                                                {!data1.Name}
+                                                            </div>
+                                                        </th>
+                                                        <td data-label="Account Name2">
+                                                            <div class="slds-truncate slds-p-around_xx-small" >
+                                                                {!data1.GarantiaName}
+                                                            </div>
+                                                        </td>
+                                                        <td data-label="Close Date2">
+                                                            <div class="slds-truncate slds-p-around_xx-small" >
+                                                                {!data1.RamoSeguroName}
+                                                            </div>
+                                                        </td>
+                                                        <td data-label="Prospecting2">
+                                                            <div class=" slds-truncate slds-p-around_xx-small" >
+                                                                {!data1.TipoGarantia}
+                                                            </div>
+                                                        </td>
+                                                        <td data-label="MOEDA">
+                                                            <div class=" slds-p-around_xx-small" >
+                                                                {!data1.CurrencyIsoCode}
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </aura:iteration>
+                                            </tbody>
+                                        </table>
+                                        <!-- PLV_3046 - FIM - Cadastro de Limite de garantia do produto - Viagem -->
+                                        
+                                        <div class="slds-m-around_x-small">
+                                            <p>{! v.selectedRows.length } itens selecionados.</p>
+                                            <!-- <aura:iteration items="{! v.selectedRows }" var="item">
+                                        <p>{! item.Id } - {! item.Name }</p>
+                                    </aura:iteration> -->   
+                                        </div>
+                                    </lightning:tab>
+                                </lightning:tabset>
+                            </aura:set>
+                        </aura:if>
+
+                    </div>
+                </div>
+            </div>
+            <footer class="slds-modal__footer">
+                <lightning:button variant="neutral" label="Cancelar" onclick="{! c.cancelar }" />
+                <lightning:button variant="{! v.buttonVariant }" label="{! v.buttonLabel }" disabled="{! v.isInvalid }"  onclick="{! c.selecionar }" />
+            </footer>
+        </div>
+    </section>
+
+</aura:component>

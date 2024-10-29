@@ -1,0 +1,744 @@
+<!--
+/*
+*  @author Squad Avanxo 
+*  @Descrição: Pagina de orcamento
+*/-->
+<apex:page showHeader="false" renderAs="advanced_pdf" applyBodyTag="false" controller="OrcamentoController">   
+    <head>
+        <meta charset="UTF-8" />
+        <title>Pagina Orçamento</title>
+        <!-- <apex:stylesheet value="{!URLFOR($Resource.orcamentoPage)}" /> -->
+        <style>
+            @page {
+                margin-top: 0cm;
+                margin-bottom: 0cm;
+                margin-left: 0cm;
+                margin-right: 0cm;
+            }
+
+            body {
+                margin: 0;
+                font-family: Arial, Helvetica, sans-serif;
+            }
+            .container {
+                width: 100%;
+                position: relative;
+                margin: 0 auto;
+                background-color: white;
+            }
+            .content {
+                width: 740px;
+                margin: 0 auto;
+                height: 100%;
+                position: relative;
+            }
+            .header {
+                width: 100%;
+                height: 280px;
+                background-color: #3a98d1;
+                color: white;
+            }
+            /* Begin Custom Grid System */
+            .clearfix {
+                clear: both;
+            }
+            .row {
+                display: block;
+            }
+            .col {
+                float: left;
+            }
+            .size-1-of-2 {
+                width: 48%;
+            }
+            .size-1-of-3 {
+                width: 33.33%;
+            }
+            .size-2-of-3 {
+                width: 66.66%;
+            }
+            .size-1-of-4 {
+                width: 24.99%;
+            }
+            .size-1-of-5 {
+                width: 20%;
+            }
+            .size-3-of-5 {
+                width: 60%;
+            }
+            /* End Custom Grid System */
+            .grid-container-header {
+                display: grid;
+                grid-template-columns: 30% 67%;
+                grid-column-gap: 4%;
+            }
+            .header h1 {
+                font-weight: 100;
+                font-size: 1.6em;
+                margin-top: 2.5em;
+            }
+            .header p {
+                font-size: 0.9em;
+                line-height: 1.3em;
+            }
+            .headerLogo {
+                position: absolute;
+                right: 0;
+                top: 50px;
+            }
+            .headerLogo img {
+                width: 190px;
+            }
+            .budgetData {
+                height: 72px;
+                background-color: #E9F1EA;
+                border-radius: 20px;
+                margin-top: -25px;
+                width: 100%;
+                padding: 10px 0 10px 0;
+            }
+            .budgetData tr td {
+                text-align: center;
+                vertical-align: top;
+                border-right: 1px solid #3E3C3C;
+            }
+            .info {
+                color: #679AD1;
+                font-weight: bold;
+                margin: 0 0 10px;
+                display: block;
+            }
+            .center {
+                text-align: center;
+            }
+            .m-top_10 {
+                margin-top: 10px;
+            }
+            .grid-container-info_1 {
+                display: grid;
+                grid-template-columns: auto;
+            }
+            .infoViagem {
+                text-align: left;
+                font-weight: normal;
+                color: #3E3C3C;
+                display: block;
+                margin: 0 0 5px;
+            }
+            .info-messages tr td {
+                vertical-align: top;
+            }
+            .info-messages {
+                margin: 1.4em 0 0;
+                color: white;
+                height: 175px; /*VIAG-253 INICIO/FIM KAYMON*/
+            }
+            .info-messages h2 {
+                border-bottom: 2px solid white;
+                font-size: 16px;
+                margin: 7px 0;
+            }
+            .info-messages ul {
+                padding-left: 0;
+                margin: 0 0 0 10px;
+            }
+            .info-messages ul li {
+                font-size: 9px;
+                margin-bottom: 0.5em;
+            }
+            .passageiroViagem .infoViagem strong, .dadosCorretor .infoViagem strong {
+                color: #3a98d1;
+                font-size: 13px;
+            }
+            .formaPagamento .infoViagem {
+                color: white;
+                font-size: 11px;
+            }
+            .obs {
+                font-size: 10px !important; /* VIAG-253 INICIO/FIM KAYMON */
+            }
+            .obsCobertura {
+                line-height: 1.3em;
+                font-size: 8px;
+                color: #7d7d7d;
+            }
+            .heading_1 {
+                color: #3a98d1;
+                font-weight: bold;
+                font-size: 16px;
+                width: 740px;
+                margin: 1em auto;
+                border-bottom: 1px solid rgb(168 169 173);
+            }
+            .passageiroViagem {
+                color: #3E3C3C;
+                width: 100%;
+            }
+            .passageiroViagemTable {
+                margin: 10px 10px 10px 0;
+                border-right: 2px solid #3a98d1;
+                height: 125px;
+            }
+            .passageiroViagemTable tr td {
+                font-size: 13px;
+                padding: 0 5px 5px 5px;
+                vertical-align: center;
+                border-right: 2px solid #3a98d1;
+            }
+            .passageiroViagemTable strong {
+                color: #3a98d1;
+            }
+            .bgColor_2 {
+                background-color: #E9F1EA;
+            }
+            .bgColor_1 {
+                background-color: #3a98d1;
+            }
+            .formaPagamento {
+                width: 100%;
+            }
+            .gird-item-pag:first-child {
+                padding: 20px 0 10px 20px;
+            }
+            .gird-item-pag  p {
+                text-align: center;
+            }
+            .comparativo-planos {
+                margin-bottom: 33px;
+            }
+            .coberturaPlanosDiv h2 {
+                color: #00B0F0;
+                text-align: left;
+                border-bottom: 1px solid #7d7d7d;
+            }
+            table.dadosCobertura {
+                color: #7d7d7d;
+                text-align: left;
+                border-collapse: collapse !important;
+                font-size: 8px;
+                width: 100%;
+            }
+            table.dadosCobertura tr th {
+                font-weight: bold;
+                padding-top: 7px;
+                padding-left: 5px;
+                border-bottom: 1px solid #7d7d7d;
+                border-width: thin !important;
+                color: #3a98d1;
+                font-family: Arial, Helvetica, sans-serif;
+            }
+            table.dadosCobertura tr th:first-child {
+                padding-left: 0;
+            }
+            table.dadosCobertura tr th.colunaSelecionada {
+                border-top-right-radius: 10px;
+                border-top-left-radius: 10px;
+            }
+            table.dadosCobertura tr td {
+                padding-top: 7px;
+                padding-left: 5px;
+                border-bottom: 1px solid #7d7d7d;
+                /*border-width: thin !important;*/
+                font-family: Arial, Helvetica, sans-serif;
+            }
+            table.dadosCobertura tr td:first-child {
+                padding-left: 0;
+            }
+            .box-logo {
+                height: 1.45em;
+                width: 100%;
+            }
+            .box-logo img {
+                height: 1.3em;
+                right: 0;
+                position: absolute;
+            }
+            .colunaSelecionada {
+                background-color: #3a98d1;
+                color: #FFFFFF !important;
+                border-bottom: 1px solid #FFFFFF !important;
+                /*border-top-left-radius: 5px;
+                border-top-right-radius: 5px;*/
+            }
+            .rodapeImage {
+                max-height: 312px;
+            }
+            .rodapeImage img {
+                left: -1px;
+                position: relative;
+                width: 101%;
+            }
+            .tbPassageiroViagemDados {
+                border-right: 2px solid #679AD1;
+                text-align: left;
+                font-size: 14px;
+                margin: 12px 0;
+            }
+            .boxPagamento {
+                padding: 0;
+                font-size: 12px;
+                color: white;
+                height: 133px;
+            }
+            .boxPagamento p {
+                margin: 5px 17px;
+                text-align: center;
+            }
+            .boxPagamento table {
+                font-size:9px;
+                width: 100%;
+            }
+            .infoPag {
+                width: 300px;
+                padding: 10px 0 10px 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- PLV-4882 INCIO -->
+        <apex:outputPanel rendered="{!mensagemErro != ''}" layout="none">
+          <div style="display:block; margin-top: 10vh">
+            <p style="width: 100%; text-align: center;">{!mensagemErro}</p>
+          </div>
+        </apex:outputPanel>
+        <apex:outputPanel rendered="{!mensagemErro == ''}" layout="none">
+            <div class="container">
+                <div class="header">
+                    <div class="content" style="padding: 25px 25px 0;">
+                        <div class="row">
+                            <div class="col size-1-of-3">
+                                <apex:image value="{!$Resource.PropostaOrcamentoViagem}" width="235px" height="228px"/>
+                            </div>
+                            <div class="col size-2-of-3">
+                                <h1 style="margin-top: 60px;">Orçamento<br/><strong>Seguro Viagem</strong></h1>
+                                <p>Você está prestes a ter uma viagem memorável e nós da Porto Seguro estaremos com você para garantir sua segurança e tranquilidade com nossas coberturas. Conte com a gente!</p>
+                            </div>
+                        </div>
+                        <div class="headerLogo">
+                            <apex:image value="{!$Resource.PortoSeguroLogo}" />
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <table class="budgetData">
+                            <tr>
+                                <td>
+                                    <div class="info">Plano:</div>
+                                    <div><apex:outputText value="{!plano}" /></div>
+                                </td>
+                                <td>
+                                    <div class="info">Nº do Orçamento:</div>
+                                    <div><apex:outputText value="{!numeroOrcamento}" /></div>
+                                </td>
+                                <td style= "border: {!If(moedaOrcamento=='-' ,'none','') }">
+                                    <div class="info">Data do Orçamento:</div>
+                                    <div><apex:outputText value="{!dataOrcamento}" /></div>
+                                    <div style="color:#808080;margin-top:5px;" class="obs">Orçamento válido para a data do cálculo.</div> <!--VIAG-253 INICIO/FIM KAYMON-->
+                                </td>
+                                <td style= "border: none;display: {!If(moedaOrcamento=='-' ,'none','') }">
+                                    <div class="info">Cotação Moeda:</div> <!-- VIAG-253 INICIO/FIM KAYMON -->
+                                    <div><apex:outputText value="{!moedaOrigem}" /></div>
+                                    <div style="color:#808080;margin-top:5px;" class="obs">*Valor da moeda utilizada para cálculo do orçamento.</div> <!--VIAG-253 INICIO/FIM KAYMON-->
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                    
+                <div class="passageiroViagem">
+                    <h2 class="heading_1">Dados do(s) Passageiros(s) e da Viagem</h2>
+                    <div class="bgColor_2" >
+                        <div class="content">
+                            <table>
+                                <tr>
+                                    <td>
+                                        <table class="passageiroViagemTable" style="padding-left: 0px; margin-left: 0px;" width="290px">
+                                            <tr>
+                                                <td style="border: 0;">
+                                                    <strong>Nome:</strong>                
+                                                    <span><apex:outputText value=" {!nomeSegurado}" /></span>
+                                                </td>
+                                            </tr>
+                                            <!-- LECVPV 189-FIX03 INICIO -->
+                                            <tr>
+                                                <td rendered="{!hasSocialName}" style="border: 0"> <!-- HOTFIX - LECVPV 189-->
+                                                    <strong>Nome Social:</strong>                
+                                                    <span><apex:outputText value=" {!nomeSocialSeguradoPDF}" /></span>
+                                                </td>
+                                            </tr>
+                                            <!-- LECVPV 189-FIX03 FIM -->
+                                            <tr>
+                                                <td style="border: 0">
+                                                    <strong>Passageiros até 70 anos**:</strong>
+                                                    <apex:outputText value=" {!passageiroAte70}" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="border: 0">
+                                                    <strong>Passageiros de 71 a 90 anos**:</strong>
+                                                    <apex:outputText value=" {!passageiroAte90}" />
+                                                </td>
+                                            </tr>
+                                            <tr><td style="border: 0; font-size:9px;">**Quantidade de passageiros, incluindo o principal.</td></tr>
+                                        </table>
+                                    </td>
+                                    <td>
+                                        <table class="passageiroViagemTable" width="220px">
+                                            <tr>
+                                                <td style="border: 0">
+                                                    <strong>Data de Saída:</strong>
+                                                    <apex:outputText value=" {!dataSaida}" /> 
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="border: 0">
+                                                    <strong>Data de Chegada:</strong>
+                                                    <apex:outputText value=" {!dataRetorno}" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="border: 0">
+                                                    <strong>Duração de Viagem:</strong>
+                                                    <apex:outputText value=" {!duracaoViagem}" /> <!-- SVEP-61 FIX01 INICIO/FIM -->
+                                                </td>
+                                            </tr>
+                                            <tr><td style="border: 0"></td></tr>
+                                        </table>
+                                    </td>
+                                    <td>
+                                        <table style="border:none" class="passageiroViagemTable" width="145x">
+                                            <tr>
+                                                <td style="border: 0">
+                                                    <strong>Origem:</strong>
+                                                    <apex:outputText value=" {!origem}" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="border: 0">
+                                                    <strong>Destino:</strong>
+                                                    <apex:outputText value=" {!Destino}" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="border: 0">
+                                                    <!--<strong>Prática de Esportes e Aventura:</strong>--><!--VIAG-306 INICIO KAYMON-->
+                                                    <!--VIAG-253 INICIO KAYMON-->
+                                                    <!-- <apex:outputText value=" {!praticaAventura}" /> -->
+                                                    <!-- <span>Sim</span>-->
+                                                    <!--VIAG-253 FIM KAYMON-->
+                                                    <!--VIAG-306 INICIO KAYMON-->
+                                                </td>
+                                            </tr>
+                                            <tr><td style="border: 0"></td></tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="passageiroViagem">
+                    <h2 class="heading_1">Dados do Corretor</h2>
+                    <div class="bgColor_2" >
+                        <div class="content">
+                            <table>
+                                <tr>
+                                    <td>
+                                        <table  width="250px" class="tbPassageiroViagemDados">
+                                            <tr>
+                                                <td class="infoViagem">
+                                                    <strong>Susep:</strong>                          
+                                                    <span><apex:outputText value=" {!susep}" /></span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="infoViagem">
+                                                    <strong>Telefone:</strong>
+                                                    <apex:outputText value=" {!telefoneCorretora}" />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td>
+                                        <table style="border:none" class="tbPassageiroViagemDados">
+                                            <tr>
+                                                <td class="infoViagem">
+                                                    <strong>Nome da Corretora:</strong>
+                                                    <apex:outputText value=" {!nomeCorretora}" /> </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="infoViagem"> <!-- VIAG-253 INICIO/FIM KAYMON -->
+                                                    <strong>E-mail:</strong>
+                                                    <apex:outputText value=" {!emailCorretora}" />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="formaPagamento">
+                    <h2 class="heading_1">Formas de Pagamento: <apex:outputText value=" {!plano}" /></h2>
+                    <div class="content">
+                        <table>
+                            <tr class="bgColor_1">
+                                <td style="width:300px">
+                                    <table>
+                                        <tr>
+                                            <td  class="infoPag">
+                                                <table >
+                                                    <tr style= "display: {!If(cupomDesconto=='' ,'none','') }">
+                                                        <td class="infoViagem"><strong>Desconto:</strong> <apex:outputText value=" {!cupomDesconto}" /></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="infoViagem"><strong>Pagamento Demais Bandeira:</strong> <apex:outputText value=" {!premioTotal}" />  </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="infoViagem"><strong>Parcelamento Disponível:</strong> <apex:outputText value=" Em até {!qtdParcelamentoDB}x" /></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="infoViagem"><strong>Pagameto Cartão Porto Seguro:</strong> <apex:outputText value=" {!pagamentoCartao}" /></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="infoViagem"><strong>Parcelameto Disponível:</strong> <apex:outputText value=" Em {!qtdParcelamentoPorto}x" /></td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td style="width:215px; margin: 0 5px;">
+                                    <div class="boxPagamento bgColor_1">
+                                        <p><strong>Pagamento:</strong> Cartão de Crédito Porto</p>
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <table>
+                                                        <tr>
+                                                            <td><strong>Qnt</strong></td>
+                                                            <td><strong>Parcelas</strong></td>
+                                                        </tr>
+                                                        <apex:repeat value="{!mapParcelamentoPorto}" var="itemPorto">
+                                                            <tr>
+                                                                <td>{!itemPorto}</td>
+                                                                <td>{!mapParcelamentoPorto[itemPorto]}</td>
+                                                            </tr>
+                                                        </apex:repeat>
+                                                    </table>
+                                                </td>
+                                                
+                                                <td style="vertical-align:top;" rendered="{!SizeOfMapParcelamentoPorto_2 > 0}">
+                                                    <table>
+                                                        <tr>
+                                                            <td><strong>Qnt</strong></td>
+                                                            <td><strong>Parcelas</strong></td>
+                                                        </tr>
+                                                         <apex:repeat value="{!mapParcelamentoPorto_2}" var="itemPorto">
+                                                            <tr>
+                                                                <td>{!itemPorto}</td>
+                                                                <td>{!mapParcelamentoPorto_2[itemPorto]}</td>
+                                                            </tr>
+                                                        </apex:repeat>
+                                                    </table>
+                                                </td>
+                                                
+                                                <td style="vertical-align:top;" rendered="{!SizeOfMapParcelamentoPorto_3 > 0}">
+                                                    <table>
+                                                        <tr>
+                                                            <td><strong>Qnt</strong></td>
+                                                            <td><strong>Parcelas</strong></td>
+                                                        </tr>
+                                                        <apex:repeat value="{!mapParcelamentoPorto_3}" var="itemPorto">
+                                                            <tr>
+                                                                <td>{!itemPorto}</td>
+                                                                <td>{!mapParcelamentoPorto_3[itemPorto]}</td>
+                                                            </tr>
+                                                        </apex:repeat>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </td>
+                                <td style="width:215px">
+                                    <div class="boxPagamento bgColor_1">
+                                        <p><strong>Pagamento:</strong> Cartão de Crédito Demais Bandeiras</p>
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <table>
+                                                        <tr>
+                                                            <td><strong>Qnt</strong></td>
+                                                            <td><strong>Parcelas</strong></td>
+                                                        </tr>
+                                                        <apex:repeat value="{!mapDemaisBandeira}" var="itemDemaisBandeira">
+                                                            <tr>
+                                                                <td>{!itemDemaisBandeira}</td>
+                                                                <td>{!mapDemaisBandeira[itemDemaisBandeira]}</td>
+                                                            </tr>
+                                                        </apex:repeat>
+                                                    </table>
+                                                </td>
+                                                <td style="vertical-align:top;" rendered="{!SizeOfMapDemaisBandeira_2 > 0}">
+                                                    <table>
+                                                        <tr>
+                                                            <td><strong>Qnt</strong></td>
+                                                            <td><strong>Parcelas</strong></td>
+                                                        </tr>
+                                                        <apex:repeat value="{!mapDemaisBandeira_2}" var="itemDB_2">
+                                                            <tr>
+                                                                <td>{!itemDB_2}</td>
+                                                                <td>{!mapDemaisBandeira_2[itemDB_2]}</td>
+                                                            </tr>
+                                                        </apex:repeat>
+                                                    </table>
+                                                </td>
+                                                <td style="vertical-align:top;" rendered="{!SizeOfMapDemaisBandeira_3 > 0}">
+                                                    <table>
+                                                        <tr>
+                                                            <td><strong>Qnt</strong></td>
+                                                            <td><strong>Parcelas</strong></td>
+                                                        </tr>
+                                                        <apex:repeat value="{!mapDemaisBandeira_3}" var="itemDB_3">
+                                                            <tr>
+                                                                <td>{!itemDB_3}</td>
+                                                                <td>{!mapDemaisBandeira_3[itemDB_3]}</td>
+                                                            </tr>
+                                                        </apex:repeat>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="info-messages bgColor_1">
+                    <div class="content">
+                        <table width="100%">
+                            <tr>
+                                <td style="width:46%;font-size: 11px;"><!--VIAG-253 INICIO/FIM KAYMON-->
+                                    
+                                    <h2>Diferenciais</h2>
+                                    <ul>
+                                        <li>Cobertura para Covid-19.</li>
+                                        <li>Meios de transporte coberto: Avião, Navio, Ônibus Rodoviário, Carro e Moto (apenas no Brasil, América do Norte, Europa, Ásia, África e Oceania)</li><!--VIAG-253 INICIO/FIM KAYMON-->
+                                        <li>Ampla rede médica de atendimento global.</li>
+                                        <li>Cobertura para gestantes até a 30° semana</li><!--VIAG-253 INICIO/FIM KAYMON-->
+                                    </ul>
+                                </td>
+                                <td style="width:8%;"></td><!--VIAG-253 INICIO/FIM KAYMON-->
+                                <td style="width:46%;"><!--VIAG-253 INICIO/FIM KAYMON-->
+                                    <h2>Informações Importantes</h2>
+                                    <ul>
+                                        <li>O Seguro só será válido para brasileiro residente no Brasil antes de iniciar a viagem.</li> <!--VIAG-253 INICIO/FIM KAYMON-->
+                                        <li>Moeda internacional cotada de acordo com último fechamento de câmbio.</li>
+                                        <li>Seguro válido para viagens acima de 100km do endereço de residência.</li>
+                                        <li>A vigência do seguro será válida somente se houver a transmissão da proposta eletrônica.</li>
+                                        <!-- <li>Em atendimento à Lei 12.741/12 informamos que incidem as alíquotas de 0,65% de PIS/PASEP e de 4% de COFINS,deduzidos do estabelecido em legislação específica.</li> VIAG-253 INICIO/FIM KAYMON -->
+                                    </ul>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="comparativo-planos">
+                    <div class="box-logo bgColor_1">
+                        <div class="content">
+                            <apex:image value="{!$Resource.PortoSeguroLogo}" width="123px"/>
+                        </div>
+                    </div>
+                    <h2 class="heading_1">Comparativo dos planos | Preço à vista</h2>
+                    <div class="content">
+                        <div class="coberturaPlanosDiv">
+                            <table class="dadosCobertura">
+                                <tr>
+                                    <th>Coberturas</th>
+                                    <apex:repeat value="{!orcamentoSet}" var="orc">
+                                        <th class="{!If(OrcamentoSelecionado==orc ,'colunaSelecionada','') }">
+                                            <apex:outputText value="{!orcValorCabecalhoMap[orc]}" />                                                 
+                                        </th>
+                                    </apex:repeat>
+                                </tr>
+
+                                <apex:repeat value="{!coberturaNomeComOferta}" var="cob"><!-- VIAG-310 INICIO/FIM KAYMON -->
+                                    <tr>
+                                        <td>{!cob.nome}</td>
+                                        <apex:repeat value="{!orcamentoSet}" var="orc">
+                                            <td class="{!If(OrcamentoSelecionado==orc ,'colunaSelecionada','') }">
+                                                <apex:outputText value="{!coberturaMapFinal[cob.sigla+orc]}" />
+                                            </td>
+                                        </apex:repeat>
+                                    </tr>
+                                </apex:repeat>
+                            </table>
+                            <!-- VIAG-253 INICIO KAYMON -->
+                            <!--
+                            <apex:outputPanel rendered="{!IsSecondPage}" >
+                                <table class="dadosCobertura" style="margin-top: 100px;">
+                                    <tr>
+                                        <th>Coberturas</th>
+                                        <apex:repeat value="{!orcamentoSet}" var="orc">
+                                            <th class="{!If(OrcamentoSelecionado==orc ,'colunaSelecionada','') }">
+                                                <apex:outputText value="{!orcValorCabecalhoMap[orc]}" />                                                 
+                                            </th>
+                                        </apex:repeat>
+                                    </tr>
+                                    <apex:repeat value="{!coberturaNomeList_2}" var="cob">
+                                        <tr>
+                                            <td>{!cob.nome}</td>
+                                            <apex:repeat value="{!orcamentoSet}" var="orc">
+                                                <td class="{!If(OrcamentoSelecionado==orc ,'colunaSelecionada','') }">
+                                                    <apex:outputText value="{!coberturaMapFinal[cob.sigla+orc]}" />
+                                                </td>
+                                            </apex:repeat>
+                                        </tr>
+                                    </apex:repeat>
+                                </table>
+                            </apex:outputPanel>
+                            -->
+                            <!-- VIAG-253 FIM KAYMON -->
+                        </div>
+                        <p class="obsCobertura">Para mais informações, entre em contato com o seu Corretor de seguros, ou ligue para nossa Central de Atendimento Vida, de segunda à sexta, das 8h15 às 18h30, nos telefones: (11) 3366-3377 (Grande São
+                            Paulo) / 0800 727 9393 (demais localidades) | 0800 727 2746 (SAC - informação, reclamação e cancelamento – 24 horas) | 0800 727 8736 (atendimento exclusivo para deficientes auditivos – 24 horas) | 0800
+                            727 1184 (Ouvidoria). Informações reduzidas. Consulte as condições gerais. Seguro garantido por Porto Seguro Cia de Seguros Gerais S.A. CNPJ 61.198.164/0001-60. Seguro Viagem - Processo SUSEP:
+                            15414.00476/2015-42. Seguro Viagem Aventura 15414.900707/2015-18. O registro deste plano na SUSEP não implica, por parte da Autarquia, incentivo ou recomendação à sua comercialização.
+                            Em atendimento à Lei 12.741/12 informamos que incidem as alíquotas de 0,65% de PIS/PASEP e de 4% de COFINS,deduzidos do estabelecido em legislação específica.</p><!-- VIAG-253 INICIO/FIM KAYMON -->
+                    </div>
+                </div>
+                <div>
+                    <!--VIAG-241 Lucas Sousa-->
+                    <div style="page-break-inside: avoid;">
+                        <h2 class="heading_1">Benefícios</h2>
+                        <div class="rodapeImage">
+                            <apex:image value="{!$Resource.PropostaOrcamentoViagemBeneficio01}"/>
+                        </div>
+                    </div>
+                    <div class="rodapeImage">
+                        <apex:image value="{!$Resource.PropostaOrcamentoViagemBeneficio02}"/>
+                    </div>
+                    <div class="rodapeImage">
+                        <apex:image value="{!$Resource.PropostaOrcamentoViagemBeneficio03}"/>
+                    </div>
+                    <div class="rodapeImage">
+                        <apex:image value="{!$Resource.PropostaOrcamentoViagemBeneficio04}"/>
+                    </div>
+                    <!--VIAG-241 Lucas Sousa END-->
+                </div>
+            </div>
+            
+        </apex:outputPanel>
+
+        <!-- PLV-4882 FIM -->
+    </body>
+      
+</apex:page>

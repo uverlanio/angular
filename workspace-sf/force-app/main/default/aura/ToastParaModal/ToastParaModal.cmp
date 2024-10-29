@@ -1,0 +1,40 @@
+<!--
+ - Created by Alessndro Ponte on 14/06/2018.
+ -->
+
+<aura:component description="ToastParaModal">
+
+  <aura:attribute name="type" type="String" description="Determina o tipo do Toast. Tipos aceitos: error e success." />
+
+  <aura:method name="showToast" action="{!c.showToast}" description="Exibe o toast" />
+  <aura:method name="hiddenToast" action="{!c.hiddenToast}" description="Esconde o toast" />
+
+  <div class="demo-only slds-hide" aura:id="toastParaModal" style="min-height: 4rem; position: fixed; width: 100%; z-index: 10000; top: 67px;left: 0; right: 0;">
+    <div class="slds-notify_container slds-is-relative">
+      <div class="{!(v.type == 'success')
+      ? 'slds-notify slds-notify_toast slds-theme--success'
+      : (v.type == 'error') ? 'slds-notify slds-notify_toast slds-theme--error'
+      : 'slds-notify slds-notify_toast'}" role="alert">
+        <span class="slds-assistive-text">{!v.type}</span>
+        <span class="slds-icon_container slds-icon-utility-info slds-m-right_small slds-no-flex slds-align-top" title="Description of icon when needed">
+          <aura:if isTrue="{!v.type == 'success'}">
+            <lightning:icon variant="bare" iconName="utility:success" alternativeText="success" size="x-small" />
+            <aura:set attribute="else" >
+              <lightning:icon variant="bare" iconName="utility:error" alternativeText="error" size="small" />
+            </aura:set>
+          </aura:if>
+      </span>
+        <div class="slds-notify__content">
+          <h2 class="slds-text-heading_small">
+            {!v.body}
+          </h2>
+        </div>
+        <button class="slds-button slds-button_icon slds-notify__close slds-button_icon-inverse" title="Close" onclick="{!c.hiddenToast}">
+          <lightning:icon variant="bare" iconName="utility:close" alternativeText="fechar" size="small" title="close" />
+          <span class="slds-assistive-text">Close</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+</aura:component>

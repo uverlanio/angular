@@ -1,0 +1,12 @@
+<!--
+ - Created by Alessndro Ponte on 25/06/2018.
+ -->
+
+<aura:event type="APPLICATION" description="QuestionarioAnaliseRiscoEvent">
+  <aura:attribute name="isToOpenSpinner" type="Boolean" />
+  <aura:attribute name="isToRefreshView" type="Boolean" />
+  <aura:attribute name="isToOpenToast" type="Boolean" />
+  <aura:attribute name="textToast" type="String" />
+  <aura:attribute name="typeToast" type="String" />
+
+</aura:event>

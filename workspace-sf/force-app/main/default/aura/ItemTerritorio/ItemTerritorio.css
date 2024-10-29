@@ -1,0 +1,18 @@
+.THIS .combo-territorio{
+	visibility: hidden;
+}
+
+.THIS .territorio-nacional-hidden{
+	display: none;
+}
+
+.THIS .territorio-nacional{
+	width: 160px;
+	position: relative;
+    bottom: 15px;
+}
+
+.THIS .slds-icon_small, .THIS .slds-icon--small {
+    width: 1rem;
+    height: 1rem;
+}

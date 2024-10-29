@@ -1,0 +1,24 @@
+.slds-modal__close svg {
+    fill: white;
+}
+
+.slds-modal__container {
+    max-width: 70rem !important;
+    width: 80% !important;
+    /*height: 400px !important;*/
+}
+
+/*
+.seletorParametrosVigencia {
+	max-width: 70rem !important;
+	width: 80% !important;
+}
+*/
+/*.slds-modal__container {
+	margin: 0 auto !important;
+	padding: 80px 80px !important;
+	max-width: 1000rem !important;
+	min-width: 20rem !important;
+	width: 100% !important;
+}
+*/

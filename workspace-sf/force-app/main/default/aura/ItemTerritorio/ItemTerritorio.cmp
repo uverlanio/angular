@@ -1,0 +1,62 @@
+<aura:component controller="GerenciamentoTerritoriosController" >
+    <aura:attribute name="item" type="Map" />
+    <aura:attribute name="territorios" type="List" />
+    <aura:attribute name="buscaPais" type="Map" />
+    <aura:attribute name="buscaMunicipio" type="Map" />
+    <aura:handler name="init" value="{!this}" action="{!c.inicializar}" />
+
+   <aura:iteration items="{!v.territorios}" var="territorio">
+        <aura:if isTrue="{!territorio.idx == v.item.idx}">
+           <tr class="slds-hint-parent">
+                <td scope="row" class="slds-text-align_left">
+                    <div class="slds-form-element">
+                        <div class="slds-form-element__control">
+                            <lightning:combobox placeholder="-- Selecione --" value="{!territorio.tipo}" variant="label-hidden" options="{!territorio.optionsTipo}" onchange="{!c.habilitarCombos}" />
+                        </div>
+                    </div>
+                </td>        
+                <td scope="row" class="slds-text-align_left">
+                    <div class="slds-form-element">
+                        <div class="{!'slds-form-element__control' + (territorio.habilitarContinente ? '' : ' combo-territorio')}">
+                            <c:MultiPickList valor="{!territorio.continente}" opcoes="{!territorio.optionsContinente}" acaoOnChange="{!v.buscaPais}" />
+                        </div>
+                        <div class="{!'territorio-nacional' + (territorio.habilitarEstado ? '' : ' territorio-nacional-hidden')}">América do Sul</div>
+                    </div>
+                </td>                        
+                <td scope="row" class="slds-text-align_left">
+                    <div class="slds-form-element">
+                        <div class="{!'slds-form-element__control' + (territorio.habilitarPais ? '' : ' combo-territorio')}">
+                            <c:MultiPickList valor="{!territorio.pais}" opcoes="{!territorio.optionsPais}" />
+                        </div>
+                        <div class="{!'territorio-nacional' + (territorio.habilitarEstado ? '' : ' territorio-nacional-hidden')}">Brasil</div>
+                    </div>
+                </td>                                              
+                <td scope="row" class="slds-text-align_left">
+                    <div class="slds-form-element">
+                        <div class="{!'slds-form-element__control' + (territorio.habilitarEstado ? '' : ' combo-territorio')}">
+                            <c:MultiPickList valor="{!territorio.estado}" opcoes="{!territorio.optionsEstado}" acaoOnChange="{!v.buscaMunicipio}" />
+                        </div>
+                    </div>
+                </td>
+                <td scope="row" class="slds-text-align_left">
+                    <div class="slds-form-element">
+                        <div class="{!'slds-form-element__control' + (territorio.habilitarMunicipio ? '' : ' combo-territorio')}">
+                            <c:MultiPickList valor="{!territorio.municipio}" opcoes="{!territorio.optionsMunicipio}" />
+                        </div>
+                    </div>
+                </td>
+                <td scope="row" class="slds-text-align_left">
+                    <div class="slds-form-element"> 
+                        <div class="slds-form-element__control">
+                            <button class="excluir" onclick="{!c.excluirItemTerritorio}">
+                                <lightning:icon iconName="action:close" size="small" variant="error"/>
+                            </button>
+                        </div>
+                    </div>
+                </td>
+           </tr> 
+        </aura:if>   
+    </aura:iteration>
+ 
+
+</aura:component>

@@ -1,0 +1,103 @@
+<!--
+ - Created by Fábio Rente on 09/04/2019.
+ -->
+<aura:component description="ConsultaArquivoECM" implements="flexipage:availableForAllPageTypes,force:hasRecordId,force:lightningQuickActionWithoutHeader" Controller="ArquivoECMController">
+
+	<!-- handlers -->
+	<aura:handler name="init" value="{! this }" action="{! c.doInit }" />
+
+	<!-- attributes -->
+	<aura:attribute type="Map" name="mapParceiros" default="{}" />
+	<aura:attribute type="List" name="arquivos" default='[]' />
+	<aura:attribute type="List" name="erros" default="[]" />
+	<aura:attribute type="Boolean" name="realizarDownload" default="false" />
+	<aura:attribute type="String" name="idecm" />
+	<aura:attribute type="Id" name="recordId" />
+	<aura:attribute type="ContratoTO.ConsultarArquivoECMTO" name="ConsultarArquivoECMTO"  default='{"sobjectType":"ContratoTO.ConsultarArquivoECMTO", "idsf":"","dataInicial":"","dataFinal":""}' />
+
+	<!-- attributes data table -->
+	<aura:attribute name="data" type="Object"/>
+	<aura:attribute name="columns" type="List"/>
+
+	<!-- spinner -->
+	<lightning:spinner variant="brand" size="large" aura:id="mySpinner" alternativeText="Spinner" class="slds-hide" /> 
+
+	<div class="slds-grid slds-wrap slds-p-horizontal--medium ">
+
+		<aura:if isTrue="{! v.erros.length > 0}">
+			<aura:iteration var="erro" items="{! v.erros }" >
+				<div class="slds-size--1-of-1 slds-p-horizontal--medium" >
+					<ui:outputText value="{! erro }" class="slds-text-color--error" />
+				</div>
+			</aura:iteration>
+		</aura:if>
+
+
+		<div class="slds-size_1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2 slds-p-around--small">
+			<ui:inputDate value="{! v.ConsultarArquivoECMTO.dataInicial }" label="* Data inicial da consulta" displayDatePicker="true" />
+		</div>
+		<div class="slds-size_1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2 slds-p-around--small ">
+			<ui:inputDate value="{! v.ConsultarArquivoECMTO.dataFinal }" label="* Data final da consulta" displayDatePicker="true" />
+			<ui:inputText aura:id="IDSalesforce" disabled="true"  value="{! v.ConsultarArquivoECMTO.idsf }" class="slds-hidden" />
+		</div>
+		<!--<div class="slds-size_1-of-1 slds-medium-size- -1-of-2 slds-large-size- -1-of-2 slds-p-around- -small ">
+            <ui:inputText label="ID Salesforce" aura:id="InputSelectProdutoParceiro" disabled="true"  value="{! v.consultarArquivoECMTO.idsf }" />
+        </div>-->
+
+		<div class="slds-size_1-of-1 slds-p-around--small ">
+			<lightning:button variant="brand" label="Consultar" title="Consultar" onclick="{! c.consultarArquivoECMController }" />
+			<aura:if isTrue="{!v.realizarDownload}">
+				<lightning:button variant="brand" label="Voltar" title="Voltar" onclick="{! c.voltar }" />
+			</aura:if>
+		</div>
+	</div>
+
+	<aura:if isTrue="{! v.arquivos.length > 0}">
+
+		<div class="slds-scrollable_y height-limited">
+			<aura:if isTrue="{!!v.realizarDownload}" >
+				<table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped">
+					<thead>
+					<tr class="slds-line-height_reset">
+						<th class="" scope="col">
+							<div class="slds-truncate" title="Nome Arquivo">Nome Arquivo</div>
+						</th>
+						<th class="" scope="col">
+							<div class="slds-truncate" title="Data de registro">Data de registro</div>
+						</th>
+						<th class="" scope="col">
+							<div class="slds-truncate" title="Tipo arquivo">Tipo arquivo</div>
+						</th>
+						<th class="" scope="col">
+							<div class="slds-truncate" title="Ações">Ações</div>
+						</th>
+					</tr>
+					</thead>
+					<tbody>
+					<aura:iteration items="{!v.arquivos}" var="arquivo" >
+						<tr class="slds-hint-parent">
+							<td data-label="{!arquivo.nomearquivo}">
+								<ui:outputText value="{!arquivo.nomearquivo}" />
+							</td>
+							<td data-label="{!arquivo.datainclusao}">
+								<ui:outputDate value="{!arquivo.datainclusao}" />
+							</td>
+							<td data-label="{!arquivo.tipoarquivo}">
+								<ui:outputText value="{!arquivo.tipoarquivo}"/>
+							</td>
+							<td data-label="Confidence">
+								<div class="slds-truncate" onclick="{!c.downloadArquivoECMController}" data-value="{!arquivo.idecm}">
+									<lightning:button variant="brand" label="Download" title="Download" />
+								</div>
+							</td>
+						</tr>
+					</aura:iteration>
+					</tbody>
+				</table>
+				<aura:set attribute="else">
+					<c:PdfEcm codigoDoc="{!v.idecm}" linkgerado="true" />
+				</aura:set>
+			</aura:if>
+		</div>
+	</aura:if>
+</aura:component>

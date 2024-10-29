@@ -1,0 +1,202 @@
+{
+   "proposta":{
+		"codigoEmpresa":1,
+		"segmento":"Individual",
+		"numeroOrcamento":"00006395",
+		"origem": 18,
+		"numero": 333,
+		"numeroPortal":478586,
+		"dataProtocolo":"2019-11-28",
+		"contratantes":[
+         {
+            "tipo":"PRI",
+            "numero":1,
+            "pessoa":{
+               "tipo":"FIS",
+               "nome":"HUGUINHO DUCK",
+			   "enderecos":[
+				  {
+					 "uf":"SP",
+					 "tipoLogradouro":"RUA",
+					 "tipoEndereco":"RES",
+					 "paisResidencia":"Brasil",
+					 "numeroLogradouro":"92",
+					 "logradouro":"Guaianses",
+					 "complementoCep":"420",
+					 "complemento":"Apto 22",
+					 "cidade":"SAO PAULO",
+					 "cep":"07114",
+					 "bairro":"Centro"
+				  }
+			   ],
+               "dadosPessoaFisica":{
+                  "numeroCpf":"346486006",
+                  "digitoCpf":"06",
+                  "dataNascimento":"1975-12-10",
+				  "nacionalidade":"brasileira",
+				  "paisDeOrigem":"Brasil",
+				  "paisResidente":"Brasil"
+               }
+            },
+            "dadosPagamento":{
+               "quantidadeParcelas":6,
+               "tipoResponsavelPagamento":"VID",
+               "codigoFormaPagamento":62,
+               "descricaoFormaPagamento":"CARTAO DE CREDITO (TODAS PARC.EM CARTAO)",
+               "codigoMeioRecebimento":"Q",
+               "vencimentoPrimeiraParcela":"2018-08-30",
+               "dadosCartaoCredito":{
+                  "numero":"4902-XXXX-XXXX-4152",
+                  "validade":"2022-10",
+                  "nome":"HUGUINHO DUCK",
+                  "ticket":123695
+               }
+            },
+            "grupos":[
+               {
+                  "numero":1,
+                  "qtdeVidas":1,
+                  "segurados":[
+                     {
+                        "numero":1,
+                        "pessoa":{
+                           "tipo":"FIS",
+                           "nome":"HUGUINHO DUCK",
+                           "email":"xinha36661@hotmail.de",
+                           "dadosPessoaFisica":{
+                              "numeroCpf":"346486006",
+                              "digitoCpf":"06",
+                              "dataNascimento":"1975-12-10",
+							  "nacionalidade":"brasileira",
+							  "paisDeOrigem":"Brasil",
+							  "paisResidente":"Brasil"
+                           },
+                           "enderecos":[
+                              {
+                                 "uf":"SP",
+                                 "tipoLogradouro":"RUA",
+                                 "tipoEndereco":"RES",
+                                 "paisResidencia":"Brasil",
+                                 "numeroLogradouro":"92",
+                                 "logradouro":"Guaianses",
+                                 "complementoCep":"420",
+                                 "complemento":"Apto 22",
+                                 "cidade":"SAO PAULO",
+                                 "cep":"07114",
+                                 "bairro":"Centro"
+                              }
+                           ],
+                           "telefones":[
+                              {
+                                 "tipoTelefone":"CEL",
+                                 "numeroTelefone":"971452694",
+                                 "dddTelefone":"11"
+                              }
+                           ],
+                           "pep":"PROX",
+                           "pessoaRelacionamentoPep":{
+                              "tipo":"FIS",
+                              "nome":"Tiririca",
+                              "dadosPessoaFisica":{
+                                 "numeroCpf":"123456789",
+                                 "digitoCpf":"56"
+                              }
+                           }
+                        },
+                        "contatoEmergencia":{
+                           "nome":"Donald Duck",
+                           "ddd":11,
+                           "telefone":"965214220"
+                        },
+						"questionario": {
+							"codigo": 2,
+							"respostas": [{
+									"questao": 1,
+									"opcao": 2
+								},
+								{
+									"questao": 4,
+									"opcao": 3
+								},
+								{
+									"questao": 5,
+									"resposta": "Outros"
+								},
+								{
+									"questao": 7,
+									"opcao": 1
+								}
+							]
+						},
+						"beneficiarios": [{
+							"tipoBeneficiario": "Nome do beneficiário",
+							"motivoSemCpfCnpj": "Não Desejo Informar",
+							"grauParentesco": "Cônjuge",
+							"participacao": 100,
+							"pessoa": {
+								"tipo": "FIS",
+								"nome": "Matheus",
+								"email": "wesley@zoppi.com.br",
+								"rendaMensal": 4000.00,
+								"dadosPessoaFisica": {
+									"sexo": "MASC",
+									"numeroCpf": "475034228",
+									"profissao": "2885",
+									"digitoCpf": "90",
+									"estadoCivil": "SOL",
+									"dataNascimento": "1984-03-03",
+									"pep": "RelacionamentoProximo",
+									"nomePessoaPep": "Nome PEP",
+									"tipoRelacionamentoPep": "Pai",
+									"cpfPep": "35958621807"
+
+								}
+							},
+							"telefones": [{
+								"tipoTelefone": "COM",
+								"numeroTelefone": 70090101,
+								"dddTelefone": 41
+							}]
+						}]
+                     }
+                  ]
+               }
+            ]
+         }
+      ],
+      "remuneracoes":[
+         {
+            "tipoRemuneracao":"Corretagem",
+            "percentual":20.0,
+            "favorecidos":[
+               {
+                  "papel":"Corretor",
+                  "participacao":100.0,
+                  "corretorLider":true,
+                  "susep":"C1192J",
+                  "pessoa":{
+                     "tipo":"JUR",
+                     "nome":"CLARA ROSEMBLAT CORRETORA DE SEGUROS",
+                     "dadosPessoaJuridica":{
+                        "numeroCnpj":"27351731",
+                        "ordemCnpj":"0001",
+                        "digitoCnpj":"38"
+                     }
+                  }
+               }
+            ]
+         }
+      ]
+   },
+   "retornoIntegracoes":{
+      "validacaoZeroDolar":{
+         "codigo":2,
+         "mensagem":"APROVADO",
+         "codigoGateway":0,
+         "mensagemGateway":"VERIFIED"
+      },
+      "bloqueioCorretor":{
+
+      }
+   }
+}

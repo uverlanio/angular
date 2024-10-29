@@ -1,0 +1,65 @@
+/**
+ * Created by Alessandro Ponte on 30/05/2018.
+ */
+.THIS .content-overflow{
+    overflow: auto!important;
+}
+.THIS .slds-section.section-is-open > .content-p-b{
+    padding-bottom: .75rem;
+}
+.THIS .m-b-10,.THIS.m-b-10{
+    margin-bottom: 10px;
+}
+.THIS .tr-total{
+    background-color: #ecebea;
+}
+.THIS .tr-total td,.THIS .tr-total th{
+    font-weight: bold;
+    padding-bottom: 7px;
+    padding-top: 7px;
+}
+.THIS .messagemErro{
+    color: red;
+    font-size: 1rem;
+}
+
+.THIS .slds-section.section-is-open > .slds-section__content {
+    padding-top: .75rem;
+    overflow: visible;
+    visibility: visible;
+    opacity: 1;
+    height: auto;
+}
+.THIS .slds-section__title-action-icon{
+    -webkit-transition: transform .2s;
+    transition: transform .2s;
+}
+
+.THIS .slds-section.section-is-open > .slds-section__title > .slds-section__title-action > .slds-section__title-action-icon{
+    transform: rotate(0deg);
+}
+.THIS .section-child-1{
+    padding-left: 30px;
+}
+.THIS .section-child-2{
+    padding-left: 60px;
+}
+.THIS .section-child-3{
+    padding-left: 90px;
+}
+
+.THIS .lista-acoes{
+    text-align: right;
+    background: rgb(243, 242, 242);
+    border-radius: .25rem;
+    padding: 0.2rem;
+}
+
+.THIS .lista-acoes li{
+    display: inline-block;
+    padding-right: 15px;
+    cursor: pointer;
+}
+.THIS .lista-acoes li:hover,.THIS .lista-acoes li:focus{
+    text-decoration: underline;
+}

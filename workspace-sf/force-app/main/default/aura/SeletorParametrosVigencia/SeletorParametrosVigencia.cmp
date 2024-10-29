@@ -1,0 +1,59 @@
+<aura:component controller="SeletorParametrosVigenciaController" implements="force:hasRecordId,force:lightningQuickActionWithoutHeader" access="global" >
+    <!-- external js/css -->
+    <ltng:require styles="{! $Resource.modalCSS }" />
+
+    <!-- attributes -->
+    <aura:attribute name="selectedRows" type="Object[]" />
+    <aura:attribute name="data" type="List" default="[]" />
+    <aura:attribute name="isInvalid" type="Boolean" default="true" />
+
+    <!-- lds1 -->
+    <aura:attribute name="record1" type="Product2" />
+    <aura:attribute name="simpleRecord1" type="Product2" />
+    <aura:attribute name="recordError1" type="String" />
+    <force:recordData aura:id="produtoComercial"
+        recordId="{! v.recordId }"
+        layoutType="FULL"
+        fields="Id, Name, ProductCode, ProdutoTecnico__c, ProdutoTecnico__r.Name, ProdutoTecnico__r.ProductCode, RecordTypeId, RecordType.Name"
+        mode="VIEW"
+        targetRecord="{! v.record1 }"
+        targetFields="{! v.simpleRecord1 }"
+        targetError="{! v.recordError1 }"
+    />
+    
+    <!-- handlers -->
+    <aura:handler name="init" value="{! this }" action="{! c.inicializar }" />
+    <aura:handler name="onRowSelection" event="c:DataTableSelector_onRowSelection" action="{! c.onRowSelection }"/>
+
+    <!-- markup -->
+    <section id="seletorParametrosVigencia" aura:id="seletorParametrosVigencia" role="dialog" class="slds-modal slds-fade-in-open slds-modal_medium" aria-modal="true">
+        <div class="slds-modal__container">
+            <header class="slds-modal__header">
+                <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" onclick="{! c.fechar }" title="Fechar">
+                    <lightning:icon iconName="utility:close" size="small" alternativeText="Fechar"/>
+                    <span class="slds-assistive-text">Fechar</span>
+                </button>
+                <h2 aura:id="modalHeader" class="slds-text-heading_medium">Parâmetros de vigência</h2>
+                <p class="slds-m-top_x-small">{! 'Produto técnico: ' + v.simpleRecord1.ProdutoTecnico__r.Name + ', Código produto: ' + v.simpleRecord1.ProdutoTecnico__r.ProductCode }</p>
+            </header>
+            <div class="slds-modal__content slds-grow">
+                <div class="slds-grid slds-grid_vertical">
+                    <div class="slds-scrollable slds-grow">
+                        <c:DataTableSelector aura:id="dtsDeterminados"
+                            data="{! v.data }"
+                            columns="[
+                                { label: 'Número', fieldName: 'Name', type: 'text', sortable: true },
+                                { label: 'Tipo', fieldName: 'Tipo__c', type: 'text', sortable: true }
+                            ]"
+                            maxRowSelection="1"
+                        />
+                    </div>
+                </div>
+            </div>
+            <footer class="slds-modal__footer">
+                <lightning:button variant="neutral" label="Cancelar" onclick="{! c.cancelar }" />
+                <lightning:button aura:id="btnSelecionar" variant="brand" label="Selecionar" disabled="{! v.isInvalid }"  onclick="{! c.selecionar }" />
+            </footer>
+        </div>
+    </section>
+</aura:component>

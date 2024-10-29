@@ -1,0 +1,20 @@
+<apex:page standardController="Product2">
+    <apex:includeLightning />
+
+    <div id="lightning" />
+
+    <script>
+        $Lightning.use("c:GerenciamentoTerritorioApp", function() {
+          $Lightning.createComponent("c:GerenciamentoTerritorios", { 
+          	recordId : "{!Product2.Id}",
+          	execucaoViaApp: true
+          },
+          "lightning",
+          function(component) {
+          	let produtoId = "{!Product2.Id}";
+            //component.set("v.recordId", produtoId);
+            //component.set("v.execucaoViaApp", true);
+          });
+        });
+    </script>
+</apex:page>

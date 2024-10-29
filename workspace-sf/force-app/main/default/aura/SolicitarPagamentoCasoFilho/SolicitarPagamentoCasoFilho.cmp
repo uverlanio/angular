@@ -1,0 +1,71 @@
+<aura:component controller="SolicitarPagamentoCasoFilhoController" implements="lightning:actionOverride,force:lightningQuickActionWithoutHeader,force:hasRecordId,force:hasSObjectName" access="global">
+    <ltng:require styles="/resource/SLDS282/assets/styles/salesforce-lightning-design-system.css"/>
+    
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:attribute name="recordId" type="Id"/>
+    <aura:attribute name="msg" type="String"/>
+    <aura:attribute name="casos" type="Map"/>
+    <aura:attribute name="idBenef" type="String" />
+    <aura:attribute name="Likedisable" type="Boolean" default="false" />
+    <aura:attribute name="percValorIndenizado" type="currency" />
+
+
+
+<lightning:card>
+	<div class="corpo">
+        <div aura:id="spinner" class="demo-only">
+            <div role="status" class="slds-spinner slds-spinner_medium slds-spinner_brand">
+                <span class="slds-assistive-text">Loading</span>
+                <div class="slds-spinner__dot-a"></div>
+                <div class="slds-spinner__dot-b"></div>
+            </div>
+        </div>
+    	<div class="row">
+                <div aura:id="erro" class="slds-hide">
+                    <div class="erro">
+                    	<lightning:icon size="medium" aura:id="icone-error" iconName="action:close" alternativeText="Error!" variant="error"/>
+                        <p class="status">
+                            {!v.msg}
+                        </p>
+                    </div>
+                    <div style="bottom:initial;" aura:id="footer" class="slds-docked-form-footer">
+                        <div class="positionbutton">
+                            <button type="button" onclick="{!c.voltarBox}" class="slds-button slds-button_brand">Ok</button>
+                        </div>
+                    </div>
+                </div>
+                <div aura:id="lessdays" class="slds-hide">
+                    <div class="erro">
+                        <lightning:icon size="medium" aura:id="change_record_type" iconName="action:change_record_type" alternativeText="Aviso" variant="aviso"/>
+                        <p class="status">
+                            {!v.msg}
+                        </p>
+                    </div>
+                    <div style="bottom:initial;" aura:id="footer" class="slds-docked-form-footer">
+                        <div class="positionbutton">
+                            <button type="button" onclick="{!c.confirmardata}" class="slds-button slds-button_brand">Confirmar</button>
+                            <button style="margin-right:14px;" type="button" onclick="{!c.voltarBox}" class="slds-button slds-button_neutral">Cancelar</button>
+                        </div>
+                    </div>
+                </div>
+                <div aura:id="sucesso" class="slds-hide">
+                    <div class="sucesso">
+                        <!--<lightning:input aura:id="dataprog" class="separador" type="date" name="input1" label="Data programada de pagamento" />-->
+                        <lightning:input aura:id="valorcap" maxlength="7" type="number"  name="input3" label="Capital" formatter="currency" step="0.01" value="{!v.casos[0].Capital__c}" disabled="true"/>
+                        <lightning:input aura:id="valorcompl" maxlength="7" type="number"  name="input1" label="Complemento da indenização" formatter="currency" step="0.01" value="{!v.casos[0].ComplementoIndenizacao__c}" disabled="true"/>
+                        <lightning:input aura:id="valorpagam" maxlength="7" type="number"  name="input2" label="Valor a ser indenizado" formatter="currency" step="0.01" value="{!v.percValorIndenizado}" disabled="true"/>
+                    </div>
+                    <div style="bottom:initial;" aura:id="footer" class="slds-docked-form-footer">
+                        <div class="positionbutton">
+                            
+                            <lightning:button  label="Solicitar Pagamento"  disabled="{!v.Likedisable}" class="slds-button slds-button_brand" title="Salvar" onclick="{!c.clickbutton}"/>
+                        
+                        </div>
+                    </div>   
+                </div>
+        </div>
+    </div>
+</lightning:card> 
+
+</aura:component>

@@ -1,0 +1,135 @@
+.THIS .wk_warning {
+    background : #FFB75D !important;
+}
+.THIS .wk_success {
+    background : #04844B !important;
+} 
+.THIS .table.center {
+    margin-left:auto; 
+    margin-right:auto;
+  }
+
+.THIS .slds-spinner_container {
+	background: none;
+}
+
+.THIS .positionbutton {
+	position: relative;
+	float: right;
+	width: 95%;
+	padding: 0px 1rem;
+}
+
+.THIS .slds-button {
+    float: right;
+}
+
+.THIS #btnCancel.slds-button,
+.THIS #btnVoltar.slds-button {
+	float: left;
+	margin-left: 0;
+}
+
+.THIS .nofloat {
+	float:none;
+}
+
+.THIS .status {
+	padding: 1px;
+	text-align: center;
+	margin-top: 5px;
+}
+
+.THIS  h1{
+    font-size: 18px; 
+}
+
+.THIS .container {
+	min-height:170px;
+}
+
+.THIS .slds-m-around_xx-large {
+	margin: 0 auto;
+	text-align: center;
+}
+
+.THIS #wrapEventos.slds-m-around_xx-large {
+	width: 70%;
+}
+
+.THIS .slds-docked-form-footer{
+	z-index: 0 !important;
+}
+.THIS .icon {
+	width: 50px !important;
+	margin: 0 auto !important;
+}
+
+.THIS.slds-modal__header {
+margin: 0rem -2rem;
+padding: 0 0 1rem 0;
+}
+.THIS.slds-modal__body {
+margin: 0 -2rem;
+height: 270px;	
+}
+.THIS.slds-modal__footer {
+margin: 0 -2rem;
+   /* padding: 1.5rem 2.5rem 0 0; */
+   box-shadow: unset;
+   background-color: #fff;
+}
+
+.THIS .error {
+	margin-top: 75px;
+}
+
+.THIS .escolha {
+	color: #a0a0a0;
+    position: relative;
+    margin-top: 10px;
+}
+
+.THIS .tabela {
+	padding: 0px 40px;
+}
+
+.THIS .disable {
+	color: #8e8e8e;
+}
+
+.THIS .icone {
+	vertical-align: sub;
+    align-self: auto;
+    width: 80px;
+}
+
+.THIS .toggle {
+   display: none;
+ }
+
+.THIS .checkbox{
+	float:left;
+}
+
+.THIS .checkboxchecked {
+	background:#f1f1f1;
+	display:inline-block;
+	padding: 10px;
+	border-radius: 5px;
+	margin: 5px;
+}
+
+.THIS #garantias {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.THIS #garantias th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+.THIS #garantias tr:nth-child(even){background-color: #f2f2f2;}
+
+.THIS #garantias tr:hover {background-color: #ddd;}

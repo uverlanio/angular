@@ -1,0 +1,12 @@
+<aura:component implements="flexipage:availableForAllPageTypes,force:hasRecordId,force:lightningQuickAction" controller="PdfEcmController">
+	<aura:handler name="init" value="{!this}" action="{!c.inicializar}" />
+	<aura:attribute name="recordId" type="Id" />
+	<aura:attribute name="dominio" type="String" />
+	<aura:attribute name="codigoDoc" type="String" />
+	<aura:attribute name="linkgerado" type="Boolean" default="false" />
+
+	<div class="link">
+		<lightning:spinner alternativeText="Loading" size="medium" class="{!'' + (v.linkgerado ? ' slds-hide' : '')}" />
+        <a class="{!'' + (v.linkgerado ? '' : ' slds-hide')}" href="{!v.dominio + '/services/apexrest/buscaecmpdf?codigo=' + v.codigoDoc}" target="_blank" >Clique aqui</a>
+    </div>
+</aura:component>

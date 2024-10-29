@@ -1,0 +1,621 @@
+<!--PLV-3705 inicio-->
+<apex:page showHeader="false" renderAs="advanced_pdf" applyBodyTag="false" controller="ApoliceController" >
+
+    <head>
+        
+            <meta charset="UTF-8" />
+            <title>Projeto pra Porto Seguro</title>
+            
+            <apex:stylesheet value="{!URLFOR($Resource.testeCss)}"/>
+        <style type="text/css" media="print">
+            @page {
+                margin-top: 1cm;
+                margin-bottom: 0.5cm;
+                margin-left: 0.5cm;
+                margin-right: 1cm;
+             
+                @bottom-left {
+                    content: element(footer);
+                }
+            }
+            /*
+            .pagenumber:before {
+                content: counter(page);
+            }
+
+            .pagecount:before {
+                content: counter(pages);
+            }
+
+            div.header {
+                position: running(header);
+                display: inline-block;
+
+            }
+
+            div.footer {                
+                position: running(footer);                
+            }
+
+            div.footer table {
+                width: 100%;
+                border-spacing: 0;
+                border: none;
+            }
+
+            div.footer table td {
+                text-align: center;
+                border: none;
+                width: 33.33%;
+            }
+ 
+            .content{
+                font-family: SansSerif; 
+                color: black;
+            }
+
+            .cabecalho {                                                          
+                width: 100%;
+                text-align: center;                               
+            }   
+
+            .cabecalho .texto{
+                font-family: SansSerif; 
+                color: #002060; 
+                font-size:15pt; 
+                font-weight:900;
+            }                
+
+            .cabecalhoLogo{               
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                position: relative;
+            }
+
+            .cabecalhoLogo .logo{
+                position: absolute;
+                top: 0;
+                right: 0;
+            }
+
+            .divCabecalho {
+                margin-bottom: -17px;
+            }
+
+            .larguraPadraoPequena{
+                width: 40%; 
+            }
+
+            .larguraRodape{                
+                margin-bottom: -8px;
+            }    
+
+            .linhaTabela{
+                border-left: 1px solid #00B0F0; 
+                padding-left: 5px
+            }
+
+            .fontNegrito{
+                font-weight:900;
+            }    
+
+            .fontRodape{
+                font-size:8px; 
+            }
+
+            .divTabelaOrcamento{
+                margin-bottom: -8px;
+                width: 100%; 
+            }
+
+            .divTabelaOrcamento .orcamento{
+                font-size: 11.5px;
+                width: 60%; 
+                margin-left: auto; 
+                margin-right: auto;
+                border-bottom: 1.5px solid #00B0F0;
+                border-top: 1.5px solid #00B0F0;
+            }
+            
+            .divMoeda{
+                width: 100%;
+            }
+
+            .divMoeda table{
+                width: 60%;
+                margin-left: auto; 
+                margin-right: auto;
+                font-size: 9px;
+            }
+
+            .divMoeda tr{
+                font-weight:900;
+                text-align: right;
+            }
+
+            .divParagrafo{
+                margin-bottom: -8px;
+                font-size: 13px;
+            }
+
+            .divDadosPassageiro{
+                width: 100%;
+                margin-bottom: 5px;
+            }
+
+            .divDadosPassageiro table{
+                font-size: 11.5px;
+                width: 100%; 
+                margin-left: auto; 
+                margin-right: auto;
+                border-bottom: 1.5px solid #00B0F0;
+                border-top: 1.5px solid #00B0F0;
+            }
+
+            .divDadosPassageiro tr{
+                height: 17px;
+                font-weight:900;
+            }
+
+            .divTabelaDadosPassageiro{
+                width: 100%;
+                margin-bottom: 2px;
+            }
+
+            .divTabelaDadosPassageiro table{
+                font-size: 11.5px;
+                width: 100%;
+                margin-left: auto; 
+                margin-right: auto;
+                border-collapse: collapse; 
+                background: white;
+            }
+
+            .divTabelaDadosPassageiro tr{
+                text-align: left;
+                height: 17px;
+            }
+
+            .linhaTabelaDadosPassageiro{
+                text-align: left; font-size: 10.5px;
+            }
+
+            .divDadosCorretor{
+                width: 100%;
+                margin-bottom: 5px;
+            }
+
+            .divDadosCorretor table{
+                width: 100%; 
+                margin-left: auto; 
+                margin-right: auto;
+                border-bottom: 1.5px solid #00B0F0;
+                border-top: 1.5px solid #00B0F0;
+            }
+
+            .divDadosCorretor tr{
+                font-size: 11.5px;
+                height: 17px;
+                font-weight:900;
+            }
+
+            .divTabelaDadosCorretor{
+                width: 100%; 
+                margin-bottom: 5px;
+            }
+
+            .divTabelaDadosCorretor table{
+                font-size: 11.5px;
+                width: 100%; 
+                margin-left: auto; 
+                margin-right: auto;
+                border-collapse: collapse; 
+                background: white;
+            }
+
+            .divTabelaDadosCorretor tr{
+                text-align: left;  
+                height: 17px;
+            }           
+
+            .divDadosPlanoCoberturaEPagamento{
+                width: 100%;
+                margin-bottom: 2px;
+            }
+
+            .divDadosPlanoCoberturaEPagamento table{
+                width: 100%; 
+                margin-left: auto; 
+                margin-right: auto;
+                border-bottom: 1.5px solid #00B0F0;
+                border-top: 1.5px solid #00B0F0;
+            }
+            .divDadosPlanoCoberturaEPagamento tr{
+                font-size: 11.5px;
+                height: 17px;
+                font-weight:900;
+            }
+
+            .divDadosPlano{
+                width: 100%; 
+                margin-bottom: 2px;
+            }
+
+            .divDadosPlano table{
+                font-size: 11.5px;
+                width: 100%; 
+                margin-left: auto; 
+                margin-right: auto;
+            }
+
+            .divDadosPlano tr{
+                height: 17px;
+            }
+
+            .divTabelaCobertura{
+                width: 100%;
+                margin-bottom: 5px;
+            }
+
+            .divTabelaCobertura table{
+                width: 100%;
+                margin-left: auto; 
+                margin-right: auto;
+                font-size: 9px;                
+            }
+
+            .divTabelaCobertura tr{
+                text-align: left; 
+                height: 17px;
+            }
+
+            .divTabelaCobertura td{
+                border: 1px solid #white; 
+                text-align: left; 
+                background: #white;
+            }
+
+            .linhaAzul{                 
+                background: #00bfff;
+            }
+            
+            .divObservacao{
+                width: 100%;
+                margin-bottom: -5px; 
+            }
+
+            .divObservacao table{
+                width: 100%; 
+                margin-left: auto; 
+                margin-right: auto;
+                border-bottom: 1.5px solid #00B0F0;
+                border-top: 1.5px solid #00B0F0;
+            }
+
+            .divObservacao tr{
+                font-size: 11.5px;
+                height: 17px;
+                font-weight:900;
+            }
+
+            .divTextoObservacao{
+                margin-bottom: -5px;
+            }
+
+            .divTextoObservacao .paragrafoObservacao{
+                font-size: 11.5px;
+                margin-bottom: -6px;
+            }
+
+            .fontObservacaoTextoLei{
+                font-size: 10px; 
+            }
+           
+           .divFormasDePagamento{
+            width: 100%;
+            margin-bottom: 5px;
+           }
+
+           .divFormasDePagamento table{
+            width: 100%;
+            margin-left: auto; 
+            margin-right: auto;
+            font-size: 13px;
+            border-bottom: 1.5px solid #00B0F0;
+            border-top: 1.5px solid #00B0F0;
+           }
+
+           .divFormasDePagamento tr{
+            font-size: 11.5px;
+            font-weight:900;
+           }
+
+           .divTabelaFormasDePagamento{
+            width: 100%; 
+            margin-bottom: -5px;
+           }
+
+           .divTabelaFormasDePagamento table{
+            font-size: 11.5px;
+            width: 100%; 
+            margin-left: auto; 
+            margin-right: auto;
+            border-collapse: collapse; 
+            background: white;
+           }
+
+           .divTabelaFormasDePagamento tr{
+            text-align: left;
+            height: 17px;
+           }*/
+            
+        </style>
+    </head>
+
+    <body>
+        <!-- PAGE CONTENT  -->     
+        <div class="content">
+            <header class="cabecalhoLogo">
+                
+                <div class="divCabecalho">
+                    <div class="logo">
+                        <apex:image value="{!$Resource.NovoLogoApolice}" width="40px" height="50px" />
+                    </div>                
+                    <div class="cabecalho" id="header" align="center">                        
+                        <p class="texto">ORÇAMENTO | Seguro Viagem :</p>                                        
+                    </div>
+                </div>
+    
+            </header>
+
+            <div align="center" class="divTabelaOrcamento"> 
+                <table class="orcamento">
+                    <tr class="fontNegrito">
+                        <td>Nº do Orçamento </td> 
+                        <td>Data do Orçamento </td>
+                        <td>Dólar | Euro*</td>                   
+                    </tr> 
+                    <tr>
+                        <td>0000</td>     
+                        <td>08/20/2020</td>
+                        <td>R$ 1.500</td>          
+                    </tr> 
+                </table>  
+                
+                <div align="right" class="divMoeda">
+                    <table>
+                        <tr>
+                            <td>*Valor da moeda utilizada para cálculo orçamento</td>          
+                        </tr> 
+                    </table>                      
+                </div>  
+            </div>
+
+            <div class="divParagrafo">
+                <p align="justify" >
+                    Muito obrigado por escolher o PORTO SEGURO VIAGEM para proteger você e sua família. 
+                    É muito bom ter você como nosso Cliente. Sabemos que imprevistos podem acontecer e, 
+                    por isso, nossas coberturas e serviços proporcionam mais tranquilidade e segurança 
+                    para a sua viagem. Conte com a gente!        
+                </p>
+            </div>
+            
+            <div align="center" class="divDadosPassageiro" > 
+                <table>
+                    <tr>
+                        <td>DADOS DO (S) PASSAGEIRO (S) E DA VIAGEM</td>          
+                    </tr> 
+
+                </table>
+           </div>  
+           
+           <div align="center" class="divTabelaDadosPassageiro" > 
+                <table>
+                    <tr>
+                        <td class="larguraPadraoPequena"><strong>Nome:</strong><apex:outputText value="{!nomeSegurado}"/></td> 
+                        <td class="linhaTabela"><strong>Data de Saída:</strong> 01/03/2020 </td>
+                        <td class="linhaTabela"><strong>Origem:</strong> Brasil</td>                   
+                    </tr> 
+                    <tr>
+                        <td ><strong>Passageiros até 70 anos**:</strong> 1</td>     
+                        <td class="linhaTabela"><strong>Data de Retorno:</strong> 20/03/2020</td>
+                        <td class="linhaTabela"><strong>Destino:</strong> América do Norte</td>          
+                    </tr>
+                    <tr>
+                        <td><strong>Passageiros de 71 a 90 anos**:</strong>  0</td>     
+                        <td class="linhaTabela"><strong>Duração de Viagem:</strong> 20 dias</td>
+                        <td class="linhaTabela"><strong>Prática de Esportes e Aventura:</strong> Não</td>          
+                    </tr> 
+                    <tr class="linhaTabelaDadosPassageiro">
+                        <td colspan="3">**Quantidade de passageiros, incluindo o principal.</td>
+                    </tr>
+                </table> 
+            </div>   
+            
+            <div align="center" class="divDadosCorretor" > 
+                <table>
+                    <tr>
+                        <td>DADOS DO CORRETOR</td>          
+                    </tr> 
+
+                </table>
+           </div> 
+
+           <div align="center" class="divTabelaDadosCorretor" > 
+            <table>
+                <tr>
+                    <td class="larguraPadraoPequena" ><strong>Susep:</strong> 12345J </td> 
+                    <td class="linhaTabela"><strong>Nome da Corretora:</strong> Corretora de Seguros Super Legal Ltda. </td>                                     
+                </tr> 
+                <tr>
+                    <td><strong>Telefone:</strong> (11) 6769-9878</td>     
+                    <td class="linhaTabela"><strong>E-mail:</strong> corretoralegal@uol.com.br</td>                           
+                </tr>                                
+            </table> 
+        </div>
+        
+        <div align="center" class="divDadosPlanoCoberturaEPagamento" > 
+            <table>
+                <tr>
+                    <td>DADOS DO PLANO – COBERTURAS E PAGAMENTO</td>          
+                </tr> 
+
+            </table>
+       </div> 
+
+       <div align="center"  class="divDadosPlano"> 
+            <table>
+                
+                <tr>
+                    <td><strong>Plano:</strong> América </td> 
+                    <td><strong>Pagamento Total:</strong> R$ 800,00</td>
+                    <td><strong>Pagamento Cartão Porto Seguro:</strong> R$ 760,00</td>                   
+                </tr> 
+                
+            </table>  
+       </div>
+
+        <div align="center" class="divTabelaCobertura" > 
+                <table>
+                    <tr class="linhaAzul">
+                        <td class="larguraPadraoPequena">Despesas Médicas, Hospitalares e Odontológicas</td> 
+                        <td>US$ 30.000,00</td>
+                        <td>Extravio de Bagagem</td>   
+                        <td>R$ 2.500,00</td>                
+                    </tr> 
+                    <tr>
+                        <td>Morte Acidental</td> 
+                        <td>R$ 100.000,00</td>
+                        <td>Invalidez Permanente Total ou Parcial por Acidente</td>   
+                        <td>R$ 100.000,00</td>                
+                    </tr> 
+                    <tr class="linhaAzul">
+                        <td>Cancelamento de Viagem</td> 
+                        <td>R$ 2.500,00</td>
+                        <td>Interrupção de Viagem</td>   
+                        <td>R$ 2.500,00</td>                
+                    </tr> 
+                    <tr>
+                        <td>Traslado de Corpo</td> 
+                        <td>US$ 75.000,00</td>
+                        <td>Traslado Médico</td>   
+                        <td>US$ 75.000,00</td>                
+                    </tr> 
+                    <tr class="linhaAzul">
+                        <td>Regresso Sanitário (regresso por doença/acidente)</td> 
+                        <td>US$ 75.000,00</td>
+                        <td>Assistência Funeral Individual</td>   
+                        <td>R$ 5.000,00</td>                
+                    </tr> 
+                    <tr>
+                        <td>Hospedagem Após Alta Hospitalar</td> 
+                        <td>US$ 150,00(1-5 Dia (s))</td>
+                        <td>Remarcação de Passagem para Regresso</td>   
+                        <td>US$ 3.000,00</td>                
+                    </tr> 
+                    <tr class="linhaAzul">
+                        <td>Acompanhante em caso de hospitalização prolongada</td> 
+                        <td>US$ 3.000,00</td>
+                        <td>Hospedagem p/ acompanhante em caso de hosp. prolongada </td>   
+                        <td>US$150,00(1-5Dia (s))</td>                
+                    </tr> 
+                    <tr>
+                        <td>Acompanhante de menor</td> 
+                        <td>US$ 3.000,00</td>
+                        <td>Fisioterapia</td>   
+                        <td>Não contratada</td>  
+                    </tr>
+                    <tr class="linhaAzul">
+                        <td>Remarc. de Passagem para Regresso de Membros da Família</td> 
+                        <td>US$ 3.000,00</td>
+                        <td>Despesas Farmacêuticas</td>   
+                        <td>US$ 500,00</td>                
+                    </tr> 
+                    <tr>
+                        <td>Despesas Jurídicas</td> 
+                        <td>US$ 1.500,00</td>
+                        <td>Pagamento de Fiança</td>   
+                        <td>US$ 2.500,00</td>  
+                    </tr>
+                    <tr class="linhaAzul">
+                        <td>Danos de Bagagem</td> 
+                        <td>US$ 100,00</td>
+                        <td>Extensão de Vigência por razoes Médicas</td>   
+                        <td>Contratada</td>                
+                    </tr> 
+                    <tr>
+                        <td>Localização e Encaminhamento de Bagagem</td> 
+                        <td>Contratada</td>
+                        <td>Orientação e envio em caso de perda de documentos</td>   
+                        <td>Contratada</td>  
+                    </tr>
+                    <tr class="linhaAzul">
+                        <td>Porto Viaje Bem</td> 
+                        <td>Contratada</td>
+                        <td>Transmissão de Mensagens Urgentes</td>   
+                        <td>Contratada</td>                
+                    </tr>                 
+                </table> 
+            </div>   
+
+            <div align="center" class="divObservacao" > 
+                <table>
+                    <tr>
+                        <td>OBSERVAÇÕES</td>          
+                    </tr> 
+
+                </table>
+            </div> 
+            <div class="divTextoObservacao">
+                <p class="paragrafoObservacao" >
+                    1)  Pagamento com Cartão Porto Seguro tem desconto de 5%.<br/>
+                    2)  A vigência do seguro será válida somente se houver a transmissão da proposta eletrônica.<br/>                            
+                    3)  Orçamento válido por 1 (um) dia, na data do cálculo. 
+                </p>      
+                
+                <p class="fontObservacaoTextoLei" align="justify" >
+                    Em atendimento à Lei 12.741/12 informamos que incidem as alíquotas de 0,65% de PIS/PASEP e 
+                    de 4% de COFINS, deduzidos do estabelecido em legislação específica.                            
+                </p>
+            </div>
+            <div align="center" class="divFormasDePagamento" > 
+                <table>
+                    <tr>
+                        <td>FORMAS DE PAGAMENTO</td>          
+                    </tr> 
+                    
+                </table>
+            </div> 
+            <div align="center" class="divTabelaFormasDePagamento" > 
+                <table>
+                    <tr>
+                        <td><strong>Descrição:</strong>Cartão de Crédito demais bandeiras</td> 
+                        <td class="linhaTabela"><strong>Valor Total:</strong>R$ 800,00</td>
+                        <td class="linhaTabela"><strong>Valor da 1ª Parcela:</strong>R$ 80,00</td> 
+                        <td class="linhaTabela"><strong>Juros:</strong>0,00</td>                                        
+                    </tr> 
+                    <tr>
+                        <td><strong>Quantidade de parcelas:</strong>Cartão de Crédito demais bandeiras</td> 
+                        <td class="linhaTabela"><strong>Encargos:</strong>0,00</td>
+                        <td class="linhaTabela"><strong>Valor Demais Parcelas:</strong>R$ 80,00</td> 
+                        <td class="linhaTabela"><strong>IOF:</strong>0,38</td>                                        
+                    </tr>                                 
+                </table> 
+            </div>
+            
+            <div class="larguraRodape" >
+                <p align="justify" class="fontRodape" >
+                    Para mais informações, entre em contato com o seu Corretor de seguros, ou ligue para nossa Central de Atendimento Vida, de segunda 
+                    à sexta, das 8h15 às 18h30, nos telefones: (11) 3366-3377 (Grande São Paulo) / 0800 727 9393 (demais localidades) | 0800 727 2746 
+                    (SAC - informação, reclamação e cancelamento – 24 horas) | 0800 727 8736 (atendimento exclusivo para deficientes auditivos – 24 horas)
+                    | 0800 727 1184 (Ouvidoria). Informações reduzidas. Consulte as condições gerais. Seguro garantido por Porto Seguro Cia de Seguros 
+                    Gerais S.A. CNPJ 60.198.164/0001-60. Seguro Viagem - Processo SUSEP: 15414.00476/2015-42. Seguro Viagem Aventura 15414.900707/2015-18. 
+                    O registro deste plano na SUSEP não implica, por parte da Autarquia, incentivo ou recomendação à sua comercialização.
+                </p>
+            </div>
+        </div>       
+    </body>
+    <!-- 3404 FIM  -->
+</apex:page>
+<!--PLV-3705 fim-->

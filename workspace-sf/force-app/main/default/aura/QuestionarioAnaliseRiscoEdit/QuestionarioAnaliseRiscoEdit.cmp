@@ -1,0 +1,82 @@
+<!--
+ - Created by Alessndro Ponte on 19/06/2018.
+ -->
+
+<aura:component description="QuestionarioAnaliseRiscoEdit" controller="QuestionarioAnaliseRiscoController">
+
+  <aura:attribute type="Aura.Component" name="controles" >
+    <lightning:buttonGroup>
+      <lightning:buttonIcon onclick="{!c.perguntaAnterior}" iconName="utility:chevronleft"
+                            disabled="{! !v.wrapperPerguntas.haAnterior }"/>
+      <lightning:buttonIcon onclick="{!c.proximaPergunta}" iconName="utility:chevronright"
+                            disabled="{! !v.wrapperPerguntas.haProxima }"/>
+    </lightning:buttonGroup>
+  </aura:attribute>
+
+  <aura:attribute name="wrapperPerguntas" type="Object" />
+  <aura:attribute name="perguntaAtiva" type="Object" default="{!v.wrapperPerguntas.perguntaAtiva}" />
+  <aura:attribute name="vida" type="Object" />
+  <aura:attribute name="listRespostas" type="RespostaQuestionario__c[]" />
+
+  <aura:method name="responderProxima" action="{!c.responderProxima}" />
+
+  <aura:if isTrue="{!v.wrapperPerguntas.perguntaAtiva}">
+    <lightning:card class="slds-has-top-magnet" actions="{!v.controles}" title="{!'Pergunta ' + v.perguntaAtiva.Numero__c + ' de ' + v.wrapperPerguntas.total}" >
+      <aura:set attribute="footer">
+        <lightning:buttonGroup>
+          <lightning:button label="Salvar" onclick="{!c.salvarRespostas}" />
+          <lightning:button label="Limpar alterações" onclick="{!c.limparAlteracoes}"/>
+        </lightning:buttonGroup>
+      </aura:set>
+      <div class="slds-p-horizontal_small">
+
+        <section class="slds-card">
+
+          <div class="slds-media">
+            <div class="slds-media__figure">
+              <div class="slds-progress-ring slds-progress-ring_large">
+                <div class="slds-progress-ring__content">{!v.perguntaAtiva.Numero__c}</div>
+              </div>
+            </div>
+            <div class="slds-media__body slds-m-top_x-small">
+              <div class="slds-media">
+                <div class="slds-setup-assistant__step-summary-content slds-media__body">
+                  <h3 class="slds-setup-assistant__step-summary-title slds-text-heading_small">
+                    {!v.perguntaAtiva.Pergunta__r.Name}
+                  </h3>
+                  <div>
+                    <aura:if isTrue="{!v.perguntaAtiva.Pergunta__r.TipoResposta__c == 'Texto'}">
+                    <lightning:textarea value="{!v.perguntaAtiva.RespostasQuestionario__r[0].Resposta__c}" name="respostaTexto" />
+
+                      <aura:set attribute="else" >
+                        <aura:if isTrue="{!v.perguntaAtiva.Pergunta__r.TipoResposta__c == 'Data'}">
+                          <lightning:input type="date" value="{!v.perguntaAtiva.RespostasQuestionario__r[0].Resposta__c}" name="respostaData" placeholder="DD/MM/AAAA" />
+
+                          <aura:set attribute="else" >
+                            <aura:if isTrue="{!v.perguntaAtiva.Pergunta__r.TipoResposta__c == 'Número'}">
+                              <lightning:input value="{!v.perguntaAtiva.RespostasQuestionario__r[0].Resposta__c}" type="number" name="respostaNumero"  />
+
+                              <aura:set attribute="else" >
+                                <aura:if isTrue="{!v.perguntaAtiva.Pergunta__r.TipoResposta__c == 'Opção'}">
+                                  <lightning:combobox name="respostaCombobox" value="{!v.perguntaAtiva.RespostasQuestionario__r[0].Resposta__c}" placeholder="Escolha..." options="{! v.wrapperPerguntas.opcoes }" />
+
+                                </aura:if>
+                              </aura:set>
+                            </aura:if>
+                          </aura:set>
+                        </aura:if>
+                      </aura:set>
+
+
+
+                    </aura:if>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </lightning:card>
+  </aura:if>
+</aura:component>

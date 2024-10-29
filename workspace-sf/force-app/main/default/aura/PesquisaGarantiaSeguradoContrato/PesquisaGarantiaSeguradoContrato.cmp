@@ -1,0 +1,84 @@
+<aura:component implements="force:hasrecordId,force:lightningQuickActionWithoutHeader" controller="PesquisaGarantiaSegContratoController" access="global">
+    <aura:attribute name="title" type="String" default="Selecionar Garantia" access="public"/>
+    <aura:attribute name="recordId" type="Id"/>
+    <aura:attribute name="semgarantias" type="String"/>
+    <aura:attribute name="semsegurado" type="String"/>
+    <aura:attribute name="search" type="String"/>
+    <aura:attribute name="data" type="Object"/>
+    <aura:attribute name="nomepag" type="String"/>
+
+    <aura:handler name="init" value="{! this }" action="{! c.init }"/>
+
+	<header class="slds-modal__header" aura:id="header">
+        <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">{!v.title}</h2>
+    </header>
+
+
+    <div aura:id="modal_body" class="slds-modal__body slds-wrap slds-scrollable_y"> 
+        <br></br>
+	    <div class="slds-form-element slds-lookup" data-select="single">
+	      <div class="slds-form-element__control">
+	        <div class="slds-input-has-icon slds-input-has-icon--right">
+	          
+	            <div>
+		        	<lightning:input
+			            aura:id="enter-search"
+			            name="enter-search"
+			            type="search"
+			            value="{!v.search}"
+			            onchange="{!c.handleOnChange}"
+			        />
+			    </div>
+
+	          </div>
+	      </div>
+	    </div>
+		<aura:if isTrue="{!v.data != null}">
+            <!--<div style="height: 300px">
+                <lightning:datatable
+                        keyField="id"
+                        data="{! v.data }"
+                        columns="{! v.columns }"
+                        hideCheckboxColumn="true"
+                        />
+            </div>-->
+
+            <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                <thead>
+                    <tr class="slds-line-height_reset">
+                        <th class="" scope="col" width="30%">
+                            <div class="slds-truncate" title="Número">Número</div>
+                        </th>
+                        <th class="" scope="col">
+                            <div class="slds-truncate" title="Garantia">Garantia</div>
+                        </th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <aura:iteration items="{!v.data}" var="data" indexVar="index" >
+                        <tr class="slds-hint-parent">
+                            <td data-label="Name" scope="row" width="30%">
+                                <div class="slds-truncate" title="Name"><a data-index="{!index}" onclick="{!c.updatePagamento}" tabindex="-1">{!data.Name}</a></div>
+                            </td>
+                            <td data-label="Garantia">
+                                <div class="slds-truncate" title="Garantia">{!data.Garantia}</div>
+                            </td>
+                        </tr>
+
+                    </aura:iteration>
+
+                </tbody>
+            </table>
+        </aura:if>
+    	<aura:if isTrue="{!v.semgarantias != null}">
+        	<h2>{!v.semgarantias}</h2>
+    	</aura:if>
+        <aura:if isTrue="{!v.semsegurado != null}">
+        	<h2>{!v.semsegurado}</h2>
+    	</aura:if>
+    </div>
+    <footer aura:id="footer" class="slds-show slds-modal__footer">
+            <button type="button" onclick="{!c.voltarBox}" class="slds-button slds-button_neutral">Cancelar</button>
+    </footer>
+</aura:component>
