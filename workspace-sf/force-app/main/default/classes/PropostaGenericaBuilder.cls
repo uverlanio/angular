@@ -867,14 +867,64 @@ public without sharing class PropostaGenericaBuilder extends PropostaBuilder
         else
             throw new PropostaBuilderException('Número de orçamento não ncontrado.');
     }
+
+   // ---- ANNVI-229-Inicio --- //
+    public List<String> validarQuestionario(EmissaoTO.QuestionarioTO questionario) {
+
+       // --- Consulta para obter as perguntas obrigatórias do questionário
+        List<PerguntaQuestionario__c> questoesList = [
+            SELECT Numero__c
+            FROM PerguntaQuestionario__c
+            WHERE Questionario__r.Codigo__c = :questionario.idquestionario
+            AND Obrigatorio__c = true
+            ORDER BY Numero__c
+        ];
+    
+        // --- Mapear as respostas do questionário para facilitar a verificação
+        Map<String, String> respostasMap = new Map<String, String>();
+        for (EmissaoTO.RespostaTO resposta : questionario.respostas) {
+            respostasMap.put(resposta.questao, resposta.resposta);
+        }
+    
+        // --- Lista para armazenar as perguntas obrigatórias que estão sem resposta
+        List<String> perguntasSemResposta = new List<String>();
+    
+        // --- Validar se cada pergunta obrigatória tem uma resposta preenchida
+        for (PerguntaQuestionario__c pergunta : questoesList) {
+            String numeroQuestao = String.valueOf(pergunta.Numero__c);
+            // -- Verificar se a resposta existe e não está vazia
+            if (!respostasMap.containsKey(numeroQuestao) || String.isBlank(respostasMap.get(numeroQuestao))) {
+                perguntasSemResposta.add(numeroQuestao);
+            }
+        }
+    
+       
+        perguntasSemResposta.sort();
+
+    // --- Retornar a lista de perguntas sem resposta, ou null se todas foram preenchidas corretamente
+    return perguntasSemResposta.isEmpty() ? null : perguntasSemResposta;
+    }
+      // ------- ANNVI-229-Fim ----------//
     
     //PLV-2663 - INICIO -AVX
     public void criarRespostaDeclaracaoSaude(EmissaoTO.PayloadTO payload, Id propostaId)
     {	
         //PLV-4257 - inicio
-        system.debug('payload: '+payload);
+
+        system.debug('payload =>: '+payload);
         //PLV-3285 - INICIO - MVP A Transmissão da proposta
         if (payload.proposta.contratantes[0].grupos[0].segurados[0].questionario == null) return;
+     
+         // ------- ANNVI-229-Inicio -------//
+         EmissaoTO.QuestionarioTO questionario = payload.proposta.contratantes[0].grupos[0].segurados[0].questionario;
+         List<String> lista = validarQuestionario(questionario);
+       
+        if(lista != null){
+            System.debug('Perguntas obrigatórias sem resposta: ' + lista.size());
+            throw new PropostaBuilderException('Erro na validação do questionário');  
+        }
+        // --- ANNVI-229-Fim ------//
+
         //PLV-3285 - FIM - MVP A Transmissão da proposta
         Map<String, DeclaracaoSaude__c> mDeclaracaoSaude = new Map<String,DeclaracaoSaude__c>();
         Map<String, List<RespostaDeclaracaoSaude__c>> mRespDeclaracaoSaude = new Map<String, List<RespostaDeclaracaoSaude__c>>();
@@ -3690,12 +3740,12 @@ upsert listaContasProposta IdExterno__c;*/
     public void atribuirParcelasRecorrencia(ServiceTO.OfertaTO payloadParcelamentos, EmissaoTO.PayloadTO payloadTO){
             if(payloadTO != null && payloadTO.proposta != null &&
                 payloadTO.proposta.contratantes[0] != null && 
-                payloadTO.proposta.contratantes[0].dadosPagamento != null && payloadTO.proposta.codigoEmpresa == 14){ //ANNVI-48 - INICIO/FIM
+                payloadTO.proposta.contratantes[0].dadosPagamento != null ){ //ANNVI-48 - INICIO/FIM ANNVI-151-INICIO/FIM 
                 for(ServiceTO.ParcelamentoTO parcela : payloadParcelamentos.parcelamentos){
                 //RVI-240-INICIO
                 if(MetadataDAO.getInstance().existsInMetadata(payloadTO.proposta.segmento, payloadTO.proposta.codigoProdutoVida, payloadTO.proposta.codigoEmpresa) &&  //RVI-240-FIM
                    payloadTO.proposta.contratantes[0].dadosPagamento.quantidadeParcelas == parcela.qtdParcelas &&
-                  (parcela.codigo == 70 || parcela.codigo == 98 || parcela.codigo == 62 || parcela.codigo == 97) && payloadTO.proposta.contratantes[0].dadosPagamento.codigoFormaPagamento == parcela.codigo) { //TKCL-441 FIX02 INICIO/FIM PLV-5860-INICIO/FIM //ANNVI-48 - INICIO/FIM
+                  (parcela.codigo == 70 || parcela.codigo == 98) || ((parcela.codigo == 62 || parcela.codigo == 97) && payloadTO.proposta.codigoEmpresa == 14) && payloadTO.proposta.contratantes[0].dadosPagamento.codigoFormaPagamento == parcela.codigo) { //TKCL-441 FIX02 INICIO/FIM PLV-5860-INICIO/FIM //ANNVI-48 - INICIO/FIM ANNVI-151-INICIO/FIM 
                     if(parcela.qtdParcelas > 1){
                         this.dadosPagamentoRecorrencia = this.dadosPagamento;
                         System.debug('CODIGO PAGAMENTO: '+ parcela.codigo);
