@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>BloquearEdicaoQuandoOfertaInativa</fullName>
+    <active>true</active>
+    <description>Bloqueia a edição da Oferta quando a mesma está inativa.</description>
+    <errorConditionFormula>AND(
+    NOT(ISNEW()),
+    TEXT(Status__c) = &apos;Inativo&apos;
+)</errorConditionFormula>
+    <errorMessage>Não é possível alterar uma Oferta Inativa.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ValidacaoDataInicialPendencia</fullName>
+    <active>true</active>
+    <errorConditionFormula>DataInicioAnalise__c &gt;  DataInicioPendencia__c</errorConditionFormula>
+    <errorMessage>Data Inicial da Pendencia não pode ser maior do que a data inicial de análise</errorMessage>
+</ValidationRule>

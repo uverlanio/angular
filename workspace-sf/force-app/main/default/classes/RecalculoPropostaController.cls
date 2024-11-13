@@ -364,7 +364,7 @@ global without sharing class RecalculoPropostaController { //FNPVVEP-126 INICIO-
         System.debug('modificada >> ' + modificada);
         
         //PLV-5161 - INICIO
-        Quote proposta = [select id, produto__c from quote where id = :modificada.id ];
+        Quote proposta = [select id, produto__c, DescontoAgravoPercentualTecnico__c from quote where id = :modificada.id ]; //FNPVVEP-168 INICIO/FIM
         Product2 produto = [select id, (select id, TipoRemuneracao__r.Codigo__c, LimiteMaximo__c, LimiteMinimo__c from RemuneracoesProduto__r) 
                             from Product2 where id =: proposta.produto__c LIMIT 1];
         //produto.RemuneracoesProduto__r = List<RemuneracaoProduto__c>
@@ -390,15 +390,36 @@ global without sharing class RecalculoPropostaController { //FNPVVEP-126 INICIO-
         String payloadCalculo = dtoEntradaCalculo(modificada);
         //II-175 INICIO
         RecalculoPropostaTO recalculoProp = (RecalculoPropostaTO) JSON.deserialize(payloadCalculo, RecalculoPropostaTO.class);
+        //List<RecalculoPropostaTO.DescontoagravoTO> descAgravoEntrada = ((RecalculoPropostaTO) JSON.deserialize(payloadEntrada,RecalculoPropostaTO.class)).calculos[0].precificacao.descontoAgravo;
         System.debug('recalculoProp des <>' + recalculoProp);
         if(alteracaoFormPag){
             System.debug('entrou if alteracao Pag <<>> ');
             if(recalculoProp != null){
                 System.debug('entrou if calculosTO <<>> ');
                 RecalculoPropostaTO.VersoesCalculos versoesCalculo = recalculoProp.calculos.get(0).versoesCalculos.get(0);
-                //RecalculoPropostaTO.VersoesCalculos versoesCalculo = calculosTO.versoesCalculos.get(0);
+                //FNPVVEP-168 INICIO
+                RecalculoPropostaTO.PrecificacaoTO precificacao = recalculoProp.calculos.get(0).precificacao;
+                precificacao.descontoAgravo.get(0).percentual = proposta.DescontoAgravoPercentualTecnico__c;
+                List<GarantiaProposta__c> garantias = [SELECT Id, DescontoAgravoPercentualTecnico__c,  Garantia__r.Sigla__c  FROM GarantiaProposta__c WHERE Proposta__c =: proposta.Id AND DescontoAgravoPercentualTecnico__c != null];
+
+                List<RecalculoPropostaTO.CoberturasTO> coberturasList = new List<RecalculoPropostaTO.CoberturasTO>();
+
+                for(GarantiaProposta__c garantia : garantias){
+                    RecalculoPropostaTO.CoberturasTO cobertura = new RecalculoPropostaTO.CoberturasTO();
+                    cobertura.sigla = garantia.Garantia__r.Sigla__c;
+                    RecalculoPropostaTO.DescontoAgravoTO descontoAgravoGarantia = new RecalculoPropostaTO.DescontoAgravoTO();
+                    descontoAgravoGarantia.percentual = garantia.DescontoAgravoPercentualTecnico__c - proposta.DescontoAgravoPercentualTecnico__c;
+                    descontoAgravoGarantia.tipo = 'TEC';
+                    if (cobertura.descontoAgravo == null) {
+                        cobertura.descontoAgravo = new List<RecalculoPropostaTO.DescontoAgravoTO>();
+                    }
+                    cobertura.descontoAgravo.add(descontoAgravoGarantia);
+                    coberturasList.add(cobertura);
+                }
+                precificacao.coberturas = coberturasList;
                 versoesCalculo.descontoAgravo = Decimal.valueOf(descontoAgravo);
             }
+            //FNPVVEP-168 FIM
         }
         payloadCalculo = JSON.serialize(recalculoProp);
         //II-175 FIM

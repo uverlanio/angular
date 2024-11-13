@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Fatura</fullName>
+    <columns>ExternalId</columns>
+    <columns>empresa__c</columns>
+    <columns>sucursal__c</columns>
+    <columns>ramo__c</columns>
+    <columns>apolice__c</columns>
+    <columns>endosso__c</columns>
+    <columns>dataintegracao__c</columns>
+    <columns>idintegracao__c</columns>
+    <columns>payloaderro__c</columns>
+    <columns>status__c</columns>
+    <columns>devolutiva__c</columns>
+    <columns>tipoobjeto__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>tipoobjeto__c</field>
+        <operation>equals</operation>
+        <value>SF:Fatura</value>
+    </filters>
+    <label>Fatura</label>
+</ListView>

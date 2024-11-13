@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ValidarTipoRemuneracaoDiferenteAgenciam</fullName>
+    <active>true</active>
+    <description>Verifica a necessidade de se preencher as parcelas de agenciamento</description>
+    <errorConditionFormula>AND(UPPER(TipoRemuneracao__r.Name) &lt;&gt; &apos;AGENCIAMENTO&apos;, 	NOT(ISNULL(ParcelasAgenciamento__c)))</errorConditionFormula>
+    <errorDisplayField>ParcelasAgenciamento__c</errorDisplayField>
+    <errorMessage>Somente é possível preencher o campo Parcelas de agenciamento, para Tipo de remuneração &apos;AGENCIAMENTO&apos;.</errorMessage>
+</ValidationRule>

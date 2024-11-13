@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ObrigaPreenchimentoCustoTituloCapitaliz</fullName>
+    <active>true</active>
+    <description>Código da promoção obrigatório para este custo do título de capitalização</description>
+    <errorConditionFormula>ISPICKVAL( TipoCaracteristicaEspecial__c , &quot;Sorteio&quot;)  &amp;&amp; 
+ISBLANK( TEXT(  ValorTitulo__c ) )</errorConditionFormula>
+    <errorMessage>Custo do titulo de capitalização obrigatório para este tipo de característica especial</errorMessage>
+</ValidationRule>

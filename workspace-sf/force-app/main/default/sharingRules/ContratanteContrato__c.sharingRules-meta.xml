@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sharingGuestRules>
+        <fullName>PermitirAcesso</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Permitir Acesso</label>
+        <sharedTo>
+            <guestUser>Api</guestUser>
+        </sharedTo>
+        <criteriaItems>
+            <field>Nome__c</field>
+            <operation>notEqual</operation>
+            <value>nomeInexistente</value>
+        </criteriaItems>
+        <includeHVUOwnedRecords>false</includeHVUOwnedRecords>
+    </sharingGuestRules>
+</SharingRules>

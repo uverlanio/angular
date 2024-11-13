@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All</fullName>
+    <columns>NAME</columns>
+    <columns>CodigoSecao__c</columns>
+    <columns>CodigoDivisao__c</columns>
+    <columns>CodigoGrupo__c</columns>
+    <columns>CodigoClasse__c</columns>
+    <columns>CodigoSubclasse__c</columns>
+    <columns>GrauRisco__c</columns>
+    <columns>Status__c</columns>
+    <columns>Blacklist__c</columns>
+    <filterScope>Everything</filterScope>
+    <label>Todos os ramos de atividade</label>
+</ListView>

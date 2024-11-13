@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ObrigaPreenchimentoCustoCaractEspecial</fullName>
+    <active>true</active>
+    <errorConditionFormula>ISPICKVAL( TipoCaracteristicaEspecial__c , &quot;Assessoria&quot;)  &amp;&amp; 
+ISBLANK( TEXT( CustoCaracteristicaEspecial__c ) )</errorConditionFormula>
+    <errorDisplayField>CustoCaracteristicaEspecial__c</errorDisplayField>
+    <errorMessage>Custo da característica especial obrigatória para este tipo de característica especial</errorMessage>
+</ValidationRule>

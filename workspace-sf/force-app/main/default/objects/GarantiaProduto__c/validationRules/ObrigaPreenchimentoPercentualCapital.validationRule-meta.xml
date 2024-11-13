@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ObrigaPreenchimentoPercentualCapital</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+    ISPICKVAL(TipoLimiteCapital__c, &apos;Percentual&apos;),
+    OR(
+       ISBLANK(PercentualCapitalMinimo__c), 
+       ISBLANK(PercentualCapitalMaximo__c)
+    )
+)</errorConditionFormula>
+    <errorMessage>Preencha o percentual mínimo e máximo de capital para este tipo de capital</errorMessage>
+</ValidationRule>

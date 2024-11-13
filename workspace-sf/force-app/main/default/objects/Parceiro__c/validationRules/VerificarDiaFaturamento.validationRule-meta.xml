@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VerificarDiaFaturamento</fullName>
+    <active>true</active>
+    <errorConditionFormula>IF( LEN(DiaFaturamento__c ) == 2, 
+  IF( ISNUMBER( DiaFaturamento__c ) , 
+  VALUE( DiaFaturamento__c ) &lt;=0 ||
+  VALUE( DiaFaturamento__c ) &gt; 31, 
+  TRUE), 
+TRUE)</errorConditionFormula>
+    <errorMessage>Campo Dia do Faturamento deve ser entre 01 e 31</errorMessage>
+</ValidationRule>

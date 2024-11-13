@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>NomeFormaPagamento__c</fullName>
+    <description>campo utilizado para exibição do nome da forma de pagamento</description>
+    <externalId>false</externalId>
+    <label>Nome Forma Pagamento</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>TextArea</type>
+</CustomField>

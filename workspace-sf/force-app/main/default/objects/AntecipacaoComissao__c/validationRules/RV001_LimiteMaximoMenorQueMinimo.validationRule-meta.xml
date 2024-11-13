@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>RV001_LimiteMaximoMenorQueMinimo</fullName>
+    <active>true</active>
+    <errorConditionFormula>LimiteMaximo__c &lt;  LimiteMinimo__c</errorConditionFormula>
+    <errorDisplayField>LimiteMaximo__c</errorDisplayField>
+    <errorMessage>Limite máximo não pode ser menor que o limite mínimo</errorMessage>
+</ValidationRule>

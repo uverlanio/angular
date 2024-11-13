@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ObrigarPreenchimentoInformacoesPEP</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+    ISPICKVAL(Pep__c, &quot;RelacionamentoProximo&quot;),
+    OR(
+       ISBLANK(NomePessoaPep__c),
+       ISBLANK(CpfPep__c),
+       ISBLANK(Participacao__c),
+       ISPICKVAL(GrauParentescoPep__c,&quot;&quot;)
+    )
+)</errorConditionFormula>
+    <errorMessage>Para este tipo de beneficiário preencher o nome, cpf, participação e grau de parentesco (PEP)</errorMessage>
+</ValidationRule>

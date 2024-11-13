@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>RV_Valor_Capital_Informado_SE_MOEDA</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+    ISPICKVAL(TipoCalculo__c,&quot;Moeda&quot;),
+				ISBLANK(Valor__c)
+)</errorConditionFormula>
+    <errorMessage>Valor do Capital deve ser preenchido!</errorMessage>
+</ValidationRule>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Cancelamento_de_pagamento_de_sinistro</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND( 
+ ISPICKVAL(Tipo_de_OP__c  , &quot;Indenização&quot;),
+ ISCHANGED(Status__c ),
+ ISPICKVAL(Status__c , &quot;Cancelado&quot;), 
+ OR(
+    TEXT(PRIORVALUE(Status__c ))= &quot;OP em criação&quot;,
+    TEXT(PRIORVALUE(Status__c ))= &quot;OP criada&quot;,
+    TEXT(PRIORVALUE(Status__c ))= &quot;Em aprovação&quot;,
+    TEXT(PRIORVALUE(Status__c ))= &quot;Aprovada&quot;,
+    TEXT(PRIORVALUE(Status__c ))= &quot;Rejeitada&quot;,
+    TEXT(PRIORVALUE(Status__c ))= &quot;Erro&quot;, 
+    TEXT(PRIORVALUE(Status__c ))= &quot;Em pagamento&quot;
+   )
+ 
+  
+)</errorConditionFormula>
+    <errorDisplayField>Status__c</errorDisplayField>
+    <errorMessage>Para cancelar o pagamento de sinistro, a fase anterior deve ser igual a &quot;Pedente&quot; ou &quot;Liberado&quot;</errorMessage>
+</ValidationRule>

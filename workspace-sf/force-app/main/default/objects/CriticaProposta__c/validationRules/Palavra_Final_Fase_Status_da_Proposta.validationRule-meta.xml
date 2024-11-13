@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Palavra_Final_Fase_Status_da_Proposta</fullName>
+    <active>false</active>
+    <description>Não poderá liberar a palavra final quando a dase de status da proposta não estiver na palavra final</description>
+    <errorConditionFormula>AND( TEXT(MomentoAnalise__c) = &apos;Palavra final&apos;, TEXT(Status__c) = &apos;Liberado&apos;,  TEXT(Proposta__r.FaseStatus__c) &lt;&gt; &apos;Palavra final&apos;)</errorConditionFormula>
+    <errorDisplayField>Status__c</errorDisplayField>
+    <errorMessage>Para liberar a crítica da &quot;Palavra Final&quot; a Fase do Status da &quot;Proposta&quot; precisa estar em &quot;Palavra final&quot;</errorMessage>
+</ValidationRule>

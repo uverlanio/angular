@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ObrigarPreenchimentoInformacoesNome</fullName>
+    <active>true</active>
+    <errorConditionFormula>IF(ISPICKVAL(TipoBeneficiario__c, &quot;Nome do beneficiário&quot;), 
+IF(ISBLANK(Nome__c),true, false)
+, false)</errorConditionFormula>
+    <errorDisplayField>Nome__c</errorDisplayField>
+    <errorMessage>Para este tipo de beneficiário preencher o nome</errorMessage>
+</ValidationRule>

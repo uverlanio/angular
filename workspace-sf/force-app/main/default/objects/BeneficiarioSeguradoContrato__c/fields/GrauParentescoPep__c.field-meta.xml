@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>GrauParentescoPep__c</fullName>
+    <externalId>false</externalId>
+    <label>Grau de parentesco da PEP</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Amigo (a)</fullName>
+                <default>false</default>
+                <label>Amigo (a)</label>
+            </value>
+            <value>
+                <fullName>Avó</fullName>
+                <default>false</default>
+                <label>Avó</label>
+            </value>
+            <value>
+                <fullName>Avô</fullName>
+                <default>false</default>
+                <label>Avô</label>
+            </value>
+            <value>
+                <fullName>Companheiro (a)</fullName>
+                <default>false</default>
+                <label>Companheiro (a)</label>
+            </value>
+            <value>
+                <fullName>Cônjuge</fullName>
+                <default>false</default>
+                <label>Cônjuge</label>
+            </value>
+            <value>
+                <fullName>Cunhado (a)</fullName>
+                <default>false</default>
+                <label>Cunhado (a)</label>
+            </value>
+            <value>
+                <fullName>Enteado (a)</fullName>
+                <default>false</default>
+                <label>Enteado (a)</label>
+            </value>
+            <value>
+                <fullName>Filho (a)</fullName>
+                <default>false</default>
+                <label>Filho (a)</label>
+            </value>
+            <value>
+                <fullName>Irmão (ã)</fullName>
+                <default>false</default>
+                <label>Irmão (ã)</label>
+            </value>
+            <value>
+                <fullName>Mãe</fullName>
+                <default>false</default>
+                <label>Mãe</label>
+            </value>
+            <value>
+                <fullName>Namorado (a)</fullName>
+                <default>false</default>
+                <label>Namorado (a)</label>
+            </value>
+            <value>
+                <fullName>Neto (a)</fullName>
+                <default>false</default>
+                <label>Neto (a)</label>
+            </value>
+            <value>
+                <fullName>Noivo (a)</fullName>
+                <default>false</default>
+                <label>Noivo (a)</label>
+            </value>
+            <value>
+                <fullName>Outros</fullName>
+                <default>false</default>
+                <label>Outros</label>
+            </value>
+            <value>
+                <fullName>Pai</fullName>
+                <default>false</default>
+                <label>Pai</label>
+            </value>
+            <value>
+                <fullName>Primo (a)</fullName>
+                <default>false</default>
+                <label>Primo (a)</label>
+            </value>
+            <value>
+                <fullName>Sobrinho (a)</fullName>
+                <default>false</default>
+                <label>Sobrinho (a)</label>
+            </value>
+            <value>
+                <fullName>Sócio (a)</fullName>
+                <default>false</default>
+                <label>Sócio (a)</label>
+            </value>
+            <value>
+                <fullName>Tio (a)</fullName>
+                <default>false</default>
+                <label>Tio (a)</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

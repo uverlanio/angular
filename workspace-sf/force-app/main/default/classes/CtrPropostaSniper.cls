@@ -1162,7 +1162,7 @@ public class Retorno2TO
 	
 		// Parte 3: 'devolutivasPropostas'
 		List<Map<String, Object>> devolutivasPropostas = new List<Map<String, Object>>();
-	
+		Integer quoteIndex = 0;
 		for (Quote quoteRecord : quoteRecords) {
 			Integer qtdDiasVigencia = 0;
 			if (quoteRecord.VigenciaFinal__c != null && quoteRecord.VigenciaInicial__c != null) {
@@ -1173,7 +1173,7 @@ public class Retorno2TO
 				'vigenciaFinal' => String.valueOf(quoteRecord.VigenciaFinal__c),
 				'numeroOrcamento' => Integer.valueOf(quoteRecord.Opportunity.ContadorOrcamento__c),
 				'numero' => quoteRecord.NumeroProposta__c,
-				'indice' => 1, // Valor mockado, substitua se necessário
+				'indice' => quoteIndex,
 				'qtdDiasVigencia' => qtdDiasVigencia,
 				'origem' => Integer.valueOf(quoteRecord.Origem__c),
 				'arquivos' => new List<Map<String, Object>>{
@@ -1203,6 +1203,7 @@ public class Retorno2TO
 					'analises' => new List<Object>()
 				}
 			});
+			quoteIndex++;
 		}
 	
 		response.put('devolutivasPropostas', devolutivasPropostas);

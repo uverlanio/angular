@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ValidarPercentualMinimoMaximoAgravo</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+    NOT(ISBLANK(PercentualAgravoMinimo__c)),
+    NOT(ISBLANK(PercentualAgravoMaximo__c)),
+    PercentualAgravoMinimo__c &gt; PercentualAgravoMaximo__c 
+)</errorConditionFormula>
+    <errorMessage>O percentual de agravo mínimo deve ser inferior ao percentual máximo</errorMessage>
+</ValidationRule>

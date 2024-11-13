@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>PermitirDadosBancarios</fullName>
+    <active>true</active>
+    <description>Regra para permitir o preenchimento dos dados bancários para qualquer remuneração que não seja &quot;Corretagem&quot;</description>
+    <errorConditionFormula>AND(
+	RemuneracaoProdutoParceiro__r.TipoRemuneracao__r.Name  = &quot;Corretagem&quot;,
+	NOT(ISBLANK(InformacaoBancaria__c))
+)</errorConditionFormula>
+    <errorDisplayField>InformacaoBancaria__c</errorDisplayField>
+    <errorMessage>Este campo não deve ser preenchido para este tipo de remuneração &apos;Corretagem&apos;</errorMessage>
+</ValidationRule>

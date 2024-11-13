@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Evento__c</fullName>
+    <externalId>false</externalId>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <label>Evento</label>
+    <required>false</required>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Abertura de sinistro</fullName>
+                <default>false</default>
+                <label>Abertura de sinistro</label>
+            </value>
+            <value>
+                <fullName>Emissão</fullName>
+                <default>false</default>
+                <label>Emissão</label>
+            </value>
+            <value>
+                <fullName>Endosso</fullName>
+                <default>false</default>
+                <label>Endosso</label>
+            </value>
+            <value>
+                <fullName>Liquidação</fullName>
+                <default>false</default>
+                <label>Liquidação</label>
+            </value>
+            <value>
+                <fullName>Reabertura de sinistro</fullName>
+                <default>false</default>
+                <label>Reabertura de sinistro</label>
+            </value>
+            <value>
+                <fullName>Reativação</fullName>
+                <default>false</default>
+                <label>Reativação</label>
+            </value>
+            <value>
+                <fullName>Reemissão</fullName>
+                <default>false</default>
+                <label>Reemissão</label>
+            </value>
+            <value>
+                <fullName>Renovação</fullName>
+                <default>false</default>
+                <label>Renovação</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

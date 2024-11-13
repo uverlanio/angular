@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ValidarLimiteMinimoTipoRemuneracao</fullName>
+    <active>true</active>
+    <description>Verifica se o limite mínimo está  de acordo com o informado no limite mínimo  do tipo de remuneração</description>
+    <errorConditionFormula>LimiteMinimo__c   &lt;  TipoRemuneracao__r.LimiteMinimo__c</errorConditionFormula>
+    <errorDisplayField>LimiteMinimo__c</errorDisplayField>
+    <errorMessage>O limite mínimo deve respeitar o limite cadastrado no tipo de remuneração</errorMessage>
+</ValidationRule>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Proposta</fullName>
+    <columns>ExternalId</columns>
+    <columns>origemproposta__c</columns>
+    <columns>numeroproposta__c</columns>
+    <columns>dataintegracao__c</columns>
+    <columns>idintegracao__c</columns>
+    <columns>payloaderro__c</columns>
+    <columns>status__c</columns>
+    <columns>devolutiva__c</columns>
+    <columns>tipoobjeto__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>tipoobjeto__c</field>
+        <operation>equals</operation>
+        <value>SF:Proposta</value>
+    </filters>
+    <label>Proposta</label>
+</ListView>

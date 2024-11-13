@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>PercentualDescontoAgravo__c</fullName>
+    <description>Este campo deverá conter valores percentuais de desconto ou agravo. Valor negativo, se for desconto e positivo, se for agravo.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Este campo deverá conter valores percentuais de desconto ou agravo. Valor negativo, se for desconto e positivo, se for agravo.</inlineHelpText>
+    <label>Percentual de Desconto ou Agravo</label>
+    <precision>12</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Percent</type>
+</CustomField>

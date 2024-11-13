@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TODOS</fullName>
+    <columns>Prioridade__c</columns>
+    <columns>MasterLabel</columns>
+    <columns>DeveloperName</columns>
+    <columns>SiglaSalesforce__c</columns>
+    <columns>FrasePadrao__c</columns>
+    <columns>TipoEndosso__c</columns>
+    <columns>TipoEndosso_CodigoOperacao__c</columns>
+    <columns>TipoEndossoBCP__c</columns>
+    <filterScope>Everything</filterScope>
+    <label>TODOS</label>
+</ListView>

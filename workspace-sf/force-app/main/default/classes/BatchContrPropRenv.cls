@@ -481,9 +481,12 @@ global class BatchContrPropRenv implements Database.Batchable<sObject>, Database
             //FNPVVEP-69 - INICIO
             if(!Test.isRunningTest()){
                 if(!idPropostaArquivo.isEmpty()){
-                    List<ContentDocumentLink > arquivoPdfProp = [SELECT Id FROM ContentDocumentLink  WHERE LinkedEntityId IN :idPropostaArquivo];            
-                    delete arquivoPdfProp;
-
+                    List<ContentDocumentLink > arquivoPdfProp = [SELECT Id FROM ContentDocumentLink  WHERE LinkedEntityId IN :idPropostaArquivo];  
+                    //FNPVVEP-69 FIX02 - INICIO  
+                    if(!arquivoPdfProp.isEmpty()){
+                        delete arquivoPdfProp;
+                    }   
+                    //FNPVVEP-69 FIX02 - FIM    
                     QuoteBO.gerarPDFPropostaSync(idPropostaArquivo);
                 }
             }

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TipoProtecao__c</fullName>
+    <externalId>false</externalId>
+    <label>Tipo de proteção</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Família</fullName>
+                <default>false</default>
+                <label>Família</label>
+            </value>
+            <value>
+                <fullName>Imprevistos</fullName>
+                <default>false</default>
+                <label>Imprevistos</label>
+            </value>
+            <value>
+                <fullName>Doenças</fullName>
+                <default>false</default>
+                <label>Doenças</label>
+            </value>
+            <value>
+                <fullName>Renda</fullName>
+                <default>false</default>
+                <label>Renda</label>
+            </value>
+            <value>
+                <fullName>Assistências e benefícios</fullName>
+                <default>false</default>
+                <label>Assistências e benefícios</label>
+            </value>
+            <value>
+                <fullName>Viagem</fullName>
+                <default>false</default>
+                <label>Viagem</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

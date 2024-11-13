@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>UrlImagem__c</fullName>
+    <description>Url criada para armazenar a imagem do Template</description>
+    <externalId>false</externalId>
+    <fieldManageability>SubscriberControlled</fieldManageability>
+    <label>Url da Imagem</label>
+    <required>false</required>
+    <type>Url</type>
+</CustomField>

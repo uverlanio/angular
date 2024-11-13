@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>GeradorOfertas__c</fullName>
+    <externalId>false</externalId>
+    <label>Gerador de Ofertas</label>
+    <referenceTo>GeradorOferta__c</referenceTo>
+    <relationshipLabel>Regras de associação</relationshipLabel>
+    <relationshipName>InteligenciaOfertas</relationshipName>
+    <relationshipOrder>0</relationshipOrder>
+    <reparentableMasterDetail>false</reparentableMasterDetail>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+</CustomField>

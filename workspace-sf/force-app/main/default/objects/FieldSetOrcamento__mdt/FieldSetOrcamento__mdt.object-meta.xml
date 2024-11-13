@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Contém a relação dos field sets a serem utilizados no componente de Complemento Orçamento</description>
+    <label>Field set de orçamento</label>
+    <pluralLabel>Field sets de orçamento</pluralLabel>
+    <visibility>Public</visibility>
+</CustomObject>

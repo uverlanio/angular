@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TipoPagamento__c</fullName>
+    <externalId>false</externalId>
+    <label>Tipo de pagamento</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Antecipação</fullName>
+                <default>false</default>
+                <label>Antecipação</label>
+            </value>
+            <value>
+                <fullName>Auxílio alimentação</fullName>
+                <default>false</default>
+                <label>Auxílio alimentação</label>
+            </value>
+            <value>
+                <fullName>À vista</fullName>
+                <default>false</default>
+                <label>À vista</label>
+            </value>
+            <value>
+                <fullName>Cesta básica</fullName>
+                <default>false</default>
+                <label>Cesta básica</label>
+            </value>
+            <value>
+                <fullName>Complemento</fullName>
+                <default>false</default>
+                <label>Complemento</label>
+            </value>
+            <value>
+                <fullName>Diária</fullName>
+                <default>false</default>
+                <label>Diária</label>
+            </value>
+            <value>
+                <fullName>Reembolso</fullName>
+                <default>false</default>
+                <label>Reembolso</label>
+            </value>
+            <value>
+                <fullName>Renda</fullName>
+                <default>false</default>
+                <label>Renda</label>
+            </value>
+            <value>
+                <fullName>Serviços</fullName>
+                <default>false</default>
+                <label>Serviços</label>
+            </value>
+            <value>
+                <fullName>Sorteio</fullName>
+                <default>false</default>
+                <label>Sorteio</label>
+            </value>
+            <value>
+                <fullName>Voucher</fullName>
+                <default>false</default>
+                <label>Voucher</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

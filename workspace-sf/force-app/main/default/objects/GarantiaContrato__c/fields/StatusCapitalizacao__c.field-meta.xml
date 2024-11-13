@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>StatusCapitalizacao__c</fullName>
+    <externalId>false</externalId>
+    <label>Status da capitalização</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>AguardandoRecompra</fullName>
+                <default>false</default>
+                <label>Aguardando recompra</label>
+            </value>
+            <value>
+                <fullName>CapitalizacaoGerada</fullName>
+                <default>false</default>
+                <label>Capitalização gerada</label>
+            </value>
+            <value>
+                <fullName>Processado</fullName>
+                <default>false</default>
+                <label>Processado</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

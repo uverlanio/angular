@@ -61,7 +61,7 @@ public with sharing class BatchReviewQuoteToRenovate implements Database.Batchab
         Boolean batchReviewExecutado = verificarExecucaoBatchReview();
         if(batchReviewExecutado){
                 String hour = String.valueOf(Datetime.now().hour());
-                String min = String.valueOf(Datetime.now().minute() + 4); //FNPVVEP-117 FIX03 INICIO/FIM
+                String min = String.valueOf(Datetime.now().addMinutes(4).minute()); //FNPVVEP-117 FIX03 INICIO/FIM //FNPVVEP-178 INICIO/FIM
                 String ss = String.valueOf(Datetime.now().second());
                 String nextFireTime = ss + ' ' + min + ' ' + hour + ' * * ?';
                 String formattedDatetime = String.valueOf(Datetime.now()).substring(0, 19).replace('T', ' ').replace(':', '-');

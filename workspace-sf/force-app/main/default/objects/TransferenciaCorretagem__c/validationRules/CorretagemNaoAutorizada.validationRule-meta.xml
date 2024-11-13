@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CorretagemNaoAutorizada</fullName>
+    <active>true</active>
+    <description>Regra criada para verificar se o corretor não está bloqueado.</description>
+    <errorConditionFormula>OR(
+    AND(
+     	SusepAtual__r.Active__c = false
+								),
+    AND(
+    	SusepPriCoCorretagem__r.Active__c = false ||
+				 SusepSegCoCorretagem__r.Active__c = false ||
+				 SusepTerCoCorretagem__r.Active__c = false ||
+				 SusepQuaCoCorretagem__r.Active__c = false ||
+				 SusepQuiCoCorretagem__r.Active__c = false
+				)
+)</errorConditionFormula>
+    <errorMessage>Transferência de corretagem não autorizada, Susep restrita.</errorMessage>
+</ValidationRule>

@@ -869,42 +869,45 @@ public without sharing class PropostaGenericaBuilder extends PropostaBuilder
     }
 
    // ---- ANNVI-229-Inicio --- //
-    public List<String> validarQuestionario(EmissaoTO.QuestionarioTO questionario) {
+    public void  validarQuestionario(EmissaoTO.QuestionarioTO questionario) {
+   
+     // --- Consulta para obter todas as perguntas do questionário obrigatórias e não obrigatórias    
+    List<PerguntaQuestionario__c> todasPerguntasList = [
+        SELECT Numero__c, Obrigatorio__c
+        FROM PerguntaQuestionario__c
+        WHERE Questionario__r.Codigo__c = :questionario.idquestionario
+        ORDER BY Numero__c
+    ];
+    // --- Mapear as respostas do questionário para facilitar a verificação
+    Map<String, String> respostasMap = new Map<String, String>();
+    for (EmissaoTO.RespostaTO resposta : questionario.respostas) {
+        respostasMap.put(resposta.questao, resposta.resposta);
+    }
 
-       // --- Consulta para obter as perguntas obrigatórias do questionário
-        List<PerguntaQuestionario__c> questoesList = [
-            SELECT Numero__c
-            FROM PerguntaQuestionario__c
-            WHERE Questionario__r.Codigo__c = :questionario.idquestionario
-            AND Obrigatorio__c = true
-            ORDER BY Numero__c
-        ];
-    
-        // --- Mapear as respostas do questionário para facilitar a verificação
-        Map<String, String> respostasMap = new Map<String, String>();
-        for (EmissaoTO.RespostaTO resposta : questionario.respostas) {
-            respostasMap.put(resposta.questao, resposta.resposta);
-        }
-    
-        // --- Lista para armazenar as perguntas obrigatórias que estão sem resposta
-        List<String> perguntasSemResposta = new List<String>();
-    
-        // --- Validar se cada pergunta obrigatória tem uma resposta preenchida
-        for (PerguntaQuestionario__c pergunta : questoesList) {
+    // --- Validar se o número de respostas é maior que o número total de perguntas    
+    if (respostasMap.size() > todasPerguntasList.size()) {
+         throw new PropostaBuilderException('Erro na validação do questionário');
+    }
+ 
+    // --- Lista para armazenar as perguntas obrigatórias que estão sem resposta    
+    List<String> perguntasSemResposta = new List<String>();
+
+    // --- Separar e validar as perguntas obrigatórias    
+    for (PerguntaQuestionario__c pergunta : todasPerguntasList) {
+        if (pergunta.Obrigatorio__c) { // Verifica se a pergunta é obrigatória
             String numeroQuestao = String.valueOf(pergunta.Numero__c);
             // -- Verificar se a resposta existe e não está vazia
             if (!respostasMap.containsKey(numeroQuestao) || String.isBlank(respostasMap.get(numeroQuestao))) {
                 perguntasSemResposta.add(numeroQuestao);
             }
         }
-    
-       
-        perguntasSemResposta.sort();
-
-    // --- Retornar a lista de perguntas sem resposta, ou null se todas foram preenchidas corretamente
-    return perguntasSemResposta.isEmpty() ? null : perguntasSemResposta;
     }
-      // ------- ANNVI-229-Fim ----------//
+      // --- Se houver perguntas obrigatórias sem resposta, lançar exceção
+    if (!perguntasSemResposta.isEmpty()) {
+        throw new PropostaBuilderException('Erro na validação do questionário');
+      }
+    }
+    // ------- ANNVI-229-Fim ----------//
     
     //PLV-2663 - INICIO -AVX
     public void criarRespostaDeclaracaoSaude(EmissaoTO.PayloadTO payload, Id propostaId)
@@ -915,14 +918,10 @@ public without sharing class PropostaGenericaBuilder extends PropostaBuilder
         //PLV-3285 - INICIO - MVP A Transmissão da proposta
         if (payload.proposta.contratantes[0].grupos[0].segurados[0].questionario == null) return;
      
-         // ------- ANNVI-229-Inicio -------//
+        // ------- ANNVI-229-Inicio -------//
          EmissaoTO.QuestionarioTO questionario = payload.proposta.contratantes[0].grupos[0].segurados[0].questionario;
-         List<String> lista = validarQuestionario(questionario);
+         validarQuestionario(questionario);
        
-        if(lista != null){
-            System.debug('Perguntas obrigatórias sem resposta: ' + lista.size());
-            throw new PropostaBuilderException('Erro na validação do questionário');  
-        }
         // --- ANNVI-229-Fim ------//
 
         //PLV-3285 - FIM - MVP A Transmissão da proposta
@@ -1177,6 +1176,7 @@ public without sharing class PropostaGenericaBuilder extends PropostaBuilder
                 contratante.dadosPagamento.recorrencia = contratantesSfProposta.sfContratante.Recorrencia__c;
                 contratante.dadosPagamento.valorPrimeiraParcela = String.valueOf(contratantesSfProposta.sfContratante.Valor_PrimeiraParcela__c);
                 contratante.dadosPagamento.valorDemaisParcelas = String.valueOf(contratantesSfProposta.sfContratante.Valor_DemaisParcelas__c);
+                System.debug('Valores parcelas '+contratante.dadosPagamento.recorrencia + ' - '+contratante.dadosPagamento.valorPrimeiraParcela + ' - '+contratante.dadosPagamento.valorDemaisParcelas);
                  // TKCL 473 - FIM
                 //PLV-3285 - Os valores abaixo serão mocados pois a logica para calculo será criada em uma nova história 
                 //PLV-3455 - INICIO - Preencher os valores de parcelas
@@ -3742,6 +3742,8 @@ upsert listaContasProposta IdExterno__c;*/
                 payloadTO.proposta.contratantes[0] != null && 
                 payloadTO.proposta.contratantes[0].dadosPagamento != null ){ //ANNVI-48 - INICIO/FIM ANNVI-151-INICIO/FIM 
                 for(ServiceTO.ParcelamentoTO parcela : payloadParcelamentos.parcelamentos){
+                    System.debug('parcela.qtdParcelas '+parcela.qtdParcelas);
+                    System.debug('this.dadosPagamento '+ JSON.serialize(this.dadosPagamento));
                 //RVI-240-INICIO
                 if(MetadataDAO.getInstance().existsInMetadata(payloadTO.proposta.segmento, payloadTO.proposta.codigoProdutoVida, payloadTO.proposta.codigoEmpresa) &&  //RVI-240-FIM
                    payloadTO.proposta.contratantes[0].dadosPagamento.quantidadeParcelas == parcela.qtdParcelas &&
@@ -3894,9 +3896,8 @@ upsert listaContasProposta IdExterno__c;*/
                     // }else{
                     // 	contratanteProposta.TipoEndereco__c = ''; 
                     // }
-                    
                     contratanteProposta.Estado__c = contratanteJSON.grupos[0].segurados[0].pessoa.enderecos[0].uf;
-                    
+
                     String tipoLogradouro = contratanteJSON.grupos[0].segurados[0].pessoa.enderecos[0].tipoLogradouro;
                     if(tipoLogradouro == 'R' || tipoLogradouro == 'Rua' || tipoLogradouro == 'R.' || tipoLogradouro == 'rua'){
                         contratanteProposta.TipoLogradouro__c = 'RUA';
@@ -4303,6 +4304,7 @@ upsert listaContasProposta IdExterno__c;*/
             }
             // TKCL-473/INICIO
             if (dadosPagamentoRecorrencia != null) {
+                System.debug('dadosPagamentoRecorrencia '+JSON.serialize(dadosPagamentoRecorrencia));
                 System.debug('Gior => Valor Primeira parcela...'+dadosPagamentoRecorrencia.valorPrimeiraParcela);
                 System.debug('Gior => Valor Demais parcelas...'+dadosPagamentoRecorrencia.valorDemaisParcelas);
                 contratanteProposta.Recorrencia__c = true;
@@ -4310,7 +4312,13 @@ upsert listaContasProposta IdExterno__c;*/
                 contratanteProposta.Valor_DemaisParcelas__c = Decimal.valueOf(dadosPagamentoRecorrencia.valorDemaisParcelas);
             }
             // TKCL-473/FIM
-            
+            try {
+                System.debug('dadosPagamentoRecorrencia.valorPrimeiraParcela '+dadosPagamentoRecorrencia.valorPrimeiraParcela);
+                System.debug('dadosPagamentoRecorrencia.Valor_DemaisParcelas__c '+dadosPagamentoRecorrencia.valorDemaisParcelas);
+            } catch (Exception e) {
+                System.debug('erro ao obter Primeira Demais parcela '+e.getStackTraceString()+' - '+e.getMessage());
+                
+            }
             //PLV-3285 - INICIO - MVP A Transmissão da proposta
 	    //PLV-5067 - INICIO DO CÓDIGO MOVIDO - PEDRO AUGUSTO BRAZ
             //PLV-5067 - FIM DO CÓDIGO MOVIDO - PEDRO AUGUSTO BRAZ

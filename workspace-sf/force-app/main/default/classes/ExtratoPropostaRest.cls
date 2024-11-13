@@ -10,7 +10,7 @@ global class ExtratoPropostaRest {
     
     @HttpPost
     global static ResponseTO consultaExtratoProposta() {
-        //EX : { "inicio": "2020-01-01", "fim": "2020-01-01", "cobertura": ["SIGLA"], "ramo": ["1391", "1381"]}
+        //EX : { "inicio": "2024-10-01", "fim": "2024-11-08", "coberturas": [ "AFI" ], "ramos": [ "1391", "1381" ], "produto":[ "VI-PESSOAS" ] }
         
         ResponseTO response = new ResponseTO();
         System.debug(RestContext.request);

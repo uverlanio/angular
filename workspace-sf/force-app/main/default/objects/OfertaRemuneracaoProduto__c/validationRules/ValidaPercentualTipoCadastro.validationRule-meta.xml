@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ValidaPercentualTipoCadastro</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND (
+				    ISPICKVAL( TipoCadastro__c , &quot;Percentual&quot;),
+				    ISNULL( Percentual__c ) 
+)</errorConditionFormula>
+    <errorDisplayField>Percentual__c</errorDisplayField>
+    <errorMessage>Percentual deve ser preenchido.</errorMessage>
+</ValidationRule>

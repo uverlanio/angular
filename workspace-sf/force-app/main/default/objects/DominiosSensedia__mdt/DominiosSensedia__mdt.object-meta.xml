@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Esse metadado tem por objetivo armazenar os 4 tipos de dominios do Sensedia para geração de token e de chamada de serviço</description>
+    <label>Dominio SENSEDIA</label>
+    <pluralLabel>Dominios SENSEDIA</pluralLabel>
+    <visibility>Public</visibility>
+</CustomObject>

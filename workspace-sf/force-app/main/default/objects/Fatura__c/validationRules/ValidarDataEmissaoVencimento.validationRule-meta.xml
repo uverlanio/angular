@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ValidarDataEmissaoVencimento</fullName>
+    <active>false</active>
+    <description>Data de vencimento da parcela não pode ser menor do que a data de emissão</description>
+    <errorConditionFormula>DataVencimento__c &lt;  DataEmissao__c</errorConditionFormula>
+    <errorDisplayField>DataVencimento__c</errorDisplayField>
+    <errorMessage>Data de vencimento deve ser maior ou igual a data de emissão</errorMessage>
+</ValidationRule>

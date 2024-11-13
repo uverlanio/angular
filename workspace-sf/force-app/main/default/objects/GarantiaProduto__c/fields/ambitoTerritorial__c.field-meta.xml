@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ambitoTerritorial__c</fullName>
+    <externalId>false</externalId>
+    <label>Âmbito territorial</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>TerritorioNacional</fullName>
+                <default>false</default>
+                <label>Território nacional</label>
+            </value>
+            <value>
+                <fullName>TerritorioGlobal</fullName>
+                <default>false</default>
+                <label>Território global</label>
+            </value>
+            <value>
+                <fullName>TerritorioGlobalExcetoBrasil</fullName>
+                <default>false</default>
+                <label>Território global, exceto Brasil</label>
+            </value>
+            <value>
+                <fullName>PaisesdaEuropa</fullName>
+                <default>false</default>
+                <label>Países da Europa</label>
+            </value>
+            <value>
+                <fullName>PaisesdaAmericaLatinaincluindoOBrasil</fullName>
+                <default>false</default>
+                <label>Países da América Latina, incluindo o Brasil</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

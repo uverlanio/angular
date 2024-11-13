@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Expurgo__c</fullName>
+    <description>Indicador de expurgo para Orçamentos não contratados existentes há mais de 12 meses.</description>
+    <externalId>false</externalId>
+    <formula>AND(
+TODAY() &gt;= ADDMONTHS(DATEVALUE(Orcamento__r.CreatedDate),12),
+TEXT(Orcamento__r.StageName) != &apos;Contratado&apos; 
+)</formula>
+    <label>Expurgo</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

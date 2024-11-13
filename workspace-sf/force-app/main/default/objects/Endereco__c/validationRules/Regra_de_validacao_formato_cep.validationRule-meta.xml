@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Regra_de_validacao_formato_cep</fullName>
+    <active>false</active>
+    <errorConditionFormula>AND(
+     !ISBLANK(CEP__c),
+     !ISNULL(CEP__c), 				
+				NOT(REGEX(CEP__c,&quot;\\d{5}(-\\d{3})?&quot;))
+)</errorConditionFormula>
+    <errorDisplayField>CEP__c</errorDisplayField>
+    <errorMessage>Cep Inválido, digite com a formatação correta (12345-000)</errorMessage>
+</ValidationRule>

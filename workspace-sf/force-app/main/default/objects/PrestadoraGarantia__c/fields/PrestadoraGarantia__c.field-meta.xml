@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>PrestadoraGarantia__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <externalId>false</externalId>
+    <label>Prestadora da garantia</label>
+    <referenceTo>PrestadoraGarantia__c</referenceTo>
+    <relationshipLabel>Prestadoras da garantia</relationshipLabel>
+    <relationshipName>PrestadorasGarantia</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

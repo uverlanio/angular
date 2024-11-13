@@ -50,7 +50,7 @@ global class BatchBaixarAssistCard implements Database.Batchable<sObject>, Datab
         // LECVPV-238-FIX01 INICIO
         // List<PagamentoGarantia__c> garantiasAFechar = new List<PagamentoGarantia__c>();
         // PagamentoGarantia__c garantia = new PagamentoGarantia__c();
-        List<String> idsGarantiasFechar = new List<String>();
+        List<ID> idsGarantiasFechar = new List<ID>();
         // LECVPV-238-FIX01 FIM
         Set<Id> setCase = new Set<Id>();
         Map<Id,Integer> mapSequencia = new Map<Id,Integer>();
@@ -74,10 +74,9 @@ global class BatchBaixarAssistCard implements Database.Batchable<sObject>, Datab
                             // LECVPV-238-FIX01 INICIO
                             // garantia = prepararGarantia(garantias[0], 'Fechado', 'Pago');
                             // garantiasAFechar.add(garantia);
-                            System.debug('Garantia Id: ' + garantias[0].Id );
                             idsGarantiasFechar.add(garantias[0].Id);
-                            // LECVPV-238-FIX01 FIM
                             casoAFechar.Id = garantias[0].Caso__c;
+                            // LECVPV-238-FIX01 FIM
                             casoAFechar.Status = 'Fechado';
                             if(mapSequencia == null){
                                 mapSequencia = new Map<Id,Integer>();

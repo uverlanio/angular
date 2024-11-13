@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ValorIndenizado__c</fullName>
+    <description>Campo inicialmente composto pela soma do capital e do complemento de indenização. Formula alterada para Valor_Indenizado__c + ComplementoIndenizacao__c por conta da história PLV-4070.</description>
+    <externalId>false</externalId>
+    <formula>Valor_indenizado__c + ComplementoIndenizacao__c</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Valor Total Provisionado</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

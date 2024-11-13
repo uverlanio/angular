@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All</fullName>
+    <columns>NAME</columns>
+    <columns>SusepTransmissaoLider__c</columns>
+    <columns>SusepTransmissao__c</columns>
+    <columns>PercentualTransmissao__c</columns>
+    <columns>SusepDeCoCorretagemLider__c</columns>
+    <columns>SusepDeCoCorretagem__c</columns>
+    <columns>PercentualCoCorretagem__c</columns>
+    <filterScope>Everything</filterScope>
+    <label>Tudo</label>
+</ListView>

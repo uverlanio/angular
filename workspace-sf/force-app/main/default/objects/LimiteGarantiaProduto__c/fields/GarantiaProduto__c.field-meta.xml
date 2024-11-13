@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>GarantiaProduto__c</fullName>
+    <externalId>false</externalId>
+    <label>Garantia do produto</label>
+    <lookupFilter>
+        <active>true</active>
+        <errorMessage>Esse registro não pode ser associado com a garantia de um produto comercial.</errorMessage>
+        <filterItems>
+            <field>GarantiaProduto__c.Produto__r.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Produto técnico</value>
+        </filterItems>
+        <isOptional>false</isOptional>
+    </lookupFilter>
+    <referenceTo>GarantiaProduto__c</referenceTo>
+    <relationshipLabel>Limites da garantia do produto</relationshipLabel>
+    <relationshipName>LimitesGarantiaProduto</relationshipName>
+    <relationshipOrder>0</relationshipOrder>
+    <reparentableMasterDetail>false</reparentableMasterDetail>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+</CustomField>

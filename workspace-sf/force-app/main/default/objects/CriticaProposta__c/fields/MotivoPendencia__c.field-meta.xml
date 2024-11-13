@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>MotivoPendencia__c</fullName>
+    <description>Este campo contém o motivo da critica estar pendenciada</description>
+    <externalId>false</externalId>
+    <label>Motivo da Pendência</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Pendência enviada - Relatório Médico e Exames</fullName>
+                <default>false</default>
+                <label>Pendência enviada - Relatório Médico e Exames</label>
+            </value>
+            <value>
+                <fullName>Pendência enviada - Cartão de crédito</fullName>
+                <default>false</default>
+                <label>Pendência enviada - Cartão de crédito</label>
+            </value>
+            <value>
+                <fullName>Pendência enviada - Seguro Vigente</fullName>
+                <default>false</default>
+                <label>Pendência enviada - Seguro Vigente</label>
+            </value>
+            <value>
+                <fullName>Pendência enviada - Grau de parentesco e/ou vinculo financeiro</fullName>
+                <default>false</default>
+                <label>Pendência enviada - Grau de parentesco e/ou vinculo financeiro</label>
+            </value>
+            <value>
+                <fullName>Pendência enviada - Esclarecimento da declaracao de saude</fullName>
+                <default>false</default>
+                <label>Pendência enviada - Esclarecimento da declaracao de saude</label>
+            </value>
+            <value>
+                <fullName>Pendência enviada - Risco Agravado</fullName>
+                <default>false</default>
+                <label>Pendência enviada - Risco Agravado</label>
+            </value>
+            <value>
+                <fullName>Pendência enviada - Envio de Anexos (Questionário)</fullName>
+                <default>false</default>
+                <label>Pendência enviada - Envio de Anexos (Questionário)</label>
+            </value>
+            <value>
+                <fullName>Pendência enviada - Exclusao de cobertura</fullName>
+                <default>false</default>
+                <label>Pendência enviada - Exclusao de cobertura</label>
+            </value>
+            <value>
+                <fullName>Pendência enviada - Comprovante de Renda</fullName>
+                <default>false</default>
+                <label>Pendência enviada - Comprovante de Renda</label>
+            </value>
+            <value>
+                <fullName>Pendência enviada - Situação cadastral do CPF</fullName>
+                <default>false</default>
+                <label>Pendência enviada - Situação cadastral do CPF</label>
+            </value>
+            <value>
+                <fullName>Pendência enviada - Esclarecimento da profissao ramo e atividade</fullName>
+                <default>false</default>
+                <label>Pendência enviada - Esclarecimento da profissao ramo e atividade</label>
+            </value>
+            <value>
+                <fullName>Pendência enviada - Contrato Social e Declaração de IR</fullName>
+                <default>false</default>
+                <label>Pendência enviada - Contrato Social e Declaração de IR</label>
+            </value>
+            <value>
+                <fullName>Pend Enviada Ag. DS/Assinatura</fullName>
+                <default>false</default>
+                <label>Pend Enviada Ag. DS/Assinatura</label>
+            </value>
+            <value>
+                <fullName>Pend Enviada Ag. Questionário Samplemed</fullName>
+                <default>false</default>
+                <label>Pend Enviada Ag. Questionário Samplemed</label>
+            </value>
+            <value>
+                <fullName>Pendência enviada - Acúmulo de Capital</fullName>
+                <default>false</default>
+                <label>Pendência enviada - Acúmulo de Capital</label>
+            </value>
+            <value>
+                <fullName>Pendência enviada - Beneficiário Empregador</fullName>
+                <default>false</default>
+                <label>Pendência enviada - Beneficiário Empregador</label>
+            </value>
+            <value>
+                <fullName>Pendência enviada - Beneficiário é o próprio Segurado</fullName>
+                <default>false</default>
+                <label>Pendência enviada - Beneficiário é o próprio Segurado</label>
+            </value>
+            <value>
+                <fullName>Pendência enviada - Transmissão em duplicidade</fullName>
+                <default>false</default>
+                <label>Pendência enviada - Transmissão em duplicidade</label>
+            </value>
+            <value>
+                <fullName>Pendência enviada - Análise adicional de aceitação</fullName>
+                <default>false</default>
+                <label>Pendência enviada - Análise adicional de aceitação</label>
+            </value>
+            <value>
+                <fullName>Pendência enviada - Vinculo financeiro</fullName>
+                <default>false</default>
+                <label>Pendência enviada - Vinculo financeiro</label>
+            </value>
+            <value>
+                <fullName>Pendência enviada - Grau de parentesco e/ou vinculo financeiro&apos;: &apos;Solicitamos esclarecimentos quanto ao vínculo do(a) proponente com o(a) responsável financeiro indicado(a).</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Pendência enviada - Grau de parentesco e/ou vinculo financeiro&apos;: &apos;Solicitamos esclarecimentos quanto ao vínculo do(a) proponente com o(a) responsável financeiro indicado(a).</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

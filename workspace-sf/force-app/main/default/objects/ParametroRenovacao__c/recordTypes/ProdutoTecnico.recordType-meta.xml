@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ProdutoTecnico</fullName>
+    <active>true</active>
+    <label>Produto técnico</label>
+    <picklistValues>
+        <picklist>TipoSegurado__c</picklist>
+        <values>
+            <fullName>Cônjuge</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Filhos</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Principal</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

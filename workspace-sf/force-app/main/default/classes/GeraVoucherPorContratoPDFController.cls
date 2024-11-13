@@ -22,7 +22,7 @@ public class GeraVoucherPorContratoPDFController {	//PLV-4805 INICIO/FIM
     public List<GarantiaWrapper> lwGarantiaESES { get; private set; }
     public List<GarantiaWrapper> lwGarantiaFRFR { get; private set; }
 
-    public Contract proposta {get; private set;}    
+    public Contract contract {get; private set;}    
 
     public List<GarantiaProduto__c> lGarantiaPrdodutoTecnico{get; private set;}
     public List<GarantiaContrato__c> lGarantiaContrato{get; private set;}
@@ -38,6 +38,11 @@ public class GeraVoucherPorContratoPDFController {	//PLV-4805 INICIO/FIM
     public String pessoaParaAvisar {get; private set;}
     public String telefonePessoaParaAvisar {get; private set;}
     public String nomePlano {get; private set;}
+
+    //LECVPV 189 - INICIO
+    public Boolean hasSocialName                {get; set;} 
+    public String  nomeSocial                   {get; set;}
+    //LECVPV 189 - FIM
     
     public GeraVoucherPorContratoPDFController() {
         
@@ -51,12 +56,12 @@ public class GeraVoucherPorContratoPDFController {	//PLV-4805 INICIO/FIM
         
         this.renderAs = mPageParam.containsKey('renderAs') ?  mPageParam.get('renderAs') : '';
         //PLV-3746 - INICIO
-        String ContratoId;
-        if (!mPageParam.containsKey('ContratoId') && !mPageParam.containsKey('token') && (ApexPages.currentPage().getParameters().get('numero') == null || ApexPages.currentPage().getParameters().get('numero') == '')) {
+        String contratoId;
+        if (!mPageParam.containsKey('propostaId') && !mPageParam.containsKey('token') && (ApexPages.currentPage().getParameters().get('numero') == null || ApexPages.currentPage().getParameters().get('numero') == '')) {
             return;
         }
-        if(mPageParam.containsKey('ContratoId')){
-            ContratoId = mPageParam.get('ContratoId');
+        if(mPageParam.containsKey('propostaId')){
+            contratoId = mPageParam.get('propostaId');
         }
         if(mPageParam.containsKey('token')){
             CryptoToken c = new CryptoToken();  
@@ -66,8 +71,8 @@ public class GeraVoucherPorContratoPDFController {	//PLV-4805 INICIO/FIM
             String chaveDescript = c.decrypt(chave);
             String dadosDoc = chaveDescript;
             String[] trataChave = dadosDoc.split('\\|');
-            ContratoId = trataChave[0];
-            system.debug('ContratoId'+ContratoId);
+            contratoId = trataChave[0];
+            system.debug('propostaId'+contratoId);
             
         }
         if(ApexPages.currentPage().getParameters().get('numero') != null && ApexPages.currentPage().getParameters().get('numero') != ''){
@@ -79,13 +84,12 @@ public class GeraVoucherPorContratoPDFController {	//PLV-4805 INICIO/FIM
                         GrupoContrato__r.ContratanteContrato__r.Contrato__r.NumeroPropostaUnico__c,
                         GrupoContrato__r.ContratanteContrato__r.Contrato__r.StartDate,
                         GrupoContrato__r.ContratanteContrato__r.Contrato__r.VigenciaFinal__c,
-                        // GrupoContrato__r.ContratanteContrato__r.Contrato__r.DataProtocolo__c,
+                        GrupoContrato__r.ContratanteContrato__r.Contrato__r.DataEmissao__c,
                         GrupoContrato__r.ContratanteContrato__r.Contrato__r.Produto__r.ProdutoTecnico__c,
-                        Conta__r.Name 
+                        Conta__r.Name, Conta__r.NomeSocial__c
                         FROM SeguradoContrato__c
                         WHERE GrupoContrato__r.ContratanteContrato__r.Contrato__r.Name =: ApexPages.currentPage().getParameters().get('numero')];
         }else{
-            System.debug('Passou else.');
             segurado = [SELECT Id, GrupoContrato__r.ContratanteContrato__r.Contrato__c,
             NomeContatoEmergencia__c, TelefoneContatoEmergencia__c,
             GrupoContrato__r.ContratanteContrato__r.Contrato__r.Name,
@@ -93,14 +97,18 @@ public class GeraVoucherPorContratoPDFController {	//PLV-4805 INICIO/FIM
             GrupoContrato__r.ContratanteContrato__r.Contrato__r.NumeroPropostaUnico__c,
             GrupoContrato__r.ContratanteContrato__r.Contrato__r.StartDate,
             GrupoContrato__r.ContratanteContrato__r.Contrato__r.VigenciaFinal__c,
-            // GrupoContrato__r.ContratanteContrato__r.Contrato__r.DataProtocolo__c,
+            GrupoContrato__r.ContratanteContrato__r.Contrato__r.DataEmissao__c,
             GrupoContrato__r.ContratanteContrato__r.Contrato__r.Produto__r.ProdutoTecnico__c,
-            Conta__r.Name 
+            Conta__r.Name, Conta__r.NomeSocial__c
             FROM SeguradoContrato__c
-                        WHERE GrupoContrato__r.ContratanteContrato__r.Contrato__c = :ContratoId];
+                        WHERE GrupoContrato__r.ContratanteContrato__r.Contrato__c = :contratoId];
         }
         //PLV-3746 - FIM
-        
+
+        //LECVPV 189 - INICIO
+        this.hasSocialName = String.isEmpty(segurado.Conta__r.NomeSocial__c) ? false : true;
+        this.nomeSocial = segurado.Conta__r.NomeSocial__c;
+        //LECVPV 189 - FIM
         
         
         lGarantiaPrdodutoTecnico = [SELECT  Id, Garantia__c, Garantia__r.Name,Garantia__r.Sigla__c,OrdemPrioridade__c, LimiteMinimoCaracteristicaEspecial__c,
@@ -112,13 +120,13 @@ public class GeraVoucherPorContratoPDFController {	//PLV-4805 INICIO/FIM
                              FROM   GarantiaContrato__c
                              WHERE   Contrato__c = :segurado.GrupoContrato__r.ContratanteContrato__r.Contrato__c];
         
-        proposta = [SELECT Id, TipoViagem__c, Produto__r.GerarVoucher__c //PLV - 4440  INICIO/FIM adicionado gerarvoucher na query
+        contract = [SELECT Id, TipoViagem__c, Produto__r.GerarVoucher__c //PLV - 4440  INICIO/FIM adicionado gerarvoucher na query
                     FROM Contract
                     WHERE Id =: segurado.GrupoContrato__r.ContratanteContrato__r.Contrato__c];
                     
-        if(!proposta.Produto__r.GerarVoucher__c)return; /*PLV - 4440  INICIO/FIM Ajuste gerarVoucher produto */
+        if(!contract.Produto__r.GerarVoucher__c)return; /*PLV - 4440  INICIO/FIM Ajuste gerarVoucher produto */
         
-        pessoaParaAvisar = 	segurado.NomeContatoEmergencia__c;
+        pessoaParaAvisar = segurado.NomeContatoEmergencia__c;
         nomePlano = segurado.GrupoContrato__r.ContratanteContrato__r.Contrato__r.Produto__r.Name;
         nProposta = (segurado.GrupoContrato__r.ContratanteContrato__r.Contrato__r.NumeroPropostaUnico__c).replace('-','/');
         nomeSegurado = segurado.Conta__r.Name;
@@ -128,35 +136,42 @@ public class GeraVoucherPorContratoPDFController {	//PLV-4805 INICIO/FIM
         vigenciaIng = vigencia.replace('-', 'and');
         vigenciaFr = vigencia.replace('-', 'au');
         vigenciaEs = vigencia.replace('-', 'al');   
-        // dataEmissao = segurado.GrupoContrato__r.ContratanteContrato__r.Contrato__r.DataProtocolo__c.format();
+        dataEmissao = segurado.GrupoContrato__r.ContratanteContrato__r.Contrato__r.DataEmissao__c.format();
         // PLV-3703 INICIO
+        System.debug('segurado.TelefoneContatoEmergencia__c '+segurado.TelefoneContatoEmergencia__c);
         if( !String.isBlank(segurado.TelefoneContatoEmergencia__c) ){
-            String tel = segurado.TelefoneContatoEmergencia__c;
-
-            System.debug('Tamanho telefone abaixo');
-            System.debug(tel);
-            System.debug(tel.length());
-            System.debug('Tamanho telefone acima');
+            System.debug('tel1'+segurado.TelefoneContatoEmergencia__c);
+            String tel = segurado.TelefoneContatoEmergencia__c.replace('-','');
+            System.debug('tel left '+tel.left(1));
+            if (tel.left(1)=='0') {
+                tel = tel.substring(1);
+                System.debug('entrou if ok');
+            }
+            System.debug('tel2'+tel);
             
-            if( segurado.TelefoneContatoEmergencia__c.length() == 10 ){
+            if( tel.length() == 10 ){
                 telefonePessoaParaAvisar = '(' + tel.left(2) + ') ';
                 telefonePessoaParaAvisar += tel.mid(2, 4);
                 telefonePessoaParaAvisar += '-';
                 telefonePessoaParaAvisar += tel.right(4);
             }
-            else if( segurado.TelefoneContatoEmergencia__c.length() == 11 ){
+            else if( tel.length() == 11 ){
                 telefonePessoaParaAvisar = '(' + tel.left(2) + ') ';
                 telefonePessoaParaAvisar += tel.mid(2, 5);
                 telefonePessoaParaAvisar += '-';
                 telefonePessoaParaAvisar += tel.right(4);
             }
             else{
+                if (segurado.TelefoneContatoEmergencia__c.left(1)=='0') {
+                    segurado.TelefoneContatoEmergencia__c = segurado.TelefoneContatoEmergencia__c.substring(1);
+                    System.debug('entrou if ok 2');
+                }
                 telefonePessoaParaAvisar = segurado.TelefoneContatoEmergencia__c;
             }
             
         }
         
-        // PLV-3703 FIM     
+        // PLV-3703 FIM       
         // Map de Tradução organizado pelo idioma e a Sigla da Garantia: Map<Idioma__c, Map<DeveloperName,Traducao__mdt>>
         //PLV-5277 - INICIO
         Map<String,Map<String,Traducao__mdt>> mTraducao = new Map<String,Map<String,Traducao__mdt>>();

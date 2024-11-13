@@ -7,8 +7,15 @@
 * *******************************************************************************************************************/
 
 public with sharing class UptFormPagPropRen {
-    
-    public static String altFPgt() {
+
+    //FNPVVEP-172 INICIO
+    @InvocableMethod
+    public static void altFPgtFlow(List<String> IdPropostas) { 
+        altFPgt(IdPropostas);
+    }
+    //FNPVVEP-172 FIM
+
+    public static String altFPgt(List<String> IdPropostas) { //FNPVVEP-172 INICIO/FIM
         
         Set<Id> ctrSt = new Set<Id>();
         Set<Id> ctrPrd = new Set<Id>();
@@ -35,7 +42,7 @@ public with sharing class UptFormPagPropRen {
 
         List<Quote> lstQtRen = [SELECT Id, Status, Name, Tipo__c, ContratoRenovado__c, OpportunityId, 
                                (SELECT Id, Codigo__c, Status__c, MensagemInterna__c, Proposta__c FROM CriticasProposta__r) 
-                                FROM Quote WHERE Status =: stsQtRen AND Tipo__c =: tipQtRen]; // RVI-171-FIX01-INICIO/FIM                         
+                                FROM Quote WHERE Status =: stsQtRen AND Tipo__c =: tipQtRen AND Id IN :IdPropostas]; // RVI-171-FIX01-INICIO/FIM  //FNPVVEP-172 INICIO/FIM     
 
         if(lstQtRen.size() == 0)
         {

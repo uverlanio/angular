@@ -112,4 +112,74 @@ public class ConsultaAcumuloCapitalBusinessTest {
         Test.stopTest();
     }
     //PLV-4503 FIM
+    //ANNVI-151 - INICIO
+    @IsTest
+    static void garsCtrSemCancelTest(){
+
+        Test.startTest();
+
+        Account conta = [SELECT Id FROM Account LIMIT 1];
+
+        Product2 produtoTecnico = TestDataFactory.gerarProdutoTecnico();
+        produtoTecnico.Status__c = 'Ativo';
+        produtoTecnico.Segmento__c ='Individual';
+        update produtoTecnico;
+
+        Product2 produtoComercial = TestDataFactory.gerarProdutoComericial(produtoTecnico);
+        produtoComercial.Status__c ='Ativo';
+        produtoComercial.Segmento__c ='Individual';        
+        update produtoComercial;
+
+        RamoSeguro__c ramoSeguro = [SELECT Id FROM RamoSeguro__c LIMIT 1];
+        DadosCorretor__c dadosCorretor = [SELECT Id FROM DadosCorretor__c LIMIT 1];
+        Quote proposta = [SELECT Id FROM Quote LIMIT 1];
+        Contract contrato = TestDataFactory.gerarContratoObjeto(produtoComercial, ramoSeguro, conta, dadosCorretor, proposta);
+        Garantia__c garantia = TestDataFactory.gerarGarantia();
+        garantia.Sigla__c = 'ABC';
+        update garantia;
+
+        GarantiaProduto__c garantiaProdutTecnico = TestDataFactory.gerarGarantiaProdutoTecnico(produtoTecnico, garantia, ramoSeguro);
+        GarantiaProduto__c garantiaProdutoComercial = TestDataFactory.gerarGarantiaProdutoComercial(produtoComercial, garantia, garantiaProdutTecnico, ramoSeguro);
+        GarantiaContrato__c garantiaContrato = TestDataFactory.gerarGarantiaContrato(contrato, garantiaProdutoComercial);
+        garantiaContrato.Capital__c = 10000;
+        update garantiaContrato;
+
+        contrato.Tipo__c = 'Novo';
+        contrato.Status = 'Emitido';
+        contrato.StartDate = System.today();
+        contrato.VigenciaFinal__c = System.today();
+
+        garantiaContrato.Contrato__r = contrato;
+        garantiaContrato.Garantia__r = garantia;
+        update garantiaContrato.Contrato__r;
+        System.debug('garantiaContrato: ' + JSON.serializePretty(garantiaContrato));
+
+        ConsultaAcumuloCapitalRest.Request req = new ConsultaAcumuloCapitalRest.Request();
+        req.cpf = '43891231814';
+
+        req.coberturasPortal = new List<ConsultaAcumuloCapitalRest.Cobertura>();
+        ConsultaAcumuloCapitalRest.Cobertura cobertura = new ConsultaAcumuloCapitalRest.Cobertura();
+        cobertura.sigla = 'ABC';
+        cobertura.valor = 10000;
+        req.coberturasPortal.add(cobertura);
+
+        ConsultaAcumuloCapitalRest.Response res = ConsultaAcumuloCapitalBusiness.getAcumuloCapitalCoberturasByCpf(req);
+        System.debug('res: ' + JSON.serialize(res));
+
+        System.assertEquals('ABC', res.coberturas[0].sigla);
+        System.assertEquals(20000, res.coberturas[0].valor);
+
+        contrato.Tipo__c = 'Cancelamento';
+        contrato.Endosso__c = '1';
+        contrato.Name = contrato.Name.substring(0, contrato.Name.length() - 1) + contrato.Endosso__c;
+        update garantiaContrato.Contrato__r;
+
+        res = ConsultaAcumuloCapitalBusiness.getAcumuloCapitalCoberturasByCpf(req);
+            
+        System.assertEquals('ABC', res.coberturas[0].sigla);
+        System.assertEquals(10000, res.coberturas[0].valor);
+
+        Test.stopTest();        
+    }
+    //ANNVI-151 - FIM
 }

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>GrupoOrcamento__c</fullName>
+    <externalId>false</externalId>
+    <label>Grupo do orçamento</label>
+    <referenceTo>GrupoOrcamento__c</referenceTo>
+    <relationshipLabel>Garantias do grupo do orçamento</relationshipLabel>
+    <relationshipName>GruposGarantiaOrcamento</relationshipName>
+    <relationshipOrder>0</relationshipOrder>
+    <reparentableMasterDetail>false</reparentableMasterDetail>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+</CustomField>

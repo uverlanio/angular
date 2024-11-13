@@ -259,13 +259,16 @@ private class BatchBaixarAssistCardTest {
 
     private static PagamentoGarantia__c criarPagamentoGarantia(Case caso, GarantiaSeguradoContrato__c garantiaSeguradoContrato){
 
+        // LECVPV-238-FIX01 INICIO
         PagamentoGarantia__c pagamentoGarantia = new PagamentoGarantia__c(
             Name = 'Despesas Médicas, Hospitalares e Odontológicas',
             Caso__c = caso.Id,
             Caso__r = caso,
             Garantia_do_segurado_do_contrato__c = garantiaSeguradoContrato.Id,
-            Garantia_do_segurado_do_contrato__r = garantiaSeguradoContrato            
+            Garantia_do_segurado_do_contrato__r = garantiaSeguradoContrato,
+            Valor_indenizado__c = 30000        
         );
+        // LECVPV-238-FIX01 FIM
 
         return pagamentoGarantia;
     }

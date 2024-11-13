@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ImpedirCriacaoComGarantiaProdTecnico</fullName>
+    <active>true</active>
+    <description>Impedir criação do Grupo de Risco da Garantia utilizando garantia do produto técnico.</description>
+    <errorConditionFormula>AND(
+				GarantiaProduto__c &lt;&gt; null,
+				GarantiaProduto__r.RecordType.DeveloperName = &apos;ProdutoTecnico&apos;
+)</errorConditionFormula>
+    <errorDisplayField>GarantiaProduto__c</errorDisplayField>
+    <errorMessage>Não é permitido criar um grupo de risco da garantia utilizando uma garantia de produto técnico.</errorMessage>
+</ValidationRule>

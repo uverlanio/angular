@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Vigencia_Final__c</fullName>
+    <description>Campo no formato de data (DD/MM/AAAA)</description>
+    <externalId>false</externalId>
+    <label>Vigência Final</label>
+    <required>true</required>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Date</type>
+</CustomField>

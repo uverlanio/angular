@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Filtrado</fullName>
+    <columns>OBJECT_ID</columns>
+    <columns>NAME</columns>
+    <columns>Codigo__c</columns>
+    <columns>InformacaoOferta__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>InformacaoOferta__c</field>
+        <operation>equals</operation>
+    </filters>
+    <label>Filtrado</label>
+</ListView>

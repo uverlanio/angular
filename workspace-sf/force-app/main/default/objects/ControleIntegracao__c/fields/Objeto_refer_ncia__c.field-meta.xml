@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Objeto_refer_ncia__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(CodigoIntegracao__c == &apos;82&apos;,
+			HYPERLINK(&quot;https://portoseguro--sniper.lightning.force.com/&quot; + MID(IdObjeto__c, 0, 18), &quot;Contrato&quot;),
+			IF(CodigoIntegracao__c == &apos;24&apos;,
+			   HYPERLINK(&quot;https://portoseguro--sniper.lightning.force.com/&quot; + MID(IdObjeto__c, 0, 18), &quot;Fatura&quot;),
+			   &apos;&apos;
+					)
+		)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Objeto referência</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>PagPagoNaoIncAltNada</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+Permitir_Alteracao__c = False,
+OR( 
+ISPICKVAL(Pagamento_de_garantia__r.Fase__c, &apos;Fechado&apos;) ,
+ISPICKVAL(Pagamento_de_garantia__r.Status_do_pagamento__c ,&apos;Pago&apos;) 
+))</errorConditionFormula>
+    <errorMessage>Não é possível inserir ou alterar beneficiários quando a fase do pagamento está &quot;Fechado&quot; ou com status &quot;Pago&quot;.</errorMessage>
+</ValidationRule>

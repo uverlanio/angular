@@ -1,0 +1,1073 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ProdutoComercial</fullName>
+    <active>true</active>
+    <compactLayoutAssignment>LayoutGarantiaProduto</compactLayoutAssignment>
+    <label>Produto comercial</label>
+    <picklistValues>
+        <picklist>AgrupamentoCoberturas__c</picklist>
+        <values>
+            <fullName>Bagagem</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Documentacoes</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Familiares e Acompanhantes</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Invalidez ou Morte</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Saude</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>CaracteristicaGarantia__c</picklist>
+        <values>
+            <fullName>Adicional</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Principal</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Serviço complementar</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>CodigoPromocao__c</picklist>
+        <values>
+            <fullName>167</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>168</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>171</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>VI010</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>VI011</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>VITST</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>DemonstracaoCapital__c</picklist>
+        <values>
+            <fullName>Acumulado</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Com incremento</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Não acumulado</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Serviço Complementar %28sem valor de capital%29</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>DemonstracaoPremio__c</picklist>
+        <values>
+            <fullName>Garantia gratuita</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Na garantia principal</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Na própria garantia</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>DependentesCancelar__c</picklist>
+        <values>
+            <fullName>Cônjuge</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Filho%28s%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pais</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sogros</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>DocumentosAviso__c</picklist>
+        <values>
+            <fullName>Anátomo-patológico %28cópia simples%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Autorização para crédito em conta corrente%2F poupança de titularidade do beneficiário</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Autorização para crédito em conta corrente%2F poupança de titularidade do representante legal</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Autorização para crédito em conta corrente%2F poupança de titularidade do%28s%29 herdeiro%28s%29 legal%28is%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Boletim de ocorrência %28cópia autenticada%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Boletim de ocorrência %28cópia simples%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Boletim de ocorrência Policial %28cópia autenticada%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Boletim de ocorrência Policial %28original%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CPF %28cópia simples%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CPF do beneficiário %28cópia simples%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CPF do custeador %28cópia simples%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CPF do representante legal %28cópia simples%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CPF do%28s%29 herdeiro%28s%29 legal %28is%29 %28cópia simples%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Carteira nacional de habilitação do condutor do veículo segurado %28cópia simples%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Carteira nacional de habilitação do segurado %28cópia simples%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cartão bancário e%2Fou cheque para validação dos dados bancários  %28Cópia Simples%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Certidão de casamento atualizada</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Certidão de casamento extraída após o óbito da vítima com averbações %28cópia autenticada%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Certidão de casamento extraída após o óbito da vítima com averbações %28cópia simples%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Certidão de nascimento %28cópia simples%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Certidão de nascimento do Beneficiário %28cópia simples%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Certidão de nascimento dos filhos e enteados</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Certidão de óbito %28cópia autenticada%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Certidão de óbito %28cópia simples%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Comprovante de rendimento %28salário%29 referente aos 3 meses anteriores a ocorrência do evento</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Comprovante de residência atualizado %28cópia simples%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Comprovante de residência atualizado do beneficiário %28cópia simples%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Comprovante de residência atualizado do custeador %28cópia simples%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Comprovante de residência do curador nomeado %28cópia simples%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Comprovante de residência do representante legal %28cópia simples%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Comprovante de vínculo empregatício %28cópia simples%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Comprovante do recibo%2Fnota para o reembolso da mala danificada %28orignal%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Comprovante vínculo oficial entre o segurado e o estipulante</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Comprovantes de despesas %28original%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Comprovantes do valor da%28s%29 multa%28s%29 retida%28s%29 no caso de cancelamento</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Contrato social com a quantidade de sócios</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Declaração da atividade de trabalho autônoma</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Declaração de separação de fato</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Declaração de união estável</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Declaração de únicos herdeiros</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Declaração de únicos herdeiros%2C com firma reconhecida somente da assinatura do declarante %28original%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Declaração prevenção à lavagem de dinheiro</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Declaração que o beneficiário reside no local informado %28quando não possui comprovante de residência em seu nome%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Declaração que o segurado reside no local informado %28quando não possui comprovante de residência em seu nome%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Declaração que o%28s%29 herdeiro%28s%29 legal%28is%29 reside no local informado %28quando não possui comprovante de residência em seu nome%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Declaração que representante legal reside no local informado %28quando não possui comprovante de residência em seu nome%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Documento de recolhimento da Previdência Social %28INSS%29 por 12 meses contínuos</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Documento do bilhete do novo trecho de reembarque referente ao cancelamento</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Documento do bilhete do trecho cancelado</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Documentos comprobatórios do evento - todos os resultados dos exames médicos realizados %28cópia simples%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Documentos médicos %28cópia simples%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Escritura pública elaborada pela companheira %28o%29 em cartório</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Formulário Informações Cadastrais -  Pessoa Física</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Formulário P%2EI%2ER %28Property Irregularity Report%29 com o comunicado do ocorrido à empresa aérea %28original%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Formulário Pagamento Sorteio -  Pessoa Física</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Formulário autorização de pagamento através de crédito em conta corrente bancária</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Formulário autorização de pagamento através de crédito em conta corrente%2Fpoupança de titularidade do segurado</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Formulário aviso de Sinistro de Vida e%2Fou Acidentes Pessoais</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Formulário aviso de Sinistro para Concessão de Renda por Incapacidade Temporária</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Formulário aviso de sinistro %28Acidente Pessoais Passageiros - Morte Acidental%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Formulário aviso de sinistro %28Acidentes Pessoais Passageiros %E2%80%93 Despesas Médico Hospitalares%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Formulário aviso de sinistro %28Acidentes Pessoais Passageiros - Invalidez por Acidente%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Formulário aviso de sinistro %28Diagnóstico de Câncer%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Formulário aviso de sinistro %28Diária de Incapacidade Temporária%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Formulário aviso de sinistro %28ILPD %E2%80%93 AED %E2%80%93 IFPD e IPD%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Formulário aviso de sinistro %28Invalidez por Acidente%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Formulário aviso de sinistro %28Morte Acidental%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Formulário aviso de sinistro %28Morte Natural%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Formulário aviso de sinistro %28Seguro Viagem - DMHO%2C Fisioterapia e Despesas Farmacêuticas%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Formulário aviso de sinistro %28Seguro Viagem - Extravio ou Danos de Bagagem%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Formulário aviso de sinistro %28Seguro Viagem - Regresso Sanitário%2C Translado de Corpo%2C Translado Médico%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Formulário aviso de sinistro %28Seguro Viagem%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Formulário aviso de sinistro %28Viagem - Cancelamento ou Interrupção de Viagem%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Formulário de Comunicação de Acidente de Trabalho %28CAT%29 %28cópia simples%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Formulário de autorização de eventual pagamento</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Formulário de comprovação de acidente de trabalho - CAT %28cópia simples%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Formulário de registro de informações cadastrais - complemento para a garantia de Remarcação de Passagem de Regresso %28original%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Formulário de registro de informações cadastrais com os dados da vítima %28original%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Formulário de registro de informações cadastrais com os dados do curador %28original%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Formulário de registro de informações cadastrais com os dados do custeador %28original%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Formulário termo de cessão de diretos</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Laudo conclusivo de exame de corpo de delito elaborado pelo instituto médico legal %28cópia simples%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Laudo de exame necroscópico elaborado pelo instituto médico legal %28cópia simples%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Laudo subscrito por médico devidamente habilitado na sua especialização %28original%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Notas Fiscais e recibos das despesas médicas e hospitalares referentes ao acidente %28originais%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Notas Fiscais e recibos referente as despesas com o funeral %28orginal%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Prontuário médico hospitalar completo %28cópia simples%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Prontuário ou ficha médica hospitalar de atendimento emergencial ou de urgência %28cópia simples%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Página de anotações gerais caso tenha observação com relação ao desemprego %28cópia simples%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Página de identificação de admissão do último emprego %28cópia autenticada%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Página de identificação de demissão do último emprego %28cópia autenticada%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Página seguinte da identificação de demissão do último emprego %28cópia autenticada%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>RG %28cópia simples%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>RG do Beneficiário %28cópia simples%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>RG do Custeador %28cópia simples%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>RG do representante legal %28cópia simples%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>RG do%28s%29 herdeiro%28s%29 legal %28is%29 %28cópia simples%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Receituário com prescrição dos medicamentos%2C cujas notas fiscais%2Frecibos forem apresentados %28originais%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Recibo de indenização emitido pela companhia aérea</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Registro de Informações Cadastrais PF %28Pessoa Física%29 do beneficiário</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Registro de Informações Cadastrais PF %28Pessoa Física%29 do representante legal</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Registro de Informações Cadastrais PF %28Pessoa Física%29 do segurado</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Registro de Informações Cadastrais PF %28Pessoa Física%29 do%28s%29 herdeiro%28s%29 legal%28is%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Registro de informações cadastrais %28original%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Registro de informações cadastrais do segurado %28original%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Relatório Médico assinado pelo médico assistente</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Relação completa do FGTS do mês do evento</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Resultado de todos os exames realizados - diagnóstico e de controle %28somente laudo%29 %28cópia simples%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Resultado do exame de dosagem alcoólica e toxicológico %28cópia simples%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Resultado dos exames de diagnósticos e controle - somente laudo %28cópia simples%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Resultados de exames complementares %28cópia simples%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Resultados de exames médicos que auxiliaram no diagnóstico %28cópia simples%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Resultados dos exames que demonstrem as lesões decorrentes do trauma ou da enfermidade súbita e aguda</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Serviço Complementar %E2%80%93 sem obrigatoriedade de apresentação de documentos</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Termo de Cessão de Direitos %28original%2C com reconhecimento de firma por autenticidade do cedente e do cessionário%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Termo de Rescisão Contratual</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Termo de curatela definitiva</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Ticket da bagagem %28original%29</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>FinalidadeRemissao__c</picklist>
+        <values>
+            <fullName>Quitar parcelas do próprio segurado</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Quitar parcelas dos dependentes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>FormaExibicaoCapital__c</picklist>
+        <values>
+            <fullName>Lista</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Serviço Complementar %28sem valor de capital%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Valor fixo</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Valor informado</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>FormaPagamento__c</picklist>
+        <values>
+            <fullName>Imediata</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Parcelado</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>MomentoCancelamento__c</picklist>
+        <values>
+            <fullName>Aviso</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pagamento</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>OrigemSinistroBeneficio__c</picklist>
+        <values>
+            <fullName>Acidente</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Benefício</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Desemprego</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Doença</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Viagem</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>TempoContagem__c</picklist>
+        <values>
+            <fullName>Ano%28s%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Bimestre%28s%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dia%28s%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Mês%28es%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Quadrimestre%28s%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Semana%28s%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Semestre%28s%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Trimestre%28s%29</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>TipoBeneficiario__c</picklist>
+        <values>
+            <fullName>A própria vida</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Amigo %28a%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Avó</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Avô</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Companheiro %28a%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cunhado %28a%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cônjuge</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Enteado %28a%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Filho %28a%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Herdeiros legais</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Irmã %28o%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Mãe</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Namorado %28a%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Neto %28a%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Noivo %28a%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>O próprio segurado</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Outros</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pai</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Parceiro</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Primo %28a%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sobrinho %28a%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sócio</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Tio %28a%29</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>TipoCapital__c</picklist>
+        <values>
+            <fullName>Capital global</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Capital uniforme</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Escalonado por cargo</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Escalonado por faixa salarial</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Livre escolha de capital</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Múltiplo por prêmio pago</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Múltiplo salarial</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sem Capital</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>TipoCaracteristicaEspecial__c</picklist>
+        <values>
+            <fullName>Ano%28s%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Assessoria</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cestas</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dia%28s%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Mês%28es%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Permanência no exterior</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Quilos</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Semana%28s%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Semestre%28s%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sorteio</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Trimestre%28s%29</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>TipoCobranca__c</picklist>
+        <values>
+            <fullName>Serviço prestado</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Vida ativa</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>TipoGarantia__c</picklist>
+        <values>
+            <fullName>Assistência</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Benefício</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cobertura</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>TipoLimiteCapital__c</picklist>
+        <values>
+            <fullName>Maior valor entre garantias</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Maior valor entre garantias%2F360</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Monetário</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Percentual</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>TipoPagamento__c</picklist>
+        <values>
+            <fullName>Antecipação</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Auxílio alimentação</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cesta básica</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Complemento</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Diária</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Reembolso</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Renda</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Serviços</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sorteio</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Voucher</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>À vista</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>TipoPrazoAvisoSinistro__c</picklist>
+        <values>
+            <fullName>Ano</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dia</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Mês</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>TipoPrazoMaximoLiquidacao__c</picklist>
+        <values>
+            <fullName>Ano</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dia</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Mês</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>TipoReintegracao__c</picklist>
+        <values>
+            <fullName>Evento</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Renovação</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Vigência</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>TipoValor__c</picklist>
+        <values>
+            <fullName>Percentual</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Valor fixo</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>VigenciaGarantia__c</picklist>
+        <values>
+            <fullName>Contratação até fim da apólice</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Contratação até início da apólice</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Mesma da apólice</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>ambitoTerritorial__c</picklist>
+        <values>
+            <fullName>PaisesdaAmericaLatinaincluindoOBrasil</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PaisesdaEuropa</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>TerritorioGlobal</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>TerritorioGlobalExcetoBrasil</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>TerritorioNacional</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

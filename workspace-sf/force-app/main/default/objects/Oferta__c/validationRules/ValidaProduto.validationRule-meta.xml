@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ValidaProduto</fullName>
+    <active>true</active>
+    <errorConditionFormula>IF( Produto__c == null , true, false)</errorConditionFormula>
+    <errorDisplayField>Produto__c</errorDisplayField>
+    <errorMessage>Produto não Informado, por favor informar um produto.</errorMessage>
+</ValidationRule>

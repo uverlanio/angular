@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ValidarDadosCorretorParaOPapelCorretor</fullName>
+    <active>true</active>
+    <errorConditionFormula>ISPICKVAL(Papel__c, &apos;Corretor&apos;) &amp;&amp; ISBLANK(DadosCorretor__c)</errorConditionFormula>
+    <errorDisplayField>DadosCorretor__c</errorDisplayField>
+    <errorMessage>Para o papel Corretor, informar os dados do corretor</errorMessage>
+</ValidationRule>

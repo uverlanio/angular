@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ValidarVigenciaFinal</fullName>
+    <active>true</active>
+    <errorConditionFormula>VigenciaFinal__c &lt; VigenciaInicial__c</errorConditionFormula>
+    <errorMessage>Vigência final deve ser superior a vigência inicial</errorMessage>
+</ValidationRule>

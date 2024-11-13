@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TipoLimiteCapital__c</fullName>
+    <externalId>false</externalId>
+    <label>Tipo de limite do capital</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Maior valor entre garantias</fullName>
+                <default>false</default>
+                <label>Maior valor entre garantias</label>
+            </value>
+            <value>
+                <fullName>Maior valor entre garantias/360</fullName>
+                <default>false</default>
+                <label>Maior valor entre garantias/360</label>
+            </value>
+            <value>
+                <fullName>Monetário</fullName>
+                <default>false</default>
+                <label>Monetário</label>
+            </value>
+            <value>
+                <fullName>Percentual</fullName>
+                <default>false</default>
+                <label>Percentual</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,625 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>DocumentosAviso__c</fullName>
+    <externalId>false</externalId>
+    <label>Documentos para aviso</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Anátomo-patológico (cópia simples)</fullName>
+                <default>false</default>
+                <label>Anátomo-patológico (cópia simples)</label>
+            </value>
+            <value>
+                <fullName>Autorização para crédito em conta corrente/ poupança de titularidade do(s) herdeiro(s) legal(is)</fullName>
+                <default>false</default>
+                <label>Autorização para crédito em conta corrente/ poupança de titularidade do(s) herdeiro(s) legal(is)</label>
+            </value>
+            <value>
+                <fullName>Autorização para crédito em conta corrente/ poupança de titularidade do beneficiário</fullName>
+                <default>false</default>
+                <label>Autorização para crédito em conta corrente/ poupança de titularidade do beneficiário</label>
+            </value>
+            <value>
+                <fullName>Autorização para crédito em conta corrente/ poupança de titularidade do representante legal</fullName>
+                <default>false</default>
+                <label>Autorização para crédito em conta corrente/ poupança de titularidade do representante legal</label>
+            </value>
+            <value>
+                <fullName>Boletim de ocorrência (cópia autenticada)</fullName>
+                <default>false</default>
+                <label>Boletim de ocorrência (cópia autenticada)</label>
+            </value>
+            <value>
+                <fullName>Boletim de ocorrência (cópia simples)</fullName>
+                <default>false</default>
+                <label>Boletim de ocorrência (cópia simples)</label>
+            </value>
+            <value>
+                <fullName>Boletim de ocorrência Policial (cópia autenticada)</fullName>
+                <default>false</default>
+                <label>Boletim de ocorrência Policial (cópia autenticada)</label>
+            </value>
+            <value>
+                <fullName>Boletim de ocorrência Policial (original)</fullName>
+                <default>false</default>
+                <label>Boletim de ocorrência Policial (original)</label>
+            </value>
+            <value>
+                <fullName>Cartão bancário e/ou cheque para validação dos dados bancários  (Cópia Simples)</fullName>
+                <default>false</default>
+                <label>Cartão bancário e/ou cheque para validação dos dados bancários  (Cópia Simples)</label>
+            </value>
+            <value>
+                <fullName>Carteira nacional de habilitação do condutor do veículo segurado (cópia simples)</fullName>
+                <default>false</default>
+                <label>Carteira nacional de habilitação do condutor do veículo segurado (cópia simples)</label>
+            </value>
+            <value>
+                <fullName>Carteira nacional de habilitação do segurado (cópia simples)</fullName>
+                <default>false</default>
+                <label>Carteira nacional de habilitação do segurado (cópia simples)</label>
+            </value>
+            <value>
+                <fullName>Certidão de casamento atualizada</fullName>
+                <default>false</default>
+                <label>Certidão de casamento atualizada</label>
+            </value>
+            <value>
+                <fullName>Certidão de casamento extraída após o óbito da vítima com averbações (cópia autenticada)</fullName>
+                <default>false</default>
+                <label>Certidão de casamento extraída após o óbito da vítima com averbações (cópia autenticada)</label>
+            </value>
+            <value>
+                <fullName>Certidão de casamento extraída após o óbito da vítima com averbações (cópia simples)</fullName>
+                <default>false</default>
+                <label>Certidão de casamento extraída após o óbito da vítima com averbações (cópia simples)</label>
+            </value>
+            <value>
+                <fullName>Certidão de nascimento (cópia simples)</fullName>
+                <default>false</default>
+                <label>Certidão de nascimento (cópia simples)</label>
+            </value>
+            <value>
+                <fullName>Certidão de nascimento do Beneficiário (cópia simples)</fullName>
+                <default>false</default>
+                <label>Certidão de nascimento do Beneficiário (cópia simples)</label>
+            </value>
+            <value>
+                <fullName>Certidão de nascimento dos filhos e enteados</fullName>
+                <default>false</default>
+                <label>Certidão de nascimento dos filhos e enteados</label>
+            </value>
+            <value>
+                <fullName>Certidão de óbito (cópia autenticada)</fullName>
+                <default>false</default>
+                <label>Certidão de óbito (cópia autenticada)</label>
+            </value>
+            <value>
+                <fullName>Certidão de óbito (cópia simples)</fullName>
+                <default>false</default>
+                <label>Certidão de óbito (cópia simples)</label>
+            </value>
+            <value>
+                <fullName>Comprovante de rendimento (salário) referente aos 3 meses anteriores a ocorrência do evento</fullName>
+                <default>false</default>
+                <label>Comprovante de rendimento (salário) referente aos 3 meses anteriores a ocorrência do evento</label>
+            </value>
+            <value>
+                <fullName>Comprovante de residência atualizado (cópia simples)</fullName>
+                <default>false</default>
+                <label>Comprovante de residência atualizado (cópia simples)</label>
+            </value>
+            <value>
+                <fullName>Comprovante de residência atualizado do beneficiário (cópia simples)</fullName>
+                <default>false</default>
+                <label>Comprovante de residência atualizado do beneficiário (cópia simples)</label>
+            </value>
+            <value>
+                <fullName>Comprovante de residência atualizado do custeador (cópia simples)</fullName>
+                <default>false</default>
+                <label>Comprovante de residência atualizado do custeador (cópia simples)</label>
+            </value>
+            <value>
+                <fullName>Comprovante de residência do curador nomeado (cópia simples)</fullName>
+                <default>false</default>
+                <label>Comprovante de residência do curador nomeado (cópia simples)</label>
+            </value>
+            <value>
+                <fullName>Comprovante de residência do representante legal (cópia simples)</fullName>
+                <default>false</default>
+                <label>Comprovante de residência do representante legal (cópia simples)</label>
+            </value>
+            <value>
+                <fullName>Comprovante de vínculo empregatício (cópia simples)</fullName>
+                <default>false</default>
+                <label>Comprovante de vínculo empregatício (cópia simples)</label>
+            </value>
+            <value>
+                <fullName>Comprovante do recibo/nota para o reembolso da mala danificada (orignal)</fullName>
+                <default>false</default>
+                <label>Comprovante do recibo/nota para o reembolso da mala danificada (orignal)</label>
+            </value>
+            <value>
+                <fullName>Comprovantes de despesas (original)</fullName>
+                <default>false</default>
+                <label>Comprovantes de despesas (original)</label>
+            </value>
+            <value>
+                <fullName>Comprovantes do valor da(s) multa(s) retida(s) no caso de cancelamento</fullName>
+                <default>false</default>
+                <label>Comprovantes do valor da(s) multa(s) retida(s) no caso de cancelamento</label>
+            </value>
+            <value>
+                <fullName>Comprovante vínculo oficial entre o segurado e o estipulante</fullName>
+                <default>false</default>
+                <label>Comprovante vínculo oficial entre o segurado e o estipulante</label>
+            </value>
+            <value>
+                <fullName>Contrato social com a quantidade de sócios</fullName>
+                <default>false</default>
+                <label>Contrato social com a quantidade de sócios</label>
+            </value>
+            <value>
+                <fullName>CPF (cópia simples)</fullName>
+                <default>false</default>
+                <label>CPF (cópia simples)</label>
+            </value>
+            <value>
+                <fullName>CPF do(s) herdeiro(s) legal (is) (cópia simples)</fullName>
+                <default>false</default>
+                <label>CPF do(s) herdeiro(s) legal (is) (cópia simples)</label>
+            </value>
+            <value>
+                <fullName>CPF do beneficiário (cópia simples)</fullName>
+                <default>false</default>
+                <label>CPF do beneficiário (cópia simples)</label>
+            </value>
+            <value>
+                <fullName>CPF do custeador (cópia simples)</fullName>
+                <default>false</default>
+                <label>CPF do custeador (cópia simples)</label>
+            </value>
+            <value>
+                <fullName>CPF do representante legal (cópia simples)</fullName>
+                <default>false</default>
+                <label>CPF do representante legal (cópia simples)</label>
+            </value>
+            <value>
+                <fullName>Declaração da atividade de trabalho autônoma</fullName>
+                <default>false</default>
+                <label>Declaração da atividade de trabalho autônoma</label>
+            </value>
+            <value>
+                <fullName>Declaração de separação de fato</fullName>
+                <default>false</default>
+                <label>Declaração de separação de fato</label>
+            </value>
+            <value>
+                <fullName>Declaração de união estável</fullName>
+                <default>false</default>
+                <label>Declaração de união estável</label>
+            </value>
+            <value>
+                <fullName>Declaração de únicos herdeiros</fullName>
+                <default>false</default>
+                <label>Declaração de únicos herdeiros</label>
+            </value>
+            <value>
+                <fullName>Declaração de únicos herdeiros, com firma reconhecida somente da assinatura do declarante (original)</fullName>
+                <default>false</default>
+                <label>Declaração de únicos herdeiros, com firma reconhecida somente da assinatura do declarante (original)</label>
+            </value>
+            <value>
+                <fullName>Declaração prevenção à lavagem de dinheiro</fullName>
+                <default>false</default>
+                <label>Declaração prevenção à lavagem de dinheiro</label>
+            </value>
+            <value>
+                <fullName>Declaração que o(s) herdeiro(s) legal(is) reside no local informado (quando não possui comprovante de residência em seu nome)</fullName>
+                <default>false</default>
+                <label>Declaração que o(s) herdeiro(s) legal(is) reside no local informado (quando não possui comprovante de residência em seu nome)</label>
+            </value>
+            <value>
+                <fullName>Declaração que o beneficiário reside no local informado (quando não possui comprovante de residência em seu nome)</fullName>
+                <default>false</default>
+                <label>Declaração que o beneficiário reside no local informado (quando não possui comprovante de residência em seu nome)</label>
+            </value>
+            <value>
+                <fullName>Declaração que o segurado reside no local informado (quando não possui comprovante de residência em seu nome)</fullName>
+                <default>false</default>
+                <label>Declaração que o segurado reside no local informado (quando não possui comprovante de residência em seu nome)</label>
+            </value>
+            <value>
+                <fullName>Declaração que representante legal reside no local informado (quando não possui comprovante de residência em seu nome)</fullName>
+                <default>false</default>
+                <label>Declaração que representante legal reside no local informado (quando não possui comprovante de residência em seu nome)</label>
+            </value>
+            <value>
+                <fullName>Documento de recolhimento da Previdência Social (INSS) por 12 meses contínuos</fullName>
+                <default>false</default>
+                <label>Documento de recolhimento da Previdência Social (INSS) por 12 meses contínuos</label>
+            </value>
+            <value>
+                <fullName>Documento do bilhete do novo trecho de reembarque referente ao cancelamento</fullName>
+                <default>false</default>
+                <label>Documento do bilhete do novo trecho de reembarque referente ao cancelamento</label>
+            </value>
+            <value>
+                <fullName>Documento do bilhete do trecho cancelado</fullName>
+                <default>false</default>
+                <label>Documento do bilhete do trecho cancelado</label>
+            </value>
+            <value>
+                <fullName>Documentos comprobatórios do evento - todos os resultados dos exames médicos realizados (cópia simples)</fullName>
+                <default>false</default>
+                <label>Documentos comprobatórios do evento - todos os resultados dos exames médicos realizados (cópia simples)</label>
+            </value>
+            <value>
+                <fullName>Documentos médicos (cópia simples)</fullName>
+                <default>false</default>
+                <label>Documentos médicos (cópia simples)</label>
+            </value>
+            <value>
+                <fullName>Escritura pública elaborada pela companheira (o) em cartório</fullName>
+                <default>false</default>
+                <label>Escritura pública elaborada pela companheira (o) em cartório</label>
+            </value>
+            <value>
+                <fullName>Formulário autorização de pagamento através de crédito em conta corrente/poupança de titularidade do segurado</fullName>
+                <default>false</default>
+                <label>Formulário autorização de pagamento através de crédito em conta corrente/poupança de titularidade do segurado</label>
+            </value>
+            <value>
+                <fullName>Formulário autorização de pagamento através de crédito em conta corrente bancária</fullName>
+                <default>false</default>
+                <label>Formulário autorização de pagamento através de crédito em conta corrente bancária</label>
+            </value>
+            <value>
+                <fullName>Formulário aviso de sinistro (Acidente Pessoais Passageiros - Morte Acidental)</fullName>
+                <default>false</default>
+                <label>Formulário aviso de sinistro (Acidente Pessoais Passageiros - Morte Acidental)</label>
+            </value>
+            <value>
+                <fullName>Formulário aviso de sinistro (Acidentes Pessoais Passageiros – Despesas Médico Hospitalares)</fullName>
+                <default>false</default>
+                <label>Formulário aviso de sinistro (Acidentes Pessoais Passageiros – Despesas Médico Hospitalares)</label>
+            </value>
+            <value>
+                <fullName>Formulário aviso de sinistro (Acidentes Pessoais Passageiros - Invalidez por Acidente)</fullName>
+                <default>false</default>
+                <label>Formulário aviso de sinistro (Acidentes Pessoais Passageiros - Invalidez por Acidente)</label>
+            </value>
+            <value>
+                <fullName>Formulário aviso de sinistro (Diagnóstico de Câncer)</fullName>
+                <default>false</default>
+                <label>Formulário aviso de sinistro (Diagnóstico de Câncer)</label>
+            </value>
+            <value>
+                <fullName>Formulário aviso de sinistro (Diária de Incapacidade Temporária)</fullName>
+                <default>false</default>
+                <label>Formulário aviso de sinistro (Diária de Incapacidade Temporária)</label>
+            </value>
+            <value>
+                <fullName>Formulário aviso de sinistro (ILPD – AED – IFPD e IPD)</fullName>
+                <default>false</default>
+                <label>Formulário aviso de sinistro (ILPD – AED – IFPD e IPD)</label>
+            </value>
+            <value>
+                <fullName>Formulário aviso de sinistro (Invalidez por Acidente)</fullName>
+                <default>false</default>
+                <label>Formulário aviso de sinistro (Invalidez por Acidente)</label>
+            </value>
+            <value>
+                <fullName>Formulário aviso de sinistro (Morte Acidental)</fullName>
+                <default>false</default>
+                <label>Formulário aviso de sinistro (Morte Acidental)</label>
+            </value>
+            <value>
+                <fullName>Formulário aviso de sinistro (Morte Natural)</fullName>
+                <default>false</default>
+                <label>Formulário aviso de sinistro (Morte Natural)</label>
+            </value>
+            <value>
+                <fullName>Formulário aviso de sinistro (Seguro Viagem)</fullName>
+                <default>false</default>
+                <label>Formulário aviso de sinistro (Seguro Viagem)</label>
+            </value>
+            <value>
+                <fullName>Formulário aviso de sinistro (Seguro Viagem - DMHO, Fisioterapia e Despesas Farmacêuticas)</fullName>
+                <default>false</default>
+                <label>Formulário aviso de sinistro (Seguro Viagem - DMHO, Fisioterapia e Despesas Farmacêuticas)</label>
+            </value>
+            <value>
+                <fullName>Formulário aviso de sinistro (Seguro Viagem - Extravio ou Danos de Bagagem)</fullName>
+                <default>false</default>
+                <label>Formulário aviso de sinistro (Seguro Viagem - Extravio ou Danos de Bagagem)</label>
+            </value>
+            <value>
+                <fullName>Formulário aviso de sinistro (Seguro Viagem - Regresso Sanitário, Translado de Corpo, Translado Médico)</fullName>
+                <default>false</default>
+                <label>Formulário aviso de sinistro (Seguro Viagem - Regresso Sanitário, Translado de Corpo, Translado Médico)</label>
+            </value>
+            <value>
+                <fullName>Formulário aviso de sinistro (Viagem - Cancelamento ou Interrupção de Viagem)</fullName>
+                <default>false</default>
+                <label>Formulário aviso de sinistro (Viagem - Cancelamento ou Interrupção de Viagem)</label>
+            </value>
+            <value>
+                <fullName>Formulário aviso de Sinistro de Vida e/ou Acidentes Pessoais</fullName>
+                <default>false</default>
+                <label>Formulário aviso de Sinistro de Vida e/ou Acidentes Pessoais</label>
+            </value>
+            <value>
+                <fullName>Formulário aviso de Sinistro para Concessão de Renda por Incapacidade Temporária</fullName>
+                <default>false</default>
+                <label>Formulário aviso de Sinistro para Concessão de Renda por Incapacidade Temporária</label>
+            </value>
+            <value>
+                <fullName>Formulário de autorização de eventual pagamento</fullName>
+                <default>false</default>
+                <label>Formulário de autorização de eventual pagamento</label>
+            </value>
+            <value>
+                <fullName>Formulário de comprovação de acidente de trabalho - CAT (cópia simples)</fullName>
+                <default>false</default>
+                <label>Formulário de comprovação de acidente de trabalho - CAT (cópia simples)</label>
+            </value>
+            <value>
+                <fullName>Formulário de Comunicação de Acidente de Trabalho (CAT) (cópia simples)</fullName>
+                <default>false</default>
+                <label>Formulário de Comunicação de Acidente de Trabalho (CAT) (cópia simples)</label>
+            </value>
+            <value>
+                <fullName>Formulário de registro de informações cadastrais com os dados da vítima (original)</fullName>
+                <default>false</default>
+                <label>Formulário de registro de informações cadastrais com os dados da vítima (original)</label>
+            </value>
+            <value>
+                <fullName>Formulário de registro de informações cadastrais com os dados do curador (original)</fullName>
+                <default>false</default>
+                <label>Formulário de registro de informações cadastrais com os dados do curador (original)</label>
+            </value>
+            <value>
+                <fullName>Formulário de registro de informações cadastrais com os dados do custeador (original)</fullName>
+                <default>false</default>
+                <label>Formulário de registro de informações cadastrais com os dados do custeador (original)</label>
+            </value>
+            <value>
+                <fullName>Formulário de registro de informações cadastrais - complemento para a garantia de Remarcação de Passagem de Regresso (original)</fullName>
+                <default>false</default>
+                <label>Formulário de registro de informações cadastrais - complemento para a garantia de Remarcação de Passagem de Regresso (original)</label>
+            </value>
+            <value>
+                <fullName>Formulário Informações Cadastrais -  Pessoa Física</fullName>
+                <default>false</default>
+                <label>Formulário Informações Cadastrais -  Pessoa Física</label>
+            </value>
+            <value>
+                <fullName>Formulário P.I.R (Property Irregularity Report) com o comunicado do ocorrido à empresa aérea (original)</fullName>
+                <default>false</default>
+                <label>Formulário P.I.R (Property Irregularity Report) com o comunicado do ocorrido à empresa aérea (original)</label>
+            </value>
+            <value>
+                <fullName>Formulário Pagamento Sorteio -  Pessoa Física</fullName>
+                <default>false</default>
+                <label>Formulário Pagamento Sorteio -  Pessoa Física</label>
+            </value>
+            <value>
+                <fullName>Formulário termo de cessão de diretos</fullName>
+                <default>false</default>
+                <label>Formulário termo de cessão de diretos</label>
+            </value>
+            <value>
+                <fullName>Laudo conclusivo de exame de corpo de delito elaborado pelo instituto médico legal (cópia simples)</fullName>
+                <default>false</default>
+                <label>Laudo conclusivo de exame de corpo de delito elaborado pelo instituto médico legal (cópia simples)</label>
+            </value>
+            <value>
+                <fullName>Laudo de exame necroscópico elaborado pelo instituto médico legal (cópia simples)</fullName>
+                <default>false</default>
+                <label>Laudo de exame necroscópico elaborado pelo instituto médico legal (cópia simples)</label>
+            </value>
+            <value>
+                <fullName>Laudo subscrito por médico devidamente habilitado na sua especialização (original)</fullName>
+                <default>false</default>
+                <label>Laudo subscrito por médico devidamente habilitado na sua especialização (original)</label>
+            </value>
+            <value>
+                <fullName>Notas Fiscais e recibos das despesas médicas e hospitalares referentes ao acidente (originais)</fullName>
+                <default>false</default>
+                <label>Notas Fiscais e recibos das despesas médicas e hospitalares referentes ao acidente (originais)</label>
+            </value>
+            <value>
+                <fullName>Notas Fiscais e recibos referente as despesas com o funeral (orginal)</fullName>
+                <default>false</default>
+                <label>Notas Fiscais e recibos referente as despesas com o funeral (orginal)</label>
+            </value>
+            <value>
+                <fullName>Página de anotações gerais caso tenha observação com relação ao desemprego (cópia simples)</fullName>
+                <default>false</default>
+                <label>Página de anotações gerais caso tenha observação com relação ao desemprego (cópia simples)</label>
+            </value>
+            <value>
+                <fullName>Página de identificação de admissão do último emprego (cópia autenticada)</fullName>
+                <default>false</default>
+                <label>Página de identificação de admissão do último emprego (cópia autenticada)</label>
+            </value>
+            <value>
+                <fullName>Página de identificação de demissão do último emprego (cópia autenticada)</fullName>
+                <default>false</default>
+                <label>Página de identificação de demissão do último emprego (cópia autenticada)</label>
+            </value>
+            <value>
+                <fullName>Página seguinte da identificação de demissão do último emprego (cópia autenticada)</fullName>
+                <default>false</default>
+                <label>Página seguinte da identificação de demissão do último emprego (cópia autenticada)</label>
+            </value>
+            <value>
+                <fullName>Prontuário médico hospitalar completo (cópia simples)</fullName>
+                <default>false</default>
+                <label>Prontuário médico hospitalar completo (cópia simples)</label>
+            </value>
+            <value>
+                <fullName>Prontuário ou ficha médica hospitalar de atendimento emergencial ou de urgência (cópia simples)</fullName>
+                <default>false</default>
+                <label>Prontuário ou ficha médica hospitalar de atendimento emergencial ou de urgência (cópia simples)</label>
+            </value>
+            <value>
+                <fullName>Receituário com prescrição dos medicamentos, cujas notas fiscais/recibos forem apresentados (originais)</fullName>
+                <default>false</default>
+                <label>Receituário com prescrição dos medicamentos, cujas notas fiscais/recibos forem apresentados (originais)</label>
+            </value>
+            <value>
+                <fullName>Recibo de indenização emitido pela companhia aérea</fullName>
+                <default>false</default>
+                <label>Recibo de indenização emitido pela companhia aérea</label>
+            </value>
+            <value>
+                <fullName>Registro de informações cadastrais (original)</fullName>
+                <default>false</default>
+                <label>Registro de informações cadastrais (original)</label>
+            </value>
+            <value>
+                <fullName>Registro de informações cadastrais do segurado (original)</fullName>
+                <default>false</default>
+                <label>Registro de informações cadastrais do segurado (original)</label>
+            </value>
+            <value>
+                <fullName>Registro de Informações Cadastrais PF (Pessoa Física) do(s) herdeiro(s) legal(is)</fullName>
+                <default>false</default>
+                <label>Registro de Informações Cadastrais PF (Pessoa Física) do(s) herdeiro(s) legal(is)</label>
+            </value>
+            <value>
+                <fullName>Registro de Informações Cadastrais PF (Pessoa Física) do beneficiário</fullName>
+                <default>false</default>
+                <label>Registro de Informações Cadastrais PF (Pessoa Física) do beneficiário</label>
+            </value>
+            <value>
+                <fullName>Registro de Informações Cadastrais PF (Pessoa Física) do representante legal</fullName>
+                <default>false</default>
+                <label>Registro de Informações Cadastrais PF (Pessoa Física) do representante legal</label>
+            </value>
+            <value>
+                <fullName>Registro de Informações Cadastrais PF (Pessoa Física) do segurado</fullName>
+                <default>false</default>
+                <label>Registro de Informações Cadastrais PF (Pessoa Física) do segurado</label>
+            </value>
+            <value>
+                <fullName>Relação completa do FGTS do mês do evento</fullName>
+                <default>false</default>
+                <label>Relação completa do FGTS do mês do evento</label>
+            </value>
+            <value>
+                <fullName>Relatório Médico assinado pelo médico assistente</fullName>
+                <default>false</default>
+                <label>Relatório Médico assinado pelo médico assistente</label>
+            </value>
+            <value>
+                <fullName>Resultado de todos os exames realizados - diagnóstico e de controle (somente laudo) (cópia simples)</fullName>
+                <default>false</default>
+                <label>Resultado de todos os exames realizados - diagnóstico e de controle (somente laudo) (cópia simples)</label>
+            </value>
+            <value>
+                <fullName>Resultado do exame de dosagem alcoólica e toxicológico (cópia simples)</fullName>
+                <default>false</default>
+                <label>Resultado do exame de dosagem alcoólica e toxicológico (cópia simples)</label>
+            </value>
+            <value>
+                <fullName>Resultado dos exames de diagnósticos e controle - somente laudo (cópia simples)</fullName>
+                <default>false</default>
+                <label>Resultado dos exames de diagnósticos e controle - somente laudo (cópia simples)</label>
+            </value>
+            <value>
+                <fullName>Resultados de exames complementares (cópia simples)</fullName>
+                <default>false</default>
+                <label>Resultados de exames complementares (cópia simples)</label>
+            </value>
+            <value>
+                <fullName>Resultados de exames médicos que auxiliaram no diagnóstico (cópia simples)</fullName>
+                <default>false</default>
+                <label>Resultados de exames médicos que auxiliaram no diagnóstico (cópia simples)</label>
+            </value>
+            <value>
+                <fullName>Resultados dos exames que demonstrem as lesões decorrentes do trauma ou da enfermidade súbita e aguda</fullName>
+                <default>false</default>
+                <label>Resultados dos exames que demonstrem as lesões decorrentes do trauma ou da enfermidade súbita e aguda</label>
+            </value>
+            <value>
+                <fullName>RG (cópia simples)</fullName>
+                <default>false</default>
+                <label>RG (cópia simples)</label>
+            </value>
+            <value>
+                <fullName>RG do(s) herdeiro(s) legal (is) (cópia simples)</fullName>
+                <default>false</default>
+                <label>RG do(s) herdeiro(s) legal (is) (cópia simples)</label>
+            </value>
+            <value>
+                <fullName>RG do Beneficiário (cópia simples)</fullName>
+                <default>false</default>
+                <label>RG do Beneficiário (cópia simples)</label>
+            </value>
+            <value>
+                <fullName>RG do Custeador (cópia simples)</fullName>
+                <default>false</default>
+                <label>RG do Custeador (cópia simples)</label>
+            </value>
+            <value>
+                <fullName>RG do representante legal (cópia simples)</fullName>
+                <default>false</default>
+                <label>RG do representante legal (cópia simples)</label>
+            </value>
+            <value>
+                <fullName>Serviço Complementar – sem obrigatoriedade de apresentação de documentos</fullName>
+                <default>false</default>
+                <label>Serviço Complementar – sem obrigatoriedade de apresentação de documentos</label>
+            </value>
+            <value>
+                <fullName>Termo de Cessão de Direitos (original, com reconhecimento de firma por autenticidade do cedente e do cessionário)</fullName>
+                <default>false</default>
+                <label>Termo de Cessão de Direitos (original, com reconhecimento de firma por autenticidade do cedente e do cessionário)</label>
+            </value>
+            <value>
+                <fullName>Termo de curatela definitiva</fullName>
+                <default>false</default>
+                <label>Termo de curatela definitiva</label>
+            </value>
+            <value>
+                <fullName>Termo de Rescisão Contratual</fullName>
+                <default>false</default>
+                <label>Termo de Rescisão Contratual</label>
+            </value>
+            <value>
+                <fullName>Ticket da bagagem (original)</fullName>
+                <default>false</default>
+                <label>Ticket da bagagem (original)</label>
+            </value>
+            <value>
+                <fullName>Cartão bancário e/ou cheque para validação dos dados bancários (Cópia Simples)</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Cartão bancário e/ou cheque para validação dos dados bancários (Cópia Simples)</label>
+            </value>
+            <value>
+                <fullName>Formulário Informações Cadastrais - Pessoa Física</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Formulário Informações Cadastrais - Pessoa Física</label>
+            </value>
+            <value>
+                <fullName>Formulário Pagamento Sorteio - Pessoa Física</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Formulário Pagamento Sorteio - Pessoa Física</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

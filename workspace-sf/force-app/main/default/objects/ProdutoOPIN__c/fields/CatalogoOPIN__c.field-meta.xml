@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CatalogoOPIN__c</fullName>
+    <externalId>false</externalId>
+    <label>Catálogo OPIN</label>
+    <referenceTo>CatalogoOPIN__c</referenceTo>
+    <relationshipLabel>Produtos OPIN</relationshipLabel>
+    <relationshipName>Produtos_OPIN</relationshipName>
+    <relationshipOrder>0</relationshipOrder>
+    <reparentableMasterDetail>false</reparentableMasterDetail>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+</CustomField>

@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Aviso</fullName>
+    <active>true</active>
+    <compactLayoutAssignment>PrazoEmissao</compactLayoutAssignment>
+    <label>Aviso</label>
+    <picklistValues>
+        <picklist>Acao__c</picklist>
+        <values>
+            <fullName>agravo</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>auto</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>tele</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>video</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>CondicaoCritica__c</picklist>
+        <values>
+            <fullName>Alteração de capital</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Alteração de prêmio</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Exclusão de garantia</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Integracao__c</picklist>
+        <values>
+            <fullName>DOCUSIGN</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SAMPLE</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>MomentoAnalise__c</picklist>
+        <values>
+            <fullName>Análise interna</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Crítica de Controle</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Palavra final</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Recalculo</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Resseguro</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Subscrição</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>MotivoPendencia__c</picklist>
+        <values>
+            <fullName>Pend Enviada Ag%2E DS%2FAssinatura</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pend Enviada Ag%2E Questionário Samplemed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pendência enviada - Cartão de crédito</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pendência enviada - Comprovante de Renda</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pendência enviada - Contrato Social e Declaração de IR</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pendência enviada - Envio de Anexos %28Questionário%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pendência enviada - Esclarecimento da declaracao de saude</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pendência enviada - Esclarecimento da profissao ramo e atividade</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pendência enviada - Exclusao de cobertura</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pendência enviada - Grau de parentesco e%2Fou vinculo financeiro</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pendência enviada - Relatório Médico e Exames</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pendência enviada - Risco Agravado</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pendência enviada - Seguro Vigente</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pendência enviada - Situação cadastral do CPF</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Origem__c</picklist>
+        <values>
+            <fullName>ODM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ProtocoloWeb</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SAP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Salesforce</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sinapse</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Setor__c</picklist>
+        <values>
+            <fullName>Aceitação</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Emissão</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Status__c</picklist>
+        <values>
+            <fullName>Cancelada</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Condicionada</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Inconclusiva</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Liberado</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Não iniciada</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pendenciado</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pendente</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Recusado</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Tipo__c</picklist>
+        <values>
+            <fullName>Analise</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Aviso</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CriticaSAP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pendencia</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Recusa</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

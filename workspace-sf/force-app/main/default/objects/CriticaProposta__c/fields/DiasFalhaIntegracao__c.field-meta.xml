@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>DiasFalhaIntegracao__c</fullName>
+    <description>Esse campo conta quantos dias ja se passaram após o envio do primeiro email de cobrança da renovação</description>
+    <externalId>false</externalId>
+    <formula>IF(
+OR(
+ISPICKVAL(Status__c, &quot;Falha na Integração&quot;),
+ISPICKVAL(Status__c, &quot;Pendenciado&quot;)
+),
+TODAY() - DataFalhaIntegracao__c,
+NULL
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Dias após primeiro email cobrança</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackHistory>false</trackHistory>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

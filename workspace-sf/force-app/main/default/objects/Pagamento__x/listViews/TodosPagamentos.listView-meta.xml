@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TodosPagamentos</fullName>
+    <columns>ExternalId</columns>
+    <columns>Status__c</columns>
+    <columns>IdConta__c</columns>
+    <columns>DataPagamento__c</columns>
+    <columns>ValorPagamento__c</columns>
+    <columns>TipoPagamento__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>TipoPagamento__c</field>
+        <operation>equals</operation>
+        <value>prolabore</value>
+    </filters>
+    <label>Todos os Pagamentos</label>
+    <sharedTo>
+        <group>Atendimento</group>
+        <group>Emissao</group>
+        <role>AnalistaProduto</role>
+        <roleAndSubordinates>CEO</roleAndSubordinates>
+        <roleAndSubordinates>Coordenador</roleAndSubordinates>
+    </sharedTo>
+</ListView>

@@ -120,7 +120,7 @@ global class BatchReenvioDocusign implements Database.Batchable<sObject>, Databa
         //FIM| PLV-4647-VI-Guilherme Brito
 
             //PLV-5155 - INICIO
-            List<PayloadDocusignTO> payloads =  new List<PayloadDocusignTO>(); 
+            //List<PayloadDocusignTO> payloads =  new List<PayloadDocusignTO>(); //ANNVI-222 INICIO/FIM
             String returnService;
             //PLV-5155 - FIM
             
@@ -183,22 +183,35 @@ global class BatchReenvioDocusign implements Database.Batchable<sObject>, Databa
                 event.formato = 'pdf';
                 // PLV-4839-FIM
                 payload.events.add(event);
+                payload.sfCriticaId = critica.Id; //ANNVI-222 INICIO/FIM
                 // PLV-4545 FIM
                 //String returnService; //PLV-5155 - INICIO/FIM
         // PLV-4545
                 // PLV-4839-FIX 3 - INICIO
                 // PLV-4552 - INICIO FIX
+                system.debug('critica '+ critica);
+                system.debug('brandId '+ brandId);
+                system.debug('cv '+ cv);
                 if(critica != null && brandId != null && cv != null){
                     //PLV-5155 - INICIO
                     //returnService = !Test.isRunningTest() ? HerokuService.getInstance().enviarAssinaturaDigital(JSON.serialize(payload)) : 'Enviado';
-                    payloads.add(payload); 
-                    criticaPayload.add(critica);
+
+                    //ANNVI-222 INICIO
+                    //payloads.add(payload); 
+                    //criticaPayload.add(critica);
+                    returnService = !Test.isRunningTest() ? SensediaServices.getInstance().montagemServicoSensedia(SensediaServices.VERB.POST, SensediaServices.DOMAIN.AWS_EXTERNO, SensediaServices.DOCUSIGN, JSON.serialize(payload)): 'Enviado';
+                    critica.Status__c = 'Em aprovação';
+                    proposta.RealizarEnvioDocusign__c = false;
+                    listPropostaUpdate.add(proposta);
+                    listCriticaUpdate.add(critica);
+                    //ANNVI-222 FIM
+
                     //PLV-5155 - FIM
                     System.debug('Tem critica e tem brandId');
                     System.debug(JSON.serialize(payload));
                 }else{
                     System.debug('Critica: ' + critica);
-                    System.debug('brandId: ' + brandId);
+                    System.debug('brandId: ' + brandId); 
                     System.debug('cv: ' + cv);
                     //returnService = 'error'; //PLV-5155 - INICIO/FIM
                 }
@@ -226,11 +239,13 @@ global class BatchReenvioDocusign implements Database.Batchable<sObject>, Databa
             
             //MGRC-1253 - INICIO
             // returnService = !Test.isRunningTest() ? CIVServices.getInstance().sendDocusign(JSON.serialize(payloads)) : 'Enviado'; 
-            returnService = !Test.isRunningTest() ? SensediaServices.getInstance().montagemServicoSensedia(SensediaServices.VERB.POST, SensediaServices.DOMAIN.AWS_EXTERNO, SensediaServices.DOCUSIGN, JSON.serialize(payloads)): 'Enviado';
+            
             //MGRC-1253 - FIM
             
             //PLV-5675 - FIM
-            if(returnService != 'error'){
+            
+            //ANNVI-222 INICIO
+            /*if(returnService != 'error'){
                 for(Quote proposta : listProposta){                    
                     proposta.RealizarEnvioDocusign__c = false;
                     listPropostaUpdate.add(proposta);                    
@@ -241,7 +256,9 @@ global class BatchReenvioDocusign implements Database.Batchable<sObject>, Databa
                 }
             }else{
                 System.debug('ERRO AO ENVIAR DOCUMENTO DOCUSIGN');                
-            }	
+            }*/	
+            //ANNVI-222 FIM
+
             //PLV-5155 - FIM
 
 
@@ -314,6 +331,7 @@ global class BatchReenvioDocusign implements Database.Batchable<sObject>, Databa
 		public String base64 { get; set; }
 		// PLV-4545
 		public String brandId { get; set; }
+        public String sfCriticaId { get; set; } //ANNVI-222 INICIO/FIM
     }
     // PLV-4545 INICIO
     public class Event {

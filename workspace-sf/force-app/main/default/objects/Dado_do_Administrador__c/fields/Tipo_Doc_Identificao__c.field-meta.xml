@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Tipo_Doc_Identificao__c</fullName>
+    <externalId>false</externalId>
+    <label>Tipo Doc Identificação</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>RG</fullName>
+                <default>false</default>
+                <label>R.G</label>
+            </value>
+            <value>
+                <fullName>RNE</fullName>
+                <default>false</default>
+                <label>R.N.E.</label>
+            </value>
+            <value>
+                <fullName>Passaporte</fullName>
+                <default>false</default>
+                <label>Passaporte</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

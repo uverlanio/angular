@@ -1197,6 +1197,7 @@ System.debug('Select PremioContratoFinal: '+ PremioContrato.PremioTotal__c +'Num
                 // FNPVVEP-91 - INICIO
 
                //FNPVVEP-159 - INICIO 
+                cobertura.franquia = '';//FNPVVEP-159_FIX01 - INICIO/FIM 
                 if(!codigoFranquiaIndexedBySigla.values().isEmpty()){
                     for(String franquiasGarantia : codigoFranquiaIndexedBySigla.values()){
                         if(codigoFranquiaIndexedBySigla.containsKey(cobertura.sigla)){

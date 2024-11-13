@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CarenciaSegurosContratados__c</fullName>
+    <externalId>false</externalId>
+    <label>Carência de seguros contratados</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>1 ano</fullName>
+                <default>false</default>
+                <label>1 ano</label>
+            </value>
+            <value>
+                <fullName>3 meses</fullName>
+                <default>false</default>
+                <label>3 meses</label>
+            </value>
+            <value>
+                <fullName>6 meses</fullName>
+                <default>false</default>
+                <label>6 meses</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

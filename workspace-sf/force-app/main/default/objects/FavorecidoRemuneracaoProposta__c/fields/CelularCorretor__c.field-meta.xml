@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CelularCorretor__c</fullName>
+    <description>Campo usado para salvar o número de celular usado para receber o SMS da samplemed.</description>
+    <externalId>false</externalId>
+    <label>Celular do corretor</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Phone</type>
+</CustomField>

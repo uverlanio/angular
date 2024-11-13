@@ -11,6 +11,7 @@ public class ConsultaAcumuloCapitalBusiness {
      * @param  coberturasLegado Objetos com os acumulos das coberturas do sistema legado, agrupados pela Sigla da cobertura
      * @return                  Objeto ConsultaAcumuloCapitalRest.Response com os valores acumulados das coberturas do Legado + Salesforce
      */
+
     // public static ConsultaAcumuloCapitalRest.Response getAcumuloCapitalCoberturasByCpf(String cpf, List<ConsultaAcumuloCapitalRest.Cobertura> coberturasLegado) {
         public static ConsultaAcumuloCapitalRest.Response getAcumuloCapitalCoberturasByCpf(ConsultaAcumuloCapitalRest.Request req) {
             
@@ -27,18 +28,30 @@ public class ConsultaAcumuloCapitalBusiness {
         System.debug('ConsultaAcumuloCapital SalesForce '+ getGarantiasByCpf(cpf));
 
         somaAcumulo(coberturasAcumuloMap, req.coberturasLegado);
-        somaAcumulo(coberturasAcumuloMap, req.coberturasPortal); 
-        somaAcumulo(coberturasAcumuloMap, getGarantiasByCpf(cpf)); 
+        somaAcumulo(coberturasAcumuloMap, req.coberturasPortal);
+        //ANNVI-151 - INICIO
+        Map<Id, GarantiaContrato__c> mapGarCtrSemCanc = new Map<Id, GarantiaContrato__c>();
+        Map<String, String> mapTipoContrato;
+        Map<Id, GarantiaContrato__c> garantiasContrato = new Map<Id, GarantiaContrato__c>(getGarantiasByCpf(cpf));
+        
+        for(GarantiaContrato__c gc : garantiasContrato.values()){
+            mapTipoContrato = new Map<String, String>();
+            mapTipoContrato.put(gc.Contrato__r.Tipo__c, gc.Contrato__r.Name);
+            if(!contratoPossuiCancelamento(mapTipoContrato)){
+                mapGarCtrSemCanc.put(gc.Id, gc);
+            }
+        }
+        somaAcumulo(coberturasAcumuloMap, mapGarCtrSemCanc.values());
+        //ANNVI-151 - FIM
+        System.debug('ConsultaAcumuloCapitalBusiness :: getAcumuloCapitalCoberturasByCpf : coberturasAcumuloMap : ' + JSON.serializePretty(coberturasAcumuloMap, true));
 
         //!* Monta Resposta com acumulos do mapa
         if (coberturasAcumuloMap.size() > 0) {
-
             for (String key : coberturasAcumuloMap.keySet()) {
                 ConsultaAcumuloCapitalRest.Cobertura cobertura = new ConsultaAcumuloCapitalRest.Cobertura();
-                cobertura.sigla = key;
-                cobertura.valor = coberturasAcumuloMap.get(key);
-
-                res.coberturas.add(cobertura);
+                    cobertura.sigla = key;
+                    cobertura.valor = coberturasAcumuloMap.get(key);
+                    res.coberturas.add(cobertura);       
             }
 
             System.debug('ConsultaAcumuloCapitalBusiness :: getAcumuloCapitalCoberturasByCpf : res.coberturas : ' + JSON.serializePretty(res.coberturas, true));
@@ -46,6 +59,29 @@ public class ConsultaAcumuloCapitalBusiness {
 
         return res;
     }
+
+    //ANNVI-151 - INICIO
+    public static Boolean contratoPossuiCancelamento(Map<String, String> mapTipoContrato) {
+
+        String contratoName = '';
+        
+        if (mapTipoContrato.containsKey('Cancelamento')) {
+            String cName = mapTipoContrato.get('Cancelamento');
+            contratoName = cName.substring(0, cName.lastIndexOf('-'));
+        }
+
+        for (String key : mapTipoContrato.keySet()) {
+            String numeroCtr = mapTipoContrato.get(key);
+            String prefix = numeroCtr.substring(0, numeroCtr.lastIndexOf('-'));
+                
+            if (contratoName == prefix) {
+                return true; 
+            }
+        }
+
+        return false;
+    }
+    //ANNVI-151 - FIM
 
     //++++++++++++++++++++++++
     // PRIVATE METHODS
@@ -92,7 +128,10 @@ public class ConsultaAcumuloCapitalBusiness {
                 Capital__c,
                 Garantia__r.Sigla__c,
                 Contrato__r.VigenciaFinal__c,
-                Contrato__r.StartDate
+                Contrato__r.StartDate,
+                Contrato__r.Tipo__c, //ANNVI-151 - INICIO
+                Contrato__r.Name,
+                Contrato__r.Endosso__c //ANNVI-151 - FIM
             FROM GarantiaContrato__c
             WHERE 
                 Contrato__r.Account.Cpf__c =: cpf

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ValorTitulo__c</fullName>
+    <externalId>false</externalId>
+    <inlineHelpText>Cod.167 - Mínimo de R$ 0,10 e máximo de R$ 2,00 (1 sorteio) 
+Cod.171 - Mínimo de R$ 0,12 e máximo de R$ 4,00 (2 sorteios) 
+Cod.168 - Mínimo de R$ 0,80 e máximo de R$ 8,00 (4 sorteios)
+Cod. VI010 - R$ 0,03 (1 sorteio)</inlineHelpText>
+    <label>Custo do título de capitalização</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

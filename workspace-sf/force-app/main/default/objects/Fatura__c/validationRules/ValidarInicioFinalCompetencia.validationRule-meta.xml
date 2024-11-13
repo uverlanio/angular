@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ValidarInicioFinalCompetencia</fullName>
+    <active>false</active>
+    <description>final de competência não pode ser menor que o início de competência</description>
+    <errorConditionFormula>FinalCompetencia__c &lt; InicioCompetencia__c</errorConditionFormula>
+    <errorDisplayField>FinalCompetencia__c</errorDisplayField>
+    <errorMessage>Final de competência deve ser maior ou igual o início de competência</errorMessage>
+</ValidationRule>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ValidarRecuperacao</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+  Recuperacao__c = TRUE,
+  AND(
+    ISBLANK(CarenciaMesesRecuperacao__c),
+    ISBLANK(LimiteMinimoRecuperacao__c),
+    ISBLANK(LimiteMaximoRecuperacao__c)
+  )
+)</errorConditionFormula>
+    <errorMessage>Campos obrigatórios Competência da recuperação, Limites de recuperação mínimo e máximo.</errorMessage>
+</ValidationRule>

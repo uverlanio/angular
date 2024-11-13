@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>AtualizadoSucesso</fullName>
+        <language>pt_BR</language>
+        <protected>false</protected>
+        <shortDescription>AtualizadoSucesso</shortDescription>
+        <value>Atualizado com sucesso!</value>
+    </labels>
+    <labels>
+        <fullName>Desabilitar_Impedimento_de_Delecao_de_Garantia_Obrigatoria</fullName>
+        <language>pt_BR</language>
+        <protected>false</protected>
+        <shortDescription>Desabilitar Impedimento de Deleção de Garantia Obrigatória</shortDescription>
+        <value>false</value>
+    </labels>
+    <labels>
+        <fullName>DescontoPagamentoCartao</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>DescontoPagamentoCartao</shortDescription>
+        <value>5</value>
+    </labels>
+    <labels>
+        <fullName>EMPTY_FILE</fullName>
+        <categories>CMT</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>CSV file is empty.</shortDescription>
+        <value>CSV file is empty.</value>
+    </labels>
+    <labels>
+        <fullName>ERROR_JSON_BAD_FORMAT</fullName>
+        <categories>CMT</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>The provided Json String was badly formatted.</shortDescription>
+        <value>The provided Json String was badly formatted.</value>
+    </labels>
+    <labels>
+        <fullName>ERROR_JSON_EMPTY</fullName>
+        <categories>CMT</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>No field values were found in the Json String.</shortDescription>
+        <value>No field values were found in the Json String.</value>
+    </labels>
+    <labels>
+        <fullName>ERROR_OP_FAILED</fullName>
+        <categories>CMT</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Operation failed, please check messages!</shortDescription>
+        <value>Operation failed, please check messages!</value>
+    </labels>
+    <labels>
+        <fullName>ERROR_REQUEST_FAILED_NO_ERROR</fullName>
+        <categories>CMT</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Request failed with no specified error.</shortDescription>
+        <value>Request failed with no specified error.</value>
+    </labels>
+    <labels>
+        <fullName>ERROR_UNAUTHORIZED_ENDPOINT</fullName>
+        <categories>CMT</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Unauthorized endpoint, please check Setup</shortDescription>
+        <value>Unauthorized endpoint, please check Setup</value>
+    </labels>
+    <labels>
+        <fullName>Endosso_Descricao_Padrao</fullName>
+        <categories>Endosso</categories>
+        <language>pt_BR</language>
+        <protected>false</protected>
+        <shortDescription>Endosso - Descrição Padrão</shortDescription>
+        <value>Declara-se para os devidos fins e efeitos que, a pedido do segurado, fica a presente apólice cancelada e sem mais nenhum efeito.</value>
+    </labels>
+    <labels>
+        <fullName>ErroTenteNovamente</fullName>
+        <language>pt_BR</language>
+        <protected>false</protected>
+        <shortDescription>Erro! Tente novamente</shortDescription>
+        <value>Erro! Por favor tente novamente!</value>
+    </labels>
+    <labels>
+        <fullName>FILE_MISSING</fullName>
+        <categories>CMT</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Please provide a comma separated file.</shortDescription>
+        <value>Please provide a comma separated file.</value>
+    </labels>
+    <labels>
+        <fullName>INVALID_FILE_ROW_SIZE_DOESNT_MATCH</fullName>
+        <categories>CMT</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>The number of field values does not match the number of header fields on line</shortDescription>
+        <value>The number of field values does not match the number of header fields on line</value>
+    </labels>
+    <labels>
+        <fullName>JustificativaObrigatoria</fullName>
+        <language>pt_BR</language>
+        <protected>false</protected>
+        <shortDescription>Justificativa obrigatória</shortDescription>
+        <value>É necessário justificar para liberar o orçamento!</value>
+    </labels>
+    <labels>
+        <fullName>MSG_CHECK_API_NAMES</fullName>
+        <categories>CMT</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Please check the Api names!</shortDescription>
+        <value>Please check the Api names!</value>
+    </labels>
+    <labels>
+        <fullName>MSG_CS_MDT_EXISTS</fullName>
+        <categories>CMT</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Make sure Custom Setting and Custom Metadata Types exists in the org!</shortDescription>
+        <value>Make sure Custom Setting and Custom Metadata Types exists in the org!</value>
+    </labels>
+    <labels>
+        <fullName>MSG_CS_MDT_FIELD_NAME_FORMAT</fullName>
+        <categories>CMT</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Please check the format, Custom Setting.field and Custom Metadata Types.field</shortDescription>
+        <value>Please check the format, Custom Setting.field and Custom Metadata Types.field</value>
+    </labels>
+    <labels>
+        <fullName>MSG_CS_MDT_FIELD_NAME_REQ</fullName>
+        <categories>CMT</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Custom Setting Name/Field Name and CMT/Field Name names are required!</shortDescription>
+        <value>Custom Setting Name/Field Name and CMT/Field Name names are required!</value>
+    </labels>
+    <labels>
+        <fullName>MSG_CS_MDT_MAPPING_REQ</fullName>
+        <categories>CMT</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Custom Setting Name, Custom Metadata Types and Json Mapping names are required!</shortDescription>
+        <value>Custom Setting Name, Custom Metadata Types and Json Mapping names are required!</value>
+    </labels>
+    <labels>
+        <fullName>MSG_CS_MDT_REQ</fullName>
+        <categories>CMT</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Custom Setting Api Name and Custom Metadata Types Api names are required!</shortDescription>
+        <value>Custom Setting Api Name and Custom Metadata Types Api names are required!</value>
+    </labels>
+    <labels>
+        <fullName>MSG_CUSTOM_SETTINGS_EXISTS</fullName>
+        <categories>CMT</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Make sure Custom Setting exists in the org!</shortDescription>
+        <value>Make sure Custom Setting exists in the org!</value>
+    </labels>
+    <labels>
+        <fullName>MSG_ERRO_APOLICE</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>MSG ERRO APOLICE</shortDescription>
+        <value>Apólice não localizada - Erro na criação do caso de Convivência</value>
+    </labels>
+    <labels>
+        <fullName>MSG_ERRO_APOLICE_SUCESS_CASE</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>MSG ERRO APOLICE SUCESS CASE</shortDescription>
+        <value>Apólice não localizada - Caso de Convivência criado com sucesso</value>
+    </labels>
+    <labels>
+        <fullName>MSG_JSON_API_NAMES</fullName>
+        <categories>CMT</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Please check the Api names in Json!</shortDescription>
+        <value>Please check the Api names in Json!</value>
+    </labels>
+    <labels>
+        <fullName>MSG_JSON_FORMAT</fullName>
+        <categories>CMT</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Please check the Json format!</shortDescription>
+        <value>Please check the Json format!</value>
+    </labels>
+    <labels>
+        <fullName>MSG_MDT_END</fullName>
+        <categories>CMT</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Custom Metadata Types name should end with</shortDescription>
+        <value>Custom Metadata Types name should end with</value>
+    </labels>
+    <labels>
+        <fullName>MSG_MIGRATION_COMPLETED</fullName>
+        <categories>CMT</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Migration Completed!</shortDescription>
+        <value>Migration Completed!</value>
+    </labels>
+    <labels>
+        <fullName>MSG_MIGRATION_IN_PROGRESS</fullName>
+        <categories>CMT</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Migration In Progress, check status under Deploy -&gt; Deployment Status, Job Id:</shortDescription>
+        <value>Migration In Progress, check status under Deploy -&gt; Deployment Status, Job Id:</value>
+    </labels>
+    <labels>
+        <fullName>MSG_NOT_SUPPORTED</fullName>
+        <categories>CMT</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Not Supported!!!</shortDescription>
+        <value>Not Supported!!!</value>
+    </labels>
+    <labels>
+        <fullName>Nome_da_Empresa</fullName>
+        <categories>Geral</categories>
+        <language>pt_BR</language>
+        <protected>false</protected>
+        <shortDescription>Nome da Empresa</shortDescription>
+        <value>Porto Seguro Companhia de Seguros Gerais S.A.</value>
+    </labels>
+    <labels>
+        <fullName>OPIN_Template_ReqMin</fullName>
+        <categories>opin</categories>
+        <language>pt_BR</language>
+        <protected>false</protected>
+        <shortDescription>OPIN Template ReqMin</shortDescription>
+        <value>Para a contratação do Produto {produto} os limites de capital mínimo e máximo de cada garantia são: {garantias}.
+O prêmio mínimo por parcela para cada forma de pagamento é: {formaspagamento}.</value>
+    </labels>
+    <labels>
+        <fullName>OPIN_Template_ReqMinFormaPagto</fullName>
+        <categories>opin</categories>
+        <language>pt_BR</language>
+        <protected>false</protected>
+        <shortDescription>OPIN Template ReqMinFormaPagto</shortDescription>
+        <value>{formapagamento} {premiominimo} , quantidade de parcelas permitida: {parcelamento}. Desconto pela forma de pagamento {descontosformapagamento}</value>
+    </labels>
+    <labels>
+        <fullName>OPIN_Template_ReqMinGarantia</fullName>
+        <categories>opin</categories>
+        <language>pt_BR</language>
+        <protected>false</protected>
+        <shortDescription>OPIN Template ReqMinGarantia</shortDescription>
+        <value>{garantia}, capital mínimo {capitalminimo}, capital máximo {capitalmaximo};</value>
+    </labels>
+    <labels>
+        <fullName>PrazoSusep</fullName>
+        <language>pt_BR</language>
+        <protected>false</protected>
+        <shortDescription>Prazo Susep</shortDescription>
+        <value>30 dias</value>
+    </labels>
+    <labels>
+        <fullName>TYPE_OPTION_NOT_SELECTED</fullName>
+        <categories>CMT</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Please choose a valid custom metadata type.</shortDescription>
+        <value>Please choose a valid custom metadata type.</value>
+    </labels>
+    <labels>
+        <fullName>ToastDefaultDuration</fullName>
+        <categories>Lightning</categories>
+        <language>pt_BR</language>
+        <protected>false</protected>
+        <shortDescription>ToastDefaultDuration</shortDescription>
+        <value>3000</value>
+    </labels>
+    <labels>
+        <fullName>hostSensediaAWS</fullName>
+        <language>pt_BR</language>
+        <protected>false</protected>
+        <shortDescription>hostSensediaAWS</shortDescription>
+        <value>https://portoapicloud-hml.portoseguro.com.br</value>
+    </labels>
+    <labels>
+        <fullName>portoapicloud</fullName>
+        <language>pt_BR</language>
+        <protected>false</protected>
+        <shortDescription>portoapicloud</shortDescription>
+        <value>https://portoapicloud-hml.portoseguro.com.br/vida/crm/acessorios/</value>
+    </labels>
+</CustomLabels>

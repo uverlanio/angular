@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>InteligenciaPreco_Roteamento</fullName>
+    <filterScope>Queue</filterScope>
+    <label>Inteligência de preço</label>
+    <queue>InteligenciaPreco</queue>
+    <sharedTo>
+        <allInternalUsers></allInternalUsers>
+    </sharedTo>
+</ListView>

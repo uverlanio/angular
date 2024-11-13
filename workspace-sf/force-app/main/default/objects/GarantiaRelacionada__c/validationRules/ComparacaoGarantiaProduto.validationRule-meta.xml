@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ComparacaoGarantiaProduto</fullName>
+    <active>false</active>
+    <description>Valida se o Id da Garantia do produto é igual ao da garantia relacionada</description>
+    <errorConditionFormula>GarantiaProduto__r.Produto__c   &lt;&gt;  GarantiaRelacionada__r.Produto__c</errorConditionFormula>
+    <errorMessage>Selecione uma garantia do mesmo produto.</errorMessage>
+</ValidationRule>

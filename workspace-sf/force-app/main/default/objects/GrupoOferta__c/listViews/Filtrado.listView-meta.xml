@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Filtrado</fullName>
+    <columns>OBJECT_ID</columns>
+    <columns>NAME</columns>
+    <columns>TipoQuantidadeVidas__c</columns>
+    <columns>QuantidadeVidas__c</columns>
+    <columns>Oferta__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Oferta__c</field>
+        <operation>equals</operation>
+        <value>Vida Essencial 2_Teste</value>
+    </filters>
+    <label>Filtrado</label>
+</ListView>

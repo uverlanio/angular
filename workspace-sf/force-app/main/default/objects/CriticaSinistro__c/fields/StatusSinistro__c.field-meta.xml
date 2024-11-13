@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>StatusSinistro__c</fullName>
+    <externalId>false</externalId>
+    <formula>Text(Sinistro__r.Status_Dependente__c)</formula>
+    <label>Status Sinistro</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

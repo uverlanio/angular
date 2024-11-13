@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ValidaPremioProdutoComercial</fullName>
+    <active>true</active>
+    <description>Não permite que o prêmio seja menor que o prêmio cadastrado no produto técnico</description>
+    <errorConditionFormula>AND( 
+ 	RecordType.DeveloperName = &apos;ProdutoComercial&apos;,
+ 	PremioMinimoParcela__c&lt; PremioMinimoProduto__r.PremioMinimoParcela__c
+ )</errorConditionFormula>
+    <errorMessage>Valor de prêmio mínimo por parcela inválido! Não pode ser menor do que o valor cadastrado no produto técnico.</errorMessage>
+</ValidationRule>

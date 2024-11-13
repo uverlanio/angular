@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>AgrupamentoCoberturas__c</fullName>
+    <description>Agrupamento de coberturas para organização.</description>
+    <externalId>false</externalId>
+    <label>Agrupamento Coberturas</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Saude</fullName>
+                <default>false</default>
+                <label>Saúde</label>
+            </value>
+            <value>
+                <fullName>Bagagem</fullName>
+                <default>false</default>
+                <label>Bagagem</label>
+            </value>
+            <value>
+                <fullName>Familiares e Acompanhantes</fullName>
+                <default>false</default>
+                <label>Familiares e Acompanhantes</label>
+            </value>
+            <value>
+                <fullName>Invalidez ou Morte</fullName>
+                <default>false</default>
+                <label>Invalidez ou Morte</label>
+            </value>
+            <value>
+                <fullName>Documentacoes</fullName>
+                <default>false</default>
+                <label>Documentações</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

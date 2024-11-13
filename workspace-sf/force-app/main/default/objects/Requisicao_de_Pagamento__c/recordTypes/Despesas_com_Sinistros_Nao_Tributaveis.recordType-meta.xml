@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Despesas_com_Sinistros_Nao_Tributaveis</fullName>
+    <active>true</active>
+    <label>Despesas com Sinistros Não Tributáveis</label>
+    <picklistValues>
+        <picklist>Status__c</picklist>
+        <values>
+            <fullName>Aprovada</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cancelado</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Em aprovação</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Enviado p%2F Tesouraria</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Enviar p%2F Financeiro</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Enviar p%2F Tesouraria</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Enviar para Registro Financeiro</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Erro</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pago</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pendente</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Rejeitada</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Tipo_Cotacao__c</picklist>
+        <values>
+            <fullName>Cotação automática</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cotação manual</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Tipo_Indeniza_o_de_Sinistros__c</picklist>
+        <values>
+            <fullName>Aprovada</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cancelado</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Em aprovação</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Enviar p%2F Financeiro</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Erro</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>OP Em criação</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>OP criada</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pago</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pendente</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Rejeitada</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Tipo_de_pagamento__c</picklist>
+        <values>
+            <fullName>Acerto de Pagamento de Fatura %28OP não tributável%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Despesas com Honorários Médicos %28OP não tributável%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pagamento Beneficiário %28OP não tributável%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pagamento Segurado %28OP não tributável%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pagamento Vítima %28OP não tributável%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pagamento a Juízo %28OP não tributável%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pagamento ao Estipulante %28OP não tributável%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pagamento ao Procurador %28OP não tributável%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Reembolso Despesas com Advogados %28OP não tributável%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Reembolso de Despesas com Investigação %28OP não tributável%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Reembolso de Despesas com KM Rodados %28OP não tributável%29</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

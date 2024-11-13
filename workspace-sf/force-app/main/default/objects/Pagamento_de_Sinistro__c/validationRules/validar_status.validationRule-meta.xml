@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>validar_status</fullName>
+    <active>false</active>
+    <errorConditionFormula>AND(ISPICKVAL(PRIORVALUE(Status__c), &apos;Liberado&apos;),
+				    NOT(OR(ISPICKVAL(Status__c, &apos;OP criada&apos;),
+						   ISPICKVAL(Status__c, &apos;OP em criação&apos;),
+						   ISPICKVAL(Status__c, &apos;Em aprovação&apos;),
+						   ISPICKVAL(Status__c, &apos;Aprovada&apos;),
+						   ISPICKVAL(Status__c, &apos;Rejeitada&apos;),
+						   ISPICKVAL(Status__c, &apos;Pago&apos;),
+						   ISPICKVAL(Status__c, &apos;Erro&apos;),
+						   ISPICKVAL(Status__c, &apos;Em pagamento&apos;)
+						   
+						   )
+						)
+					)</errorConditionFormula>
+    <errorMessage>Este pagamento de sinistro não pode ser alterado</errorMessage>
+</ValidationRule>

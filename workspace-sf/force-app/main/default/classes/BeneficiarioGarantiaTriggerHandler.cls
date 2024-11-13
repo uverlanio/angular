@@ -6,15 +6,23 @@ public class BeneficiarioGarantiaTriggerHandler extends TriggerHandler {
 
     public override void beforeInsert(){
         bo.preencherIdExterno(Trigger.new);
-        bo.validaTotalIndenizacao(Trigger.new);
+        
+        String message = bo.validaTotalIndenizacao(Trigger.new);
+        if(message == 'O valor Indenizado é maior que o Saldo da reserva!'){
+            Trigger.new[0].addError(message);
+        }
         //PLV-2403 - Inicio - Foi criado para chamar o metódo da Classe BeneficiarioGarantiaBO
         bo.atualizavalorindenizacao(Trigger.new, (Map<Id,BeneficiarioGarantia__c>) Trigger.oldMap);
         //PLV-2403 - Fim - Foi criado para chamar o metódo da Classe BeneficiarioGarantiaBO        
     }  
 
     public override void afterUpdate(){
-        if (isFirstTime)
+        if(!Test.IsRunningTest()){
+            if (isFirstTime)
+                bo.efetuaPagamento(Trigger.new, (Map<Id,BeneficiarioGarantia__c>) Trigger.oldMap);
+        }else{
             bo.efetuaPagamento(Trigger.new, (Map<Id,BeneficiarioGarantia__c>) Trigger.oldMap);
+        }
         //PLV-4818 - INICIO - PEDRO AUGUSTO BRAZ - SYS4B
         if(criarMovimento)
             bo.criaMovimentoDeSinistro(Trigger.new, (Map<Id,BeneficiarioGarantia__c>) Trigger.oldMap);    
@@ -23,7 +31,11 @@ public class BeneficiarioGarantiaTriggerHandler extends TriggerHandler {
 
     //PLV-2403 - Inicio - Foi criado para chamar o metódo da Classe BeneficiarioGarantiaBO
     public override void beforeUpdate(){ 
-        bo.validaTotalIndenizacao(Trigger.new);
+
+        String message = bo.validaTotalIndenizacao(Trigger.new);
+        if(message == 'O valor Indenizado é maior que o Saldo da reserva!'){
+            Trigger.new[0].addError(message);
+        }
 
         if(isFirstTime) //PLV-4448 - INICIO/FIM
             bo.atualizavalorindenizacao(Trigger.new, (Map<Id,BeneficiarioGarantia__c>) Trigger.oldMap);

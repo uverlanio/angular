@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TipoResponsavelPagamento__c</fullName>
+    <externalId>false</externalId>
+    <label>Tipo de responsável pelo pagamento</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>SEG</fullName>
+                <default>false</default>
+                <label>SEG</label>
+            </value>
+            <value>
+                <fullName>PAR</fullName>
+                <default>false</default>
+                <label>PAR</label>
+            </value>
+            <value>
+                <fullName>VID</fullName>
+                <default>false</default>
+                <label>VID</label>
+            </value>
+            <value>
+                <fullName>CON</fullName>
+                <default>false</default>
+                <label>CON</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

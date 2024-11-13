@@ -1807,10 +1807,16 @@
         param.orcamento = orcamento;
         System.debug('param> ' + JSON.serialize(param));
         try {
-
-            //--- chama CIV Oferta
+            //MGRC-1509-INICIO
+            //--- chama Sensedia Oferta
             System.debug('***************** entrou no try');
-            ServiceTO.DataCancelamentoTO retornoCalculo = CIVServices.getInstance().calculoOrcamentoOferta(param); //MGRC-1657 - INICIO/FIM
+            // ServiceTO.DataCancelamentoTO retornoCalculo = CIVServices.getInstance().calculoOrcamentoOferta(param); //MGRC-1657 - INICIO/FIM
+            String retornoSensedia = SensediaServices.getInstance().montagemServicoSensedia(SensediaServices.VERB.POST, SensediaServices.DOMAIN.AWS_EXTERNO_EMISSAO, SensediaServices.OFERTAS_CANCELAMENTO_VIAGEM, JSON.serialize(param));
+
+            ServiceTO.OfertasCancelamentoTO ofertasCancelamento = (ServiceTO.OfertasCancelamentoTO) JSON.deserialize(retornoSensedia, ServiceTO.OfertasCancelamentoTO.class);
+            ServiceTO.DataCancelamentoTO retornoCalculo = new ServiceTO.DataCancelamentoTO();
+            retornoCalculo.data = ofertasCancelamento;            
+            //MGRC-1509-FIM
 
             System.debug('===> Retorno: ' + JSON.serialize(retornoCalculo));
 
@@ -1828,17 +1834,56 @@
             param2.proposta = proposta;
 
             // PLV-2430-29 INICIO
-            //--- chama CIV Transmissao
-            RetornoPropostaRestTO.ValidacaopropostaTO retornoEmissao = CIVServices.getInstance().calculoPropostaTransmissao(param2);
 
+            //MGRC-1580-INICIO
+            //--- chama Sensedia Transmissao
+            // RetornoPropostaRestTO.ValidacaopropostaTO retornoEmissao = CIVServices.getInstance().calculoPropostaTransmissao(param2);
+            String retornoEmissao;
+            String codigoProdutoVida = contrato.Produto__r.CodigoPrecificaProduto__c;
+            System.debug('codigoProdutoVida: ' + codigoProdutoVida);
+            System.debug('param2: ' + param2);
+                switch on codigoProdutoVida {
+                    when 'VIDA_ON' {
+                        retornoEmissao = SensediaServices.getInstance().montagemServicoSensedia(
+                            SensediaServices.VERB.POST, 
+                            SensediaServices.DOMAIN.AWS_EXTERNO_EMISSAO, 
+                            SensediaServices.TRANSMISSAO_CANCELAMENTO_VIDA_ON, 
+                            JSON.serialize(param2, true)
+                        );
+                    }
+                    //MGRC-1580-FIM
+                    //MGRC-1578-INICIO
+                    when 'VI-PESSOAS' {
+                        retornoEmissao = SensediaServices.getInstance().montagemServicoSensedia(
+                            SensediaServices.VERB.POST, 
+                            SensediaServices.DOMAIN.AWS_EXTERNO_EMISSAO, 
+                            SensediaServices.TRANSMISSAO_CANCELAMENTO_VDSJ, 
+                            JSON.serialize(param2, true)
+                        );
+                    }
+                    //MGRC-1578-FIM
+                    //MGRC-1579-INICIO
+                    when 'APTLMKT' {
+                        retornoEmissao = SensediaServices.getInstance().montagemServicoSensedia(
+                            SensediaServices.VERB.POST, 
+                            SensediaServices.DOMAIN.AWS_EXTERNO_EMISSAO, 
+                            SensediaServices.TRANSMISSAO_CANCELAMENTO_APTLMKT, 
+                            JSON.serialize(param2, true)
+                        );
+                    }
+                }
+                RetornoPropostaRestTO.ValidacaopropostaTO validacaoProposta = (RetornoPropostaRestTO.ValidacaopropostaTO) JSON.deserialize(retornoEmissao, RetornoPropostaRestTO.ValidacaopropostaTO.class);
+                System.debug('validacaoProposta: ' + validacaoProposta);
                 // PLV-2312-28 INICIO
                 if(!Test.isRunningTest()) {
-                    if (retornoEmissao.devolutivas.isEmpty() || retornoEmissao.devolutivas[0].codigo != 0) {
+                    if (validacaoProposta.devolutivas.isEmpty() || validacaoProposta.devolutivas[0].codigo != 0) {
                         retorno.tipo = RetornoAcaoBotaoTO.ERROR;
                         retorno.mensagens.add('Não foi possivel efetuar o cancelamento do Contrato!');
                         return retorno;
                     }
                 }
+                //MGRC-1579-FIM
+
                 // PLV-2312-28 FIM
             // PLV-2430-29 FIM
 
@@ -2463,7 +2508,12 @@
                 param.orcamento = orcamento;
 
                 try {
-                    ServiceTO.DataCancelamentoTO retornoCalculo = CIVServices.getInstance().calculoOrcamentoOferta(param); //MGRC-1657 - INICIO/FIM
+                    //MGRC-1509-FIX1-INICIO
+                    // ServiceTO.DataCancelamentoTO retornoCalculo = CIVServices.getInstance().calculoOrcamentoOferta(param); //MGRC-1657 - INICIO/FIM
+                    ServiceTO.DataCancelamentoTO retornoCalculo = SensediaServices.getInstance().cancelamentoInadimplente(SensediaServices.VERB.POST, SensediaServices.DOMAIN.AWS_EXTERNO_EMISSAO, SensediaServices.OFERTAS_CANCELAMENTO_VIAGEM, param);
+                    System.debug('retornoCalculo: ' + retornoCalculo);         
+                    //MGRC-1509-FIX1-FIM
+
                     System.debug('retornorCalculo> ' + JSON.serialize(retornoCalculo));
                     Integer numeroOrcamento = Integer.valueOf(retornoCalculo.data.ofertas[0].orcamento.numeroOrcamento);
                     BotaoCancelarContratoController.gerarPropostaEndosso(numeroOrcamento, contrato.id, dataCancel);

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ValidarObrigatoriedadeTipoCapital</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND( 
+   RecordType.DeveloperName = &apos;ProdutoTecnico&apos;, 
+   IF(
+   NOT(ISPICKVAL( DemonstracaoCapital__c, &apos;Serviço Complementar (sem valor de capital)&apos; )) &amp;&amp; ISBLANK(TipoCapital__c),
+   true,
+   false
+   )
+)</errorConditionFormula>
+    <errorMessage>Tipo de Capital deve ser informado.</errorMessage>
+</ValidationRule>

@@ -9,6 +9,6 @@
  global with sharing class AltFPgtRenSchedulable implements Schedulable {
     
     global void execute(SchedulableContext ctx){
-        UptFormPagPropRen.altFPgt();
+        //UptFormPagPropRen.altFPgt(); //FNPVVEP-172 INICIO/FIM
     }
 }

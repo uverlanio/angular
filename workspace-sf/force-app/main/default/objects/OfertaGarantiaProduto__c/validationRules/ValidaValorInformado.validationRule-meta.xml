@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ValidaValorInformado</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+	   NOT(ISBLANK(Valor__c)),
+	   IF(
+		     Valor__c &lt;= GarantiaProduto__r.LimiteCapitalMaximo__c  &amp;&amp; 
+		     Valor__c  &gt;= GarantiaProduto__r.LimiteCapitalMinimo__c,
+		     false, true
+			   )
+  )</errorConditionFormula>
+    <errorDisplayField>Valor__c</errorDisplayField>
+    <errorMessage>O valor Informado deve estar entre os limites de capita cadastrados na garantia do produto
+associada.</errorMessage>
+</ValidationRule>

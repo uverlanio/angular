@@ -48,7 +48,7 @@ public class BatchReenvioDocusignTest {
         insert criticaOrcamento;
         
         Canal_Subscricao__c cs = new Canal_Subscricao__c();
-        cs.Name = 'auto';
+        cs.Name = 'QTR_INTERNO'; //ANNVI-222 INICIO/FIM
         cs.Marca_Docusign__c = 'Marcadeexemplodocusign';
         insert cs;
         
@@ -57,7 +57,13 @@ public class BatchReenvioDocusignTest {
         pasta.Id_Pasta__c = '12312312321';
         insert pasta;
 		// PLV-4545 - FIM
-		// 
+
+        //ANNVI-222 INICIO
+        FormaPagamento__c formaPagamento = (FormaPagamento__c) new FormaPagamentoFactory().createRecord();
+        formaPagamento.Codigo__c = '62';
+        update formaPagamento;
+        //ANNVI-222 FIM
+        
         Quote proposta = new Quote();
         proposta.OpportunityId = opp.Id;
         proposta.Name = 'asd';
@@ -65,6 +71,12 @@ public class BatchReenvioDocusignTest {
         proposta.RealizarEnvioDocusign__c = true;
         proposta.Produto__c = produtoComercial.id; //TKCL-246 FIX05 INICIO/FIM
         insert proposta;
+        
+        //ANNVI-222 INICIO
+        ContratanteProposta__c contratanteProposta = (ContratanteProposta__c) new ContratantePropostaFactory(proposta, formaPagamento).getRecord();
+        contratanteProposta.Conta__c = conta.Id;
+        insert contratanteProposta;
+        //ANNVI-222 FIM
 
         CriticaProposta__c critica = new CriticaProposta__c();
         critica.Proposta__c = proposta.Id;

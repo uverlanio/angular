@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ValidarPreenchimentoParticipacao</fullName>
+    <active>false</active>
+    <errorConditionFormula>IF(ISPICKVAL(TipoBeneficiario__c, &quot;Conforme artigo 792 do código civil&quot;) &amp;&amp;  !ISNULL(Participacao__c ) , true, false)</errorConditionFormula>
+    <errorDisplayField>Participacao__c</errorDisplayField>
+    <errorMessage>Este campo não pode ser preenchido para esse tipo de beneficiário</errorMessage>
+</ValidationRule>

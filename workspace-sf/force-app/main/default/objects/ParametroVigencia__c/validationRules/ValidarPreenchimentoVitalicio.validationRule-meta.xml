@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ValidarPreenchimentoVitalicio</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+    ISPICKVAL(Tipo__c, &apos;Vitalício&apos;),
+    OR(
+       NOT(ISBLANK(PrazoAvisarRenovacao__c)),
+       NOT(ISBLANK(VigenciaMinimaRenovacao__c)),
+       NOT(ISBLANK(PrazoRetornoAviso__c)),
+       NOT(ISBLANK(PrazoDesistenciaRenovacao__c)),
+       NOT(ISBLANK(IdadeMaximaRenovacao__c)),
+       NOT(ISBLANK(QuantidadeRenovacaoesAnuencia__c)),
+       RenovaEsgotamentoIndenizacao__c = true,
+       NOT(ISBLANK(PeriodoMaximoInadimplenciaPeriodica__c)),
+       NOT(ISBLANK(PeriodoMinimoVigencia__c)),
+       NOT(ISBLANK(PeriodoMaximoVigencia__c))
+    )
+)</errorConditionFormula>
+    <errorMessage>Preenchimento inválido para o Tipo selecionado</errorMessage>
+</ValidationRule>

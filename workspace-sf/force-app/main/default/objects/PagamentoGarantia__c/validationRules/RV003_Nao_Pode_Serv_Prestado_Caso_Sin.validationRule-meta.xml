@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>RV003_Nao_Pode_Serv_Prestado_Caso_Sin</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+ ISPICKVAL( Status_do_pagamento__c , &quot;Serviço Prestado&quot;),
+  Caso__r.RecordType.Name = &quot;Sinistro&quot;
+)</errorConditionFormula>
+    <errorMessage>Para casos do tipo Sinistro não pode informar o valor &quot;Serviço Prestado&quot; no Pagamento de Garantia</errorMessage>
+</ValidationRule>

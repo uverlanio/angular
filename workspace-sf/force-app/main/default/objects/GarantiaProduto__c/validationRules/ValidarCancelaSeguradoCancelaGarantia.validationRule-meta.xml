@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ValidarCancelaSeguradoCancelaGarantia</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+    CancelaSegurado__c,
+    CancelaGarantia__c,
+				Controle_de_Uso_Saldo__c,
+				Sem_Acao__c
+)</errorConditionFormula>
+    <errorMessage>Somente uma das opções entre Cancela segurado e Cancela garantia podem estar marcadas</errorMessage>
+</ValidationRule>

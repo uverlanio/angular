@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>InteligenciaOferta__c</fullName>
+    <externalId>false</externalId>
+    <label>Inteligência de oferta</label>
+    <referenceTo>InteligenciaOferta__c</referenceTo>
+    <relationshipLabel>Decisão de Ofertas</relationshipLabel>
+    <relationshipName>DecisaoOfertas</relationshipName>
+    <relationshipOrder>0</relationshipOrder>
+    <reparentableMasterDetail>false</reparentableMasterDetail>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+</CustomField>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Nao_altera_dt_programada_apos_liberacao</fullName>
+    <active>true</active>
+    <description>Regra de validação que não permite a alteração da data programada de pagamento após a liberação do pagamento</description>
+    <errorConditionFormula>AND( 
+
+TEXT( PRIORVALUE(Status__c)) &lt;&gt; &quot;Pendente&quot;,
+ ISPICKVAL( Tipo_de_OP__c , &quot;Indenização&quot;), 
+
+OR(
+    ISPICKVAL( Status__c , &quot;Liberado&quot;),
+	ISPICKVAL( Status__c , &quot;OP em criação&quot;), 
+	ISPICKVAL( Status__c , &quot;OP criada&quot;), 
+	ISPICKVAL( Status__c , &quot;Em aprovação&quot;), 
+	ISPICKVAL( Status__c , &quot;Aprovada&quot;), 
+	ISPICKVAL( Status__c , &quot;Rejeitada&quot;), 
+	ISPICKVAL( Status__c , &quot;Erro&quot;), 
+	ISPICKVAL( Status__c ,&quot;Em pagamento&quot;) 
+),
+ISCHANGED(Data_Programada_de_Pagamento__c)
+
+)</errorConditionFormula>
+    <errorDisplayField>Data_Programada_de_Pagamento__c</errorDisplayField>
+    <errorMessage>Não é permitido alterar a data programada após a liberação do pagamento!</errorMessage>
+</ValidationRule>

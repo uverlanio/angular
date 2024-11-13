@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ValidacaoDataFinalAnalisePorPendencia</fullName>
+    <active>false</active>
+    <errorConditionFormula>DataFimPendencia__c &gt;  DataFimAnalise__c</errorConditionFormula>
+    <errorMessage>Data final da Pendência não pode ser maior do que a data final de análise</errorMessage>
+</ValidationRule>

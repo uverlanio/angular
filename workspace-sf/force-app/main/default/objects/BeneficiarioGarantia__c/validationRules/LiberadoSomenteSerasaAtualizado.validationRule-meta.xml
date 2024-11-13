@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>LiberadoSomenteSerasaAtualizado</fullName>
+    <active>false</active>
+    <errorConditionFormula>AND(
+  ISPICKVAL(Status__c, &quot;Liberado&quot;),
+  ConsultaManualSerasa__c == FALSE,
+  NOT(ISPICKVAL(StatusSerasa__c, &quot;Atualizado&quot;))
+)</errorConditionFormula>
+    <errorMessage>SERASA: Necessário &quot;Validar Beneficiário&quot; para alterar o status para Liberado.
+Na eventualidade de indisponibilidade do serviço do Serasa, é necessário realizar a consulta manualmente; após isso marque a o campo &quot;Consulta Manual Serasa&quot;.</errorMessage>
+</ValidationRule>

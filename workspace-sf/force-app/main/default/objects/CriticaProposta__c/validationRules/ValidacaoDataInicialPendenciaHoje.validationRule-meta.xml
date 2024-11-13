@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ValidacaoDataInicialPendenciaHoje</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+    ISCHANGED(DataInicioPendencia__c),
+    DataInicioPendencia__c &lt; TODAY()
+)</errorConditionFormula>
+    <errorMessage>Data Inicial da Pendência não pode ser menor do que hoje</errorMessage>
+</ValidationRule>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ValidarPreenchimentoDeterminado</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+    ISPICKVAL(Tipo__c, &apos;Determinado&apos;),
+    OR(
+       NOT(ISBLANK(PrazoAvisarRenovacao__c)),
+       NOT(ISBLANK(VigenciaMinimaRenovacao__c)),
+       NOT(ISBLANK(PrazoRetornoAviso__c)),
+       NOT(ISBLANK(PrazoDesistenciaRenovacao__c)),
+       NOT(ISBLANK(IdadeMaximaRenovacao__c)),
+       NOT(ISBLANK(QuantidadeRenovacaoesAnuencia__c)),
+       RenovaEsgotamentoIndenizacao__c = true,
+       NOT(ISBLANK(PeriodoMaximoInadimplenciaPeriodica__c)),
+       NOT(ISPICKVAL(ModeloResgate__c,&apos;&apos;)),
+       NOT(ISPICKVAL(PrazoMinimoCancelamento__c,&apos;&apos;))
+    )
+)</errorConditionFormula>
+    <errorMessage>Preenchimento inválido para o Tipo selecionado</errorMessage>
+</ValidationRule>

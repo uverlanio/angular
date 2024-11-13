@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Pagamento_de_garantia__c</fullName>
+    <externalId>false</externalId>
+    <label>Pagamento de garantia</label>
+    <referenceTo>PagamentoGarantia__c</referenceTo>
+    <relationshipLabel>Beneficiarios da Garantia</relationshipLabel>
+    <relationshipName>Beneficiarios_Garantia</relationshipName>
+    <relationshipOrder>0</relationshipOrder>
+    <reparentableMasterDetail>false</reparentableMasterDetail>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+</CustomField>

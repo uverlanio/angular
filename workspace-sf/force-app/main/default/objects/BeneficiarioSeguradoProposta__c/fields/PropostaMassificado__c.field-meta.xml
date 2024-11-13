@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>PropostaMassificado__c</fullName>
+    <externalId>false</externalId>
+    <formula>SeguradoProposta__r.GrupoProposta__r.ContratanteProposta__r.Proposta__r.Massificados__c</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>PropostaMassificado</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

@@ -31,6 +31,7 @@ public class ExtratoPropostaService {
                 AND RamoSeguro__r.Codigo__c in: request.ramos
             	AND Tipo__c != 'Renovacao'
                 AND Produto__r.ProductCode IN: request.produto //II-159 INICIO-FIM
+                AND Status != 'Em criação' //ANNVI-257 - INICIO/FIM
         ];
 
         System.debug('lstPropostas pre filtro ' + lstPropostas.size());

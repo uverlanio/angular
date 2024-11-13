@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CodigoPromocao__c</fullName>
+    <description>Picklist obrigatória se o campo Sorteio no campo tipo de característica especial, for selecionado.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Cod.167 - Vida 01 Sorteio
+Cod.171 - Vida 02 Sorteios
+Cod.168 - Vida 04 Sorteios
+Cod.VI010 - Vida 1 Sorteio
+Cod.VI011 – Vida 3 Sorteios</inlineHelpText>
+    <label>Código da promoção</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>167</fullName>
+                <default>false</default>
+                <label>167</label>
+            </value>
+            <value>
+                <fullName>168</fullName>
+                <default>false</default>
+                <label>168</label>
+            </value>
+            <value>
+                <fullName>171</fullName>
+                <default>false</default>
+                <label>171</label>
+            </value>
+            <value>
+                <fullName>VITST</fullName>
+                <default>false</default>
+                <label>VITST</label>
+            </value>
+            <value>
+                <fullName>VI010</fullName>
+                <default>false</default>
+                <label>VI010</label>
+            </value>
+            <value>
+                <fullName>VI011</fullName>
+                <default>false</default>
+                <label>VI011</label>
+            </value>
+            <value>
+                <fullName>VI005</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>VI005</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

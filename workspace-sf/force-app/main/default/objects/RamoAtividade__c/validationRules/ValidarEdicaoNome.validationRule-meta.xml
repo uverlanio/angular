@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ValidarEdicaoNome</fullName>
+    <active>true</active>
+    <errorConditionFormula>IF(ISBLANK(PRIORVALUE(Name)) || ISNULL(PRIORVALUE(Name)), false, IF(ISCHANGED(Name),true,false))</errorConditionFormula>
+    <errorMessage>O nome não pode ser alterado.</errorMessage>
+</ValidationRule>

@@ -64,15 +64,36 @@ public with sharing class UptFormPagPropRenTest {
         propostaRen.ContratoRenovado__c = contrato.Id;
         update propostaRen;
     }
-   
-    @istest static void testScheduleCrit(){
+    //FNPVVEP-172 INICIO
+    // @istest static void testScheduleCrit(){
+    //     Test.StartTest();
+    //     System.debug('Iniciando o processamento');
+    //     AltFPgtRenSchedulable schd = new AltFPgtRenSchedulable();
+    //     String scheduleTest = '0 0 23 ? * *';
+    //     System.debug('Iniciando o comparativo');
+    //     System.schedule('Teste de Job', scheduleTest, schd);
+    //     System.debug('Terminando o comparativo');
+    //     Test.stopTest();
+    // }
+
+    @istest 
+    static void altFPgtTest(){
         Test.StartTest();
-        System.debug('Iniciando o processamento');
-        AltFPgtRenSchedulable schd = new AltFPgtRenSchedulable();
-        String scheduleTest = '0 0 23 ? * *';
-        System.debug('Iniciando o comparativo');
-        System.schedule('Teste de Job', scheduleTest, schd);
-        System.debug('Terminando o comparativo');
+        Quote proposta = [SELECT Id FROM Quote LIMIT 1];
+        List<String> idPropostas = new List<String>();
+        idPropostas.add(proposta.id);
+        UptFormPagPropRen.altFPgt(idPropostas);
         Test.stopTest();
     }
+
+    @istest 
+    static void altFPgtFlowTest(){
+        Test.StartTest();
+        Quote proposta = [SELECT Id FROM Quote LIMIT 1];
+        List<String> idPropostas = new List<String>();
+        idPropostas.add(proposta.id);
+        UptFormPagPropRen.altFPgtFlow(idPropostas);
+        Test.stopTest();
+    }
+    //FNPVVEP-172 FIM
 }

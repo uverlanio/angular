@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Tipo__c</fullName>
+    <externalId>false</externalId>
+    <label>Tipo</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Percentual</fullName>
+                <default>false</default>
+                <label>Percentual</label>
+            </value>
+            <value>
+                <fullName>Monetario</fullName>
+                <default>false</default>
+                <label>Monetário</label>
+            </value>
+            <value>
+                <fullName>Dias</fullName>
+                <default>false</default>
+                <label>Dias</label>
+            </value>
+            <value>
+                <fullName>ServicoPrestado</fullName>
+                <default>false</default>
+                <label>Serviço Prestado</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

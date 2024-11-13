@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ValidaInicioVigencia</fullName>
+    <active>true</active>
+    <description>Validar se a data do início da vigência é maior ou igual a atual.</description>
+    <errorConditionFormula>AND(
+				OR(
+								ISNEW(), 
+								ISCHANGED(VigenciaInicio__c)
+				),
+				VigenciaInicio__c &lt; TODAY()
+)</errorConditionFormula>
+    <errorDisplayField>VigenciaInicio__c</errorDisplayField>
+    <errorMessage>A data deve ser maior ou igual a atual.</errorMessage>
+</ValidationRule>

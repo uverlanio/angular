@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>53.0</apiVersion>
+    <assignments>
+        <description>Adiciona cada registro de Parâmetros de Vigência Comerciais na lista para atualização.</description>
+        <name>Set_PVC_List</name>
+        <label>Add Parâmetros de Vigência Comerciais to List</label>
+        <locationX>176</locationX>
+        <locationY>696</locationY>
+        <assignmentItems>
+            <assignToReference>PVC_Update_List</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>Loop_PVC_relacionados</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Loop_PVC_relacionados</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>Atualiza o Tipo de Reenquadramento de cada registro de Parâmetros de Vigência Comercial relacionado ao registro de Parâmetros de Vigência Técnico.</description>
+        <name>Set_TipoReenquadramento</name>
+        <label>Set Tipo de Reenquadramento</label>
+        <locationX>429</locationX>
+        <locationY>704</locationY>
+        <assignmentItems>
+            <assignToReference>Loop_PVC_relacionados.TipoReenquadramento__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Record.TipoReenquadramento__c</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Set_PVC_List</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>Preenche o Tipo de Reenquadramento do registro de Parâmetros de Vigência Comercial conforme o Tipo de Reenquadramento do registro de Parâmetros de Vigência Técnico relacionado.</description>
+        <name>Set_TipoReenquadramento_Record</name>
+        <label>Set Tipo de Reenquadramento</label>
+        <locationX>422</locationX>
+        <locationY>328</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.TipoReenquadramento__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Record.ParametroVigencia__r.TipoReenquadramento__c</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Update_PVC_Record</targetReference>
+        </connector>
+    </assignments>
+    <decisions>
+        <description>Avalia o tipo de registro dos Parâmetros de Vigência.</description>
+        <name>TipoRegistro</name>
+        <label>Tipo de Registro</label>
+        <locationX>168</locationX>
+        <locationY>325</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>RT_ProdutoTecnico</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.RecordType.DeveloperName</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>ProdutoTecnico</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>IsNew</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Get_PVC_relacionados</targetReference>
+            </connector>
+            <label>Produto Técnico</label>
+        </rules>
+        <rules>
+            <name>RT_ProdutoComercial</name>
+            <conditionLogic>1 AND 3 AND (2 OR (NOT(2) AND 4 AND 5))</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.RecordType.DeveloperName</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>ProdutoComercial</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>IsNew</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.ParametroVigencia__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.TipoReenquadramento__c</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.TipoReenquadramento__c</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <elementReference>$Record.ParametroVigencia__r.TipoReenquadramento__c</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Set_TipoReenquadramento_Record</targetReference>
+            </connector>
+            <label>Produto Comercial</label>
+        </rules>
+    </decisions>
+    <description>Realiza alterações em Parâmetros de Vigência Comerciais, conforme alterações no registro de Parâmetros de Vigência Técnico.</description>
+    <formulas>
+        <description>Indica que o registro está em criação.</description>
+        <name>IsNew</name>
+        <dataType>Boolean</dataType>
+        <expression>ISNEW()</expression>
+    </formulas>
+    <interviewLabel>Parâmetros de Vigência: Alterações {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Parâmetros de Vigência Comerciais: Alterações</label>
+    <loops>
+        <description>Itera sobre cada Parâmetro de Vigência Comercial relacionado.</description>
+        <name>Loop_PVC_relacionados</name>
+        <label>Loop Parâmetros de Vigência Comerciais relacionados</label>
+        <locationX>429</locationX>
+        <locationY>546</locationY>
+        <collectionReference>Get_PVC_relacionados</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>Set_TipoReenquadramento</targetReference>
+        </nextValueConnector>
+        <noMoreValuesConnector>
+            <targetReference>PVC_Update</targetReference>
+        </noMoreValuesConnector>
+    </loops>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>FREE_FORM_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <description>Recupera os Parâmetros de Vigência Comerciais relacionados.</description>
+        <name>Get_PVC_relacionados</name>
+        <label>Get Parâmetros de Vigência Comerciais relacionados</label>
+        <locationX>176</locationX>
+        <locationY>538</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Loop_PVC_relacionados</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>ParametroVigencia__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>Produto__c</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>ParametroVigencia__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordUpdates>
+        <description>Atualiza os Parâmetros de Vigência Comerciais relacionados ao registro de Parâmetros de Vigência Técnico.</description>
+        <name>PVC_Update</name>
+        <label>Update Parâmetros de Vigência Comerciais</label>
+        <locationX>619</locationX>
+        <locationY>547</locationY>
+        <inputReference>PVC_Update_List</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <description>Atualiza o registro de Parâmetros de Vigência Comercial.</description>
+        <name>Update_PVC_Record</name>
+        <label>Update Parâmetros de Vigência Comercial</label>
+        <locationX>618</locationX>
+        <locationY>328</locationY>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>50</locationX>
+        <locationY>50</locationY>
+        <connector>
+            <targetReference>TipoRegistro</targetReference>
+        </connector>
+        <object>ParametroVigencia__c</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+    <variables>
+        <description>Lista dos Parâmetros de Vigência Comerciais que terão o Tipo de Reenquadramento atualizado conforme o Tipo de Reenquadramento do registro de Parâmetros de Vigência Técnico relacionado.</description>
+        <name>PVC_Update_List</name>
+        <dataType>SObject</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>ParametroVigencia__c</objectType>
+    </variables>
+</Flow>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Tabela__c</fullName>
+    <externalId>false</externalId>
+    <label>Tabela</label>
+    <required>false</required>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Adicional de parto para garantia DIT</fullName>
+                <default>false</default>
+                <label>Adicional de parto para garantia DIT</label>
+            </value>
+            <value>
+                <fullName>Danos Corporais (Parciais) - Órgãos e Estruturas Corporais</fullName>
+                <default>false</default>
+                <label>Danos Corporais (Parciais) - Órgãos e Estruturas Corporais</label>
+            </value>
+            <value>
+                <fullName>Diárias por Incapacidade Temporária</fullName>
+                <default>false</default>
+                <label>Diárias por Incapacidade Temporária</label>
+            </value>
+            <value>
+                <fullName>Invalidez Permanente - Diversos</fullName>
+                <default>false</default>
+                <label>Invalidez Permanente - Diversos</label>
+            </value>
+            <value>
+                <fullName>Invalidez Permanente - Invalidez Permanente</fullName>
+                <default>false</default>
+                <label>Invalidez Permanente - Invalidez Permanente</label>
+            </value>
+            <value>
+                <fullName>Invalidez Permanente - Membros Inferiores</fullName>
+                <default>false</default>
+                <label>Invalidez Permanente - Membros Inferiores</label>
+            </value>
+            <value>
+                <fullName>Invalidez Permanente - Membros Superiores</fullName>
+                <default>false</default>
+                <label>Invalidez Permanente - Membros Superiores</label>
+            </value>
+            <value>
+                <fullName>Invalidez Permanente Total - Invalidez Total Permanente</fullName>
+                <default>false</default>
+                <label>Invalidez Permanente Total - Invalidez Total Permanente</label>
+            </value>
+            <value>
+                <fullName>Majoração - Vida Individual</fullName>
+                <default>false</default>
+                <label>Majoração - Vida Individual</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

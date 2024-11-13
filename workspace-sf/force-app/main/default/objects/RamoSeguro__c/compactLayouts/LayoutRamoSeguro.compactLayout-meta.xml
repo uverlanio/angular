@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CompactLayout xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>LayoutRamoSeguro</fullName>
+    <fields>Name</fields>
+    <fields>Codigo__c</fields>
+    <fields>SiglaRamo__c</fields>
+    <fields>Empresa__c</fields>
+    <label>Layout de ramo de seguro</label>
+</CompactLayout>

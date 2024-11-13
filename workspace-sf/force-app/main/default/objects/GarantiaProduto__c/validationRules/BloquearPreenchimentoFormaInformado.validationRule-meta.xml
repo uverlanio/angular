@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>BloquearPreenchimentoFormaInformado</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+    RecordType.DeveloperName = &apos;ProdutoComercial&apos;,
+    ISPICKVAL(FormaExibicaoCapital__c, &apos;Valor informado&apos;),
+    ISPICKVAL(FormaExibicaoCapital__c, &apos;Valor fixo&apos;),
+    OR(
+       NOT(ISBLANK(Intervalo__c)),
+       NOT(ISBLANK(ValorInicial__c)),
+       NOT(ISBLANK(ValorFinal__c)) 
+    )
+)</errorConditionFormula>
+    <errorMessage>Os campos Intervalo, Valor inicial e Valor final não devem ser preenchidos para esta forma de capital</errorMessage>
+</ValidationRule>

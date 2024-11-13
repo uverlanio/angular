@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ObrigarPreenchimentoInformacoesCPF</fullName>
+    <active>false</active>
+    <errorConditionFormula>IF(ISPICKVAL(TipoBeneficiario__c, &quot;Nome do beneficiário&quot;), 
+IF(ISPICKVAL(MotivoSemCpfCnpj__c, &quot;&quot;) &amp;&amp; ISBLANK(CpfCnpj__c), 
+IF(ISPICKVAL(MotivoSemCpfCnpj__c, &quot;&quot;) &amp;&amp; ISBLANK(CpfCnpj__c),                                                     
+IF(ISPICKVAL(GrauParentesco__c, &quot;&quot;),true, 
+IF(ISPICKVAL(MotivoSemCpfCnpj__c, &quot;&quot;),true, IF(ISBLANK(CpfCnpj__c),true, false)))
+, false)                       
+, false) 
+, false)</errorConditionFormula>
+    <errorDisplayField>MotivoSemCpfCnpj__c</errorDisplayField>
+    <errorMessage>Para este tipo de beneficiário preencher o motivo sem cpf.</errorMessage>
+</ValidationRule>

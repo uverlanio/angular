@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ValidarSucursal</fullName>
+    <active>true</active>
+    <errorConditionFormula>IF( ISBLANK(Sucursal__c ) , FALSE, 
+  NOT(ISNUMBER( Sucursal__c )) ||
+  VALUE( Sucursal__c )  &lt;= 0)</errorConditionFormula>
+    <errorMessage>Campo Sucursal deve ser apenas numérico</errorMessage>
+</ValidationRule>

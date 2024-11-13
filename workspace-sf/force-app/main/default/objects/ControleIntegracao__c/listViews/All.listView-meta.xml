@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All</fullName>
+    <columns>NAME</columns>
+    <columns>CodigoIntegracao__c</columns>
+    <columns>IdObjeto__c</columns>
+    <columns>DataCriacaoRegistro__c</columns>
+    <columns>Status__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>IdObjeto__c</field>
+        <operation>startsWith</operation>
+        <value>800DP000003o5A9YAI</value>
+    </filters>
+    <label>Todos os logs de integração</label>
+</ListView>

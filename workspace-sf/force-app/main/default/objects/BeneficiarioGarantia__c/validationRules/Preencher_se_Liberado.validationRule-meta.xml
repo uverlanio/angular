@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Preencher_se_Liberado</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+NOT(ISPICKVAL(Status__c, &quot;Pendente&quot;)), 
+NOT(ISPICKVAL(Status__c, &quot;Cancelado&quot;)),
+NOT(ISPICKVAL(Status__c, &quot;Serviço prestado&quot;)),
+NOT(ISPICKVAL(Status__c, &quot;Serviço não prestado&quot;)),
+OR(
+ISBLANK(Percentual_de_indenizacao__c) 
+)
+)</errorConditionFormula>
+    <errorMessage>Os campos &quot;Tipo de pagamento&quot; e &quot;Percentual de indenização&quot; não podem estar em branco neste status.</errorMessage>
+</ValidationRule>

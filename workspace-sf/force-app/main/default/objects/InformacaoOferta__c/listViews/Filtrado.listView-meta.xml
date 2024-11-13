@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Filtrado</fullName>
+    <columns>OBJECT_ID</columns>
+    <columns>NAME</columns>
+    <columns>Id__c</columns>
+    <columns>ConjuntoInformacoes__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>ConjuntoInformacoes__c</field>
+        <operation>notEqual</operation>
+        <value>Formulario</value>
+    </filters>
+    <filters>
+        <field>ConjuntoInformacoes__c</field>
+        <operation>notEqual</operation>
+        <value>Conjunto teste</value>
+    </filters>
+    <filters>
+        <field>ConjuntoInformacoes__c</field>
+        <operation>notEqual</operation>
+        <value>Tela de opções</value>
+    </filters>
+    <filters>
+        <field>ConjuntoInformacoes__c</field>
+        <operation>notEqual</operation>
+        <value>Tela Inicial Vida Individual</value>
+    </filters>
+    <filters>
+        <field>ConjuntoInformacoes__c</field>
+        <operation>notEqual</operation>
+        <value>Testando conjunto de informações</value>
+    </filters>
+    <label>Filtrado</label>
+</ListView>

@@ -1,0 +1,686 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Sucursal_Destino_de_Cheque__c</fullName>
+    <externalId>false</externalId>
+    <label>Sucursal Destino de Cheque</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Tipo_de_Pagamento__c</controllingField>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>1</fullName>
+                <default>false</default>
+                <label>SÃO PAULO</label>
+            </value>
+            <value>
+                <fullName>2</fullName>
+                <default>false</default>
+                <label>RIO DE JANEIRO</label>
+            </value>
+            <value>
+                <fullName>3</fullName>
+                <default>false</default>
+                <label>PERNAMBUCO</label>
+            </value>
+            <value>
+                <fullName>4</fullName>
+                <default>false</default>
+                <label>BAHIA</label>
+            </value>
+            <value>
+                <fullName>5</fullName>
+                <default>false</default>
+                <label>TOCANTINS</label>
+            </value>
+            <value>
+                <fullName>6</fullName>
+                <default>false</default>
+                <label>MINAS GERAIS</label>
+            </value>
+            <value>
+                <fullName>7</fullName>
+                <default>false</default>
+                <label>PARANÁ</label>
+            </value>
+            <value>
+                <fullName>8</fullName>
+                <default>false</default>
+                <label>MOGI DAS CRUZES</label>
+            </value>
+            <value>
+                <fullName>9</fullName>
+                <default>false</default>
+                <label>MARANHÃO</label>
+            </value>
+            <value>
+                <fullName>10</fullName>
+                <default>false</default>
+                <label>PARÁ</label>
+            </value>
+            <value>
+                <fullName>11</fullName>
+                <default>false</default>
+                <label>DISTRITO FEDERAL</label>
+            </value>
+            <value>
+                <fullName>12</fullName>
+                <default>false</default>
+                <label>AMAZONAS</label>
+            </value>
+            <value>
+                <fullName>13</fullName>
+                <default>false</default>
+                <label>ESPÍRITO SANTO</label>
+            </value>
+            <value>
+                <fullName>14</fullName>
+                <default>false</default>
+                <label>GOIÁS</label>
+            </value>
+            <value>
+                <fullName>15</fullName>
+                <default>false</default>
+                <label>RIO GRANDE DO SUL</label>
+            </value>
+            <value>
+                <fullName>16</fullName>
+                <default>false</default>
+                <label>SANTA CATARINA</label>
+            </value>
+            <value>
+                <fullName>17</fullName>
+                <default>false</default>
+                <label>MATO GROSSO</label>
+            </value>
+            <value>
+                <fullName>18</fullName>
+                <default>false</default>
+                <label>ALAGOAS</label>
+            </value>
+            <value>
+                <fullName>19</fullName>
+                <default>false</default>
+                <label>RIO GRANDE DO NORTE</label>
+            </value>
+            <value>
+                <fullName>20</fullName>
+                <default>false</default>
+                <label>MATO GROSSO DO SUL</label>
+            </value>
+            <value>
+                <fullName>21</fullName>
+                <default>false</default>
+                <label>CEARÁ</label>
+            </value>
+            <value>
+                <fullName>22</fullName>
+                <default>false</default>
+                <label>LITORAL PAULISTA</label>
+            </value>
+            <value>
+                <fullName>23</fullName>
+                <default>false</default>
+                <label>PIAUÍ</label>
+            </value>
+            <value>
+                <fullName>24</fullName>
+                <default>false</default>
+                <label>INATIVO - INTERIOR PAULISTA</label>
+            </value>
+            <value>
+                <fullName>25</fullName>
+                <default>false</default>
+                <label>RUNOFF - CONVÊNIOS</label>
+            </value>
+            <value>
+                <fullName>26</fullName>
+                <default>false</default>
+                <label>CAMPINAS</label>
+            </value>
+            <value>
+                <fullName>27</fullName>
+                <default>false</default>
+                <label>REPLACE</label>
+            </value>
+            <value>
+                <fullName>28</fullName>
+                <default>false</default>
+                <label>SÃO PAULO - INTERLAGOS</label>
+            </value>
+            <value>
+                <fullName>29</fullName>
+                <default>false</default>
+                <label>SÃO PAULO - ITAQUERA</label>
+            </value>
+            <value>
+                <fullName>30</fullName>
+                <default>false</default>
+                <label>SÃO PAULO - VILA PRUDENTE</label>
+            </value>
+            <value>
+                <fullName>31</fullName>
+                <default>false</default>
+                <label>SÃO PAULO - ARICANDUVA</label>
+            </value>
+            <value>
+                <fullName>32</fullName>
+                <default>false</default>
+                <label>SÃO PAULO - PENHA</label>
+            </value>
+            <value>
+                <fullName>33</fullName>
+                <default>false</default>
+                <label>SÃO PAULO - MORUMBI</label>
+            </value>
+            <value>
+                <fullName>34</fullName>
+                <default>false</default>
+                <label>SÃO PAULO - PACAEMBU</label>
+            </value>
+            <value>
+                <fullName>35</fullName>
+                <default>false</default>
+                <label>SÃO PAULO - SANTANA</label>
+            </value>
+            <value>
+                <fullName>36</fullName>
+                <default>false</default>
+                <label>SÃO PAULO - CAMPOS ELÍSEOS I</label>
+            </value>
+            <value>
+                <fullName>37</fullName>
+                <default>false</default>
+                <label>SÃO PAULO - LAPA</label>
+            </value>
+            <value>
+                <fullName>38</fullName>
+                <default>false</default>
+                <label>SÃO PAULO - CONSOLAÇÃO</label>
+            </value>
+            <value>
+                <fullName>39</fullName>
+                <default>false</default>
+                <label>SÃO PAULO - BANDEIRANTES</label>
+            </value>
+            <value>
+                <fullName>40</fullName>
+                <default>false</default>
+                <label>SÃO PAULO - TATUAPÉ</label>
+            </value>
+            <value>
+                <fullName>41</fullName>
+                <default>false</default>
+                <label>SÃO PAULO - SÃO MIGUEL PAULIST</label>
+            </value>
+            <value>
+                <fullName>42</fullName>
+                <default>false</default>
+                <label>SÃO PAULO - REBOUÇAS</label>
+            </value>
+            <value>
+                <fullName>43</fullName>
+                <default>false</default>
+                <label>SÃO PAULO - MOOCA</label>
+            </value>
+            <value>
+                <fullName>44</fullName>
+                <default>false</default>
+                <label>JARDINS II</label>
+            </value>
+            <value>
+                <fullName>45</fullName>
+                <default>false</default>
+                <label>SÃO PAULO - CENTRO</label>
+            </value>
+            <value>
+                <fullName>46</fullName>
+                <default>false</default>
+                <label>SÃO PAULO - VILA MARIA</label>
+            </value>
+            <value>
+                <fullName>47</fullName>
+                <default>false</default>
+                <label>SÃO PAULO - IPIRANGA</label>
+            </value>
+            <value>
+                <fullName>48</fullName>
+                <default>false</default>
+                <label>SÃO PAULO - PIRITUBA</label>
+            </value>
+            <value>
+                <fullName>49</fullName>
+                <default>false</default>
+                <label>JARDINS I</label>
+            </value>
+            <value>
+                <fullName>52</fullName>
+                <default>false</default>
+                <label>SÃO PAULO - CAMPOS ELÍSEOS II</label>
+            </value>
+            <value>
+                <fullName>53</fullName>
+                <default>false</default>
+                <label>SÃO PAULO - SANTO AMARO</label>
+            </value>
+            <value>
+                <fullName>54</fullName>
+                <default>false</default>
+                <label>SÃO PAULO - PRAÇA DA ÁRVORE</label>
+            </value>
+            <value>
+                <fullName>55</fullName>
+                <default>false</default>
+                <label>OSASCO</label>
+            </value>
+            <value>
+                <fullName>56</fullName>
+                <default>false</default>
+                <label>SÃO CAETANO DO SUL</label>
+            </value>
+            <value>
+                <fullName>57</fullName>
+                <default>false</default>
+                <label>SÃO B. DO CAMPO</label>
+            </value>
+            <value>
+                <fullName>58</fullName>
+                <default>false</default>
+                <label>DIADEMA</label>
+            </value>
+            <value>
+                <fullName>59</fullName>
+                <default>false</default>
+                <label>GUARULHOS</label>
+            </value>
+            <value>
+                <fullName>60</fullName>
+                <default>false</default>
+                <label>SANTO ANDRÉ</label>
+            </value>
+            <value>
+                <fullName>61</fullName>
+                <default>false</default>
+                <label>MAUÁ</label>
+            </value>
+            <value>
+                <fullName>62</fullName>
+                <default>false</default>
+                <label>ALPHAVILLE</label>
+            </value>
+            <value>
+                <fullName>63</fullName>
+                <default>false</default>
+                <label>SÃO PAULO - CAMPOS ELÍSEOS III</label>
+            </value>
+            <value>
+                <fullName>64</fullName>
+                <default>false</default>
+                <label>VALE DO PARAÍBA</label>
+            </value>
+            <value>
+                <fullName>65</fullName>
+                <default>false</default>
+                <label>RIBEIRÃO PRETO</label>
+            </value>
+            <value>
+                <fullName>66</fullName>
+                <default>false</default>
+                <label>SOROCABA</label>
+            </value>
+            <value>
+                <fullName>67</fullName>
+                <default>false</default>
+                <label>SÃO JOSÉ DO RIO PRETO</label>
+            </value>
+            <value>
+                <fullName>68</fullName>
+                <default>false</default>
+                <label>PIRACICABA</label>
+            </value>
+            <value>
+                <fullName>69</fullName>
+                <default>false</default>
+                <label>BAURU</label>
+            </value>
+            <value>
+                <fullName>70</fullName>
+                <default>false</default>
+                <label>ACRE</label>
+            </value>
+            <value>
+                <fullName>71</fullName>
+                <default>false</default>
+                <label>PARAÍBA</label>
+            </value>
+            <value>
+                <fullName>72</fullName>
+                <default>false</default>
+                <label>SERGIPE</label>
+            </value>
+            <value>
+                <fullName>73</fullName>
+                <default>false</default>
+                <label>RONDÔNIA</label>
+            </value>
+            <value>
+                <fullName>74</fullName>
+                <default>false</default>
+                <label>RORAIMA</label>
+            </value>
+            <value>
+                <fullName>75</fullName>
+                <default>false</default>
+                <label>BRAGANÇA PAULISTA</label>
+            </value>
+            <value>
+                <fullName>76</fullName>
+                <default>false</default>
+                <label>JUNDIAÍ</label>
+            </value>
+            <value>
+                <fullName>77</fullName>
+                <default>false</default>
+                <label>MOGI MIRIM</label>
+            </value>
+            <value>
+                <fullName>78</fullName>
+                <default>false</default>
+                <label>SÃO PAULO - USP</label>
+            </value>
+            <value>
+                <fullName>79</fullName>
+                <default>false</default>
+                <label>PRESIDENTE PRUDENTE</label>
+            </value>
+            <value>
+                <fullName>80</fullName>
+                <default>false</default>
+                <label>AMERICANA</label>
+            </value>
+            <value>
+                <fullName>81</fullName>
+                <default>false</default>
+                <label>IPS PAULISTA</label>
+            </value>
+            <value>
+                <fullName>82</fullName>
+                <default>false</default>
+                <label>TABOÃO DA SERRA</label>
+            </value>
+            <value>
+                <fullName>83</fullName>
+                <default>false</default>
+                <label>MOGI GUAÇU</label>
+            </value>
+            <value>
+                <fullName>84</fullName>
+                <default>false</default>
+                <label>CAMPOS DO JORDÃO - PROTEÇÃO</label>
+            </value>
+            <value>
+                <fullName>85</fullName>
+                <default>false</default>
+                <label>CORPORATE SÃO PAULO</label>
+            </value>
+            <value>
+                <fullName>86</fullName>
+                <default>false</default>
+                <label>BARRA DATIJUCA</label>
+            </value>
+            <value>
+                <fullName>87</fullName>
+                <default>false</default>
+                <label>METROPOLITANA RJ</label>
+            </value>
+            <value>
+                <fullName>88</fullName>
+                <default>false</default>
+                <label>NITEROI</label>
+            </value>
+            <value>
+                <fullName>89</fullName>
+                <default>false</default>
+                <label>PETROPOLIS</label>
+            </value>
+            <value>
+                <fullName>90</fullName>
+                <default>false</default>
+                <label>CAMPOS DOS GOYTACAZES (POCKET)</label>
+            </value>
+            <value>
+                <fullName>91</fullName>
+                <default>false</default>
+                <label>CENTRO RIO</label>
+            </value>
+            <value>
+                <fullName>92</fullName>
+                <default>false</default>
+                <label>CENTRO RIO II</label>
+            </value>
+            <value>
+                <fullName>93</fullName>
+                <default>false</default>
+                <label>BENEFÍCIOS</label>
+            </value>
+            <value>
+                <fullName>94</fullName>
+                <default>false</default>
+                <label>CANAL BANCO</label>
+            </value>
+            <value>
+                <fullName>95</fullName>
+                <default>false</default>
+                <label>SUCURSAL SÃO PAULO I</label>
+            </value>
+            <value>
+                <fullName>96</fullName>
+                <default>false</default>
+                <label>SUCURSAL RIO BRANCO</label>
+            </value>
+            <value>
+                <fullName>97</fullName>
+                <default>false</default>
+                <label>SUCURSAL INTERIOR RIO</label>
+            </value>
+            <value>
+                <fullName>98</fullName>
+                <default>false</default>
+                <label>SUCURSAL ZONA NORTE</label>
+            </value>
+            <value>
+                <fullName>99</fullName>
+                <default>false</default>
+                <label>SUCURSAL SÃO PAULO II</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>Cheque</controllingFieldValue>
+            <valueName>1</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Cheque</controllingFieldValue>
+            <valueName>2</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Cheque</controllingFieldValue>
+            <valueName>3</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Cheque</controllingFieldValue>
+            <valueName>4</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Cheque</controllingFieldValue>
+            <valueName>5</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Cheque</controllingFieldValue>
+            <valueName>7</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Cheque</controllingFieldValue>
+            <valueName>8</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Cheque</controllingFieldValue>
+            <valueName>9</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Cheque</controllingFieldValue>
+            <valueName>10</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Cheque</controllingFieldValue>
+            <valueName>11</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Cheque</controllingFieldValue>
+            <valueName>12</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Cheque</controllingFieldValue>
+            <valueName>13</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Cheque</controllingFieldValue>
+            <valueName>14</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Cheque</controllingFieldValue>
+            <valueName>15</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Cheque</controllingFieldValue>
+            <valueName>16</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Cheque</controllingFieldValue>
+            <valueName>17</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Cheque</controllingFieldValue>
+            <valueName>18</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Cheque</controllingFieldValue>
+            <valueName>19</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Cheque</controllingFieldValue>
+            <valueName>20</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Cheque</controllingFieldValue>
+            <valueName>21</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Cheque</controllingFieldValue>
+            <valueName>22</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Cheque</controllingFieldValue>
+            <valueName>23</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Cheque</controllingFieldValue>
+            <valueName>24</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Cheque</controllingFieldValue>
+            <valueName>25</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Cheque</controllingFieldValue>
+            <valueName>26</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Cheque</controllingFieldValue>
+            <valueName>27</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Cheque</controllingFieldValue>
+            <valueName>28</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Cheque</controllingFieldValue>
+            <valueName>29</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Cheque</controllingFieldValue>
+            <valueName>30</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Cheque</controllingFieldValue>
+            <valueName>31</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Cheque</controllingFieldValue>
+            <valueName>32</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Cheque</controllingFieldValue>
+            <valueName>33</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Cheque</controllingFieldValue>
+            <valueName>34</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Cheque</controllingFieldValue>
+            <valueName>35</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Cheque</controllingFieldValue>
+            <valueName>36</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Cheque</controllingFieldValue>
+            <valueName>37</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Cheque</controllingFieldValue>
+            <valueName>38</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Cheque</controllingFieldValue>
+            <valueName>39</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Cheque</controllingFieldValue>
+            <valueName>40</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Cheque</controllingFieldValue>
+            <valueName>41</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Cheque</controllingFieldValue>
+            <valueName>42</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Cheque</controllingFieldValue>
+            <valueName>43</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Cheque</controllingFieldValue>
+            <valueName>44</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Cheque</controllingFieldValue>
+            <valueName>45</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Cheque</controllingFieldValue>
+            <valueName>46</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Cheque</controllingFieldValue>
+            <valueName>47</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

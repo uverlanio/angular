@@ -35,8 +35,12 @@ public virtual class BeneficiarioGarantiaBO
                                                   FROM BeneficiarioGarantia__c
                                                   WHERE Id = :plNew]){
             
+            System.debug('XXX - ben: ' + JSON.serialize(ben));
 
+                                                    
             BeneficiarioGarantia__c benOld = pmOld.get(ben.Id);
+            System.debug('XXX - benOld: ' + JSON.serialize(benOld));
+
 
             Boolean isStatusPago = ( ben.Status__c == 'Pago' );
             Boolean isStatusChanged = ( ben.Status__c != benOld.Status__c );
@@ -318,6 +322,9 @@ public virtual class BeneficiarioGarantiaBO
 
                 Decimal totalJuros = 0;
                 Decimal totalCorrecao = 0;
+
+                System.debug('XXX - b.ValorTotalIndenizado__c'+ b.ValorTotalIndenizado__c + 'XXX - b.Pagamento_de_garantia__r.ValorIndenizado__c:' + b.Pagamento_de_garantia__r.ValorIndenizado__c);
+
                 Decimal fator = b.ValorTotalIndenizado__c/b.Pagamento_de_garantia__r.ValorIndenizado__c;
 
                 if (b.Pagamento_de_garantia__r.ComplementoIndenizacao__c > 0) {
@@ -485,8 +492,8 @@ public virtual class BeneficiarioGarantiaBO
         }
     }
 
-    public void validaTotalIndenizacao(List<BeneficiarioGarantia__c> beneficiarios){
-        if(beneficiarios.isEmpty()) return; 
+    public String validaTotalIndenizacao(List<BeneficiarioGarantia__c> beneficiarios){
+        if(beneficiarios.isEmpty()) return ''; 
 
         String message = '';
         
@@ -494,7 +501,7 @@ public virtual class BeneficiarioGarantiaBO
             message = beneficiario.ValorIndenizacao__c > beneficiario.Pagamento_de_garantia__r.Saldo_da_reserva__c ? 'O valor Indenizado é maior que o Saldo da reserva!' : 'Criar';
         }
 
-        //return message;
+        return message;
     }
 }
 //PLV-2603 - Fim - AVX - Melhoria Contínua - Correção pagamento de Sinistro.

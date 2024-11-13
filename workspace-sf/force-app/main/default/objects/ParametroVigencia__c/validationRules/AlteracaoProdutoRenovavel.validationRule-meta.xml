@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>AlteracaoProdutoRenovavel</fullName>
+    <active>true</active>
+    <description>Permitir a alteração apenas para os perfis de Administrador</description>
+    <errorConditionFormula>ISCHANGED(ProdutoRenovavel__c ) &amp;&amp;
+	$Profile.Name  &lt;&gt; &quot;Administrador do Sistema&quot; &amp;&amp;
+	$Profile.Name &lt;&gt; &quot;Administrador Porto&quot;</errorConditionFormula>
+    <errorDisplayField>ProdutoRenovavel__c</errorDisplayField>
+    <errorMessage>Alteração não permitida, fale com o Administrador para analisar impacto nos contratos a serem renovados. 
+
+
+Atividade</errorMessage>
+</ValidationRule>

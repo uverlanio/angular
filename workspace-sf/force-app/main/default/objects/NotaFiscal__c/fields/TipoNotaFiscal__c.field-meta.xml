@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TipoNotaFiscal__c</fullName>
+    <externalId>false</externalId>
+    <label>Tipo da Nota Fiscal</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>NE</fullName>
+                <default>false</default>
+                <label>NE - Nota Fiscal de Serviços</label>
+            </value>
+            <value>
+                <fullName>RF</fullName>
+                <default>false</default>
+                <label>RF - Recibo Pessoa Fisica</label>
+            </value>
+            <value>
+                <fullName>RJ</fullName>
+                <default>false</default>
+                <label>RJ - Recibo Pessoa Juridica</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

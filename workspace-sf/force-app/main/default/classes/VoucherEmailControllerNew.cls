@@ -188,11 +188,13 @@ public class VoucherEmailControllerNew {
         try {
             //Chama classe de envio de e-mail
             System.debug('#senhaPrincipal# '+senhaPrincipal);
-            if( mapQuote.size()==1){
-                Util.enviarEmail(bodyToSend,  new List<String> {mapVoucher.values()[0].emailToSend} , emailTemplate.Subject );
-            } else {
-                Util.enviarEmail(bodyToSend, new List<String> {emailPrincipal}, emailTemplate.Subject );
-            }
+            if (senhaPrincipal != '' && senhaPrincipal != NULL) { //VIAG-323 INICIO/FIM
+                if( mapQuote.size()==1){
+                    Util.enviarEmail(bodyToSend,  new List<String> {mapVoucher.values()[0].emailToSend} , emailTemplate.Subject );
+                } else {
+                    Util.enviarEmail(bodyToSend, new List<String> {emailPrincipal}, emailTemplate.Subject );
+                }
+            } //VIAG-323 INICIO/FIM
       
             mapToReturn.put('Sucesso','true');
         } catch (Exception e ) {

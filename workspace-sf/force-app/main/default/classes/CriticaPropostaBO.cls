@@ -336,7 +336,7 @@ public class CriticaPropostaBO {
 				System.debug('entrou else rogerio teste flow ');
 				for (CriticaProposta__c critica : mapCriticaNew.values()) {			
 					if (isCriticaValida(critica)) {
-						gerarPix(JSON.serialize(critica.Proposta__c));
+						gerarPix(critica.Proposta__c);
 					}
 				}
 			}
@@ -350,41 +350,41 @@ public class CriticaPropostaBO {
 	}
 	
 	private static Boolean isCriticaValida(CriticaProposta__c critica) {
-		return critica.MomentoAnalise__c == 'Palavra Final' &&
-			   critica.Status__c == 'Pendente' &&
-			   critica.Tipo__c == 'Novo';
+		return critica.MomentoAnalise__c == 'Palavra Final' 
+				&& critica.Status__c == 'Pendente';
 	}
 	
 	@Future(Callout=true)
-	public static void gerarPix(String propostaId) {
+	public static void gerarPix(Id propostaId) {
+
 		Quote proposta = obterProposta(propostaId);
-		if (proposta == null) return;
-	
+		if (proposta == null || proposta.Tipo__c != 'Novo') return;
+
 		ContratanteProposta__c contratante = obterContratante(proposta);
 		if (contratante == null) return;
-	
+
 		Decimal primeiraParcela = calcularPrimeiraParcela(contratante);
 		String codigoModalidade = obterCodigoModalidade(proposta);
 		Map<String, Object> jsonMap = criarJsonPix(proposta, contratante, primeiraParcela, codigoModalidade);
 		String retorno;
 
+		System.Debug('JSON ENVIADO--->'+jsonMap);
 		try{
 			retorno = SensediaServices.getInstance().montagemServicoSensedia(SensediaServices.VERB.POST, SensediaServices.DOMAIN.AWS_EXTERNO, SensediaServices.SOLICITACAO_PAGAMENTO_PIX, JSON.serialize(jsonMap));
 			if(retorno != 'Erro na requisição'){
+				System.Debug('RETORNO--->'+retorno);
 				IntegracaoAS.inserirHistoricoAS(new Set<Id>{proposta.Id});
 			}	
 		} catch(Exception ex){
 			System.debug('###### ERROR: (' + ex.getLineNumber() + '): ' + ex.getMessage() + ' st=' +ex.getStackTraceString());
 		}
-	
-		System.Debug(JSON.serialize(jsonMap));
+
 	}
 	
-	private static Quote obterProposta(String propostaId) {
-		List<Quote> propostas = [SELECT Id, NumeroPropostaUnico__c, Empresa__r.CodigoEmpresa__c, RamoSeguro__r.Codigo__c, Origem__c, NumeroProposta__c 
+	private static Quote obterProposta(Id propostaId) {
+		List<Quote> propostas = [SELECT Id, NumeroPropostaUnico__c, Empresa__r.CodigoEmpresa__c, RamoSeguro__r.Codigo__c, Origem__c, NumeroProposta__c, Tipo__c 
 								 FROM Quote 
-								 WHERE Id =: propostaId 
-								 LIMIT 1];
+								 WHERE Id =: propostaId];
 		return propostas.isEmpty() ? null : propostas[0];
 	}
 	

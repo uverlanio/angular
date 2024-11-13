@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ProdutoComercial</fullName>
+    <active>true</active>
+    <label>Produto comercial</label>
+    <picklistValues>
+        <picklist>TipoEmissao__c</picklist>
+        <values>
+            <fullName>Endosso</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Renovação</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Seguro Novo</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>tipo__c</fullName>
+    <externalId>false</externalId>
+    <label>Tipo</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Texto</fullName>
+                <default>false</default>
+                <label>Texto</label>
+            </value>
+            <value>
+                <fullName>Número inteiro</fullName>
+                <default>false</default>
+                <label>Número inteiro</label>
+            </value>
+            <value>
+                <fullName>Opções fixas</fullName>
+                <default>false</default>
+                <label>Opções fixas</label>
+            </value>
+            <value>
+                <fullName>Opções de servico</fullName>
+                <default>false</default>
+                <label>Opções de servico</label>
+            </value>
+            <value>
+                <fullName>CPF</fullName>
+                <default>false</default>
+                <label>CPF</label>
+            </value>
+            <value>
+                <fullName>CNPJ</fullName>
+                <default>false</default>
+                <label>CNPJ</label>
+            </value>
+            <value>
+                <fullName>Email</fullName>
+                <default>false</default>
+                <label>Email</label>
+            </value>
+            <value>
+                <fullName>CEP</fullName>
+                <default>false</default>
+                <label>CEP</label>
+            </value>
+            <value>
+                <fullName>Monetário</fullName>
+                <default>false</default>
+                <label>Monetário</label>
+            </value>
+            <value>
+                <fullName>Booleano</fullName>
+                <default>false</default>
+                <label>Booleano</label>
+            </value>
+            <value>
+                <fullName>DataCalendario</fullName>
+                <default>false</default>
+                <label>Data Calendario</label>
+            </value>
+            <value>
+                <fullName>Opção fixa painel</fullName>
+                <default>false</default>
+                <label>Opção fixa painel</label>
+            </value>
+            <value>
+                <fullName>Radiobutton</fullName>
+                <default>false</default>
+                <label>Radiobutton</label>
+            </value>
+            <value>
+                <fullName>Data</fullName>
+                <default>false</default>
+                <label>Data</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

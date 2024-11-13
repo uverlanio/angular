@@ -1123,5 +1123,4 @@ public class RecalculoPropostaControllerTest {
         Test.stopTest();
     }
     //FNPVVEP-146 FIM
-    
 }

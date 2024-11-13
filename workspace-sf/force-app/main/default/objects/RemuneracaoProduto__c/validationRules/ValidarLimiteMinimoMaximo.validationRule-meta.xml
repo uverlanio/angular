@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ValidarLimiteMinimoMaximo</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+    NOT(ISBLANK(LimiteMinimo__c)),
+    NOT(ISBLANK(LimiteMaximo__c)),
+    LimiteMinimo__c &gt; LimiteMaximo__c 
+)</errorConditionFormula>
+    <errorMessage>O limite mínimo deve ser inferior ao limite máximo</errorMessage>
+</ValidationRule>

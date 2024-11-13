@@ -5,7 +5,28 @@ public with sharing class PropostaGenericaBuilderTest{
     public static EmissaoTO.PayloadTO payloadTO; 
 
     @TestSetup
-    static void setup()     {        
+    static void setup()     { 
+        // -- ANNVI-229 -- INICIO
+        Questionario__c questionario1 = new Questionario__c (Name = 'Questionário1',
+        Descricao__c = 'Questionário1',
+        Codigo__c = 'QAR_COMPLETO', Status__c = 'Ativo');
+        insert questionario1;
+        
+        List<Pergunta__c> perguntas = new List<Pergunta__c>{
+             new Pergunta__c(Name = 'Pergunta1',Pergunta__c = 'Teste1',TipoResposta__c = 'Texto',Status__c = 'Ativo' ),
+             new Pergunta__c(Name = 'Pergunta2',Pergunta__c = 'Teste2',TipoResposta__c = 'Texto',Status__c = 'Ativo' ), 
+             new Pergunta__c(Name = 'Pergunta3',Pergunta__c = 'Teste3',TipoResposta__c = 'Texto',Status__c = 'Ativo' ) 
+        };
+        insert perguntas;
+         // Cria o questionário de teste com perguntas obrigatórias e números de sequência
+        List<PerguntaQuestionario__c> questoes = new List<PerguntaQuestionario__c>{
+            new PerguntaQuestionario__c(Numero__c = 1, Obrigatorio__c = true, Questionario__r = new Questionario__c(Codigo__c = questionario1.Codigo__c	), Pergunta__c = perguntas[0].Id ),
+            new PerguntaQuestionario__c(Numero__c = 2, Obrigatorio__c = true, Questionario__r = new Questionario__c(Codigo__c = questionario1.Codigo__c) , Pergunta__c = perguntas[1].Id),
+            new PerguntaQuestionario__c(Numero__c = 3, Obrigatorio__c = true, Questionario__r = new Questionario__c(Codigo__c = questionario1.Codigo__c) , Pergunta__c = perguntas[2].Id)
+        };
+        insert questoes;
+        // -- ANNVI-229 -- FIM
+        
         // PLV-3667 - INICIO    
         insert new ContadorCodigo__c(Name='ProdutoTecnico', Numero__c = 0);
         insert new ContadorCodigo__c(Name='ProdutoComercial', Numero__c = 0);
@@ -1858,6 +1879,28 @@ public with sharing class PropostaGenericaBuilderTest{
         Test.stopTest();
         
     }
-
-    //ANNVI-48 - FIM        
+    // ANNVI-48 - FIM          
+     
+     // -- ANNVI-229 -- INICIO -- //
+     
+    @isTest
+    static void testValidarQuestionarioTodasRespostasPreenchidas() {
+       
+        String jsonString = '{"idquestionario": "QAR_COMPLETO", "respostas": ['
+            + '{ "questao": "1", "resposta": "90" },'
+            + '{ "questao": "2", "resposta": "1.80" },'
+            + '{ "questao": "3", "resposta": "Sim" }'
+            + ']}';
+        PropostaGenericaBuilder proposta = new PropostaGenericaBuilder();
+        EmissaoTO.QuestionarioTO questionario = (EmissaoTO.QuestionarioTO) JSON.deserialize(jsonString, EmissaoTO.QuestionarioTO.class);
+        try {
+        proposta.validarQuestionario(questionario);
+        
+        System.assert(true, 'Nenhuma exceção deve ser lançada para todas as respostas obrigatórias preenchidas.');
+        } catch (Exception e) {
+            
+            System.assert(false, 'Não deve ser lançada nenhuma exceção: ' + e.getMessage());
+        }
+    }
+    // -- ANNVI-229 -- FIM -- //
 }

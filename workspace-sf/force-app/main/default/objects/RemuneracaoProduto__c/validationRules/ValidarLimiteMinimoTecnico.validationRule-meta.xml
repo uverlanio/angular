@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ValidarLimiteMinimoTecnico</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+    $Profile.Name &lt;&gt; &apos;Administrador do sistema&apos;,
+    NOT(ISBLANK(LimiteMinimo__c)),
+    LimiteMinimo__c &lt; RemuneracaoProduto__r.LimiteMinimo__c 
+)</errorConditionFormula>
+    <errorDisplayField>LimiteMinimo__c</errorDisplayField>
+    <errorMessage>O limite mínimo deve respeitar o limite cadastrado no produto técnico</errorMessage>
+</ValidationRule>

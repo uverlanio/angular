@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>RV004_FasePagamentoXFaseCaso</fullName>
+    <active>false</active>
+    <errorConditionFormula>AND(
+  ISCHANGED(Fase__c),
+  OR(
+    ISPICKVAL(Fase__c, &apos;Em Análise&apos;),
+    ISPICKVAL(Fase__c, &apos;Fechado&apos;)
+  ),
+  ISPICKVAL(Caso__r.Status , &apos;Avisar&apos;) 
+)</errorConditionFormula>
+    <errorDisplayField>Fase__c</errorDisplayField>
+    <errorMessage>Você só pode alterar a fase do Pagamento para &apos;Em Análise&apos; ou &apos;Fechado&apos; se a fase do Caso for diferente de &apos;Avisar&apos;.</errorMessage>
+</ValidationRule>

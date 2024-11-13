@@ -1,0 +1,1275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ProfissaoSAP__c</fullName>
+    <externalId>false</externalId>
+    <label>Profissão do SAP</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>0952</fullName>
+                <default>false</default>
+                <label>ACOUGUEIRO</label>
+            </value>
+            <value>
+                <fullName>1047</fullName>
+                <default>false</default>
+                <label>ACUPUNTURISTA</label>
+            </value>
+            <value>
+                <fullName>0993</fullName>
+                <default>false</default>
+                <label>ADESTRADOR DE ANIMAIS</label>
+            </value>
+            <value>
+                <fullName>1050</fullName>
+                <default>false</default>
+                <label>ADMINISTRADOR HOSPITALAR</label>
+            </value>
+            <value>
+                <fullName>1051</fullName>
+                <default>false</default>
+                <label>ADMINISTRADOR OU FUNCIONÁRIO D</label>
+            </value>
+            <value>
+                <fullName>0131</fullName>
+                <default>false</default>
+                <label>ADVOGADO</label>
+            </value>
+            <value>
+                <fullName>0027</fullName>
+                <default>false</default>
+                <label>AEROMOÇA,  COMISSÁRIO  DE BORD</label>
+            </value>
+            <value>
+                <fullName>1054</fullName>
+                <default>false</default>
+                <label>AGENCIADOR, VENDEDOR, PRODUTOR</label>
+            </value>
+            <value>
+                <fullName>0405</fullName>
+                <default>false</default>
+                <label>AGENCIADOR DE PROPAGANDA, CONT</label>
+            </value>
+            <value>
+                <fullName>1057</fullName>
+                <default>false</default>
+                <label>AGENTE, VISTORIADOR DE CARGAS</label>
+            </value>
+            <value>
+                <fullName>0595</fullName>
+                <default>false</default>
+                <label>AGENTE DE SERVICOS FUNERARIOS</label>
+            </value>
+            <value>
+                <fullName>1055</fullName>
+                <default>false</default>
+                <label>AGENTE DE VETOR/SANITAR,  GUAR</label>
+            </value>
+            <value>
+                <fullName>0594</fullName>
+                <default>false</default>
+                <label>AGENTE DE VIAGEM E GUIA DE TUR</label>
+            </value>
+            <value>
+                <fullName>1056</fullName>
+                <default>false</default>
+                <label>AGENTE TRIBUTOS, ARRECADADOR</label>
+            </value>
+            <value>
+                <fullName>1059</fullName>
+                <default>false</default>
+                <label>AGRIMENSOR</label>
+            </value>
+            <value>
+                <fullName>0103</fullName>
+                <default>false</default>
+                <label>AGRONOMO,  ENGENHEIRO AGRÔNOMO</label>
+            </value>
+            <value>
+                <fullName>1060</fullName>
+                <default>false</default>
+                <label>AJUDANTE DE MOTORISTA, AJUDANT</label>
+            </value>
+            <value>
+                <fullName>1061</fullName>
+                <default>false</default>
+                <label>AJUDANTE GERAL , AJUD/AUX. DE</label>
+            </value>
+            <value>
+                <fullName>0591</fullName>
+                <default>false</default>
+                <label>ALFAIATE, COSTUREIRA, ESTILIST</label>
+            </value>
+            <value>
+                <fullName>1062</fullName>
+                <default>false</default>
+                <label>ALMOXARIFE, ESTOQUISTAS E ATIV</label>
+            </value>
+            <value>
+                <fullName>1069</fullName>
+                <default>false</default>
+                <label>ANALISTA/ ASSESSOR/ TÉCNICO D</label>
+            </value>
+            <value>
+                <fullName>1066</fullName>
+                <default>false</default>
+                <label>ANALISTA/ ASSISTENTE/ ASSESSOR</label>
+            </value>
+            <value>
+                <fullName>0392</fullName>
+                <default>false</default>
+                <label>ANALISTA/ ASSISTENTE FINANCEIR</label>
+            </value>
+            <value>
+                <fullName>1063</fullName>
+                <default>false</default>
+                <label>ANALISTA DE PRODUÇÃO,  ANALIST</label>
+            </value>
+            <value>
+                <fullName>0126</fullName>
+                <default>false</default>
+                <label>ANALISTA DE SISTEMAS</label>
+            </value>
+            <value>
+                <fullName>1064</fullName>
+                <default>false</default>
+                <label>ANALISTA DE TREINAMENTO</label>
+            </value>
+            <value>
+                <fullName>1065</fullName>
+                <default>false</default>
+                <label>ANALISTA SUPORTE TÉCNICO INFOR</label>
+            </value>
+            <value>
+                <fullName>0960</fullName>
+                <default>false</default>
+                <label>APOSENTADO (POR INVALIDEZ )</label>
+            </value>
+            <value>
+                <fullName>0963</fullName>
+                <default>false</default>
+                <label>APOSENTADO (POR TEMPO DE SERVI</label>
+            </value>
+            <value>
+                <fullName>0956</fullName>
+                <default>false</default>
+                <label>ARBITRO ESPORTIVO</label>
+            </value>
+            <value>
+                <fullName>1045</fullName>
+                <default>false</default>
+                <label>ARQUEÓLOGO</label>
+            </value>
+            <value>
+                <fullName>0102</fullName>
+                <default>false</default>
+                <label>ARQUITETO</label>
+            </value>
+            <value>
+                <fullName>1067</fullName>
+                <default>false</default>
+                <label>ARQUIVISTA</label>
+            </value>
+            <value>
+                <fullName>1068</fullName>
+                <default>false</default>
+                <label>ASCENSORISTA</label>
+            </value>
+            <value>
+                <fullName>1070</fullName>
+                <default>false</default>
+                <label>ASSESSOR/ASSISTENTE  PARLAMENT</label>
+            </value>
+            <value>
+                <fullName>0134</fullName>
+                <default>false</default>
+                <label>ASSISTENTE SOCIAL</label>
+            </value>
+            <value>
+                <fullName>0971</fullName>
+                <default>false</default>
+                <label>ASTROLOGO</label>
+            </value>
+            <value>
+                <fullName>0128</fullName>
+                <default>false</default>
+                <label>ASTRONOMO E METEOROLOGISTA</label>
+            </value>
+            <value>
+                <fullName>1073</fullName>
+                <default>false</default>
+                <label>ATENDENTE/AUXILIAR ESCOLAR, DE</label>
+            </value>
+            <value>
+                <fullName>1071</fullName>
+                <default>false</default>
+                <label>ATENDENTE DE GUICHÊ, BILHETEIR</label>
+            </value>
+            <value>
+                <fullName>1072</fullName>
+                <default>false</default>
+                <label>ATENDENTE EM HOSPITAIS, CONSUL</label>
+            </value>
+            <value>
+                <fullName>0954</fullName>
+                <default>false</default>
+                <label>ATIV. REMUNERADA PELA PRATICA (0954)</label>
+            </value>
+            <value>
+                <fullName>0955</fullName>
+                <default>false</default>
+                <label>ATIV. REMUNERADA PELA PRATICA (0955)</label>
+            </value>
+            <value>
+                <fullName>0162</fullName>
+                <default>false</default>
+                <label>ATOR E DIRETOR  DE ESPETACULOS</label>
+            </value>
+            <value>
+                <fullName>0122</fullName>
+                <default>false</default>
+                <label>ATUARIO, MATEMÁTICO,  ESTATÍST</label>
+            </value>
+            <value>
+                <fullName>1001</fullName>
+                <default>false</default>
+                <label>AUDITOR/FISCAL  FEDERAL, ESTAD</label>
+            </value>
+            <value>
+                <fullName>1020</fullName>
+                <default>false</default>
+                <label>AUDITOR (EMPRESAS)</label>
+            </value>
+            <value>
+                <fullName>0950</fullName>
+                <default>false</default>
+                <label>AUTONOMOS QUE NAO CONTRIBUAM P</label>
+            </value>
+            <value>
+                <fullName>0298</fullName>
+                <default>false</default>
+                <label>AUXILIAR/TÉCNICO NA AREA  SAÚD</label>
+            </value>
+            <value>
+                <fullName>0394</fullName>
+                <default>false</default>
+                <label>AUXILIAR DE ESCRITORIO</label>
+            </value>
+            <value>
+                <fullName>0395</fullName>
+                <default>false</default>
+                <label>BANCARIO</label>
+            </value>
+            <value>
+                <fullName>0135</fullName>
+                <default>false</default>
+                <label>BIBLIOTECARIO, MUSEÓLOGO E ATV</label>
+            </value>
+            <value>
+                <fullName>0116</fullName>
+                <default>false</default>
+                <label>BIOLOGO, GENETICISTA, FISIOLOG</label>
+            </value>
+            <value>
+                <fullName>1074</fullName>
+                <default>false</default>
+                <label>BIOMÉDICO</label>
+            </value>
+            <value>
+                <fullName>1075</fullName>
+                <default>false</default>
+                <label>BIOQUIMICO</label>
+            </value>
+            <value>
+                <fullName>0931</fullName>
+                <default>false</default>
+                <label>BOLSISTA, ESTAGIARIO, TRAINEE</label>
+            </value>
+            <value>
+                <fullName>0544</fullName>
+                <default>false</default>
+                <label>BOMBEIRO</label>
+            </value>
+            <value>
+                <fullName>1076</fullName>
+                <default>false</default>
+                <label>BORRACHEIRO, BICICLETEIRO</label>
+            </value>
+            <value>
+                <fullName>0511</fullName>
+                <default>false</default>
+                <label>CABELEIREIRO, BARBEIRO, MANICU</label>
+            </value>
+            <value>
+                <fullName>0163</fullName>
+                <default>false</default>
+                <label>CANTOR, COMPOSITOR</label>
+            </value>
+            <value>
+                <fullName>0959</fullName>
+                <default>false</default>
+                <label>CARCEREIRO, AGENTE PENITENCIÁR</label>
+            </value>
+            <value>
+                <fullName>0597</fullName>
+                <default>false</default>
+                <label>CARREGADORES E EMBALADORES EM</label>
+            </value>
+            <value>
+                <fullName>0983</fullName>
+                <default>false</default>
+                <label>CARTEIRO</label>
+            </value>
+            <value>
+                <fullName>1077</fullName>
+                <default>false</default>
+                <label>CARTÓGRAFO</label>
+            </value>
+            <value>
+                <fullName>1078</fullName>
+                <default>false</default>
+                <label>CERAMISTA, TELHADISTA (FABRICA</label>
+            </value>
+            <value>
+                <fullName>0977</fullName>
+                <default>false</default>
+                <label>CHAVEIRO</label>
+            </value>
+            <value>
+                <fullName>1079</fullName>
+                <default>false</default>
+                <label>CINEASTA</label>
+            </value>
+            <value>
+                <fullName>1043</fullName>
+                <default>false</default>
+                <label>COBRADOR DE ONIBUS E DEMAIS TR</label>
+            </value>
+            <value>
+                <fullName>0991</fullName>
+                <default>false</default>
+                <label>COLOCADOR DE GESSO,  MARMORIST</label>
+            </value>
+            <value>
+                <fullName>1080</fullName>
+                <default>false</default>
+                <label>COLOCADOR DE LUMINOSOS, OUTDOO</label>
+            </value>
+            <value>
+                <fullName>0181</fullName>
+                <default>false</default>
+                <label>COMANDANTE/ PILOTO DE AERONAVE</label>
+            </value>
+            <value>
+                <fullName>0499</fullName>
+                <default>false</default>
+                <label>COMERCIÁRIO-BALCONISTA,CAIXA,V</label>
+            </value>
+            <value>
+                <fullName>1081</fullName>
+                <default>false</default>
+                <label>COMPRADOR - ANIMAIS/PROD AGRÍC</label>
+            </value>
+            <value>
+                <fullName>1082</fullName>
+                <default>false</default>
+                <label>COMPRADOR - INDÚSTRIA, SERVIÇO</label>
+            </value>
+            <value>
+                <fullName>0136</fullName>
+                <default>false</default>
+                <label>COMUNICOLOGO</label>
+            </value>
+            <value>
+                <fullName>0995</fullName>
+                <default>false</default>
+                <label>CONFERENTE (PORTUARIO)</label>
+            </value>
+            <value>
+                <fullName>1085</fullName>
+                <default>false</default>
+                <label>CONSULTOR(A), VENDEDOR(A) DE C</label>
+            </value>
+            <value>
+                <fullName>0972</fullName>
+                <default>false</default>
+                <label>CONSULTOR ADMINISTRATIVO, CONT</label>
+            </value>
+            <value>
+                <fullName>1083</fullName>
+                <default>false</default>
+                <label>CONSULTOR DE INFORMÁTICA/SISTE</label>
+            </value>
+            <value>
+                <fullName>1084</fullName>
+                <default>false</default>
+                <label>CONSULTOR JURÍDICO</label>
+            </value>
+            <value>
+                <fullName>0124</fullName>
+                <default>false</default>
+                <label>CONTADOR, ANALISTA CONTÁBIL (E</label>
+            </value>
+            <value>
+                <fullName>0391</fullName>
+                <default>false</default>
+                <label>COORDENADOR/ CHEFE/ SUPERVISOR</label>
+            </value>
+            <value>
+                <fullName>1087</fullName>
+                <default>false</default>
+                <label>COORDENADOR/ SUPERVISOR EM EMP</label>
+            </value>
+            <value>
+                <fullName>1086</fullName>
+                <default>false</default>
+                <label>COORDENADOR DE VÔO, TECNICO TR</label>
+            </value>
+            <value>
+                <fullName>0165</fullName>
+                <default>false</default>
+                <label>COREOGRAFO,   BAILARINO, DANÇA</label>
+            </value>
+            <value>
+                <fullName>1088</fullName>
+                <default>false</default>
+                <label>CORRETOR BOLSA DE MERCADORIAS</label>
+            </value>
+            <value>
+                <fullName>0403</fullName>
+                <default>false</default>
+                <label>CORRETOR DE IMOVEIS,  TITULOS</label>
+            </value>
+            <value>
+                <fullName>1089</fullName>
+                <default>false</default>
+                <label>CORRETOR DE SEGUROS</label>
+            </value>
+            <value>
+                <fullName>1090</fullName>
+                <default>false</default>
+                <label>COVEIRO</label>
+            </value>
+            <value>
+                <fullName>0023</fullName>
+                <default>false</default>
+                <label>COZINHEIRA, MERENDEIRA,  DOCEI</label>
+            </value>
+            <value>
+                <fullName>1091</fullName>
+                <default>false</default>
+                <label>DATILOSCOPISTA,  PAPILOSCOPIST</label>
+            </value>
+            <value>
+                <fullName>0193</fullName>
+                <default>false</default>
+                <label>DECORADOR, PAISAGISTA, VITRINI</label>
+            </value>
+            <value>
+                <fullName>0214</fullName>
+                <default>false</default>
+                <label>DELEGADO DE POLICIA</label>
+            </value>
+            <value>
+                <fullName>0491</fullName>
+                <default>false</default>
+                <label>DEMONSTRADOR, DIVULGADOR, PROM</label>
+            </value>
+            <value>
+                <fullName>0105</fullName>
+                <default>false</default>
+                <label>DESENHISTA, PROJETISTA, DESIGN</label>
+            </value>
+            <value>
+                <fullName>1092</fullName>
+                <default>false</default>
+                <label>DESENHISTA ARTÍSTICO, DESENHIS</label>
+            </value>
+            <value>
+                <fullName>0593</fullName>
+                <default>false</default>
+                <label>DESPACHANTE ( INCLUSIVE O ADUA</label>
+            </value>
+            <value>
+                <fullName>1093</fullName>
+                <default>false</default>
+                <label>DETETIVE, INVESTIGADOR PARTICU</label>
+            </value>
+            <value>
+                <fullName>0981</fullName>
+                <default>false</default>
+                <label>DIGITADOR</label>
+            </value>
+            <value>
+                <fullName>0012</fullName>
+                <default>false</default>
+                <label>DIRETOR, CONTROLLER, SUPERINTE</label>
+            </value>
+            <value>
+                <fullName>1094</fullName>
+                <default>false</default>
+                <label>DIRIGENTE PARTIDÁRIO,  SINDICA</label>
+            </value>
+            <value>
+                <fullName>1095</fullName>
+                <default>false</default>
+                <label>DJ, SONOPLASTA, OPERADOR  DE S</label>
+            </value>
+            <value>
+                <fullName>0965</fullName>
+                <default>false</default>
+                <label>DO LAR</label>
+            </value>
+            <value>
+                <fullName>0121</fullName>
+                <default>false</default>
+                <label>ECONOMISTA</label>
+            </value>
+            <value>
+                <fullName>1097</fullName>
+                <default>false</default>
+                <label>EDITOR DE LIVROS</label>
+            </value>
+            <value>
+                <fullName>0994</fullName>
+                <default>false</default>
+                <label>ELETRICISTAS EM GERAL</label>
+            </value>
+            <value>
+                <fullName>0212</fullName>
+                <default>false</default>
+                <label>EMBAIXADOR, DIPLOMATA, CONSUL,</label>
+            </value>
+            <value>
+                <fullName>0598</fullName>
+                <default>false</default>
+                <label>EMPREG DOMESTICO(DIARISTA,BABA</label>
+            </value>
+            <value>
+                <fullName>1106</fullName>
+                <default>false</default>
+                <label>EMPRESÁRIO, PROPRIET DE LOJAS</label>
+            </value>
+            <value>
+                <fullName>1104</fullName>
+                <default>false</default>
+                <label>EMPRESÁRIO, PROPRIET  EMPR IMP</label>
+            </value>
+            <value>
+                <fullName>1105</fullName>
+                <default>false</default>
+                <label>EMPRESÁRIO, PROPRIET ESTAB  ES</label>
+            </value>
+            <value>
+                <fullName>1107</fullName>
+                <default>false</default>
+                <label>EMPRESÁRIO, PROPRIET  PADARIA,</label>
+            </value>
+            <value>
+                <fullName>1101</fullName>
+                <default>false</default>
+                <label>EMPRESÁRIO/ PROPRIET  BANCA JO</label>
+            </value>
+            <value>
+                <fullName>1102</fullName>
+                <default>false</default>
+                <label>EMPRESÁRIO/ PROPRIET  EDITORA,</label>
+            </value>
+            <value>
+                <fullName>0901</fullName>
+                <default>false</default>
+                <label>EMPRESÁRIO/ PROPRIET  ESTAB AG</label>
+            </value>
+            <value>
+                <fullName>0902</fullName>
+                <default>false</default>
+                <label>EMPRESÁRIO/ PROPRIET ESTAB COM</label>
+            </value>
+            <value>
+                <fullName>0903</fullName>
+                <default>false</default>
+                <label>EMPRESÁRIO/ PROPRIET  ESTAB IN</label>
+            </value>
+            <value>
+                <fullName>0904</fullName>
+                <default>false</default>
+                <label>EMPRESÁRIO/ PROPRIET  HOTEL, M</label>
+            </value>
+            <value>
+                <fullName>1100</fullName>
+                <default>false</default>
+                <label>EMPRESÁRIO/ PROPRIET POSTO DE</label>
+            </value>
+            <value>
+                <fullName>1103</fullName>
+                <default>false</default>
+                <label>EMPRESÁRIO/ PROPRIET  TRANSPOR</label>
+            </value>
+            <value>
+                <fullName>1046</fullName>
+                <default>false</default>
+                <label>EMPRESÁRIO DA CONSTRUÇÃO CIVIL</label>
+            </value>
+            <value>
+                <fullName>0161</fullName>
+                <default>false</default>
+                <label>EMPRESARIO E PRODUTOR DE ESPET</label>
+            </value>
+            <value>
+                <fullName>1098</fullName>
+                <default>false</default>
+                <label>EMPRESÁRIO ESPORTIVO</label>
+            </value>
+            <value>
+                <fullName>1108</fullName>
+                <default>false</default>
+                <label>ENCANADOR OU INSTALADOR DE TUB</label>
+            </value>
+            <value>
+                <fullName>0113</fullName>
+                <default>false</default>
+                <label>ENFERMEIRO</label>
+            </value>
+            <value>
+                <fullName>0006</fullName>
+                <default>false</default>
+                <label>ENGENHEIRO DE MINAS</label>
+            </value>
+            <value>
+                <fullName>0101</fullName>
+                <default>false</default>
+                <label>ENGENHEIRO-EXCT FLORESTAL, MIN</label>
+            </value>
+            <value>
+                <fullName>1109</fullName>
+                <default>false</default>
+                <label>ENGENHEIRO FLORESTAL</label>
+            </value>
+            <value>
+                <fullName>0007</fullName>
+                <default>false</default>
+                <label>ENGENHEIRO NUCLEAR</label>
+            </value>
+            <value>
+                <fullName>0008</fullName>
+                <default>false</default>
+                <label>ENTREGADOR, MOTOBOY E ASSEMELH</label>
+            </value>
+            <value>
+                <fullName>1110</fullName>
+                <default>false</default>
+                <label>ESCRITOR, AUTOR DE LIVROS</label>
+            </value>
+            <value>
+                <fullName>0987</fullName>
+                <default>false</default>
+                <label>ESCRIVÃO POLICIAL/JUDICIAL</label>
+            </value>
+            <value>
+                <fullName>0191</fullName>
+                <default>false</default>
+                <label>ESCULTOR, PINTOR ARTIST, ARTIS</label>
+            </value>
+            <value>
+                <fullName>0393</fullName>
+                <default>false</default>
+                <label>ESTENOGRAFO, DATILOGRAFO, TAQU</label>
+            </value>
+            <value>
+                <fullName>1005</fullName>
+                <default>false</default>
+                <label>ESTETICISTA / MASSAGISTA / MAS</label>
+            </value>
+            <value>
+                <fullName>0939</fullName>
+                <default>false</default>
+                <label>ESTUDANTE</label>
+            </value>
+            <value>
+                <fullName>0117</fullName>
+                <default>false</default>
+                <label>FARMACEUTICO E ATVS AUXILIARES</label>
+            </value>
+            <value>
+                <fullName>0020</fullName>
+                <default>false</default>
+                <label>FAXINEIRA, ARRUMADEIRA, CAMARE</label>
+            </value>
+            <value>
+                <fullName>0413</fullName>
+                <default>false</default>
+                <label>FEIRANTE</label>
+            </value>
+            <value>
+                <fullName>1006</fullName>
+                <default>false</default>
+                <label>FERRAMENTEIRO</label>
+            </value>
+            <value>
+                <fullName>0989</fullName>
+                <default>false</default>
+                <label>FILOSOFO, SOCIOLOGO, HISTORIAD</label>
+            </value>
+            <value>
+                <fullName>1111</fullName>
+                <default>false</default>
+                <label>FISCAL/ SUPERVISOR/ MESTRE EM</label>
+            </value>
+            <value>
+                <fullName>0106</fullName>
+                <default>false</default>
+                <label>FISICO</label>
+            </value>
+            <value>
+                <fullName>1112</fullName>
+                <default>false</default>
+                <label>FISICO NUCLEAR</label>
+            </value>
+            <value>
+                <fullName>0114</fullName>
+                <default>false</default>
+                <label>FISIOTERAPEUTA E TERAPEUTA OCU</label>
+            </value>
+            <value>
+                <fullName>0118</fullName>
+                <default>false</default>
+                <label>FONOAUDIOLOGO</label>
+            </value>
+            <value>
+                <fullName>0975</fullName>
+                <default>false</default>
+                <label>FOTOGRAFO</label>
+            </value>
+            <value>
+                <fullName>0982</fullName>
+                <default>false</default>
+                <label>FRENTISTA E DEMAIS TRABALHADOR</label>
+            </value>
+            <value>
+                <fullName>0297</fullName>
+                <default>false</default>
+                <label>FUNCIONÁRIO/SERVIDOR  PÚBLICO</label>
+            </value>
+            <value>
+                <fullName>0540</fullName>
+                <default>false</default>
+                <label>FUNILEIRO</label>
+            </value>
+            <value>
+                <fullName>0501</fullName>
+                <default>false</default>
+                <label>GARAGISTA, MANOBRISTA</label>
+            </value>
+            <value>
+                <fullName>0024</fullName>
+                <default>false</default>
+                <label>GARÇON, MAITRE, BAR MAN  E ASS</label>
+            </value>
+            <value>
+                <fullName>0296</fullName>
+                <default>false</default>
+                <label>GARI, TRABALHADOR CONSERVAÇÃO</label>
+            </value>
+            <value>
+                <fullName>0605</fullName>
+                <default>false</default>
+                <label>GARIMPEIRO</label>
+            </value>
+            <value>
+                <fullName>0127</fullName>
+                <default>false</default>
+                <label>GEOGRAFO</label>
+            </value>
+            <value>
+                <fullName>0107</fullName>
+                <default>false</default>
+                <label>GEOLOGO</label>
+            </value>
+            <value>
+                <fullName>1052</fullName>
+                <default>false</default>
+                <label>GERENTE/ADMIN ESTAB COMERCIAL(</label>
+            </value>
+            <value>
+                <fullName>1048</fullName>
+                <default>false</default>
+                <label>GERENTE/ADMINISTRAD ESTAB AGRI</label>
+            </value>
+            <value>
+                <fullName>1049</fullName>
+                <default>false</default>
+                <label>GERENTE/ADMINISTRAD HOTEL,MOTE</label>
+            </value>
+            <value>
+                <fullName>1053</fullName>
+                <default>false</default>
+                <label>GERENTE/ADMINISTRAD PADARIAS,B</label>
+            </value>
+            <value>
+                <fullName>0303</fullName>
+                <default>false</default>
+                <label>GERENTE ADMINISTRATIVO</label>
+            </value>
+            <value>
+                <fullName>1113</fullName>
+                <default>false</default>
+                <label>GERENTE DE VENDAS, GERENTE COM</label>
+            </value>
+            <value>
+                <fullName>1114</fullName>
+                <default>false</default>
+                <label>INSPETOR/ VISITADOR NAVAL</label>
+            </value>
+            <value>
+                <fullName>0970</fullName>
+                <default>false</default>
+                <label>INSPETOR DE DUTOS</label>
+            </value>
+            <value>
+                <fullName>1115</fullName>
+                <default>false</default>
+                <label>INSTALADOR  DE GÁS, AGUA E ESG</label>
+            </value>
+            <value>
+                <fullName>1007</fullName>
+                <default>false</default>
+                <label>INSTALADOR DE PISOS, AZULEGIST</label>
+            </value>
+            <value>
+                <fullName>0951</fullName>
+                <default>false</default>
+                <label>INSTALADOR DE TV A CABO, CABIS</label>
+            </value>
+            <value>
+                <fullName>0974</fullName>
+                <default>false</default>
+                <label>INSTRUMENTADOR CIRURGICO</label>
+            </value>
+            <value>
+                <fullName>0985</fullName>
+                <default>false</default>
+                <label>INSTRUTOR DE AUTO ESCOLA</label>
+            </value>
+            <value>
+                <fullName>0717</fullName>
+                <default>false</default>
+                <label>JOALHEIRO, OURIVES, DESIGNER D</label>
+            </value>
+            <value>
+                <fullName>0412</fullName>
+                <default>false</default>
+                <label>JORNALEIRO</label>
+            </value>
+            <value>
+                <fullName>0171</fullName>
+                <default>false</default>
+                <label>JORNALISTA, REPORTER, ASSESSOR</label>
+            </value>
+            <value>
+                <fullName>0543</fullName>
+                <default>false</default>
+                <label>LANTERNEIRO E PINTOR DE VEICUL</label>
+            </value>
+            <value>
+                <fullName>0601</fullName>
+                <default>false</default>
+                <label>LAVRADOR, TRABALHADOR RURAL (</label>
+            </value>
+            <value>
+                <fullName>0404</fullName>
+                <default>false</default>
+                <label>LEILOEIRO, AVALIADOR,  INSPETO</label>
+            </value>
+            <value>
+                <fullName>0973</fullName>
+                <default>false</default>
+                <label>LEITURISTA DE AGUA,  LUZ E GÁS</label>
+            </value>
+            <value>
+                <fullName>0166</fullName>
+                <default>false</default>
+                <label>LOCUTOR, RADIALISTA, COMENTARI</label>
+            </value>
+            <value>
+                <fullName>0021</fullName>
+                <default>false</default>
+                <label>MAQUINISTA FERROVIÁRIO, FOGUIS</label>
+            </value>
+            <value>
+                <fullName>0414</fullName>
+                <default>false</default>
+                <label>MARCENEIRO, SERRALHEIRO, CARPI</label>
+            </value>
+            <value>
+                <fullName>0702</fullName>
+                <default>false</default>
+                <label>MECANICO MANUTENCAO,MONTADOR,P</label>
+            </value>
+            <value>
+                <fullName>0111</fullName>
+                <default>false</default>
+                <label>MEDICO</label>
+            </value>
+            <value>
+                <fullName>0170</fullName>
+                <default>false</default>
+                <label>MERGULHADOR</label>
+            </value>
+            <value>
+                <fullName>0921</fullName>
+                <default>false</default>
+                <label>MILITAR REFORMADO POR TEMPO DE</label>
+            </value>
+            <value>
+                <fullName>0205</fullName>
+                <default>false</default>
+                <label>MINISTRO DO STF, DESEMBARGADOR</label>
+            </value>
+            <value>
+                <fullName>0492</fullName>
+                <default>false</default>
+                <label>MODELO (MODA, FOTOGRÁFICO)</label>
+            </value>
+            <value>
+                <fullName>0958</fullName>
+                <default>false</default>
+                <label>MONITOR, INSTRUTOR DE MENORES</label>
+            </value>
+            <value>
+                <fullName>0009</fullName>
+                <default>false</default>
+                <label>MOTOQUEIRO</label>
+            </value>
+            <value>
+                <fullName>0532</fullName>
+                <default>false</default>
+                <label>MOTORISTA-TRANSP DE CARGA</label>
+            </value>
+            <value>
+                <fullName>0531</fullName>
+                <default>false</default>
+                <label>MOTORISTA-TRANSP DE PASSAGEIRO</label>
+            </value>
+            <value>
+                <fullName>0164</fullName>
+                <default>false</default>
+                <label>MUSICO, MAESTRO, PROF MÚSICA,</label>
+            </value>
+            <value>
+                <fullName>1044</fullName>
+                <default>false</default>
+                <label>NUTRICIONISTA E ASSISTENTE DE</label>
+            </value>
+            <value>
+                <fullName>1013</fullName>
+                <default>false</default>
+                <label>OFFICE-BOY / CONTÍNUO</label>
+            </value>
+            <value>
+                <fullName>0216</fullName>
+                <default>false</default>
+                <label>OFICIAIS DO EXÉRCITO, MARINHA</label>
+            </value>
+            <value>
+                <fullName>0167</fullName>
+                <default>false</default>
+                <label>OPERADOR DE CAMERAS CINEMA E T</label>
+            </value>
+            <value>
+                <fullName>1096</fullName>
+                <default>false</default>
+                <label>OPERADOR DE  IMAGEM E DE VÍDEO</label>
+            </value>
+            <value>
+                <fullName>0976</fullName>
+                <default>false</default>
+                <label>OPERADOR DE PREGAO DA BOLSA DE</label>
+            </value>
+            <value>
+                <fullName>1000</fullName>
+                <default>false</default>
+                <label>OPERADOR DE TELEMARKETING</label>
+            </value>
+            <value>
+                <fullName>0996</fullName>
+                <default>false</default>
+                <label>OPERADOR MERCADO FINANCEIRO, F</label>
+            </value>
+            <value>
+                <fullName>0019</fullName>
+                <default>false</default>
+                <label>PADEIRO,  PANIFICADOR</label>
+            </value>
+            <value>
+                <fullName>0201</fullName>
+                <default>false</default>
+                <label>PARLAMENTARES: SENADORES, DEPU</label>
+            </value>
+            <value>
+                <fullName>0992</fullName>
+                <default>false</default>
+                <label>PEAO DE RODEIO</label>
+            </value>
+            <value>
+                <fullName>1017</fullName>
+                <default>false</default>
+                <label>PEDAGOGO, ORIENTADOR/COORDENAD</label>
+            </value>
+            <value>
+                <fullName>0013</fullName>
+                <default>false</default>
+                <label>PEDREIRO E DEMAIS TRABS BRAÇAI</label>
+            </value>
+            <value>
+                <fullName>0924</fullName>
+                <default>false</default>
+                <label>PENSIONISTA</label>
+            </value>
+            <value>
+                <fullName>0025</fullName>
+                <default>false</default>
+                <label>PILOTO AUTOMOBILÍSTICO</label>
+            </value>
+            <value>
+                <fullName>0964</fullName>
+                <default>false</default>
+                <label>PINTOR (COM EQUIPAMENTOS DE SE</label>
+            </value>
+            <value>
+                <fullName>0957</fullName>
+                <default>false</default>
+                <label>PINTOR (SEM EQUIPAMENTOS DE SE</label>
+            </value>
+            <value>
+                <fullName>0603</fullName>
+                <default>false</default>
+                <label>POLICIAL,AGENTE FLORESTAL, AMB</label>
+            </value>
+            <value>
+                <fullName>0003</fullName>
+                <default>false</default>
+                <label>POLICIAL CIVIL, MILITAR E  INV</label>
+            </value>
+            <value>
+                <fullName>0202</fullName>
+                <default>false</default>
+                <label>PRESIDENTE DA REPUBLICA, GOVER</label>
+            </value>
+            <value>
+                <fullName>0953</fullName>
+                <default>false</default>
+                <label>PROFESSOR EDUC FISICA/ESPORTES</label>
+            </value>
+            <value>
+                <fullName>0143</fullName>
+                <default>false</default>
+                <label>PROFESSOR ENSINO FUNDAM, MÉDIO</label>
+            </value>
+            <value>
+                <fullName>0010</fullName>
+                <default>false</default>
+                <label>PROGRAMADOR, TÉCNICO, TECNÓLOG</label>
+            </value>
+            <value>
+                <fullName>0905</fullName>
+                <default>false</default>
+                <label>PROPRIETARIO DE MICROEMPRESA</label>
+            </value>
+            <value>
+                <fullName>0592</fullName>
+                <default>false</default>
+                <label>PROTETICO, TÉCNICOS E AUXILIAR</label>
+            </value>
+            <value>
+                <fullName>0132</fullName>
+                <default>false</default>
+                <label>PSICOLOGO , PSICOTERAPEUTA, PS</label>
+            </value>
+            <value>
+                <fullName>0172</fullName>
+                <default>false</default>
+                <label>PUBLICITARIO,  PROPAGANDISTA</label>
+            </value>
+            <value>
+                <fullName>0104</fullName>
+                <default>false</default>
+                <label>QUIMICO</label>
+            </value>
+            <value>
+                <fullName>1029</fullName>
+                <default>false</default>
+                <label>RECEPCIONISTA</label>
+            </value>
+            <value>
+                <fullName>0137</fullName>
+                <default>false</default>
+                <label>RELACOES PUBLICAS</label>
+            </value>
+            <value>
+                <fullName>0910</fullName>
+                <default>false</default>
+                <label>SACERDOTE, PASTOR,  MEMBRO ORD</label>
+            </value>
+            <value>
+                <fullName>0017</fullName>
+                <default>false</default>
+                <label>SECRETÁRIA (O), TÉCNICA(O) EM</label>
+            </value>
+            <value>
+                <fullName>0396</fullName>
+                <default>false</default>
+                <label>SECURITARIO</label>
+            </value>
+            <value>
+                <fullName>0986</fullName>
+                <default>false</default>
+                <label>SINDICANTE/INVESTIGADOR EM  SE</label>
+            </value>
+            <value>
+                <fullName>0980</fullName>
+                <default>false</default>
+                <label>SOLDADOR,CHAPEADOR,CALDEREIRO,</label>
+            </value>
+            <value>
+                <fullName>0294</fullName>
+                <default>false</default>
+                <label>TABELIAO, OFICIAIS DE REGISTRO</label>
+            </value>
+            <value>
+                <fullName>0979</fullName>
+                <default>false</default>
+                <label>TAPECEIRO, TECELÃO (MÓVEIS E D</label>
+            </value>
+            <value>
+                <fullName>0157</fullName>
+                <default>false</default>
+                <label>TECNICO, AUXILIAR LABORATORIO/</label>
+            </value>
+            <value>
+                <fullName>0155</fullName>
+                <default>false</default>
+                <label>TÉCNICO, TECNOLOGO EM MECANICA</label>
+            </value>
+            <value>
+                <fullName>0154</fullName>
+                <default>false</default>
+                <label>TÉCNICO, TECNOLOGO EM QUIMICA</label>
+            </value>
+            <value>
+                <fullName>1058</fullName>
+                <default>false</default>
+                <label>TÉCNICO/AGENTE  EM TELECOMUNIC</label>
+            </value>
+            <value>
+                <fullName>0596</fullName>
+                <default>false</default>
+                <label>TÉCNICO/AUXILIAR EM RADIOLOGIA</label>
+            </value>
+            <value>
+                <fullName>0998</fullName>
+                <default>false</default>
+                <label>TÉCNICO/ INSTALADOR  DE AR CON</label>
+            </value>
+            <value>
+                <fullName>1033</fullName>
+                <default>false</default>
+                <label>TÉCNICO/TECNOLOGO EM EDIFICAÇÕ</label>
+            </value>
+            <value>
+                <fullName>0151</fullName>
+                <default>false</default>
+                <label>TECNICO EM  CONTABILIDADE OU</label>
+            </value>
+            <value>
+                <fullName>0156</fullName>
+                <default>false</default>
+                <label>TECNICO EM ELETRONICA, ELETROT</label>
+            </value>
+            <value>
+                <fullName>0711</fullName>
+                <default>false</default>
+                <label>TRABALHADOR DA INDÚSTRIA GRAFI</label>
+            </value>
+            <value>
+                <fullName>0604</fullName>
+                <default>false</default>
+                <label>TRABALHADOR DA PESCA</label>
+            </value>
+            <value>
+                <fullName>0716</fullName>
+                <default>false</default>
+                <label>TRABALHADOR FABR PRODTS BORRAC</label>
+            </value>
+            <value>
+                <fullName>0712</fullName>
+                <default>false</default>
+                <label>TRABALHADOR FABR PRODTS TEXTEI</label>
+            </value>
+            <value>
+                <fullName>0706</fullName>
+                <default>false</default>
+                <label>TRABALHADOR  IND  TRATAMENTO D</label>
+            </value>
+            <value>
+                <fullName>0707</fullName>
+                <default>false</default>
+                <label>TRABALHADOR METALURGICO OU SID</label>
+            </value>
+            <value>
+                <fullName>0710</fullName>
+                <default>false</default>
+                <label>TRABALHADOR NA FABRICAÇÃO DE</label>
+            </value>
+            <value>
+                <fullName>0714</fullName>
+                <default>false</default>
+                <label>TRABALHADOR  NA FABRICACAO DE</label>
+            </value>
+            <value>
+                <fullName>0984</fullName>
+                <default>false</default>
+                <label>TRIPULANTES DE EMBARCAÇOES</label>
+            </value>
+            <value>
+                <fullName>0018</fullName>
+                <default>false</default>
+                <label>VENDEDOR</label>
+            </value>
+            <value>
+                <fullName>0402</fullName>
+                <default>false</default>
+                <label>VENDEDOR,  REPRESENTANTE COMER</label>
+            </value>
+            <value>
+                <fullName>0112</fullName>
+                <default>false</default>
+                <label>VETERINARIO E ZOOTECNISTA</label>
+            </value>
+            <value>
+                <fullName>0997</fullName>
+                <default>false</default>
+                <label>VIDRACEIRO</label>
+            </value>
+            <value>
+                <fullName>0988</fullName>
+                <default>false</default>
+                <label>VIGILANTE, VIGIA, GUARDA NOTUR</label>
+            </value>
+            <value>
+                <fullName>0966</fullName>
+                <default>false</default>
+                <label>WEB DESIGNER, ANALISTA/PROGRAM</label>
+            </value>
+            <value>
+                <fullName>0509</fullName>
+                <default>false</default>
+                <label>ZELADOR</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

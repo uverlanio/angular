@@ -1,0 +1,579 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>UptFormPagPropRen</name>
+        <label>UptFormPagPropRen</label>
+        <locationX>50</locationX>
+        <locationY>1008</locationY>
+        <actionName>UptFormPagPropRen</actionName>
+        <actionType>apex</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>IdPropostas</name>
+            <value>
+                <elementReference>Get_Proposta_da_critica.Id</elementReference>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <apiVersion>61.0</apiVersion>
+    <decisions>
+        <name>Critica_encontrada</name>
+        <label>Critica encontrada?</label>
+        <locationX>611</locationX>
+        <locationY>468</locationY>
+        <defaultConnectorLabel>Não encontrada</defaultConnectorLabel>
+        <rules>
+            <name>Encontrou_critica</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>getCriticaProposta</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Get_Proposta_da_critica</targetReference>
+            </connector>
+            <label>Encontrada</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Dias_com_falha_maior_ou_igual_a_17</name>
+        <label>Dias com falha maior ou igual a 17?</label>
+        <locationX>182</locationX>
+        <locationY>900</locationY>
+        <defaultConnector>
+            <targetReference>Atualiza_proposta</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Nao</defaultConnectorLabel>
+        <rules>
+            <name>Sim</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.DiasFalhaIntegracao__c</leftValueReference>
+                <operator>GreaterThanOrEqualTo</operator>
+                <rightValue>
+                    <numberValue>17.0</numberValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>UptFormPagPropRen</targetReference>
+            </connector>
+            <label>Sim</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Proposta_encontrada</name>
+        <label>Proposta encontrada?</label>
+        <locationX>380</locationX>
+        <locationY>792</locationY>
+        <defaultConnectorLabel>Não encontrada</defaultConnectorLabel>
+        <rules>
+            <name>Encontrada</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_Proposta_da_critica.Id</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Get_Proposta_da_critica.Status</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Em análise</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Dias_com_falha_maior_ou_igual_a_17</targetReference>
+            </connector>
+            <label>Encontrada</label>
+        </rules>
+    </decisions>
+    <description>Esse flow é reponsavel por fazer o repique da cobrança de renovação (FNPVVEP-127)</description>
+    <environments>Default</environments>
+    <formulas>
+        <name>IdConta</name>
+        <dataType>String</dataType>
+        <expression>{!Get_Proposta_da_critica.Opportunity.Account.Id}</expression>
+    </formulas>
+    <interviewLabel>Repique renovação {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Repique renovação</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <name>Get_Conta_Proposta</name>
+        <label>Get Conta Proposta</label>
+        <locationX>380</locationX>
+        <locationY>684</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Proposta_encontrada</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>IdConta</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Account</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>Get_Proposta_da_critica</name>
+        <label>Get Proposta da critica</label>
+        <locationX>380</locationX>
+        <locationY>576</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Get_Conta_Proposta</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>getCriticaProposta.Proposta__r.Id</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Quote</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>getCriticaProposta</name>
+        <label>Get Critica Proposta</label>
+        <locationX>611</locationX>
+        <locationY>360</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Critica_encontrada</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>OwnerId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>getGroup.Id</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>CriticaProposta__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>getGroup</name>
+        <label>Get Grupo</label>
+        <locationX>611</locationX>
+        <locationY>252</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>getCriticaProposta</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Type</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Queue</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>DeveloperName</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Fila_Renovacao</stringValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Group</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordUpdates>
+        <name>Atualiza_proposta</name>
+        <label>Atualiza proposta</label>
+        <locationX>314</locationX>
+        <locationY>1008</locationY>
+        <connector>
+            <targetReference>Liberar_critica_da_proposta</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>Get_Proposta_da_critica.Id</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>FaseStatus__c</field>
+            <value>
+                <stringValue>Palavra final</stringValue>
+            </value>
+        </inputAssignments>
+        <object>Quote</object>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Liberar_critica_da_proposta</name>
+        <label>Liberar critica da proposta</label>
+        <locationX>314</locationX>
+        <locationY>1116</locationY>
+        <inputAssignments>
+            <field>Status__c</field>
+            <value>
+                <stringValue>Liberado</stringValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>485</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>getGroup</targetReference>
+        </connector>
+        <filterLogic>(1 OR 2) AND 3</filterLogic>
+        <filters>
+            <field>Status__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Falha na Integração</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Status__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Pendenciado</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>MomentoAnalise__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Palavra final</stringValue>
+            </value>
+        </filters>
+        <object>CriticaProposta__c</object>
+        <schedule>
+            <frequency>Daily</frequency>
+            <startDate>2024-08-23</startDate>
+            <startTime>15:00:00.000Z</startTime>
+        </schedule>
+        <triggerType>Scheduled</triggerType>
+    </start>
+    <status>Active</status>
+    <textTemplates>
+        <name>CancelamentoAutomatico</name>
+        <isViewedAsPlainText>false</isViewedAsPlainText>
+        <text>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.01 Transitional//EN&quot; &quot;http://www.w3.org/TR/html4/loose.dtd&quot;&gt;
+&lt;html&gt;&lt;!--RegionStart[socialslot:&quot;allcontent&quot;]--&gt;
+  &lt;head&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot; /&gt;
+    &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=UTF-8&quot; /&gt;
+    &lt;style type=&quot;text/css&quot;&gt;
+      ReadMsgBody{ width: 100%;}
+      .ExternalClass {width: 100%;}
+      .ExternalClass, .ExternalClass p, .ExternalClass span, .ExternalClass font, .ExternalClass td, .ExternalClass div {line-height: 100%;}
+      body {-webkit-text-size-adjust:100%; -ms-text-size-adjust:100%;margin:0 !important;}
+      p { margin: 1em 0;}
+      table td { border-collapse: collapse;}
+      img {outline:0;}
+      a img {border:none;}
+      @-ms-viewport{ width: device-width;}
+    &lt;/style&gt;
+    &lt;style type=&quot;text/css&quot;&gt;
+      @media only screen and (max-width: 480px) {
+        .container {width: 100% !important;}
+        .footer { width:auto !important; margin-left:0; }
+        .mobile-hidden { display:none !important; }
+        .logo { display:block !important; padding:0 !important; }
+        img { max-width:100% !important; height:auto !important; max-height:auto !important;}
+        .header img{max-width:100% !important;height:auto !important; max-height:auto !important;}
+        .photo img { width:100% !important; max-width:100% !important; height:auto !important;}
+        .drop { display:block !important; width: 100% !important; float:left; clear:both;}
+        .footerlogo { display:block !important; width: 100% !important; padding-top:15px; float:left; clear:both;}
+        .nav4, .nav5, .nav6 { display: none !important; }
+        .tableBlock {width:100% !important;}
+        .responsive-td {width:100% !important; display:block !important; padding:0 !important; }
+        .fluid, .fluid-centered {
+          width: 100% !important;
+          max-width: 100% !important;
+          height: auto !important;
+          margin-left: auto !important;
+          margin-right: auto !important;
+        }
+        .fluid-centered {
+          margin-left: auto !important;
+          margin-right: auto !important;
+        }
+        /* MOBILE GLOBAL STYLES - DO NOT CHANGE */
+body, .tb_properties{font-family: Arial !important; font-size: 18px !important; color: #000000 !important; line-height: 1.5 !important; padding: 0px !important; }.buttonstyles{font-family: Arial, helvetica, sans-serif !important; font-size: 16px !important; color: #FFFFFF !important; padding: 10px !important; }h1{font-family: Arial !important; font-size: 24px !important; color: #202020 !important; line-height: 1 !important; }h2{font-family: Arial !important; font-size: 20px !important; color: #202020 !important; line-height: 1 !important; }h3{font-family: Arial !important; font-size: 18px !important; color: #202020 !important; line-height: 1 !important; }a:not(.buttonstyles){line-height: 1 !important; }.mobile-hidden{display: none !important; }.responsive-td {width: 100% !important; display: block !important; padding: 0 !important;}
+/* END OF MOBILE GLOBAL STYLES - DO NOT CHANGE */
+      }
+      @media only screen and (max-width: 640px) {
+        .container { width:100% !important; }
+        .mobile-hidden { display:none !important; }
+        .logo { display:block !important; padding:0 !important; }
+        .photo img { width:100% !important; height:auto !important;}
+        .nav5, .nav6 { display: none !important;}
+        .fluid, .fluid-centered {
+          width: 100% !important;
+          max-width: 100% !important;
+          height: auto !important;
+          margin-left: auto !important;
+          margin-right: auto !important;
+        }
+        .fluid-centered {
+          margin-left: auto !important;
+          margin-right: auto !important;
+        }
+      }
+    &lt;/style&gt;
+    &lt;!--[if mso]&gt;
+      &lt;style type=&quot;text/css&quot;&gt;
+          /* Begin Outlook Font Fix */
+              body, table, td {
+                 font-family : Arial, helvetica, sans-serif;
+                 line-height : 115%;
+                 font-size : 16px;
+                 color : #000000;
+              }
+          /* End Outlook Font Fix */
+      &lt;/style&gt;
+    &lt;![endif]--&gt;
+  &lt;!-- start:processor:head --&gt;&lt;!-- start:processor:body:head --&gt;&lt;style&gt;body{background:#fff0}.a11yHidden{max-height:0;overflow:hidden;opacity:0}table.mso{border-collapse:collapse;padding:0;table-layout:fixed}.sc-box-sizing{display:inherit}&lt;/style&gt;&lt;style&gt;
+u + .body .ie-form{display:block!important}@media screen and (max-width:801px) and (min-width:800px) and (orientation: landscape) and (min-device-width: 801px){u + .body .ie-form{display:none!important} }noinput{display:inline!important}.ie-radio-check{display:inline-block;opacity:0;width:0;height:0;margin:0;margin:0 0 0 -9999px;float:left;position:absolute;-webkit-appearance:none}#MessageWebViewDiv .ie-radio-check{display:block}
+.ie-radio-check:focus + .ie-btn-wrap .ie-btn,.ie-radio-check:focus + .ie-btn,.ie-radio-check:focus + .ie-frm-btn,.ie-rating-group .ie-radio-check:focus + .ie-btn,.ie-rating-default:focus + .ie-input-group .ie-rating-group &gt; label &gt; .ie-btn-wrap .ie-btn{outline:Highlight auto 2px;outline:-webkit-focus-ring-color auto 5px}.ie-btn-wrap,.ie-frm-btn,select,.ie-dropdown-i{cursor:pointer}.ie-frm-btni{-webkit-appearance:none;appearance:none;border:none;background:none;padding:0;border-radius:0}
+*.ie-input-wraper{display:block}*.ie-label{display:block}.ie-b-label,.ie-btn,.ie-gmail-btn-wrap{display:inline-block;vertical-align:middle;word-wrap:normal}.ie-b-label-box{width:100%;vertical-align:middle}.ie-frm-btn{display:inline-block;text-align:center;font:inherit}*.sc-text-caerva8-ic-required{color:#ff0000;font-weight:bold;display:inline-block}u + .body .ie-frm-btni{font:inherit;color:inherit;opacity:1;width:auto;height:auto;float:none}u + .body .ie-frm-btn{display:none}
+u + .body .ie-frm-btni-caerva8-ic-submit,*.ie-frm-btn-caerva8-ic-submit{width:auto;margin:15px 0px;padding:5px 10px;color:#ffffff;text-decoration:none;background:#309ddd}u + .body .ie-frm-btni{background-image:linear-gradient(transparent,transparent)}
+&lt;/style&gt;&lt;style&gt;&lt;/style&gt;&lt;style&gt;
+#interactive:checked+#rebel .ie-form{display:block!important}@media screen and (max-width: 800px){.&amp; #interactive:checked+#rebel .ie-form{display:none!important} }#MessageWebViewDiv #rebel#rebel .ie-form,.edo-email-view #rebel#rebel .ie-form,.edo #rebel#rebel .ie-form,#msgBody #rebel#rebel .ie-form,.netease_mail_readhtml #interactive:checked+#rebel .ie-form,.c17637 #interactive:checked+#rebel .ie-form{display:none!important}@media (hover: hover) and (pointer: fine){
+_:-webkit-full-screen,_::-webkit-full-page-media,_:future,:root .body:not(.Singleton) #rebel#rebel .ie-form{display:none!important} }
+&lt;/style&gt;&lt;noscript&gt; &lt;style&gt;#interactive:checked+#rebel .ie-form{display:none!important}#interactive:checked+#rebel .ie-formFallback{display:block!important}&lt;/style&gt; &lt;/noscript&gt;&lt;!-- end:processor:body:head --&gt;&lt;!-- end:processor:head --&gt;&lt;/head&gt;
+  &lt;body bgcolor=&quot;#EFF4EF&quot; text=&quot;#000000&quot; style=&quot;-webkit-text-size-adjust:none;background-color : #EFF4EF; font-family : Arial, helvetica, sans-serif; line-height : 115%; font-size : 16px; color : #000000; padding : 0px; &quot; class=&quot;body&quot;&gt;&lt;!-- start:processor:prepend --&gt;&lt;!-- start:processor:body:prepend --&gt;&lt;!--[if mso]&gt;&lt;!--&gt;&lt;input type=&quot;radio&quot; name=&quot;limited&quot; id=&quot;interactive&quot; style=&quot;display:none;mso-hide:all;&quot; checked&gt;&lt;!--&lt;![endif]--&gt;&lt;div id=&quot;rebel&quot;&gt;&lt;!-- end:processor:body:prepend --&gt;&lt;!-- end:processor:prepend --&gt;
+    &lt;div style=&quot;font-size:0; line-height:0;&quot;&gt;&lt;custom name=&quot;opencounter&quot; type=&quot;tracking&quot;&gt;&lt;custom name=&quot;usermatch&quot; type=&quot;tracking&quot; /&gt;&lt;/div&gt;
+    &lt;table width=&quot;100%&quot; border=&quot;0&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; align=&quot;center&quot;&gt;
+      &lt;tr&gt;
+        &lt;td align=&quot;center&quot; valign=&quot;top&quot;&gt;
+          &lt;custom type=&quot;header&quot;/&gt;
+        &lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td align=&quot;center&quot;&gt;
+          &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;600&quot; class=&quot;container&quot; align=&quot;center&quot;&gt;
+            &lt;tr&gt;
+              &lt;td&gt;
+                &lt;table class=&quot;tb_properties border_style&quot; style=&quot;background-color : #FFFFFF; border : 0px solid transparent;font-size : 16px; font-family : Arial, helvetica, sans-serif; line-height : 115%; color : #000000; &quot; cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; bgcolor=&quot;#FFFFFF&quot; width=&quot;100%&quot;&gt;
+                  &lt;tr&gt;
+                    &lt;td align=&quot;center&quot; valign=&quot;top&quot;&gt;
+                      &lt;table align=&quot;left&quot; border=&quot;0&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; width=&quot;100%&quot;&gt;
+                        &lt;tr&gt;
+                          &lt;!-- added padding here --&gt;
+                          &lt;td class=&quot;content_padding&quot; style=&quot;padding : 0px; &quot;&gt;
+                            &lt;!-- end of comment --&gt;
+                            &lt;table border=&quot;0&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; width=&quot;100%&quot;&gt;
+                              &lt;tr&gt; &lt;!-- top slot --&gt;
+                                &lt;td align=&quot;center&quot; class=&quot;header&quot; valign=&quot;top&quot;&gt;
+                                  &lt;table align=&quot;left&quot; border=&quot;0&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; width=&quot;100%&quot;&gt;
+                                    &lt;tbody&gt;
+                                        &lt;tr&gt;
+                                          &lt;td align=&quot;left&quot; valign=&quot;top&quot;&gt;
+                                            &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; style=&quot;width:100%&quot;&gt;
+                                              &lt;tbody&gt;
+                                              &lt;tr&gt;
+                                                &lt;td class=&quot;responsive-td&quot; valign=&quot;top&quot; style=&quot;width: 100%;&quot;&gt;
+                                                  &lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; width=&quot;100%&quot; role=&quot;presentation&quot; style=&quot;background-color: #FFFFFF; border: 0px solid transparent; min-width: 100%; &quot; class=&quot;slot-styling&quot;&gt;&lt;tr&gt;&lt;td style=&quot;padding: 0px; &quot; class=&quot;slot-styling camarker-inner&quot;&gt;&lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; width=&quot;100%&quot; role=&quot;presentation&quot; class=&quot;stylingblock-content-wrapper&quot; style=&quot;min-width: 100%; &quot;&gt;&lt;tr&gt;&lt;td class=&quot;stylingblock-content-margin-cell&quot; style=&quot;padding: 0px 30px; &quot;&gt;&lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; width=&quot;100%&quot; role=&quot;presentation&quot; style=&quot;background-color: transparent; min-width: 100%; &quot; class=&quot;stylingblock-content-wrapper&quot;&gt;&lt;tr&gt;&lt;td style=&quot;padding: 0px; &quot; class=&quot;stylingblock-content-wrapper camarker-inner&quot;&gt;&lt;table width=&quot;100%&quot; cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; role=&quot;presentation&quot;&gt;&lt;tr&gt;&lt;td align=&quot;center&quot;&gt;&lt;img data-assetid=&quot;49189&quot; src=&quot;https://image.novidades.portoseguro.com.br/lib/fe3a117371640478741473/m/1/77a99b42-261a-45f1-8727-506e6f0bd3d3.png&quot; alt=&quot;Porto Seguro: Cancelamento Seguro de Vida da Porto&quot; width=&quot;600&quot; style=&quot;display: block; padding: 0px; text-align: center; height: auto; width: 100%; border: 0px;&quot;&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; width=&quot;100%&quot; role=&quot;presentation&quot; style=&quot;background-color: transparent; min-width: 100%; &quot; class=&quot;stylingblock-content-wrapper&quot;&gt;&lt;tr&gt;&lt;td style=&quot;padding: 30px; &quot; class=&quot;stylingblock-content-wrapper camarker-inner&quot;&gt;&lt;table role=&quot;presentation&quot; style=&quot;color:#000000; font-family:&amp;quot;Open Sans&amp;quot;, sans-serif; font-size:medium; font-style:normal; font-variant-ligatures:normal; font-weight:400; text-align:start; white-space:normal; background-color:#ffffff; text-decoration-thickness:initial; text-decoration-style:initial; text-decoration-color:initial; border-collapse:collapse; border-spacing:0px&quot;&gt;
+ 
+  &lt;tr&gt;
+   &lt;td align=&quot;left&quot; style=&quot;background-color:#ffffff&quot;&gt;
+    &lt;font style=&quot;font-size:18px&quot;&gt;Ol&amp;aacute;,&amp;nbsp; &lt;/font&gt;&lt;b&gt;{!Get_Conta_Proposta.Name}&lt;/b&gt;&lt;br&gt;
+    &lt;br&gt;
+    O pagamento do seu &lt;span style=&quot;color:#00a1fc;&quot;&gt;&lt;b&gt;Seguro de Vida da Porto&lt;/b&gt;&lt;/span&gt; n&amp;atilde;o foi identificado e, por isso, n&amp;atilde;o foi poss&amp;iacute;vel seguir com a renova&amp;ccedil;&amp;atilde;o da sua ap&amp;oacute;lice.&lt;br&gt;
+    &lt;br&gt;
+    Isso significa que o seu seguro foi cancelado, portanto as suas coberturas e benef&amp;iacute;cios n&amp;atilde;o est&amp;atilde;o mais em vigor.&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; width=&quot;100%&quot; role=&quot;presentation&quot; style=&quot;background-color: transparent; min-width: 100%; &quot; class=&quot;stylingblock-content-wrapper&quot;&gt;&lt;tr&gt;&lt;td style=&quot;padding: 0px 30px 30px; &quot; class=&quot;stylingblock-content-wrapper camarker-inner&quot;&gt;&lt;table style=&quot;width:100%;background:#eff4ef;padding:20px;border-radius:20px;color:#000000&quot;&gt;
+ 
+  &lt;tr&gt;
+   &lt;td colspan=&quot;2&quot;&gt;
+    Relembre &lt;b&gt;por que ter um seguro de vida &lt;/b&gt;&amp;eacute; importante para voc&amp;ecirc;:&lt;br&gt;
+    &amp;nbsp;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;
+   &lt;td align=&quot;left&quot; style=&quot;width:20px;vertical-align:top&quot;&gt;
+    &lt;img alt=&quot;&quot; data-assetid=&quot;49201&quot; height=&quot;15&quot; src=&quot;https://image.novidades.portoseguro.com.br/lib/fe3a117371640478741473/m/1/3484b9cf-6e92-4ee7-b318-9235f29efcad.png&quot; style=&quot;height: 15px; width: 15px; padding: 0px; text-align: center;&quot; width=&quot;15&quot;&gt;&lt;/td&gt;&lt;td align=&quot;left&quot;&gt;
+    Seguran&amp;ccedil;a em caso de perda de renda devido a acidentes ou doen&amp;ccedil;as;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;
+   &lt;td style=&quot;height:5px&quot;&gt;
+   &lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;
+   &lt;td align=&quot;left&quot; style=&quot;width:20px;vertical-align:top&quot;&gt;
+    &lt;img alt=&quot;&quot; data-assetid=&quot;49201&quot; height=&quot;15&quot; src=&quot;https://image.novidades.portoseguro.com.br/lib/fe3a117371640478741473/m/1/3484b9cf-6e92-4ee7-b318-9235f29efcad.png&quot; style=&quot;height: 15px; width: 15px; padding: 0px; text-align: center;&quot; width=&quot;15&quot;&gt;&lt;/td&gt;&lt;td align=&quot;left&quot;&gt;
+    Apoio para os seus benefici&amp;aacute;rios na sua aus&amp;ecirc;ncia;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;
+   &lt;td style=&quot;height:5px&quot;&gt;
+   &lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;
+   &lt;td align=&quot;left&quot; style=&quot;width:20px;vertical-align:top&quot;&gt;
+    &lt;img alt=&quot;&quot; data-assetid=&quot;49201&quot; height=&quot;15&quot; src=&quot;https://image.novidades.portoseguro.com.br/lib/fe3a117371640478741473/m/1/3484b9cf-6e92-4ee7-b318-9235f29efcad.png&quot; style=&quot;height: 15px; width: 15px; padding: 0px; text-align: center;&quot; width=&quot;15&quot;&gt;&lt;/td&gt;&lt;td align=&quot;left&quot;&gt;
+    Servi&amp;ccedil;o de telemedicina 24h por dia, de forma gratuita;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;
+   &lt;td style=&quot;height:5px&quot;&gt;
+   &lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;
+   &lt;td align=&quot;left&quot; style=&quot;width:20px;vertical-align:top&quot;&gt;
+    &lt;img alt=&quot;&quot; data-assetid=&quot;49201&quot; height=&quot;15&quot; src=&quot;https://image.novidades.portoseguro.com.br/lib/fe3a117371640478741473/m/1/3484b9cf-6e92-4ee7-b318-9235f29efcad.png&quot; style=&quot;height: 15px; width: 15px; padding: 0px; text-align: center;&quot; width=&quot;15&quot;&gt;&lt;/td&gt;&lt;td align=&quot;left&quot;&gt;
+    Possibilidade de ampliar sua prote&amp;ccedil;&amp;atilde;o para os seus pets;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;
+   &lt;td style=&quot;height:5px&quot;&gt;
+   &lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;
+   &lt;td align=&quot;left&quot; style=&quot;width:20px;vertical-align:top&quot;&gt;
+    &lt;img alt=&quot;&quot; data-assetid=&quot;49201&quot; height=&quot;15&quot; src=&quot;https://image.novidades.portoseguro.com.br/lib/fe3a117371640478741473/m/1/3484b9cf-6e92-4ee7-b318-9235f29efcad.png&quot; style=&quot;height: 15px; width: 15px; padding: 0px; text-align: center;&quot; width=&quot;15&quot;&gt;&lt;/td&gt;&lt;td align=&quot;left&quot;&gt;
+    Descontos e benef&amp;iacute;cios exclusivos em estabelecimentos parceiros daPorto, para compras de produtos e servi&amp;ccedil;os de diversos segmentos.&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; width=&quot;100%&quot; role=&quot;presentation&quot; style=&quot;background-color: transparent; min-width: 100%; &quot; class=&quot;stylingblock-content-wrapper&quot;&gt;&lt;tr&gt;&lt;td style=&quot;padding: 0px 30px 30px; &quot; class=&quot;stylingblock-content-wrapper camarker-inner&quot;&gt;Para voltar a contar com a nossa prote&amp;ccedil;&amp;atilde;o, entre em contato com o seu &lt;b&gt;Corretor&lt;/b&gt; e fa&amp;ccedil;a uma nova cota&amp;ccedil;&amp;atilde;o.&lt;br&gt;
+&lt;br&gt;
+Ser&amp;aacute; um prazer continuar cuidando de voc&amp;ecirc; e da sua fam&amp;iacute;lia.&lt;br&gt;
+&lt;br&gt;
+Um abra&amp;ccedil;o!&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; width=&quot;100%&quot; role=&quot;presentation&quot; style=&quot;background-color: transparent; min-width: 100%; &quot; class=&quot;stylingblock-content-wrapper&quot;&gt;&lt;tr&gt;&lt;td style=&quot;padding: 0px 30px 30px; &quot; class=&quot;stylingblock-content-wrapper camarker-inner&quot;&gt;&lt;div&gt;
+ &lt;b&gt;&lt;span style=&quot;font-size:20px;&quot;&gt;&lt;font style=&quot;letter-spacing: -1.1px;&quot;&gt;Todo cuidado &amp;eacute; &lt;u&gt;Porto&lt;/u&gt;.&lt;/font&gt;&lt;/span&gt;&lt;/b&gt;&lt;/div&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; width=&quot;100%&quot; role=&quot;presentation&quot; style=&quot;background-color: #000000; min-width: 100%; &quot; class=&quot;stylingblock-content-wrapper&quot;&gt;&lt;tr&gt;&lt;td style=&quot;padding: 20px 30px; &quot; class=&quot;stylingblock-content-wrapper camarker-inner&quot;&gt;&lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; role=&quot;presentation&quot; style=&quot;width: 100%;&quot;&gt;&lt;tr&gt;&lt;td&gt;&lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; role=&quot;presentation&quot; style=&quot;width: 100%;&quot;&gt;&lt;tr&gt;&lt;td valign=&quot;top&quot; class=&quot;responsive-td&quot; style=&quot;width: 60%; padding-right: 0px;&quot;&gt;&lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; width=&quot;100%&quot; role=&quot;presentation&quot; style=&quot;background-color: transparent; min-width: 100%; &quot; class=&quot;stylingblock-content-wrapper&quot;&gt;&lt;tr&gt;&lt;td style=&quot;padding: 5px 0px 0px; &quot; class=&quot;stylingblock-content-wrapper camarker-inner&quot;&gt;&lt;div&gt;
+ &lt;style type=&quot;text/css&quot;&gt;
+.frase-app {
+      display:block;
+      color:#ffffff !important;
+      font-size:16px;
+      padding-top:0px}
+    @media screen and (max-width: 490px) {
+      .frase-app {
+        color:#ffffff;
+        font-size:16px;
+        text-align:center;
+        display:block;
+        padding-bottom:15px;
+        padding-top:0;
+        line-height:100%}
+    } &lt;/style&gt;&lt;span class=&quot;frase-app&quot;&gt;&lt;span style=&quot;color:#ffffff;&quot;&gt;&lt;b&gt;Baixe o App &lt;/b&gt;e fale com seu&amp;nbsp;&lt;b&gt;Corretor. &lt;/b&gt;&lt;/span&gt; &lt;/span&gt;&lt;/div&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/td&gt;&lt;td valign=&quot;top&quot; class=&quot;responsive-td&quot; style=&quot;width: 40%; padding-left: 0px;&quot;&gt;&lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; width=&quot;100%&quot; role=&quot;presentation&quot; style=&quot;background-color: transparent; min-width: 100%; &quot; class=&quot;stylingblock-content-wrapper&quot;&gt;&lt;tr&gt;&lt;td style=&quot;padding: 0px; &quot; class=&quot;stylingblock-content-wrapper camarker-inner&quot;&gt;&lt;table align=&quot;center&quot; border=&quot;0&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; role=&quot;presentation&quot; style=&quot;border-collapse: collapse; border-spacing: 0;&quot;&gt;
+  &lt;tr&gt;
+    &lt;td align=&quot;left&quot;&gt;
+      &lt;a href=&quot;https://play.google.com/store/apps/details?id=br.com.portoseguro.experienciacliente.mundoporto&amp;referrer=utm_source%3Dhub-vendas%26utm_medium%3Dcta-download%26utm_campaign%3Dhub-vendas&quot; target=&quot;_blank&quot; title=&quot;Baixe o App da Porto na Google&quot;&gt;&lt;img alt=&quot;Baixe o APP da Porto no Google Play&quot; src=&quot;https://content.campanhaporto.com.br/Porto/8232/google.png&quot; style=&quot;width: 100px;&quot;&gt; &lt;/a&gt;
+    &lt;/td&gt;
+    &lt;td align=&quot;center&quot; style=&quot;width: 20px;&quot;&gt;
+    &lt;/td&gt;
+    &lt;td align=&quot;right&quot;&gt;
+      &lt;a href=&quot;https://apps.apple.com/app/apple-store/id1511026277&quot; target=&quot;_blank&quot; title=&quot;Baixe o App da Porto na Apple&quot;&gt;&lt;img alt=&quot;Baixe o APP da Porto na App Store&quot; src=&quot;https://content.campanhaporto.com.br/Porto/8232/apple.png&quot; style=&quot;width: 100px;&quot;&gt; &lt;/a&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;table id=&quot;rodape-2016&quot; style=&quot; width: 600px; margin-left: auto; margin-right: auto; border-collapse:collapse;&quot;&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td class=&quot;links&quot; style=&quot;padding: 10px;  border-top: #b0b0b0 1px solid; border-bottom: #b0b0b0 1px solid; background-color: #F0F0F0; text-align: center;&quot;&gt;
+      &lt;table class=&quot;rodape-2016-divisao&quot; style=&quot;width: 24%; display: inline-flex; justify-content: center; border-collapse:collapse;&quot;&gt;
+        &lt;tbody&gt;
+          &lt;tr&gt;
+            &lt;td class=&quot;link&quot; style=&quot;padding: 10px; font-family:Arial, Helvetica, sans-serif; font-size:12px; color:#5e5e5e;&quot;&gt;&lt;span id=&quot;j_id0:emailTemplate:j_id3:j_id4:j_id6:j_id7:j_id9&quot;&gt;&lt;a href=&quot;https://www.portoseguro.com.br/fale-conosco/contatos#redes-sociais?utm_campaign=comm_news_vida&amp;amp;#38;utm_source=rodape_fixo&amp;amp;#38;utm_medium=eml&quot; style=&quot;color:#5e5e5e;&quot;&gt;Redes Sociais&lt;/a&gt; &lt;/span&gt;&lt;/td&gt;
+          &lt;/tr&gt;
+        &lt;/tbody&gt;
+      &lt;/table&gt;
+
+      &lt;table class=&quot;rodape-2016-divisao&quot; style=&quot;width: 24%; display: inline-flex; justify-content: center; border-collapse:collapse;&quot;&gt;
+        &lt;tbody&gt;
+          &lt;tr&gt;
+            &lt;td class=&quot;link&quot; style=&quot;padding: 10px; font-family:Arial, Helvetica, sans-serif; font-size:12px; color:#5e5e5e;&quot;&gt;&lt;span id=&quot;j_id0:emailTemplate:j_id3:j_id4:j_id6:j_id7:j_id9&quot;&gt;&lt;a href=&quot;https://www.portoseguro.com.br/cliente?utm_campaign=comm_news_vida&amp;amp;#38;utm_source=rodape_fixo&amp;amp;#38;utm_medium=eml&quot; style=&quot;color:#5e5e5e;&quot;&gt;&amp;Aacute;rea do Cliente&lt;/a&gt; &lt;/span&gt;&lt;/td&gt;
+          &lt;/tr&gt;
+        &lt;/tbody&gt;
+      &lt;/table&gt;
+
+      &lt;table class=&quot;rodape-2016-divisao&quot; style=&quot;width: 24%; display: inline-flex; justify-content: center;border-collapse:collapse;&quot;&gt;
+        &lt;tbody&gt;
+          &lt;tr&gt;
+            &lt;td class=&quot;link&quot; style=&quot;padding: 10px; font-family:Arial, Helvetica, sans-serif; font-size:12px; color:#5e5e5e;&quot;&gt;&lt;span id=&quot;j_id0:emailTemplate:j_id3:j_id4:j_id6:j_id7:j_id9&quot;&gt;&lt;a href=&quot;https://www.portoseguro.com.br/fale-conosco/contatos?utm_campaign=comm_news_vida&amp;amp;#38;utm_source=rodape_fixo&amp;amp;#38;utm_medium=eml&quot; style=&quot;color:#5e5e5e;&quot;&gt;Atendimento&lt;/a&gt; &lt;/span&gt;&lt;/td&gt;
+          &lt;/tr&gt;
+        &lt;/tbody&gt;
+      &lt;/table&gt;
+
+      &lt;table class=&quot;rodape-2016-divisao&quot; style=&quot;width: 24%; display: inline-flex; justify-content: center; border-collapse:collapse;&quot;&gt;
+        &lt;tbody&gt;
+          &lt;tr&gt;
+            &lt;td class=&quot;link&quot; style=&quot;padding: 10px; font-family:Arial, Helvetica, sans-serif; font-size:12px; color:#5e5e5e;&quot;&gt;&lt;span id=&quot;j_id0:emailTemplate:j_id3:j_id4:j_id6:j_id7:j_id9&quot;&gt;&lt;a href=&quot;https://www.portoseguro.com.br/institucional/responsabilidade-socioambiental/projetos-corporativos/negocios-sustentaveis?utm_campaign=comm_news_vida&amp;amp;#38;utm_source=rodape_fixo&amp;amp;#38;utm_medium=eml&quot; style=&quot;color:#5e5e5e;&quot;&gt;Sustentabilidade&lt;/a&gt; &lt;/span&gt;&lt;/td&gt;
+          &lt;/tr&gt;
+        &lt;/tbody&gt;
+      &lt;/table&gt;
+      &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td class=&quot;informacoes contato&quot; style=&quot;color: #5e5e5e; padding-top: 20px !important; padding: 10px; font-family: Arial, Helvetica, sans-serif; font-size: 12px;  text-align: justify; background-color: #F0F0F0;&quot;&gt;&lt;span id=&quot;j_id0:emailTemplate:j_id3:j_id4:j_id6:j_id7:j_id9&quot;&gt;&lt;strong&gt;11 3366 3377&lt;/strong&gt; (Grande S&amp;atilde;o Paulo) | &lt;strong&gt;0800 727 9393&lt;/strong&gt; (Demais localidades) | &lt;strong&gt;0800 727 2746&lt;/strong&gt; (SAC - informa&amp;ccedil;&amp;atilde;o, reclama&amp;ccedil;&amp;atilde;o e cancelamento - 24horas) | &lt;strong&gt;0800 727 8736&lt;/strong&gt; (SAC 24h - atendimento exclusivo para deficientes auditivos) | &lt;strong&gt;0800 727 1184&lt;/strong&gt; (Ouvidoria - das 8h15 &amp;agrave;s 18h30, de segunda a sexta-feira, exceto feriados) &lt;/span&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td class=&quot;informacoes chat&quot; style=&quot;font-family: Arial, Helvetica, sans-serif; font-size: 12px; color:#b0b0b0; padding: 10px; text-align: justify; background-color: #F0F0F0;&quot;&gt;&lt;span id=&quot;j_id0:emailTemplate:j_id3:j_id4:j_id6:j_id7:j_id9&quot;&gt;&lt;a href=&quot;http://porto.vc/chatonline?utm_campaign=comm_news_vida&amp;amp;#38;utm_source=rodape_fixo&amp;amp;#38;utm_medium=eml&quot; target=&quot;_blank&quot;&gt;Chat On-line.&lt;/a&gt;&lt;/span&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td class=&quot;informacoes&quot; style=&quot;font-family: Arial, Helvetica, sans-serif; font-size: 12px; color: #b0b0b0; padding: 10px; text-align: justify; background-color: #F0F0F0;&quot;&gt;
+      &lt;p&gt;Informa&amp;ccedil;&amp;otilde;es reduzidas. Consulte as Condi&amp;ccedil;&amp;otilde;es Gerais do seguro contratado no site&amp;nbsp;&lt;a href=&quot;http://www.portoseguro.com.br/vida?utm_campaign=comm_news_vida&amp;amp;#38;utm_source=rodape_fixo&amp;amp;%2338;utm_medium=eml&quot; target=&quot;_blank&quot;&gt;www.portoseguro.com.br/vida&lt;/a&gt;. Processos Susep: Seguro de Pessoas Individual 15414.901355/2016-07; Porto Acidentes Pessoais Individual 15414.632387/2022-97; Porto Vida ON 15414.627930/2021-53&amp;nbsp;O registro do produto &amp;eacute; autom&amp;aacute;tico e n&amp;atilde;o representa aprova&amp;ccedil;&amp;atilde;o ou recomenda&amp;ccedil;&amp;atilde;o por parte da Susep.. A aceita&amp;ccedil;&amp;atilde;o do seguro est&amp;aacute; sujeita &amp;agrave; an&amp;aacute;lise de risco.&lt;/p&gt;
+      &lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+                                                &lt;/td&gt;
+                                              &lt;/tr&gt;
+                                              &lt;/tbody&gt;
+                                            &lt;/table&gt;
+                                          &lt;/td&gt;
+                                        &lt;/tr&gt;
+                                    &lt;/tbody&gt;
+                                  &lt;/table&gt;
+                                &lt;/td&gt;
+                              &lt;/tr&gt;
+                            &lt;/table&gt;
+                          &lt;/td&gt;
+                        &lt;/tr&gt;
+                      &lt;/table&gt;
+                    &lt;/td&gt;
+                  &lt;/tr&gt;
+                &lt;/table&gt;
+              &lt;/td&gt;
+            &lt;/tr&gt;
+          &lt;/table&gt;
+        &lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td valign=&quot;top&quot;&gt;
+          &lt;custom type=&quot;footer&quot; /&gt;
+        &lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/table&gt;
+  &lt;!-- start:processor:append --&gt;&lt;!-- start:processor:body:append --&gt;&lt;/div&gt;&lt;!-- end:processor:body:append --&gt;&lt;!-- end:processor:append --&gt;&lt;/body&gt;
+&lt;!--RegionEnd[socialslot:&quot;allcontent&quot;]--&gt;&lt;/html&gt;</text>
+    </textTemplates>
+    <textTemplates>
+        <name>CorpoEmailrecusa</name>
+        <isViewedAsPlainText>false</isViewedAsPlainText>
+        <text>&lt;p&gt;Renovação Recusada&lt;/p&gt;&lt;p&gt;Prezado(a) {!Get_Conta_Proposta.Name}&lt;/p&gt;&lt;p&gt;Lamentamos informar que a proposta de renovação {!Get_Proposta_da_critica.Name} foi recusada.&lt;/p&gt;&lt;p&gt;Por favor, entre em contato com o cliente para verificar o motivo da recusa.&lt;/p&gt;&lt;p&gt;Estamos à disposição para ajudá-lo(a) e solucionar qualquer dúvida que possa ter.&lt;/p&gt;&lt;p&gt;Atenciosamente,&lt;/p&gt;&lt;p&gt;Porto Seguro&lt;/p&gt;</text>
+    </textTemplates>
+    <variables>
+        <name>DataAtual</name>
+        <dataType>Date</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+        <value>
+            <elementReference>$Flow.CurrentDate</elementReference>
+        </value>
+    </variables>
+</Flow>

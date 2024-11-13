@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ValidarProdutoRenovavel</fullName>
+    <active>false</active>
+    <description>Impede a alteração do campo Produto Renovável.</description>
+    <errorConditionFormula>AND(
+    $Profile.Name &lt;&gt; &quot;Administrador do sistema&quot;,
+    $Profile.Name &lt;&gt; &quot;Administrador Porto&quot;,
+    NOT(ISNEW()), 
+    ISCHANGED(ProdutoRenovavel__c)
+)</errorConditionFormula>
+    <errorDisplayField>ProdutoRenovavel__c</errorDisplayField>
+    <errorMessage>Alteração não permitida, fale com o Administrador para analisar impacto nos contratos a serem renovados</errorMessage>
+</ValidationRule>

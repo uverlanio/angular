@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Preencher_QuantidadeVidasNumero</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+					ISPICKVAL(TipoQuantidadeVidas__c, &apos;Quantidade fixa&apos;),
+				  ISNULL(QuantidadeVidasNumero__c)
+	)</errorConditionFormula>
+    <errorDisplayField>QuantidadeVidasNumero__c</errorDisplayField>
+    <errorMessage>Preencha o campo &apos;Quantidade de vidas número&apos; quando o Grupo da oferta for &apos;Quantidade fixa&apos;</errorMessage>
+</ValidationRule>

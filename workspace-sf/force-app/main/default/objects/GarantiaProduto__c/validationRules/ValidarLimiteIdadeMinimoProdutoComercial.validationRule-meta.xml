@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ValidarLimiteIdadeMinimoProdutoComercial</fullName>
+    <active>true</active>
+    <description>Verifica se o valor está de acordo com o produto técnico</description>
+    <errorConditionFormula>AND(
+ RecordType.DeveloperName = &apos;ProdutoComercial&apos;,
+ LimiteIdadeMinimo__c &lt; GarantiaProduto__r.LimiteIdadeMinimo__c
+)</errorConditionFormula>
+    <errorMessage>O Limite de idade mínimo não pode ser menor do que foi cadastrado no produto técnico.</errorMessage>
+</ValidationRule>

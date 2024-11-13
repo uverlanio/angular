@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Limite_utrapassado</fullName>
+    <active>true</active>
+    <description>teste</description>
+    <errorConditionFormula>IF(TEXT(Fase__c) = &quot;Em Análise&quot; 
+			&amp;&amp; TEXT(Status_do_pagamento__c) = &quot;Em Análise&quot;
+			&amp;&amp;  Garantia_do_segurado_do_contrato__r.GarantiaProduto__r.Controle_de_Uso_Saldo__c 
+			&amp;&amp;	( 
+							(Valor_indenizado__c &gt; Garantia_do_segurado_do_contrato__r.Saldo_de_utilizacao__c) 
+							|| (( BLANKVALUE(Franquias__c, 0) + BLANKVALUE(QuantidadeDias__c, 0) ) &gt; Garantia_do_segurado_do_contrato__r.Saldo_de_utilizacao__c)
+	), TRUE, FALSE
+	)</errorConditionFormula>
+    <errorMessage>Limite máximo de utilização da garantia ultrapassado</errorMessage>
+</ValidationRule>

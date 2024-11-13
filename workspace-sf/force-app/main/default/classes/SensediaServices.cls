@@ -824,6 +824,7 @@ public with sharing class SensediaServices extends ServiceBase {
 				retorno = resposta.getBody();
 			}
 			else {
+                System.Debug('RESPOSTA--->'+resposta.getBody());
                 //MGRC-1533-INICIO
                 // throw new SensediaServicesException('ERROR HTTP ' +'Status: '+resposta.getStatusCode()+' Body: '+resposta.getBody());
                 retorno = 'Erro na requisição';
@@ -838,6 +839,49 @@ public with sharing class SensediaServices extends ServiceBase {
         return retorno;
     }
     //MGRC-1384 - FIM
+
+    //MGRC-1509-FIX1-INICIO
+    public ServiceTO.DataCancelamentoTO cancelamentoInadimplente(SensediaServices.VERB verboHTTP, SensediaServices.DOMAIN dominio, String servico, ServiceTO.ParamOrcamentoCalculoTO dadosParam) {
+        System.debug('dadosParam: ' + dadosParam);
+        String verbo = verboHTTP.toString();
+        String servicoDominio = dominio.toString();
+
+        String prefixo = this.selectDomain(servicoDominio);                              
+        String url = this.selectEndpoint(servico);                            
+        String token = this.getAccessToken(servicoDominio, SENSEDIA_TOKEN); 
+        String endpoint = prefixo + url;
+        String retorno;   
+
+        ServiceTO.DataCancelamentoTO parSaida = new  ServiceTO.DataCancelamentoTO();
+        
+        String body = JSON.serialize(dadosParam);
+        
+        System.debug('Request ' + body);        
+
+        try {
+            HttpResponse resposta;
+            resposta = Util.executarHttpRequest(endpoint, verbo, this.gerarHeaderOAuth2(token), body, 120000);
+            
+            System.debug('### Status: ' + resposta.getStatusCode() + ', Body: ' + resposta.getBody());
+            
+            if (resposta.getStatusCode() < 400 || resposta.getStatusCode() == 500) {
+
+                System.debug('====> parSaida: ' + resposta.getBody());
+                
+                parSaida = (ServiceTO.DataCancelamentoTO) JSON.deserialize(resposta.getBody(), ServiceTO.DataCancelamentoTO.class);
+            }
+            else {
+                throw new SensediaServicesException('ERROR HTTP ' + resposta.getBody());
+            }
+        }
+        catch (Exception e) {
+            System.debug('###### ERROR: (' + e.getLineNumber() + '): ' + e.getMessage());
+            throw new SensediaServicesException(mensagemErro + e.getMessage());
+        }
+        
+        return parSaida;
+    }
+    //MGRC-1509-FIX1-FIM
     
     public class SensediaServicesException extends Exception{}
 }

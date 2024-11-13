@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Valida_Opcoes_Resposta</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+					Resposta__c  != &apos;&apos;,
+				Resposta__c != null,
+				ISPICKVAL(PerguntaQuestionarioRisco__r.Pergunta__r.TipoResposta__c, &apos;Opção&apos;),
+	   NOT(CONTAINS( PerguntaQuestionarioRisco__r.Pergunta__r.OpcoesResposta__c , Resposta__c))
+)</errorConditionFormula>
+    <errorDisplayField>Resposta__c</errorDisplayField>
+    <errorMessage>Preencha com uma opção válida</errorMessage>
+</ValidationRule>
