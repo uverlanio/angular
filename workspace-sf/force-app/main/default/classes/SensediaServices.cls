@@ -203,12 +203,10 @@ public with sharing class SensediaServices extends ServiceBase {
 
 
         if (res.getStatusCode() == 200) {
+            //FNPVVEP-114 FIX02 INICIO
             Map<String, Object> responseMap = (Map<String, Object>) JSON.deserializeUntyped(res.getBody());
-            if (responseMap.get('status') == 'success') {
-                return (String) responseMap.get('message');
-            } else {
-                throw new CalloutException('Falha ao gerar comunicar Telemed: ' + res.getBody());
-            }
+            return (String) responseMap.get('message');
+            //FNPVVEP-114 FIX02 FIM
         } else {
             throw new CalloutException('Erro HTTP: ' + res.getStatusCode() + ' - ' + res.getStatus());
         }

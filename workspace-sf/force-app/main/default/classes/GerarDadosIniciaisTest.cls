@@ -83,6 +83,9 @@ public class GerarDadosIniciaisTest {
         insert favorecidoRemuneracaoContrato;
         //FNPVVEP-71 FIM
         ContratanteContrato__c contratanteContrato = TestDataFactory.gerarContratanteContrato(contrato, contaTeste, contaTeste);
+        contratanteContrato.FormaPagamento__c = formaPagamento.Id;//ANNVI-258 - INICIO
+        contratanteContrato.FormaPagamento__r = formaPagamento; 
+        update contratanteContrato;//ANNVI-258 - FIM
         GrupoContrato__c grupoContrato = TestDataFactory.gerarGrupoContrato(contratanteContrato);
         SeguradoContrato__c segurado = TestDataFactory.gerarSeguradoContrato(grupoContrato, contaTeste);
         //FNPVVEP-71 INICIO
@@ -1044,6 +1047,55 @@ public class GerarDadosIniciaisTest {
         System.assertEquals(-5, cteCtr.DescontoAgravoPercentualFormaPagto__c, '5% de desconto');        
     }
     //RVI-312 - FIM
+    //ANNVI-258 - INICIO
+    @IsTest
+    static void verificarAltPgtoEdsTest(){
+
+        Test.startTest();
+
+        Contract ctr = [SELECT Id, AlteraFormaPagto__c FROM Contract LIMIT 1];
+        String ctrId = ctr.Id;
+
+        Product2 produto = [SELECT Id, ProductCode, VigenciaInicial__c FROM Product2 WHERE ProductCode = '1' LIMIT 1];
+        produto.ProductCode = 'VI-PESSOAS';
+        
+        String dataCalculo = String.valueOf(produto.VigenciaInicial__c);
+        produto.CodigoPrecificaProduto__c = produto.ProductCode; 
+        update produto;
+ 
+        CondicaoCobranca__c condicaoCobranca = [SELECT Id, TipoPagamento__c, QuantidadeParcelas__c,PercentualDescontoAgravo__c,Produto__c FROM CondicaoCobranca__c WHERE Produto__c=:produto.Id ];
+        condicaoCobranca.TipoPagamento__c = 'Boleto';
+        condicaoCobranca.QuantidadeParcelas__c = '2';
+        condicaoCobranca.PercentualDescontoAgravo__c = -5;
+        update condicaoCobranca;
+
+        String payload = '{ "orcamentos": [ { "idContratoRenovado": \"'+ ctrId +'\", "tipoVigencia": "Periódico", "precificacao": { "descontoAgravo": [], "coberturas": [] }, "vigenciaFinal": "2023-10-31", "tipoSeguro": "eds", "qtdDiasVigencia": 364, "customizavel": false, "canalDistribuicao": "COR", "viagem": null, "varConsultivo": false, "idProdutoSf": "'+ produto.Id +'", "ramoSeguro": 0, "versoesCalculos": [ { "opcao": 0, "tipo": "FPG", "descontoAgravo": -15 } ], "ordemPortal": 1, "rotulo": "Renovacao", "susepOrcamento": "67185J", "resultadoIntegracoes": { "IndiceMonetario": { "ItensCotacao": [ { "moedaDestino": "BRL", "dataCotacao": 1112023, "moedaOrigem": "BRL", "cotacao": "1.0" } ] } }, "indiceIPCA": 0, "remuneracoes": [ { "percentual": 0, "tipoRemuneracao": "AGENCIAMENTO" }, { "percentual": 10, "tipoRemuneracao": "CORRETAGEM" } ], "dataCalculo": "'+dataCalculo+'", "Cupom": "FERIAS20", "tarifa": "2023-11-01", "numeroOrcamento": "00122711", "numeroPortal": 1, "codigoProdutoVida": "VI-PESSOAS", "contratantes": [ { "tipo": "PRI", "numero": 1, "grupos": [ { "numero": 1, "segurados": [ { "pessoa": { "tipo": "FIS", "enderecos": [ { "uf": "SP", "cidade": "TaboãodaSerra", "complemento": "", "logradouro": "AvelinaNogueiradoPrado", "bairro": "JardimMonteAlegre", "complementoCep": "325", "paisResidencia": "", "tipoEndereco": "RESIDENCIAL", "numeroLogradouro": null, "cep": "06755" } ], "nome": "FRANCISLIU", "dadosPessoaFisica": { "grupoProfissao": "DIT-A", "cicloVacinal": "1", "profissao": "2111-05", "temDependentes": true, "tipoContrato": "VOCE", "tempoGarantiaRenda": "48", "dataNascimento": "1964-05-22", "sexo": "MASC", "fumante": true, "regimeTrabalho": "CLT", "renda": "10000" }, "email": "teste@teste.com" }, "numero": 1, "coberturas": [ { "franquia": "", "caracteristica": "Principal", "limitemaximo": "10000000", "moeda": "BRL", "sigla": "MAP", "valor": 120000, "caracteristicaespecialvalor": "0", "limiteminimo": "30000", "caracteristicaespecialtipo": "Monetário" }, { "franquia": "", "caracteristica": "Serviçocomplementar", "limitemaximo": "", "moeda": "BRL", "sigla": "TELEMED", "valor": 0, "caracteristicaespecialvalor": "0", "limiteminimo": "", "caracteristicaespecialtipo": "" }, { "franquia": "", "caracteristica": "Principal", "limitemaximo": "10000000", "moeda": "BRL", "sigla": "BAS", "valor": 120000, "caracteristicaespecialvalor": "0", "limiteminimo": "30000", "caracteristicaespecialtipo": "Monetário" }, { "franquia": "", "caracteristica": "Principal", "limitemaximo": "10000000", "moeda": "BRL", "sigla": "IPA", "valor": 120000, "caracteristicaespecialvalor": "0", "limiteminimo": "30000", "caracteristicaespecialtipo": "Monetário" }, { "franquia": "FR_NORMAL", "caracteristica": "Adicional", "limitemaximo": "1300", "moeda": "BRL", "sigla": "DIT", "valor": 25, "caracteristicaespecialvalor": "0", "limiteminimo": "25", "caracteristicaespecialtipo": "Monetário" }, { "franquia": "", "caracteristica": "Adicional", "limitemaximo": "500000", "moeda": "BRL", "sigla": "DG17", "valor": 120000, "caracteristicaespecialvalor": "0", "limiteminimo": "30000", "caracteristicaespecialtipo": "Monetário" }, { "franquia": "", "caracteristica": "Adicional", "limitemaximo": "1000", "moeda": "BRL", "sigla": "DIH", "valor": 83.33, "caracteristicaespecialvalor": "1", "limiteminimo": "50", "caracteristicaespecialtipo": "Dia(s)" }, { "franquia": "", "caracteristica": "Adicional", "limitemaximo": "20000", "moeda": "BRL", "sigla": "AFF", "valor": 10000, "caracteristicaespecialvalor": "0", "limiteminimo": "5000", "caracteristicaespecialtipo": "Monetário" }, { "franquia": "", "caracteristica": "Adicional", "limitemaximo": "10000", "moeda": "BRL", "sigla": "DMHO", "valor": 4500, "caracteristicaespecialvalor": "0", "limiteminimo": "100", "caracteristicaespecialtipo": "Monetário" }, { "franquia": "", "caracteristica": "Principal", "limitemaximo": "2000000", "moeda": "BRL", "sigla": "IFPD", "valor": 120000, "caracteristicaespecialvalor": "0", "limiteminimo": "10000", "caracteristicaespecialtipo": "Monetário" } ] } ], "nome": "FRANCISLIU", "qtdeVidas": 1, "coberturas": [ { "franquia": "", "caracteristica": "Principal", "limitemaximo": "10000000", "moeda": "BRL", "sigla": "MAP", "valor": 120000, "caracteristicaespecialvalor": "0", "limiteminimo": "30000", "caracteristicaespecialtipo": "Monetário" }, { "franquia": "", "caracteristica": "Serviçocomplementar", "limitemaximo": "", "moeda": "BRL", "sigla": "TELEMED", "valor": 0, "caracteristicaespecialvalor": "0", "limiteminimo": "", "caracteristicaespecialtipo": "" }, { "franquia": "", "caracteristica": "Principal", "limitemaximo": "10000000", "moeda": "BRL", "sigla": "BAS", "valor": 120000, "caracteristicaespecialvalor": "0", "limiteminimo": "30000", "caracteristicaespecialtipo": "Monetário" }, { "franquia": "", "caracteristica": "Principal", "limitemaximo": "10000000", "moeda": "BRL", "sigla": "IPA", "valor": 120000, "caracteristicaespecialvalor": "0", "limiteminimo": "30000", "caracteristicaespecialtipo": "Monetário" }, { "franquia": "FR_NORMAL", "caracteristica": "Adicional", "limitemaximo": "1300", "moeda": "BRL", "sigla": "DIT", "valor": 25, "caracteristicaespecialvalor": "0", "limiteminimo": "25", "caracteristicaespecialtipo": "Monetário" }, { "franquia": "", "caracteristica": "Adicional", "limitemaximo": "500000", "moeda": "BRL", "sigla": "DG17", "valor": 120000, "caracteristicaespecialvalor": "0", "limiteminimo": "30000", "caracteristicaespecialtipo": "Monetário" }, { "franquia": "", "caracteristica": "Adicional", "limitemaximo": "1000", "moeda": "BRL", "sigla": "DIH", "valor": 83.33, "caracteristicaespecialvalor": "1", "limiteminimo": "50", "caracteristicaespecialtipo": "Dia(s)" }, { "franquia": "", "caracteristica": "Adicional", "limitemaximo": "20000", "moeda": "BRL", "sigla": "AFF", "valor": 10000, "caracteristicaespecialvalor": "0", "limiteminimo": "5000", "caracteristicaespecialtipo": "Monetário" }, { "franquia": "", "caracteristica": "Adicional", "limitemaximo": "10000", "moeda": "BRL", "sigla": "DMHO", "valor": 4500, "caracteristicaespecialvalor": "0", "limiteminimo": "100", "caracteristicaespecialtipo": "Monetário" }, { "franquia": "", "caracteristica": "Principal", "limitemaximo": "2000000", "moeda": "BRL", "sigla": "IFPD", "valor": 120000, "caracteristicaespecialvalor": "0", "limiteminimo": "10000", "caracteristicaespecialtipo": "Monetário" } ] } ] } ], "meioComercializacao": "SFC", "segmento": "Individual", "numeroOferta": 52595, "orcnum": "00122711", "vigenciaInicial": "2023-11-06", "contratoOriginal": { "apolice": "000000014889", "sucursal": "999", "ramo": "2", "endosso": "0", "empresa": "22", "premioPago": 2 } } ] }';
+
+        ctr.AlteraFormaPagto__c = true;
+        update ctr;
+
+        ContratanteContrato__c cttCtr = [SELECT Id, FormaPagamento__r.Id FROM ContratanteContrato__c WHERE Contrato__c = :ctr.Id];
+        
+        FormaPagamento__c fp = [SELECT Id, Codigo__c FROM FormaPagamento__c WHERE Id = :cttCtr.FormaPagamento__r.Id];
+        fp.Codigo__c = '62';
+        update fp;
+
+        GerarDadosIniciais.getInstance().gerarDadosIniciais(payload);
+
+        fp.Codigo__c = '97';
+        update fp;
+
+        GerarDadosIniciais.getInstance().gerarDadosIniciais(payload);
+
+        fp.Codigo__c = '41';
+        update fp;
+
+        GerarDadosIniciais.getInstance().gerarDadosIniciais(payload);
+
+        Test.stopTest();
+        
+    }
+    //ANNVI-258 - FIM
     //FNPVVEP-71 INICIO 
     @isTest
     static void getDiscCtrOrgTest(){

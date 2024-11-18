@@ -492,6 +492,7 @@ public virtual class BeneficiarioGarantiaBO
         }
     }
 
+    //FNPVVEP-158 - INICIO
     public String validaTotalIndenizacao(List<BeneficiarioGarantia__c> beneficiarios){
         if(beneficiarios.isEmpty()) return ''; 
 
@@ -503,5 +504,7 @@ public virtual class BeneficiarioGarantiaBO
 
         return message;
     }
+    //FNPVVEP-158 - FIM
+
 }
 //PLV-2603 - Fim - AVX - Melhoria Contínua - Correção pagamento de Sinistro.

@@ -144,9 +144,10 @@ public without sharing class GerarDadosIniciais {
             system.debug('payLoadTO acima');
             Product2 prodPrec = produtoDao.buscProdPrecDtCalc(payLoadTO.orcamentos[i].codigoProdutoVida, payLoadTO.orcamentos[i].idProdutoSf);
             System.debug('payloadTO.orcamentos[0].tipoSeguro <<<' + payloadTO.orcamentos[0].tipoSeguro);
+            Contract produtoOriginal; //ANNVI-258 - INICIO/FIM
             if('eds'.equalsIgnoreCase(payloadTO.orcamentos[0].tipoSeguro)){
                 String numeroApolice = gerarNumeroApolice(payloadTO);
-                Contract produtoOriginal = [SELECT Id, Produto__c,Produto__r.Status__c,Produto__r.ProductCode, Produto__r.ProdutoEndosso__c, Produto__r.ProdutoRenovacao__c FROM Contract WHERE NAME =: numeroApolice];
+                produtoOriginal = [SELECT Id, Produto__c,Produto__r.Status__c,Produto__r.ProductCode, Produto__r.ProdutoEndosso__c, Produto__r.ProdutoRenovacao__c FROM Contract WHERE NAME =: numeroApolice]; //ANNVI-258 - INICIO/FIM
                 if(produtoOriginal.Produto__r.ProdutoEndosso__c!=null){
                     produto = ProductDAO.getInstance().buscarProdutoEndosso(produtoOriginal.Produto__r.ProdutoEndosso__c);
                 }else{
@@ -216,6 +217,7 @@ public without sharing class GerarDadosIniciais {
             // RVI-193-INICIO
             String tipoDoSeguro = payloadTO.orcamentos[0].tipoSeguro;
             String ctrOrRen = payloadTO.orcamentos[0].idContratoRenovado;
+            
             System.debug('tipoDoSeguro >>>> ' + tipoDoSeguro);
             System.debug('ctrOrRen >>>> ' + ctrOrRen);
             System.debug('listDescontoAgravo rogerio>>>> ' + listDescontoAgravo); 
@@ -245,7 +247,45 @@ public without sharing class GerarDadosIniciais {
                         System.debug('versoesCalculoRen >>>> ' + versoesCalculo);  
                         System.debug('ListDescontoAgravo >>>> ' + versaoCalculo.ListDescontoAgravo); 
                         break;
-                    } else {
+                    } else if (tipoDoSeguro == 'EDS') { //ANNVI-258 - INICIO
+                        
+                        versaoCalculo.opcao = ctOpcaoRen;
+                        
+                        Boolean formaPgtoAlt = verificarAltPgto(produtoOriginal.Id);
+                        if (formaPgtoAlt) {
+                            ContratanteContrato__c cteCtr = ajustaDescAgrvRenovAltFormaPagto(produtoOriginal.Id, mapDescAgrvRenovAltBoleto); // RVI-312-FIX01 INICIO/FIM
+                            Date dtInicioAcelera = Date.newInstance(2024, 11, 04);
+
+                            Map<String, String> codigosDescontoMap = new Map<String, String>();
+                            codigosDescontoMap.put('DESC_DEZ_PORCENTO', '62,70');
+                            codigosDescontoMap.put('DESC_CINCO_PORCENTO', '97,98');
+                            codigosDescontoMap.put('SEM_DESCONTO', '41,52');
+                            Datetime cteCtrCreatDt = !Test.isRunningTest() ? cteCtr.CreatedDate : System.today().addYears(-1);
+
+                            if (cteCtrCreatDt < dtInicioAcelera) {
+                                System.debug('Código forma de pagamento: ' + cteCtr.FormaPagamento__r.Codigo__c);
+                                
+                                if (codigosDescontoMap.get('DESC_DEZ_PORCENTO').contains(cteCtr.FormaPagamento__r.Codigo__c)) {
+                                    versaoCalculo.descontoAgravo = 10;
+                                } else if (codigosDescontoMap.get('DESC_CINCO_PORCENTO').contains(cteCtr.FormaPagamento__r.Codigo__c)) {
+                                    versaoCalculo.descontoAgravo = 5;
+                                } else if (codigosDescontoMap.get('SEM_DESCONTO').contains(cteCtr.FormaPagamento__r.Codigo__c)) {
+                                    versaoCalculo.descontoAgravo = 0;
+                                }
+                            }
+
+                            if (cteCtr.Id != null && !ctesCtrId.contains(cteCtr.Id)) {
+                                ctesCtrId.add(cteCtr.Id);
+                                ctesCtr.add(cteCtr);
+                            }
+                            versaoCalculo.descontoAgravo = cteCtr.DescontoAgravoPercentualFormaPagto__c;
+                        }else{
+                            versaoCalculo.descontoAgravo = getDiscCtrOrg(produtoOriginal.Id);                       
+                            versaoCalculo.tipo = 'FPG';
+                            versoesCalculo.add(versaoCalculo);                            
+                            break;
+                        }
+                    } else { //ANNVI-258 - FIM
                         CondicaoCobranca__c condicaoCobranca = mapCondicaoCobranca.get(descontoAgravo);
                         versaoCalculo.opcao = contadorOpcao;
                         versaoCalculo.descontoAgravo = condicaoCobranca.PercentualDescontoAgravo__c != null ? condicaoCobranca.PercentualDescontoAgravo__c : 0;
@@ -1595,7 +1635,9 @@ public without sharing class GerarDadosIniciais {
                 Id,
                 QuantidadeParcelas__c,
                 DescontoAgravoPercentualFormaPagto__c,
-                Contrato__r.Proposta__c
+                Contrato__r.Proposta__c,
+                FormaPagamento__r.Codigo__c, //ANNVI-258 - INICIO
+                CreatedDate //ANNVI-258 - FIM
             FROM
                 ContratanteContrato__c
             WHERE

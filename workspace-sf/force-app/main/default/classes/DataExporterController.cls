@@ -1,4 +1,4 @@
-@RestResource(urlMapping='/Ofertas/*')
+@RestResource(urlMapping='/Authenticate/*')
 global with sharing class DataExporterController {
 
     private static final DataExporterController instance = new DataExporterController();
@@ -45,9 +45,9 @@ global with sharing class DataExporterController {
         }
     }  
 
-    // GeradorOferta__c - PAI  
-    // ConjuntoInformacoes__c - FILHO de GeradorOferta__c
-    // InformacaoOferta__c - FILHO de ConjuntoInformacoes__c
+    // 1.GeradorOferta__c - PAI  
+    // 2.ConjuntoInformacoes__c - FILHO de GeradorOferta__c
+    // 3.InformacaoOferta__c - FILHO de ConjuntoInformacoes__c
 
     public String sendData(String orgSelect) {
         String url = 'https://portoseguro--' + orgSelect + '.sandbox.my.salesforce.com/services/apexrest/Ofertas';

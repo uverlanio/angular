@@ -102,7 +102,7 @@ public class IntegracaoAS {
         if (proposta.Status == 'Em análise' && criticasProposta.Status__c == 'Pendente') codigoTarefa = TASKNUMBER_ASSINATURA_ELETRONICA_PENDENTE_68;
         if (proposta.Status == 'Em análise' && criticasProposta.Status__c == 'Recusado') codigoTarefa = TASKNUMBER_ASSINATURA_ELETRONICA_RECUSADA_168;
         if (proposta.Status == 'Em análise' && criticasProposta.Status__c == 'Liberado') codigoTarefa = TASKNUMBER_ASSINADA_169;    
-        if (proposta.Tipo__c == 'Novo' && (proposta.FormaPagamento__r.Codigo__c == '21' || proposta.FormaPagamento__r.Codigo__c == '52')) codigoTarefa = TASKNUMBER_AGUARDANDO_PAGAMENTO; //FCVEP-33      
+        if (proposta.Tipo__c == 'Novo' && (proposta.FormaPagamento__r.Codigo__c == '22' || proposta.FormaPagamento__r.Codigo__c == '53')) codigoTarefa = TASKNUMBER_AGUARDANDO_PAGAMENTO; //FCVEP-33      
 
         System.debug(LoggingLevel.ERROR + ' - CLASS_NAME: '+ CLASS_NAME + ' => METHOD_NAME: '+ METHOD_NAME + ' => proposta: ' + proposta);
         System.debug(LoggingLevel.ERROR + ' - CLASS_NAME: '+ CLASS_NAME + ' => METHOD_NAME: '+ METHOD_NAME + ' => proposta.Status: ' + proposta.Status);

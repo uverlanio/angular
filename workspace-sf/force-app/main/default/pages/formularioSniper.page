@@ -123,7 +123,9 @@
                 <!-- PLV-4393 - Fim -->
                 <apex:actionFunction name="redirecionarTela" action="{!redirecionarTela}" rerender="" ></apex:actionFunction>
             </apex:form>
-            <script> var controllerConsultaCPF = "{!$RemoteAction.CtrFormularioSnipper.consultarDadosPessoaBCP}"; </script> <!-- ANNVI-170 INICIO/FIM -->
+            <!-- ANNVI-170 INICIO -->
+            <script> var controllerConsultaCPF = "{!$RemoteAction.CtrFormularioSnipper.consultarDadosPessoaBCP}"; </script> 
+            <!-- ANNVI-170 FIM -->
             <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
             <apex:includeScript value="{!URLFOR($Resource.pageSnipperLibsJs)}"/>
             <apex:includeScript value="{!URLFOR($Resource.pageSnipperJs)}"/>

@@ -317,7 +317,7 @@ div.assistencia-content {
                 <apex:image value="{!$Resource.DezPorcDescPgtoCartDmaisBand}" width="30px" height="30px" />
             </div>
             <div style="margin-left:80px; margin-top: -40px;">
-                <p>10% de desconto em pagamentos com Cartão demais bandeiras.</p>
+                <p>15% de desconto em pagamentos com Cartão demais bandeiras.</p>
             </div>
 
             <div style="margin-top:15px; margin-left: 40px;">

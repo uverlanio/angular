@@ -6,4 +6,8 @@ export default class DataExporter extends LightningElement {
     handleClick() {
         this.message = 'Data Exporter - ON';
     }   
+
+    authenticate(){
+        console.log('Iniciando autenticação');
+    }
 }

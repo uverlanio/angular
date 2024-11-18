@@ -1,16 +1,10 @@
 /**
-* @author Renato Matheus Simião
-* @version 1.0
-* @date 2019-12-03
-* @description Classe de controle para a criação de Voucher em Contrato
 
-*  @author Joao Fabiano - SYS4B - 17 04 2024
-*  @Descrição: Gerador de PDF do Voucher do Seguro - Usando informações do objeto Contract. Removido da QuoteBO e componentizado nesta classe e demais necessárias para a história.
+*  @author Joao Fabiano - SYS4B - 18/11/2024
+*  @Descrição: Gerador de PDF do Voucher do Seguro - Usando informações do objeto Contract.
 
 */
-// PLV-2939 INICIO
-// PLV-3395	INICIO
-// PLV-3726 INICIO
+//ZSVEP-41-INICIO
 public class GeraVoucherPorContratoPDFController {	//PLV-4805 INICIO/FIM
     
     public String renderAs { get; private set; }
@@ -75,8 +69,7 @@ public class GeraVoucherPorContratoPDFController {	//PLV-4805 INICIO/FIM
             system.debug('propostaId'+contratoId);
             
         }
-        if(ApexPages.currentPage().getParameters().get('numero') != null && ApexPages.currentPage().getParameters().get('numero') != ''){
-            
+        if(ApexPages.currentPage().getParameters().get('numero') != null && ApexPages.currentPage().getParameters().get('numero') != ''){            
             segurado = [SELECT Id, GrupoContrato__r.ContratanteContrato__r.Contrato__c,
                         NomeContatoEmergencia__c, TelefoneContatoEmergencia__c,
                         GrupoContrato__r.ContratanteContrato__r.Contrato__r.Name,
@@ -86,9 +79,10 @@ public class GeraVoucherPorContratoPDFController {	//PLV-4805 INICIO/FIM
                         GrupoContrato__r.ContratanteContrato__r.Contrato__r.VigenciaFinal__c,
                         GrupoContrato__r.ContratanteContrato__r.Contrato__r.DataEmissao__c,
                         GrupoContrato__r.ContratanteContrato__r.Contrato__r.Produto__r.ProdutoTecnico__c,
-                        Conta__r.Name, Conta__r.NomeSocial__c
+                        Conta__r.Name, 
+                        Conta__r.NomeSocial__c
                         FROM SeguradoContrato__c
-                        WHERE GrupoContrato__r.ContratanteContrato__r.Contrato__r.Name =: ApexPages.currentPage().getParameters().get('numero')];
+                        WHERE GrupoContrato__r.ContratanteContrato__r.Contrato__r.NumeroPropostaUnico__c =: ApexPages.currentPage().getParameters().get('numero')];
         }else{
             segurado = [SELECT Id, GrupoContrato__r.ContratanteContrato__r.Contrato__c,
             NomeContatoEmergencia__c, TelefoneContatoEmergencia__c,
@@ -101,7 +95,7 @@ public class GeraVoucherPorContratoPDFController {	//PLV-4805 INICIO/FIM
             GrupoContrato__r.ContratanteContrato__r.Contrato__r.Produto__r.ProdutoTecnico__c,
             Conta__r.Name, Conta__r.NomeSocial__c
             FROM SeguradoContrato__c
-                        WHERE GrupoContrato__r.ContratanteContrato__r.Contrato__c = :contratoId];
+            WHERE GrupoContrato__r.ContratanteContrato__r.Contrato__c = :contratoId];
         }
         //PLV-3746 - FIM
 
@@ -142,33 +136,39 @@ public class GeraVoucherPorContratoPDFController {	//PLV-4805 INICIO/FIM
         if( !String.isBlank(segurado.TelefoneContatoEmergencia__c) ){
             System.debug('tel1'+segurado.TelefoneContatoEmergencia__c);
             String tel = segurado.TelefoneContatoEmergencia__c.replace('-','');
-            System.debug('tel left '+tel.left(1));
-            if (tel.left(1)=='0') {
-                tel = tel.substring(1);
-                System.debug('entrou if ok');
-            }
-            System.debug('tel2'+tel);
-            
-            if( tel.length() == 10 ){
-                telefonePessoaParaAvisar = '(' + tel.left(2) + ') ';
-                telefonePessoaParaAvisar += tel.mid(2, 4);
-                telefonePessoaParaAvisar += '-';
-                telefonePessoaParaAvisar += tel.right(4);
-            }
-            else if( tel.length() == 11 ){
-                telefonePessoaParaAvisar = '(' + tel.left(2) + ') ';
-                telefonePessoaParaAvisar += tel.mid(2, 5);
-                telefonePessoaParaAvisar += '-';
-                telefonePessoaParaAvisar += tel.right(4);
-            }
-            else{
-                if (segurado.TelefoneContatoEmergencia__c.left(1)=='0') {
-                    segurado.TelefoneContatoEmergencia__c = segurado.TelefoneContatoEmergencia__c.substring(1);
-                    System.debug('entrou if ok 2');
+            String newTel ;
+    
+            if(tel.left(2) == '55' && (tel.length() == 12 || tel.length() == 13)) {
+                if(tel.length() == 13){
+                    newTel = tel.left(2);
+                    newTel += ' (' + tel.mid(2,2) + ') ';
+                    newTel += tel.mid(4, 5);
+                    newTel += '-';
+                    newTel += tel.right(4);
+                } else if(tel.length() == 12) {
+                    newTel = tel.left(2);
+                    newTel += ' (' + tel.mid(2,2) + ') ';
+                    newTel += tel.mid(4, 4);
+                    newTel += '-';
+                    newTel += tel.right(4);
                 }
-                telefonePessoaParaAvisar = segurado.TelefoneContatoEmergencia__c;
+                newTel = '+'+newTel;
+            } else{
+                if( tel.length() == 10 ){
+                    newTel = '(' + tel.left(2) + ') ';
+                    newTel += tel.mid(2, 4);
+                    newTel += '-';
+                    newTel += tel.right(4);
+                } else if( tel.length() == 11 ){
+                    newTel = '(' + tel.left(2) + ') ';
+                    newTel += tel.mid(2, 5);
+                    newTel += '-';
+                    newTel += tel.right(4);
+                } else {
+                    newTel = tel;
+                }
             }
-            
+            telefonePessoaParaAvisar = newTel;
         }
         
         // PLV-3703 FIM       
@@ -323,3 +323,4 @@ public class GeraVoucherPorContratoPDFController {	//PLV-4805 INICIO/FIM
 // PLV-2939 FIM
 // PLV-3395 FIM
 // PLV-3726 FIM
+//ZSVEP-41-FIM

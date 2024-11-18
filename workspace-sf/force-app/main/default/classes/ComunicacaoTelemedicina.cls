@@ -40,8 +40,8 @@ public with sharing class ComunicacaoTelemedicina {
                 comunicacaoTO.VAL_ATE = contrato.VigenciaFinal__c; 
                 comunicacaoTO.SUBGRUPO = 'Porto Seguro'; 
                 comunicacaoTO.OPERACAO = (letraOperacao != null) ? letraOperacao : '';
-                comunicacaoTO.DATAEMISSAO = contrato.DataEmissao__c; 
-                comunicacaoTO.STATUS = 'PENDENTE'; 
+                comunicacaoTO.DATAEMISSAO = contrato.DataEmissao__c; //FNPVVEP-114 FIX02 INICIO/FIM
+                comunicacaoTO.STATUS = 'PENDENTE';  //FNPVVEP-114 FIX02 INICIO/FIM
         
                 String payload = JSON.serialize(comunicacaoTO);
                 System.debug('payload rogerio teste ><><>' + payload);
@@ -67,7 +67,7 @@ public with sharing class ComunicacaoTelemedicina {
         public Date VAL_ATE { get; set; }
         public String SUBGRUPO { get; set; }
         public String OPERACAO { get; set; }
-        public Date DATAEMISSAO { get; set; }
+        public Date DATAEMISSAO { get; set; } //FNPVVEP-114 FIX02 INICIO/FIM
         public String STATUS { get; set; }
     }
 }

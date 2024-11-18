@@ -25,6 +25,7 @@
     <aura:attribute name="jsonModificada" type="String" default="" /> <!-- II-54 - INICIO/FIM -->
     <aura:attribute name="tipoConfirm" type="String" default="" />
     <aura:attribute name="confirmDialogMessage" type="String" default="" />
+    <aura:attribute name="confirmDialogMessageAlt" type="String" default="" /> <!-- FNPVVEP-168 - INICO/FIM -->
     <aura:attribute name="errorInit" type="String" default="" />
     <aura:attribute name="saveMessage" type="String" default="" />
     <aura:attribute name="etapa" type="Integer" default="1" />
@@ -137,7 +138,28 @@
                     <div class="slds-backdrop slds-backdrop--open" onclick="{!c.handleConfirmDialogNo}"></div>
                 </div>
             </aura:if>
-
+            <!-- FNPVVEP-168 - INICO -->
+            <aura:if isTrue="{!v.showConfirmRecalculo}">
+                <div class="slds-m-around_xx-large">
+                    <div role="dialog" class="slds-modal slds-fade-in-open ">
+                        <div class="slds-modal__container">
+                            <header class="slds-modal__header">
+                                <h1 class="slds-text-heading--medium">Recalculo realizado</h1>
+                            </header>
+                            <div class="slds-modal__content slds-p-around--medium">
+                                <aura:unescapedHtml value="{!v.confirmDialogMessageAlt}" /> 
+                            </div>
+                            <footer class="slds-modal__footer">
+                                <lightning:button name='Fechar' label='Fechar'
+                                    onclick='{!c.handleConfirmRecalculo}' />
+                            </footer>
+                        </div>
+                    </div>
+                    <div class="slds-backdrop slds-backdrop--open" onclick="{!c.handleConfirmDialogNo}">
+                    </div>
+                </div>
+            </aura:if>
+            <!-- FNPVVEP-168 - FIM -->
             <div class="slds">
 
                 <aura:if isTrue="{!v.showSpinner}">
@@ -647,9 +669,7 @@
                                             <h1 class="slds-text-heading--medium">Recalculo realizado</h1>
                                         </header>
                                         <div class="slds-modal__content slds-p-around--medium">
-                                            Olá, {!v.cliente}!<br/>
-                                            A alteração da forma de pagamento do seu Seguro de Vida da Porto foi realizada com sucesso!<br/>
-                                            Todo cuidado é Porto.
+                                            <aura:unescapedHtml value="{!v.confirmDialogMessageAlt}" /> <!-- FNPVVEP-168 - INICO/FIM -->
                                         </div>
                                         <footer class="slds-modal__footer">
                                             <lightning:button name='Fechar' label='Fechar'

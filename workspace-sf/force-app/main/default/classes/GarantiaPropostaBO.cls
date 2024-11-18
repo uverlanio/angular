@@ -184,8 +184,8 @@ public class GarantiaPropostaBO {
 		
 		//VEP - 146 - INICIO
 		Map<String,Id> mapFila = new Map<String,Id>();
-        for(QueueSobject fila :[SELECT QueueID, Queue.developerName FROM QueueSObject WHERE SobjectType = 'CriticaProposta__c' AND Queue.developerName IN ('Fila_Propostas_Prioritarias')]){
-			mapFila.put(fila.Queue.developerName, fila.QueueID);
+        for(QueueSobject fila :[SELECT QueueID, Queue.developerName FROM QueueSObject WHERE SobjectType = 'CriticaProposta__c' AND Queue.developerName IN ('Fila_Propostas_Prioritarias' , 'Fila_Renovacao')]){
+			mapFila.put(fila.Queue.developerName, fila.QueueID);  //FNPVVEP-179 INICIO/FIM
         }
 		//VEP - 146 - FIM
 
@@ -216,7 +216,7 @@ public class GarantiaPropostaBO {
 		//PLV-5004 - FIM
 
 		//VEP - 146 - INICIO                               
-		List<Quote> lstProposta = [SELECT Id, Name, isRecusadaSumariamente__c,CodigoMotivoDevolucao__c, NR__c FROM Quote WHERE Name =: numeroProposta]; //PLV-4980 INICIO/FIM // II-99 - INICIO/FIM
+		List<Quote> lstProposta = [SELECT Id, Name, isRecusadaSumariamente__c,CodigoMotivoDevolucao__c, NR__c, Tipo__c FROM Quote WHERE Name =: numeroProposta]; //PLV-4980 INICIO/FIM // II-99 - INICIO/FIM //FNPVVEP-179 INICIO/FIM
 		//VEP - 146 - FIM
 
 		if(listGarantiaProposta.size() > 0 && criticaProposta != null){
@@ -331,6 +331,7 @@ public class GarantiaPropostaBO {
 			Integer nrInt = 0;
             try { nrInt = Integer.valueOf(lstProposta[0].NR__c); } catch (Exception e) {}
 
+			String idFila = lstProposta[0].Tipo__c == 'Renovacao' ? mapFila.get('Fila_Renovacao') : mapFila.get('Fila_Propostas_Prioritarias'); // FNPVVEP-179 INICIO/FIM 	
 			if(nrInt > 4 && criticaProposta.Status__c == 'Recusado') {
 				criticaProposta.Status__c = 'Inconclusiva';
 				criticaProposta.Procedimento__c = 'Proposta foi recusada pela Samplemed, porém, segurado possui nível de relacionamento superior a 4';
@@ -342,7 +343,7 @@ public class GarantiaPropostaBO {
 					Setor__c = criticaProposta.Setor__c,
 					MomentoAnalise__c = 'Análise interna',     
 					Tipo__c = 'Analise',
-					OwnerId = mapFila.get('Fila_Propostas_Prioritarias'),
+					OwnerId = idFila, //FNPVVEP-179 INICIO/FIM
 					Proposta__c = criticaProposta.Proposta__c
 				);
 				insert novaCriticaProposta; 

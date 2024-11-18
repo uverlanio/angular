@@ -332,7 +332,7 @@ public class CriticaPropostaStatus {
                             System.debug('newStatusCritica: ' + newStatusCritica);
                             //FCVEP-33 INICIO
                             System.Debug('--->CODIGO<---'+mapPropostaAux.get(proposta.id).FormaPagamento__r.Codigo__c);
-                            Set<String> codigosValidos = new Set<String>{'52', '21'};
+                            Set<String> codigosValidos = new Set<String>{'52', '22'};
                             if(momentos.contains('Palavra final') && mapMomento.containsKey('Palavra final') && newStatusCritica != 'Cancelada' && !codigosValidos.contains(mapPropostaAux.get(proposta.id).FormaPagamento__r.Codigo__c)){ //PLV-5004 - INICIO/FIM
                                 palavrafinal = mapMomento.get('Palavra final')[0];
                                 palavrafinal.status__c = 'Liberado';

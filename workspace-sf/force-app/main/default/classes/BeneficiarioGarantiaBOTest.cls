@@ -1,3 +1,10 @@
+/*********************************************************************************************************************************************************************
+@description  Classe para geração de dados iniciais no processo de contratação
+@author KEVIN VOGADO - GLOBANT
+@date 05/11/2024
+@Classe criada por conta da história FNPVVEP-158
+*******************************************************'*************************/
+
 @isTest
 public with sharing class BeneficiarioGarantiaBOTest {
 
@@ -28,16 +35,6 @@ public with sharing class BeneficiarioGarantiaBOTest {
         beneficiario.Status__c = 'Pendente';
         Map<Id, BeneficiarioGarantia__c> pmOld = new Map<Id, BeneficiarioGarantia__c>{beneficiario.Id => beneficiario};
 
-        // Test.startTest();
-        // //BeneficiarioGarantiaBO.getInstance().efetuaPagamento(new List<BeneficiarioGarantia__c>{beneficiario}, pmOld);
-        // Test.stopTest();
-
-        // PagamentoGarantia__c pagamentoGarantiaAtualizado = [SELECT Id, Fase__c, Status_do_pagamento__c 
-        //                                                     FROM PagamentoGarantia__c 
-        //                                                     WHERE Id = :pagamentoGarantia.Id];
-
-        // System.assertEquals('Fechado', pagamentoGarantiaAtualizado.Fase__c, 'The payment phase should be "Fechado"');
-        // System.assertEquals('Pago', pagamentoGarantiaAtualizado.Status_do_pagamento__c, 'The payment status should be "Pago"');
     }
 
 

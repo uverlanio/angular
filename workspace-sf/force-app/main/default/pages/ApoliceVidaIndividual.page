@@ -644,11 +644,13 @@
                         <apex:outputText value="{!data}"/>
                     </td>
                     <td class="borderTop">
-                        <apex:image id="assinaturaVoucher" value="{!$Resource.NovaAssinaturaApolice}" height="50" alt=""/>
+                        <!-- LECVPV-270 Inicio -->
+                        <apex:image id="assinaturaVoucher" value="{!$Resource.NovaAssinaturaApolice}" height="50px" width="140px" alt=""/>
                         <p class="spanParagraph">
-                            <span style="margin-left:5px;"><apex:outputText value="{!nome1}"/></span><br/>
+                            <span style="margin-left:18px;"><apex:outputText value="{!nome1}"/></span><br/>
                             <span style="margin-left:-7px; padding-top:0px;"><b><apex:outputText value="{!descricaoCargo1}"/></b></span>
                         </p>
+                        <!-- LECVPV-270 Fim -->
                     </td>
                     <td class="borderTop">
                         

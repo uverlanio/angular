@@ -1200,11 +1200,16 @@ System.debug('Select PremioContratoFinal: '+ PremioContrato.PremioTotal__c +'Num
                 cobertura.franquia = '';//FNPVVEP-159_FIX01 - INICIO/FIM 
                 if(!codigoFranquiaIndexedBySigla.values().isEmpty()){
                     for(String franquiasGarantia : codigoFranquiaIndexedBySigla.values()){
-                        if(codigoFranquiaIndexedBySigla.containsKey(cobertura.sigla)){
-                            cobertura.franquia = codigoFranquiaIndexedBySigla.get(cobertura.sigla);
-                        }else{
-                            cobertura.franquia = '';
-                        }
+                        //FNPVVEP-159 FIX02 - INICIO 
+                        // if(codigoFranquiaIndexedBySigla.containsKey(cobertura.sigla)){
+                        //     cobertura.franquia = codigoFranquiaIndexedBySigla.get(cobertura.sigla);
+                        // }else{
+                        //     cobertura.franquia = '';
+                        // }
+                        cobertura.franquia = (codigoFranquiaIndexedBySigla.containsKey(cobertura.sigla) && codigoFranquiaIndexedBySigla.get(cobertura.sigla) != null) 
+                        ? codigoFranquiaIndexedBySigla.get(cobertura.sigla) 
+                        : '';
+                        //FNPVVEP-159 FIX02 - FIM 
                     }
                 }
                 //FNPVVEP-159 - FIM 
@@ -1220,17 +1225,22 @@ System.debug('Select PremioContratoFinal: '+ PremioContrato.PremioTotal__c +'Num
                 // FNPVVEP-91 - FIM
                 //II-149 - FIM
                 //PLV-4481 DIT - VINICIUS - FIM
+                System.debug('codigoFranquiaIndexedBySigla Rogerio>> ' + codigoFranquiaIndexedBySigla);
+                System.debug('cobertura.franquia Rogerio>> ' + cobertura.franquia);
                 System.debug('cobertura.quantidade >> ' + cobertura.quantidade);
                 segurado.coberturas.add( cobertura );
                 system.debug('segurado.coberturas >> ' + segurado.coberturas);
             }
-            
+            System.debug('>segurado> ' + grupo.segurados);
+            System.debug('>grupo> ' + grupo.segurados);
             grupo.segurados.add(segurado);
+            System.debug('>grupo.segurados> ' + grupo.segurados);
             contratante.grupos.add(grupo);
+            System.debug('>contratante.grupos ' + contratante.grupos);
         }
         
         request.orcamento.contratantes.add(contratante);
-        
+        System.debug('>request.orcamento.contratantes> ' + request.orcamento.contratantes);
         //payload = JSON.serialize(request);
         payload = JSON.serialize(request, true);
         

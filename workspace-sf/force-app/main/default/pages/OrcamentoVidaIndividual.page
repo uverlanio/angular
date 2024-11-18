@@ -150,7 +150,7 @@
             <!-- II-124 - FIM-->
             <apex:actionFunction name="redirecionarTela" action="{!redirecionarTela}" rerender="" ></apex:actionFunction>
         </apex:form>
-        <script> var controllerConsultaCPF = "{!$RemoteAction.CtrFormularioSnipper.consultarDadosPessoaBCP}"; </script> <!-- ANNVI-170 INICIO/FIM -->
+        <script> var controllerConsultaCPF = "{!$RemoteAction.CtrFormularioSnipper.consultarDadosPessoaBCP}"; </script> <!-- ANNVI-170 INICIO/FIM FIX 02-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"> </script>        
         <apex:includeScript value="{!URLFOR($Resource.OrcamentoVidaIndividualJs)}" />
     </body>

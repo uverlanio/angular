@@ -1,3 +1,4 @@
+<!-- ZSVEP-41-INICIO -->
 <apex:page showHeader="false" renderAs="pdf"  applyBodyTag="false" controller="GeraVoucherPorContratoPDFController">
     <!--PLV- 3726 INICIO --> 
     <!--PLV- 3703 INICIO --> 
@@ -107,8 +108,8 @@
         <div style="margin:10px;">
             <div class="headervoucher">
                 <div style="border:0px solid #000; width:780px;">
-                                                                                                <!-- VOUCHER - Carta Garantia -->
-                    <span style="font-size:18px; font-family:Futara; color:#104E8B"><strong>VOUCHER - Carta Garantia - 2024</strong></span>
+                                                                                                <!-- VOUCHER - Carta Garantia  - 2024 Zeladoria -->
+                    <span style="font-size:18px; font-family:Futara; color:#104E8B"><strong>VOUCHER - Carta Garantia</strong></span>
                     
                 </div>
                 <!-- AV-749 - INICIO-->
@@ -273,7 +274,7 @@
                 </p>
             </div>
         </div>
-        <div style="{!IF(proposta.TipoViagem__c = 'Internacional','display:block', 'display:none')}">
+        <div style="{!IF(contract.TipoViagem__c = 'Internacional','display:block', 'display:none')}">
             <!--Ingles-->
             <div style="margin:10px;page-break-before: always;">
                 <div style="border:0px solid #000; margin-top:-20px; text-align:right;">
@@ -617,3 +618,4 @@
     <!--PLV- 3703 FIM --> 
     <!--PLV- 3726 FIM --> 
 </apex:page>
+<!-- ZSVEP-41-FIM -->

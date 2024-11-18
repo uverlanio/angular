@@ -151,6 +151,7 @@ public without sharing class PropostaGenericaBuilder extends PropostaBuilder
         
     }
     //FIM | PLV-2402-30
+    
     /*
 *  @author Everymind - Sprint 23
 *  @Descrição: Atualiza Status Proposta
@@ -283,7 +284,7 @@ public without sharing class PropostaGenericaBuilder extends PropostaBuilder
                 //PLV-2722 - Fim - Alteração de lógica no if	
                 else
                     proposta.propostaWrapper.sfProposta.Status = 'Disponível para contratação';
-                }
+            }
             else{
                 if(payloadTO.recusada==true){
                     proposta.propostaWrapper.sfProposta.CodigoMotivoDevolucao__c = '10'; //II-48 FIX01 INICIO-FIM 
@@ -312,7 +313,7 @@ public without sharing class PropostaGenericaBuilder extends PropostaBuilder
                 //PLV-4993 - FIM
                
             }
-
+          
             //II-165 INICIO
             //II-165 FIX03 INICIO
             // if(hasCtrAnalise && proposta.propostaWrapper.sfProposta.Status == 'Disponível para contratação'){
@@ -323,7 +324,6 @@ public without sharing class PropostaGenericaBuilder extends PropostaBuilder
 
             try{
                 // Atualiza proposta
-                  
                 update proposta.propostaWrapper.sfProposta;
             }
             catch (Exception e){
@@ -364,9 +364,9 @@ public without sharing class PropostaGenericaBuilder extends PropostaBuilder
     //PLV-3763 - INICIO - Converter serviço de Devolutivas da Proposta em lista
     public List<Proposta> atualizarStatusListaPropostas(EmissaoTO.PayloadTO payloadTO)
     {
-        system.debug('payloadTO<>^^: '+payloadTO);
+        
         Set<String> 			 setPropostas 				   = new Set<String>();
-       // Set<String> 			 setPropostasParaEnviarVoucher = new Set<String>();
+        Set<String> 			 setPropostasParaEnviarVoucher = new Set<String>();
         Map<String, Quote> 		 mapPropostas 				   = new Map<String, Quote>();
         Map<String, String>		 mapPropostasVoucherEnviado	   = new Map<String, String>();
         List<CriticaProposta__c> listCriticaProposta 		   = new List<CriticaProposta__c>();
@@ -470,6 +470,8 @@ public without sharing class PropostaGenericaBuilder extends PropostaBuilder
         List<Id> listaIdProposta = new List<Id>();
         //PLV-3888 - Fim
         System.debug('payloadTO.devolutivas = '+ payloadTO.devolutivas);
+        System.debug('payloadTO.'+ JSON.serialize(payloadTO));
+
         payloadTO.proposta2 = new EmissaoTO.PessoaTO();//OKR 146 INICIO-FIN       
         
         for(EmissaoTO devolutiva : payloadTO.devolutivas){            
@@ -524,7 +526,7 @@ public without sharing class PropostaGenericaBuilder extends PropostaBuilder
                     proposta.propostaWrapper.sfProposta.Chave_de_Agrupamento__c = '';
                     //II-48 FIX03 INICIO
                     if(payloadTO.retornoFinanceiro.autorizacaoCartao.portoPag.erros != null){
-                        proposta.propostaWrapper.sfProposta.CodigoMotivoDevolucao__c = '10';
+                        proposta.propostaWrapper.sfProposta.CodigoMotivoDevolucao__c = '10'; 
                         //II-165 INICIO
                         //II-165 FIX03 INICIO 
                         if(!listaPropostas.contains(proposta.propostaWrapper.sfProposta)){ 
@@ -536,8 +538,9 @@ public without sharing class PropostaGenericaBuilder extends PropostaBuilder
                     //II-48 FIX03 FIM
                 }
                 //TKCL 458 - FIM
-            //PLV-3888 - Fim
-                
+             //PLV-3888 - Fim
+                System.debug('existeCriticaFinanceiro.'+ JSON.serialize(existeCriticaFinanceiro));
+
                 // faz a leitura dos nós de crítica do payload e insere as criticas da proposta
                 //II-48 FIX03 INICIO
                 if(existeCriticaFinanceiro){
@@ -589,14 +592,8 @@ public without sharing class PropostaGenericaBuilder extends PropostaBuilder
                     listCriticaProposta.add(criticaProposta.sfCriticaProposta);
                 }
                 
-                //FCVEP-33 - INICIO
-                Boolean isPix = (proposta.propostaWrapper.sfProposta.FormaPagamento__r != null &&
-                                 proposta.propostaWrapper.sfProposta.FormaPagamento__r.Codigo__c != null &&
-                                 (proposta.propostaWrapper.sfProposta.FormaPagamento__r.Codigo__c == '21' || 
-                                  proposta.propostaWrapper.sfProposta.FormaPagamento__r.Codigo__c == '52') &&
-                                 proposta.propostaWrapper.sfProposta.Tipo__c == 'Novo') ? true : false;
-                //FCVEP-33 - FIM
-                
+                System.debug('XXX - Proposta2: ' + JSON.serialize(payloadTO.proposta2));
+
                 // valida status da proposta de acordo com o nó de retorno
                 if(devolutiva.retornoAceitacao.recusas != null && devolutiva.retornoAceitacao.recusas.size() > 0 || existeCriticaFinanceiro == true){
                     //OKR-146 INICIO
@@ -610,14 +607,14 @@ public without sharing class PropostaGenericaBuilder extends PropostaBuilder
                         }
                     //OKR-146 FIN
                 }else if((devolutiva.retornoAceitacao.pendencias != null && devolutiva.retornoAceitacao.pendencias.size() > 0)||
-                         (devolutiva.retornoAceitacao.analises != null && devolutiva.retornoAceitacao.analises.size() > 0) || isPix ){//FCVEP-33
+                         (devolutiva.retornoAceitacao.analises != null && devolutiva.retornoAceitacao.analises.size() > 0)){
                              proposta.propostaWrapper.sfProposta.Status = 'Em análise';
                              mapPropostas.get(namePropostaPayload).status = 'Em análise';					
                          }else{
                              proposta.propostaWrapper.sfProposta.Status = 'Disponível para contratação';
                              mapPropostas.get(namePropostaPayload).status = 'Disponível para contratação';
                              if(mapPropostas.get(namePropostaPayload).name == namePropostaPrincipal) idPropostaPrincipal = mapPropostas.get(namePropostaPayload).id;
-                          //   setPropostasParaEnviarVoucher.add(mapPropostas.get(namePropostaPayload).id);
+                             setPropostasParaEnviarVoucher.add(mapPropostas.get(namePropostaPayload).id);
                          }	
             }
             else{
@@ -656,7 +653,7 @@ public without sharing class PropostaGenericaBuilder extends PropostaBuilder
             if(mapPropostas.get(namePropostaPayload).Modalidade__r != null) proposta.propostaWrapper.retornoWrapper.modalidade = mapPropostas.get(namePropostaPayload).Modalidade__r.Codigo__c;
             
             // VIAG-141 INICIO
-            System.debug('Debug mapPropostas: ' +mapPropostas );
+
             Datetime validade;
             validade = Datetime.valueOf(mapPropostas.get(namePropostaPayload).DataLimitePagamento__c);
             Datetime newDate;
@@ -665,7 +662,7 @@ public without sharing class PropostaGenericaBuilder extends PropostaBuilder
             proposta.propostaWrapper.retornoWrapper.validadePagamento = String.valueOf(newDate);
             System.debug('proposta.propostaWrapper.retornoWrapper.validadePagamento>>>' +  proposta.propostaWrapper.retornoWrapper.validadePagamento );
             // VIAG-141 INICIO
-           
+            
             listaPropostasDevolutiva.add(proposta);
         }
 
@@ -696,7 +693,7 @@ public without sharing class PropostaGenericaBuilder extends PropostaBuilder
         //PLV-3755 - INICIO - Mudança na forma de envio do Voucher
         //Chama a classe responsável pelo envio do voucher para os segurados.
         // O mapa de retorno contem o link de cada voucher enviado, identificado pelo id da Proposta correspondente.
-          if(existeCriticaFinanceiro == false){
+        if(existeCriticaFinanceiro == false){
             VoucherEmailController voucherEmail = new VoucherEmailController();
             //PLV-4398 - INICIO
             system.debug('idPropostaPrincipal:'+idPropostaPrincipal);
@@ -704,9 +701,9 @@ public without sharing class PropostaGenericaBuilder extends PropostaBuilder
                 
                 system.debug('busca proposta principal, oportunidadeID: '+oportunidadeID);
                 idPropostaPrincipal = [select Id from Quote where OpportunityId =: oportunidadeID  ORDER BY NumeroProposta__c  ASC LIMIT 1].Id;
-             //   setPropostasParaEnviarVoucher.add(idPropostaPrincipal);
+                setPropostasParaEnviarVoucher.add(idPropostaPrincipal);
             }
-          //  system.debug('setPropostasParaEnviarVoucher'+setPropostasParaEnviarVoucher);
+            system.debug('setPropostasParaEnviarVoucher'+setPropostasParaEnviarVoucher);
             system.debug('idPropostaPrincipal novo'+idPropostaPrincipal);
             
             //PLV-5200 - INICIO
@@ -747,7 +744,6 @@ public without sharing class PropostaGenericaBuilder extends PropostaBuilder
     {
         List<EmissaoTO.RemuneracaoTO> remuneracoesPropostaTO = payloadTO.proposta.remuneracoes; //II-167 INICIO/FIM
         payload = payloadTO;
-        system.debug('remuneracoesProposta <><> ' + remuneracoesPropostaTO);
         segmento = String.isNotBlank(segmento) ? segmento : payload.proposta.segmento;//PLV-4701 - INICIO/FIM
         system.debug('GERAR PROPOSTA!!');
         system.debug('PAYLOAD: ' + JSON.serialize( payload ) );
@@ -855,9 +851,8 @@ public without sharing class PropostaGenericaBuilder extends PropostaBuilder
             mapRetencaoComissao.put('meioComercializacao', payload.proposta.meioComercializacao);
             mapRetencaoComissao.put('susep', payload.proposta.remuneracoes[0].favorecidos[0].susep);
             System.debug( 'mapRetencaoComissao:  ' + mapRetencaoComissao);
-            // aqui rogerio
             this.gerarRemuneracaoPropostaWrappersComFavorecidos(orcamento.RemuneracoesOrcamento__r, this.proposta.propostaWrapper.RemuneracaoPropostaWrapper, payloadTO.proposta.tipoSeguro, mapRetencaoComissao, remuneracoesPropostaTO); //RVI-49 - INICIO/FIM //II-167 INICIO/FIM
-            //AV-614 - FIM 
+            //AV-614 - FIM
             
             //PLV_3196 - INICIO - Alteração do Serviço "Gravar Proposta" para retornar Ramo e Modalidade da Proposta
             //proposta.propostaWrapper.retornoWrapper.codigoRamo = this.proposta.propostaWrapper.sfProposta.RamoSeguro__r.Codigo__c;//PLV-4785-INICIO/FIM
@@ -913,8 +908,7 @@ public without sharing class PropostaGenericaBuilder extends PropostaBuilder
     public void criarRespostaDeclaracaoSaude(EmissaoTO.PayloadTO payload, Id propostaId)
     {	
         //PLV-4257 - inicio
-
-        system.debug('payload =>: '+payload);
+        system.debug('payload: '+payload);
         //PLV-3285 - INICIO - MVP A Transmissão da proposta
         if (payload.proposta.contratantes[0].grupos[0].segurados[0].questionario == null) return;
      
@@ -1132,7 +1126,7 @@ public without sharing class PropostaGenericaBuilder extends PropostaBuilder
          
             String idPropostaPrincipal = proposta.propostaWrapper.sfProposta.Id;
             List<Quote> DataLimite = new List<Quote>();
-             DataLimite =  [SELECT DataLimitePagamento__c
+             DataLimite =  [SELECT DataLimitePagamento__c 
                                     FROM Quote
                                     WHERE id = : idPropostaPrincipal 
                                     LIMIT 1];
@@ -1146,6 +1140,9 @@ public without sharing class PropostaGenericaBuilder extends PropostaBuilder
               System.Debug(' proposta.propostaWrapper.retornoWrapper.retorno.proposta.validadePagamento >>>>'+ proposta.propostaWrapper.retornoWrapper.retorno.proposta.validadePagamento); 
             
             // VIAG-141 FIM
+
+
+
             proposta.propostaWrapper.retornoWrapper.retorno.proposta.codigoEmpresa = this.codigoEmpresa;
             proposta.propostaWrapper.retornoWrapper.retorno.proposta.dataCalculo = String.valueOf(proposta.propostaWrapper.sfProposta.DataCalculo__c);
             proposta.propostaWrapper.retornoWrapper.retorno.proposta.tipoSeguro = mapConversaoTipoSeguro.get(proposta.propostaWrapper.sfProposta.Tipo__c);
@@ -1176,7 +1173,6 @@ public without sharing class PropostaGenericaBuilder extends PropostaBuilder
                 contratante.dadosPagamento.recorrencia = contratantesSfProposta.sfContratante.Recorrencia__c;
                 contratante.dadosPagamento.valorPrimeiraParcela = String.valueOf(contratantesSfProposta.sfContratante.Valor_PrimeiraParcela__c);
                 contratante.dadosPagamento.valorDemaisParcelas = String.valueOf(contratantesSfProposta.sfContratante.Valor_DemaisParcelas__c);
-                System.debug('Valores parcelas '+contratante.dadosPagamento.recorrencia + ' - '+contratante.dadosPagamento.valorPrimeiraParcela + ' - '+contratante.dadosPagamento.valorDemaisParcelas);
                  // TKCL 473 - FIM
                 //PLV-3285 - Os valores abaixo serão mocados pois a logica para calculo será criada em uma nova história 
                 //PLV-3455 - INICIO - Preencher os valores de parcelas
@@ -1238,8 +1234,7 @@ public without sharing class PropostaGenericaBuilder extends PropostaBuilder
     {
         system.debug('ACESSOU converterListaPropostasParaRetorno');
         Set<String> setIdCanalDistribuicao = new Set<String>();
-        Set<Id> quotesIds = new Set<Id>();
-
+        
         Proposta propostaWP = new proposta();
         propostaWP.propostaWrapper = new Proposta.PropostaWrapper();
         propostaWP.propostaWrapper.retornoWrapper.retorno.resultados = new List<RetornoPropostaRestTO>();
@@ -1247,13 +1242,8 @@ public without sharing class PropostaGenericaBuilder extends PropostaBuilder
         
         for(Proposta proposta : listaPropostas){
             if(proposta.propostaWrapper.sfProposta.CanalDistribuicao__c == null) continue; 
-             setIdCanalDistribuicao.add(proposta.propostaWrapper.sfProposta.CanalDistribuicao__c);
-
-             if(proposta.propostaWrapper.sfProposta.voucherPdfDownloadUrl__c !='')
-             {
-                 quotesIds.add(proposta.propostaWrapper.sfProposta.Id);
-                
-             }
+            
+            setIdCanalDistribuicao.add(proposta.propostaWrapper.sfProposta.CanalDistribuicao__c);
         }	
         
         Map<String,CanalDistribuicao__c> mapCanalDistribuicao = new Map<String, CanalDistribuicao__c>(
@@ -1264,26 +1254,9 @@ public without sharing class PropostaGenericaBuilder extends PropostaBuilder
     // MGRC-624 INICIO
         String  identificador ='';     
         String  redirecionaURL = '';   
-        String   nomeVoucher =''; 
-           
-        String baseURL = '';
-        List<NamedCredential> namedCredential = [SELECT Endpoint FROM NamedCredential WHERE DeveloperName = 'SFECM' LIMIT 1];
-        List<Servico__mdt> servicoMdt = [SELECT NomeCredencial__c,NomeToken__c,Endpoint__c,DeveloperName FROM Servico__mdt WHERE DeveloperName='Consultar_ArquivoSF' LIMIT 1];
-        if(namedCredential.size() > 0){
-            if(namedCredential.get(0).Endpoint != '' && namedCredential.get(0).Endpoint != null){
-                baseURL += namedCredential.get(0).Endpoint; 
-            }
-        }
-        if(servicoMdt.size() > 0){
-            if(servicoMdt.get(0).Endpoint__c != '' && servicoMdt.get(0).Endpoint__c != null){
-                baseURL += servicoMdt.get(0).Endpoint__c; 
-            }
-        }
-        
-        //Sting baseURL = namedCredential.get(0) != null ? 
-        //String baseURL = [SELECT Endpoint FROM NamedCredential WHERE DeveloperName = 'SFECM' LIMIT 1].Endpoint;
-        //baseURL += [SELECT NomeCredencial__c,NomeToken__c,Endpoint__c,DeveloperName FROM Servico__mdt WHERE DeveloperName='Consultar_ArquivoSF' LIMIT 1].Endpoint__c;
-
+        String   nomeVoucher ='';    
+        String baseURL = [SELECT Endpoint FROM NamedCredential WHERE DeveloperName = 'SFECM' LIMIT 1].Endpoint;
+        baseURL += [SELECT NomeCredencial__c,NomeToken__c,Endpoint__c,DeveloperName FROM Servico__mdt WHERE DeveloperName='Consultar_ArquivoSF' LIMIT 1].Endpoint__c;
       // MGRC-624 FIM
         for(Proposta proposta :  listaPropostas){
             system.debug('Proposta: ' + proposta);
@@ -1609,7 +1582,7 @@ public without sharing class PropostaGenericaBuilder extends PropostaBuilder
         // String dataNascimentoSegurado;
         // String nomeGrupo = '';
         
-        if(this.contemViagem){
+        if(this.contemViagem == true){
             
             // 	dataNascimentoSegurado = grupoPayloadProposta.segurados[0].pessoa.dadosPessoaFisica.dataNascimento;
             // 	Integer idadeSegurado = ValidaRegrasGarantiaSniper.converterDataComtracosParaIdade(dataNascimentoSegurado);
@@ -2113,6 +2086,10 @@ public without sharing class PropostaGenericaBuilder extends PropostaBuilder
                 listCriticasWrapper.add(criticaWrapper);
             }
         }
+
+        System.debug('listCriticasWrapper: ' + JSON.serialize(listCriticasWrapper));
+        System.debug('1954 - PROPOSTA: ' + JSON.serialize(proposta));
+
 
         //PLV-4953 - INICIO
         if (listCriticasWrapper != null && listCriticasWrapper.size() > 0) {
@@ -2916,12 +2893,11 @@ upsert listaContasProposta IdExterno__c;*/
 *  @Descrição: inclui no wrapper
 */
     public void gerarRemuneracaoPropostaWrappersComFavorecidos(List<RemuneracaoOrcamento__c> remuneracoes, List<Proposta.RemuneracaoPropostaWrapper> listRemuneracaoPropostaWrappers, String tipoProposta, map<String, String> mapRetencaoComissao, List<EmissaoTO.RemuneracaoTO> remuneracoesPropostaTO) //RVI-49 - INICIO/FIM ----- AV-614 - INICIO/FIM //II-167 INICIO/FIM
-    {   
+    {
         // monta o mapa com os favorecidos das remunerações obtidas no payload recebido
         Map<String, List<EmissaoTO.FavorecidoTO>> mapFavorecidosRemuneracoesTO = new Map<String, List<EmissaoTO.FavorecidoTO>>();
         //AV-614 - INICIO FOI NECESSÁRIO COMENTAR ESSE BLOCO PARA QUE A NOVA LOGICA FUNCIONE
         //Map<String, Decimal> mapRetencao = new Map<String, Decimal>(); // PLV-4470 INICIO/FIM
-        System.debug('PayloadGenerica <> ' + payload);
         for(EmissaoTO.RemuneracaoTO remTO : payload.proposta.remuneracoes){
             if(remTO.favorecidos.size() > 0){
                 mapFavorecidosRemuneracoesTO.put(remTO.tipoRemuneracao, remTO.favorecidos);
@@ -3001,6 +2977,7 @@ upsert listaContasProposta IdExterno__c;*/
             // Instancias
             Proposta.RemuneracaoPropostaWrapper remuneracaoPropostaWrapper = new Proposta.RemuneracaoPropostaWrapper();
             remuneracaoPropostaWrapper.sfRemuneracaoProposta = new RemuneracaoProposta__c();
+            
             // Popula a remuneracao da proposta
             this.popularRemuneracaoProposta(remuneracao, remuneracaoPropostaWrapper.sfRemuneracaoProposta, tipoProposta, retencaoComissao, bonusCampanha); //RVI-49 - INICIO/FIM -------- AV-614 - INICIO/FIM
         //II-167 FIM
@@ -3295,9 +3272,8 @@ upsert listaContasProposta IdExterno__c;*/
                     }catch(Exception ee){
                         System.debug('FALHA AO PEGAR EMAIL DO PAYLOAD');
                     }
-                  
                 }
-                
+
             }
             
             // PLV-4488 FIM - 
@@ -3323,14 +3299,12 @@ upsert listaContasProposta IdExterno__c;*/
             HerokuResponseTO.TituloTO retorno = HerokuService.getInstance().gerarNumeroProposta(solicitarTituloTO);
             // INICIO | PLV-2355-SNIPER
             String numeroProposta = retorno.data.numeros[0];
-
             proposta.Status = 'Em criação';
             proposta.NR__c = payloadTO.proposta.contratantes[0].pessoa.nivelRelacionamento == null ? '': payloadTO.proposta.contratantes[0].pessoa.nivelRelacionamento;//OKR-134 - INÍCIO/FIM 
             proposta.NumeroProposta__c = numeroProposta;
             system.debug('proposta.NumeroProposta__c: '+ proposta.NumeroProposta__c);
             proposta.NomeSocial__c = payloadTO.proposta.contratantes[0].pessoa.nomeSocial; // LECVPV-184 INICIO/FIM
             proposta.MeioComercializacao__c = payloadTO.proposta.meioComercializacao;
-            
             //PLV-4440 - INICIO
             if('Individual'.equalsIgnoreCase(this.segmento)){//PLV-4701 INICIO/FIM
                 system.debug('payloadTO:: '+payloadTO);
@@ -3347,14 +3321,13 @@ upsert listaContasProposta IdExterno__c;*/
         		//PLV-4386 - INÍCIO
         		proposta.MelhorPeriodoContato__c = payloadTO.proposta.melhorPeriodo== null ? 'I' : payloadTO.proposta.melhorPeriodo;
         		//PLV-4386 - FIM
-               
                 //PLV-4953 - INICIO
                 if(payloadTO.proposta.contratantes[0].pessoa.email != null)
                     proposta.email__c = payloadTO.proposta.contratantes[0].pessoa.email;
                 //PLV-4953 - FIM
-                 
             }
 
+            // VIAG-139 INICIO
             ParceiroDAO daoParceiroDAO = ParceiroDAO.getInstance();
             proposta.Parceiro__c = daoParceiroDAO.buscarParceiroPorProductId(orcamento.Produto__c); 
             System.debug('Parceiro>>>>'+ proposta.Parceiro__c+ 'Produto c>>>>>>'+ orcamento.Produto__c);
@@ -3440,12 +3413,12 @@ upsert listaContasProposta IdExterno__c;*/
             proposta.TipoDescontoAgravo__c = orcamento.TipoDescontoAgravo__c;
             proposta.TipoEvento__c = orcamento.TipoEvento__c;
             proposta.TipoViagem__c = orcamento.TipoViagem__c;
-            proposta.VigenciaFinal__c = orcamento.VigenciaFinal__c;
             proposta.TipoVigencia__c = orcamento.TipoVigencia__c;
+            proposta.VigenciaFinal__c = orcamento.VigenciaFinal__c;
             proposta.VigenciaFinalAlterada__c = orcamento.VigenciaFinalAlterada__c; //PLV-4684 INICIO/FIM
             proposta.VigenciaInicial__c = orcamento.VigenciaInicial__c;
             //II-143 - INICIO            
-            if(this.segmento == 'Individual' && orcamento.VigenciaInicial__c < System.today() &&  orcamento.Type == 'Novo'){
+            if(this.segmento == 'Individual' && orcamento.VigenciaInicial__c < System.today()){
                 proposta.VigenciaInicial__c = System.today();
                 proposta.VigenciaFinal__c = System.today().addDays(-1).addYears(1);
             }
@@ -3730,9 +3703,6 @@ upsert listaContasProposta IdExterno__c;*/
         {
             throw new PropostaBuilderException('Origem: Proposta >> mapeiaProposta >> DEPARA de orcamento p/ objeto SF \r - Causa: ' + e.getCause() + ' \r - linha: ' +  e.getLineNumber() +' TrackTrace: '+e.getStackTraceString()+ ' \r - Mensagem: ' + e.getMessage());
         }
-
-      
-
     }
 	//TKCL-246 FIX-05 INICIO
     // TKCL 441 - INICIO FIX01
@@ -3742,12 +3712,10 @@ upsert listaContasProposta IdExterno__c;*/
                 payloadTO.proposta.contratantes[0] != null && 
                 payloadTO.proposta.contratantes[0].dadosPagamento != null ){ //ANNVI-48 - INICIO/FIM ANNVI-151-INICIO/FIM 
                 for(ServiceTO.ParcelamentoTO parcela : payloadParcelamentos.parcelamentos){
-                    System.debug('parcela.qtdParcelas '+parcela.qtdParcelas);
-                    System.debug('this.dadosPagamento '+ JSON.serialize(this.dadosPagamento));
                 //RVI-240-INICIO
                 if(MetadataDAO.getInstance().existsInMetadata(payloadTO.proposta.segmento, payloadTO.proposta.codigoProdutoVida, payloadTO.proposta.codigoEmpresa) &&  //RVI-240-FIM
                    payloadTO.proposta.contratantes[0].dadosPagamento.quantidadeParcelas == parcela.qtdParcelas &&
-                  (parcela.codigo == 70 || parcela.codigo == 98) || ((parcela.codigo == 62 || parcela.codigo == 97) && payloadTO.proposta.codigoEmpresa == 14) && payloadTO.proposta.contratantes[0].dadosPagamento.codigoFormaPagamento == parcela.codigo) { //TKCL-441 FIX02 INICIO/FIM PLV-5860-INICIO/FIM //ANNVI-48 - INICIO/FIM ANNVI-151-INICIO/FIM 
+                  (parcela.codigo == 70 || parcela.codigo == 98) && payloadTO.proposta.contratantes[0].dadosPagamento.codigoFormaPagamento == parcela.codigo) { //TKCL-441 FIX02 INICIO/FIM PLV-5860-INICIO/FIM //ANNVI-48 - INICIO/FIM ANNVI-151-INICIO/FIM 
                     if(parcela.qtdParcelas > 1){
                         this.dadosPagamentoRecorrencia = this.dadosPagamento;
                         System.debug('CODIGO PAGAMENTO: '+ parcela.codigo);
@@ -3803,15 +3771,6 @@ upsert listaContasProposta IdExterno__c;*/
 */
     private void popularContratante(ContratanteOrcamento__c contratante, ContratanteProposta__c contratanteProposta, EmissaoTO.ContratanteTO contratanteJSON, InformacaoBancaria__c pInformacaoBancaria, CartaoCredito__c pCartaoCredito, Boolean contemViagem, EmissaoTO.PessoaTO responsavelFinanceiro,Boolean responsavelFinanceiroBoolean, String tpSeg)//PLV-5067 INICIO/FIM  //PLV-4911 - INICIO/FIM PEDRO AUGUSTO BRAZ //RVI-193 - INICIO/FIM
     {
-        system.debug('contratante <><> ' + contratante);
-        system.debug('contratanteProposta <><> ' + contratanteProposta);
-        system.debug('contratanteJSON <><> ' + contratanteJSON);
-        system.debug('pInformacaoBancaria <><> ' + pInformacaoBancaria);
-        system.debug('pCartaoCredito <><> ' + pCartaoCredito);
-        system.debug('contemViagem <><> ' + contemViagem);
-        system.debug('responsavelFinanceiro <><> ' + responsavelFinanceiro);
-        system.debug('responsavelFinanceiro <><> ' + responsavelFinanceiroBoolean);
-        system.debug('responsavelFinanceiro <><> ' + tpSeg);
         try
         {	
             system.debug('popularContratante contemViagem: ' + this.contemViagem);
@@ -3896,8 +3855,9 @@ upsert listaContasProposta IdExterno__c;*/
                     // }else{
                     // 	contratanteProposta.TipoEndereco__c = ''; 
                     // }
+                    
                     contratanteProposta.Estado__c = contratanteJSON.grupos[0].segurados[0].pessoa.enderecos[0].uf;
-
+                    
                     String tipoLogradouro = contratanteJSON.grupos[0].segurados[0].pessoa.enderecos[0].tipoLogradouro;
                     if(tipoLogradouro == 'R' || tipoLogradouro == 'Rua' || tipoLogradouro == 'R.' || tipoLogradouro == 'rua'){
                         contratanteProposta.TipoLogradouro__c = 'RUA';
@@ -4047,7 +4007,6 @@ upsert listaContasProposta IdExterno__c;*/
                 contratanteProposta.IOF__c = 0;
             }
             //VIAG-225 FIM
-            //contratanteProposta.IOF__c = grupoPayload.segurados[0].iof !=null ? grupoPayload.segurados[0].iof : 0;
             //AV-658 FIM 
             //PLV-4701 - FIM - PEDRO AUGUSTO BRAZ - SYS4B
 
@@ -4256,7 +4215,7 @@ upsert listaContasProposta IdExterno__c;*/
                 upsert responsavel IdExterno__c;
                 mapContas.put(responsavel.IdExterno__c,responsavel);
             }
-
+           
             //SE FALSO O RESPONSÁVEL É OUTREM, SE VERDADEIRO É O PROPRIO CONTRATANTE
             if(responsavelFinanceiroBoolean){
                 contratanteProposta.ResponsavelPagamento__r = new Account(IdExterno__c = contratanteIdExterno);
@@ -4304,7 +4263,6 @@ upsert listaContasProposta IdExterno__c;*/
             }
             // TKCL-473/INICIO
             if (dadosPagamentoRecorrencia != null) {
-                System.debug('dadosPagamentoRecorrencia '+JSON.serialize(dadosPagamentoRecorrencia));
                 System.debug('Gior => Valor Primeira parcela...'+dadosPagamentoRecorrencia.valorPrimeiraParcela);
                 System.debug('Gior => Valor Demais parcelas...'+dadosPagamentoRecorrencia.valorDemaisParcelas);
                 contratanteProposta.Recorrencia__c = true;
@@ -4312,13 +4270,7 @@ upsert listaContasProposta IdExterno__c;*/
                 contratanteProposta.Valor_DemaisParcelas__c = Decimal.valueOf(dadosPagamentoRecorrencia.valorDemaisParcelas);
             }
             // TKCL-473/FIM
-            try {
-                System.debug('dadosPagamentoRecorrencia.valorPrimeiraParcela '+dadosPagamentoRecorrencia.valorPrimeiraParcela);
-                System.debug('dadosPagamentoRecorrencia.Valor_DemaisParcelas__c '+dadosPagamentoRecorrencia.valorDemaisParcelas);
-            } catch (Exception e) {
-                System.debug('erro ao obter Primeira Demais parcela '+e.getStackTraceString()+' - '+e.getMessage());
-                
-            }
+            
             //PLV-3285 - INICIO - MVP A Transmissão da proposta
 	    //PLV-5067 - INICIO DO CÓDIGO MOVIDO - PEDRO AUGUSTO BRAZ
             //PLV-5067 - FIM DO CÓDIGO MOVIDO - PEDRO AUGUSTO BRAZ
@@ -4744,8 +4696,7 @@ upsert listaContasProposta IdExterno__c;*/
             // }else{
             // 	nacionalidade = 'Estrangeira';
             // }
-            System.debug('sfProposta##: ' + JSON.serializePretty(this.proposta.propostaWrapper.sfProposta));
-            System.debug('seguradoPayloadProposta##: ' + JSON.serializePretty(seguradoPayloadProposta));
+            
             Account contaSegurado = new Account(FirstName = firstName,
                                                 LastName = LastName,
                                                 Cpf__c = idExterno,
@@ -5636,6 +5587,7 @@ garantiaContratanteProposta.TaxaTotal__c = garantia.TaxaTotal__c;*/
         
         //PLV-3896 - INICIO - Hotfix - Ajustes na portal e emissão do Viagem.
         Account contaCriada = new Account();
+        
         contaCriada.FirstName = firstName;
         contaCriada.LastName = LastName;
         contaCriada.NomeSocial__c = pPessoaTO.nomeSocial; // LECVPV-184 INICIO/FIM
@@ -5835,15 +5787,15 @@ garantiaContratanteProposta.TaxaTotal__c = garantia.TaxaTotal__c;*/
     public List<Decimal> propostaDescontoAgravo(String numeroOferta){  
 
         List<Decimal> agravosOrcamento = new List<Decimal>();
-    
-        Opportunity orcProRenv = [SELECT Id, ContratoRenovado__r.Proposta__c, DescontoAgravoPercentualFormaPagto__c, DescontoAgravoMonetarioFormaPagto__c  FROM Opportunity WHERE Numero__c = :numeroOferta];
 
+        Opportunity orcProRenv = [SELECT Id, ContratoRenovado__r.Proposta__c, DescontoAgravoPercentualFormaPagto__c, DescontoAgravoMonetarioFormaPagto__c  FROM Opportunity WHERE Numero__c = :numeroOferta];
+           
         if(orcProRenv != null){
             agravosOrcamento.add(orcProRenv.DescontoAgravoPercentualFormaPagto__c);
             agravosOrcamento.add(orcProRenv.DescontoAgravoMonetarioFormaPagto__c);
             return agravosOrcamento;
         }
-    
+
         return null;
     }
     //RVI-312-FIX01 - FIM

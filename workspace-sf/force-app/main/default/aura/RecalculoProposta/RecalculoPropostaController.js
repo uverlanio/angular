@@ -92,11 +92,16 @@
 		component.set('v.tipoConfirm', 'salvar');
 		//II-176 - INICIO
 		let atualizarCtr = component.get("v.alteracaoFormPag");
+		//FNPVVEP-168 INICIO
+		let cliente = component.get("v.cliente");
 		if(atualizarCtr){
 			component.set('v.confirmDialogMessage', 'Você gostaria de aplicar todas as modificações realizadas? Ao confirmar, sua proposta será atualizada com os novos cálculos.'); //FNPVVEP-147 INICIO/FIM
+			component.set('v.confirmDialogMessageAlt', 'Olá, '+cliente+'!<br/> A alteração da forma de pagamento do seu Seguro de Vida da Porto foi realizada com sucesso!<br/> Todo cuidado é Porto.'); //FNPVVEP-168 INICIO/FIM
 		}else{
 			component.set('v.confirmDialogMessage', 'Deseja aplicar todas as modificações realizadas? Ao aceitar o cálculo:<br/>• A Crítica de Recalculo será Liberada;<br/>• Será criada Critica da DOCUSIGN;<br/>• Será enviado e-mail para o contratante;<br/>• Itens vinculados ao registro podem ser apagados;');
+			component.set('v.confirmDialogMessageAlt', 'Proposta racalculada com sucesso!'); //FNPVVEP-168 INICIO/FIM
 		}
+		//FNPVVEP-168 FIM
 		//II-176 - FIM
 	},
 
@@ -134,25 +139,19 @@
 		component.set('v.tipoConfirm', '');
 	},
 	//FNPVVEP-147 INICIO
+	//FNPVVEP-168 INICIO
 	handleConfirmRecalculo: function (component, event, helper) {
 		component.set("v.etapaTela2", false);
 		component.set('v.showConfirmRecalculo', false);
 		component.set('v.tipoConfirm', '');
-		// let atualizarCtr = component.get("v.alteracaoFormPag");
-		// let etapaTela2 = component.get("v.etapaTela2");
 		helper.popularTabelaCriticas(component);
 		helper.carregaDadosProposta(component);
-		// if(!atualizarCtr ){
-		// 	helper.dadosFormaPagamento(component);
-		// }
-		// if(etapaTela2 != '2'){
-		// 	helper.dadosFormaPagamento(component);
-		// }
 		helper.dadosFormaPagamento(component);
 		helper.verificaAgenciamento(component);
 		helper.consultaBancos(component);
 		helper.verificaResponsavelFinanceiro(component);
 	},
+	//FNPVVEP-168 FIM
 	//FNPVVEP-147 FIM
 
 	voltar : function(component) {

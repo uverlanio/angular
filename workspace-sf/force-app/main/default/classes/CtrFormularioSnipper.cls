@@ -500,8 +500,8 @@ public without sharing class CtrFormularioSnipper {
 					Map<String, Object> consultivo = (Map<String, Object>) calculosMap.get('consultivo');
 					String codigoOfertaConsultiva = (String) consultivo.get('codigoOfertaConsultiva');
 
-					if (codigoOfertaConsultiva == 'VIAGEM' || codigoOfertaConsultiva == 'VIAGEM_VIDA_ON') { //ZSVEP-288-INICIO/FIM
-						Response = SensediaServices.getInstance().montagemServicoSensedia(SensediaServices.VERB.POST, SensediaServices.DOMAIN.AWS_EXTERNO_EMISSAO, SensediaServices.OFERTAS_CONTRATACAO_VIAGEM, calculosContrats);//SensediaServices.getInstance().chamadasViagem(calculosContrats, 'Ofertas_Contratacao_Viagem_Sensedia');
+					if (codigoOfertaConsultiva == 'VIAGEM' || codigoOfertaConsultiva == 'VIAGEM_VIDA_ON') { //ZSVEP-307-INICIO/FIM
+						Response = SensediaServices.getInstance().montagemServicoSensedia(SensediaServices.VERB.POST, SensediaServices.DOMAIN.AWS_EXTERNO_EMISSAO, SensediaServices.OFERTAS_CONTRATACAO_VIAGEM, calculosContrats);
 					} else {
 						// Response = civServ.criacaoCalculo(calculosContrats);
 						// Verificações adicionais para diferentes valores de 'codigoOfertaConsultiva'

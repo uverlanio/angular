@@ -7,10 +7,13 @@ public class BeneficiarioGarantiaTriggerHandler extends TriggerHandler {
     public override void beforeInsert(){
         bo.preencherIdExterno(Trigger.new);
         
+        //FNPVVEP-158 - INICIO
         String message = bo.validaTotalIndenizacao(Trigger.new);
         if(message == 'O valor Indenizado é maior que o Saldo da reserva!'){
             Trigger.new[0].addError(message);
         }
+        //FNPVVEP-158 - INICIO
+
         //PLV-2403 - Inicio - Foi criado para chamar o metódo da Classe BeneficiarioGarantiaBO
         bo.atualizavalorindenizacao(Trigger.new, (Map<Id,BeneficiarioGarantia__c>) Trigger.oldMap);
         //PLV-2403 - Fim - Foi criado para chamar o metódo da Classe BeneficiarioGarantiaBO        

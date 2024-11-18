@@ -531,8 +531,10 @@
                         <!-- PLV 3606 Inicio -->
                         <apex:image id="assinaturaVoucher" value="{!$Resource.NovaAssinaturaApolice}" height="50" alt=""/>
                         <p style="margin-left:20px;">
-                            <span style="margin-left:14px;">Carlos Eduardo Gondim</span><br/>
-                            <span style="margin-left:-7px; padding-top:0px;"><b>Diretoria vida e Previdência</b></span>
+                             <!-- LECVPV-270 Inicio -->
+                            <span style="margin-left:14px;">Jarbas Medeiros</span><br/>
+                            <span style="margin-left:-7px; padding-top:0px;"><b>Diretoria Vida Porto Seguro</b></span>
+                             <!-- LECVPV-270 Fim -->
                         <!-- PLV 3606 fim -->
 
                         </p>

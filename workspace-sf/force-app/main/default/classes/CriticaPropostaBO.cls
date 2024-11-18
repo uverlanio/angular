@@ -336,7 +336,7 @@ public class CriticaPropostaBO {
 				System.debug('entrou else rogerio teste flow ');
 				for (CriticaProposta__c critica : mapCriticaNew.values()) {			
 					if (isCriticaValida(critica)) {
-						gerarPix(critica.Proposta__c);
+						gerarPix(critica.Proposta__c, critica.Id);
 					}
 				}
 			}
@@ -346,7 +346,7 @@ public class CriticaPropostaBO {
     
     //FCVEP-33 INICIO
 	private static Boolean isFormaPagamentoValido(FormaPagamento__c formaPagamento) {
-		return formaPagamento != null && (formaPagamento.Codigo__c == '52' || formaPagamento.Codigo__c == '21');
+		return formaPagamento != null && (formaPagamento.Codigo__c == '53' || formaPagamento.Codigo__c == '22');
 	}
 	
 	private static Boolean isCriticaValida(CriticaProposta__c critica) {
@@ -355,7 +355,7 @@ public class CriticaPropostaBO {
 	}
 	
 	@Future(Callout=true)
-	public static void gerarPix(Id propostaId) {
+	public static void gerarPix(Id propostaId, Id criticaId) {
 
 		Quote proposta = obterProposta(propostaId);
 		if (proposta == null || proposta.Tipo__c != 'Novo') return;
@@ -371,10 +371,15 @@ public class CriticaPropostaBO {
 		System.Debug('JSON ENVIADO--->'+jsonMap);
 		try{
 			retorno = SensediaServices.getInstance().montagemServicoSensedia(SensediaServices.VERB.POST, SensediaServices.DOMAIN.AWS_EXTERNO, SensediaServices.SOLICITACAO_PAGAMENTO_PIX, JSON.serialize(jsonMap));
+			System.Debug('RETORNO--->'+retorno);
+			CriticaProposta__c criticaProposta = new CriticaProposta__c(Id = criticaId);
 			if(retorno != 'Erro na requisição'){
-				System.Debug('RETORNO--->'+retorno);
 				IntegracaoAS.inserirHistoricoAS(new Set<Id>{proposta.Id});
-			}	
+				criticaProposta.Status__c = 'Pendenciada';
+			} else{
+				criticaProposta.Status__c = 'Falha na Integração';
+			}
+			update criticaProposta;
 		} catch(Exception ex){
 			System.debug('###### ERROR: (' + ex.getLineNumber() + '): ' + ex.getMessage() + ' st=' +ex.getStackTraceString());
 		}

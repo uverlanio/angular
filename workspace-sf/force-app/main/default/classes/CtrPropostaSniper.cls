@@ -541,7 +541,7 @@ global class CtrPropostaSniper { //PLV-5517 - INCIO/FIM
 					System.debug('Tipo Seguro: ' + tipoSeguro);
 				}
 
-				if(entrada.propostas.get(0).segmento == 'Viagem'){
+				if(entrada.propostas.get(0).segmento == 'Viagem' || codigoProdutoVida == 'VIAGEM_VIDA_ON'){ //ZSVEP-308-INICIO/FIM
                     //VIAG-301 INICIO
                     if(entrada.propostas.get(0).numeroOrcamento != null){
                         
@@ -1173,7 +1173,7 @@ public class Retorno2TO
 				'vigenciaFinal' => String.valueOf(quoteRecord.VigenciaFinal__c),
 				'numeroOrcamento' => Integer.valueOf(quoteRecord.Opportunity.ContadorOrcamento__c),
 				'numero' => quoteRecord.NumeroProposta__c,
-				'indice' => quoteIndex,
+				'indice' => 1, // Valor mockado, substitua se necessário
 				'qtdDiasVigencia' => qtdDiasVigencia,
 				'origem' => Integer.valueOf(quoteRecord.Origem__c),
 				'arquivos' => new List<Map<String, Object>>{
