@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
 	<types>
-		<members>ContratanteOrcamentoDAO</members>
-		<members>CriticaPropostaBO</members>
-		<members>CriticaPropostaTest</members>
-		<members>CtrPropostaSniper</members>
-		<members>EmissaoTOTest</members>
-		<members>GravarOrcamentoService</members>
-		<members>OrcamentoGenericoBuilder</members>
 		<members>PropostaGenericaBuilder</members>
-		<members>ServiceTO</members>
 		<name>ApexClass</name>
 	</types>
 	<version>60.0</version>
