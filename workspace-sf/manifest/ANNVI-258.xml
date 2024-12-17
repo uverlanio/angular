@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+	<types>
+		<members>DadosIniciaisRepository</members>
+        <members>GerarDadosIniciais</members>
+		<members>GerarDadosIniciaisTest</members>
+        <members>GravarOrcamentoService</members>
+        <name>ApexClass</name>
+	</types>
+	<types>
+		<members>MockEntradaServico</members>
+		<name>StaticResource</name>
+	</types>
+	<version>62.0</version>
+</Package>
