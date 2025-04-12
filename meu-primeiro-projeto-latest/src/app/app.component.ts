@@ -7,8 +7,10 @@ import { NewComponent } from './components/new-component/new.component';
   standalone: true,
   imports: [RouterOutlet, NewComponent],
   template: `
-    <h1>Curso de Angular</h1>
-    <app-new-component />
+    <h2>Curso de Angular</h2>
+      <div class="dark-theme">
+      <app-new-component />
+    </div>
   `
 })
 export class AppComponent {
