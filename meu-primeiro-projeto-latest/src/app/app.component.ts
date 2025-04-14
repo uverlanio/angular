@@ -1,16 +1,16 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
 import { NewComponent } from './components/new-component/new.component';
+import { CommonModule } from '@angular/common';
+import { TemplateBindingComponent } from './components/template/template-binding/template-binding.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NewComponent],
+  imports: [CommonModule, NewComponent, TemplateBindingComponent],
+  styles: ``,
   template: `
     <h2>Curso de Angular</h2>
-      <div class="dark-theme">
-      <app-new-component />
-    </div>
+    <app-template-binding />
   `
 })
 export class AppComponent {
