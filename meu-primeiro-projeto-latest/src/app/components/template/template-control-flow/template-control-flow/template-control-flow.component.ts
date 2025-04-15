@@ -11,5 +11,5 @@ import { delay, Observable, of } from 'rxjs';
 })
 export class TemplateControlFlowComponent {
 
-  public itens: Array<{name: string}> = [ {name: 'Uver'}];
+  public switchCondition = 'B';
 }

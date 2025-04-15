@@ -1,10 +1,16 @@
 <h2>Control Flow</h2>
-<h3>IF, FOR</h3>
+<h3>IF, FOR, SWITCH</h3>
 
-<ul>
-  @for (item of itens; track item) {
-  <li>{{ item.name }}</li>
-  } @empty {
-  <li>Não contém valores</li>
-  }
-</ul>
+@switch (switchCondition) {
+    @case ('A') {
+        <p>Sim sua letra é: A</p>
+    }
+
+    @case ('B') {
+        <p>Sim sua letra é: B</p>
+    }
+
+    @default {
+        <p>Os dados não foram encontrados</p>
+    }
+}
