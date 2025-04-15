@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { delay, Observable, of } from 'rxjs';
 
 @Component({
@@ -13,6 +13,7 @@ export class TemplateControlFlowComponent {
 
   public isTrue = true;
 
+  public itens = [{name: 'Uver'}];
   public loadingData$: Observable<string[]> = of([
     'item 1',
     'item 2',
@@ -21,6 +22,10 @@ export class TemplateControlFlowComponent {
 
 public trackByFn(index: number){
   return index;
+}
+
+public addNewName(value: string){  
+  return this.itens.push({ name: value});
 }
 
 }

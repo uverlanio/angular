@@ -19,4 +19,24 @@
 </ng-container>
 <ng-template #loading > <p>Carregando ...</p></ng-template>
 
+@for (
+    item of itens; track item.name;
+    let i = $index;
+    let c = $count;
+    let f = $first;
+    let l = $last;
+    let e = $even;
+    let o = $odd;
+) {
+    <p>{{item.name}}</p>
+    <p>index = {{i}}</p>
+    <p>count = {{c}}</p>
+    <p>first = {{f}}</p>
+    <p>last =  {{l}}</p>
+    <p>odd =   {{o}}</p>
+}
+
+<input #name type="text">
+<button (click)="addNewName(name.value)">Add Name</button>
+
 
