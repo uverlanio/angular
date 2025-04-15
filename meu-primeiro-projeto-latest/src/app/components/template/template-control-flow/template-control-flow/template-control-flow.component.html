@@ -1,9 +1,22 @@
 <h2>Control Flow</h2>
-<h3>IF</h3>
+<h3>IF, FOR</h3>
 
-@if (isTrue)  {
-    Sim, são iguais
+@if (loadingData$ | async; as data)  {
+    @for (item of data; track item) {
+        <li>{{item}}</li>
+    }
 }
 @else {
     São diferentes
 }
+
+<ng-container *ngIf="loadingData$ | async as data; else loading">
+    <ul>
+        <ng-container *ngFor="let item of data; trackBy: trackByFn">
+            <li>{{item}}</li>
+        </ng-container>
+    </ul>
+</ng-container>
+<ng-template #loading > <p>Carregando ...</p></ng-template>
+
+
