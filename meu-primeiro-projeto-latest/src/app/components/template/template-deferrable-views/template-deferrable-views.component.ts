@@ -11,4 +11,6 @@ import { NewComponent } from '../../new-component/new.component';
 })
 export class TemplateDeferrableViewsComponent {
 
+  public isTrue = false;
+
 }

@@ -10,8 +10,9 @@
 -->
 
 <h2 #trigger>Deferrable views</h2>
+<button (click) = "isTrue = true" >Add True</button>
 
-@defer (on interaction; prefetch on hover(trigger)) {
+@defer (when isTrue) {
     <app-new-component />
 }@placeholder {
     <p>Mostrar antes de carregar algo.</p>
