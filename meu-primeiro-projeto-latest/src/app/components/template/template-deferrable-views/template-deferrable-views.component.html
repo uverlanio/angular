@@ -1,6 +1,17 @@
-<h2>Deferrable views</h2>
+<!--
+    on
+     idle
+     timer
+     viewport
+     interaction
+     hover
+     immediate
+     prefetch
+-->
 
-@defer () {
+<h2 #trigger>Deferrable views</h2>
+
+@defer (on interaction; prefetch on hover(trigger)) {
     <app-new-component />
 }@placeholder {
     <p>Mostrar antes de carregar algo.</p>
