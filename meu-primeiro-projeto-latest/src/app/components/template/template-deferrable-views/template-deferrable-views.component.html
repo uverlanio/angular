@@ -9,11 +9,11 @@
      prefetch
 -->
 
-<h2 #trigger>Deferrable views</h2>
+<h2>Deferrable views</h2>
 
-@defer (on interaction) {
+@defer (when isTrue) {
     <app-new-component />
-}@placeholder (minimum 6s) {
+}@placeholder {
     <p>Mostrar antes de carregar algo.</p>
 }@loading {
     <p>Loading ...</p>
