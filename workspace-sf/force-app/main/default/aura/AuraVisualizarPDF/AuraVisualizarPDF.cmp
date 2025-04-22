@@ -1,5 +1,0 @@
-<aura:component implements="force:hasRecordId,force:lightningQuickActionWithoutHeader" controller="AuraVisualizarPDFController" >
-    <aura:attribute name="recordId" type="String" />
-    <lightning:navigation aura:id="navService"/>
-    <aura:handler name="init" value="{!this}" action="{!c.abrirPDF}"/>
-</aura:component>

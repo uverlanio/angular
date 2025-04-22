@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>ValidarEmpresa</fullName>
-    <active>true</active>
-    <errorConditionFormula>IF( ISBLANK(Empresa__c ) ,FALSE,
-  NOT(ISNUMBER( Empresa__c )) ||
-  VALUE( Empresa__c )  &lt;= 0)</errorConditionFormula>
-    <errorMessage>Campo Empresa deve ser apenas numérico</errorMessage>
-</ValidationRule>

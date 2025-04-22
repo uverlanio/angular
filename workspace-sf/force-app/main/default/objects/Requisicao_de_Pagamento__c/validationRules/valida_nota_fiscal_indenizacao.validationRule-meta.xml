@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>valida_nota_fiscal_indenizacao</fullName>
-    <active>false</active>
-    <description>caso o tipo de requisição seja igual a indenização o campo Nota Fiscal deve ser vazio.</description>
-    <errorConditionFormula>AND(RecordType.Name = &apos;Indenização de sinistros&apos; ,	NOT	ISBLANK(Nota_fiscal__c))</errorConditionFormula>
-    <errorMessage>Favor remover a Nota Fiscal. Para o tipo de registro Indenização Nota Fiscal não deve ser informada.</errorMessage>
-</ValidationRule>

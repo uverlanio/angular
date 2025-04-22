@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>ObrigarPreenchimentoCodigoPromocao</fullName>
-    <active>true</active>
-    <errorConditionFormula>RecordType.DeveloperName = &quot;ProdutoComercial&quot; &amp;&amp;
-ISPICKVAL(TipoCaracteristicaEspecial__c , &quot;Sorteio&quot;)&amp;&amp;              ISPICKVAL(CodigoPromocao__c , &quot;&quot;)</errorConditionFormula>
-    <errorMessage>Campo Código da Promoção deve ser preenchidos para esta forma de capital</errorMessage>
-</ValidationRule>

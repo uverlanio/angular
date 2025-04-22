@@ -1,3 +1,0 @@
-<apex:page controller="DocumentAPI" action="{!redireciona}">
-
-</apex:page>

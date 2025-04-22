@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>ValidarStatus</fullName>
-    <active>true</active>
-    <description>Validar preenchimento de status.</description>
-    <errorConditionFormula>ISBLANK(TEXT(Status__c))</errorConditionFormula>
-    <errorDisplayField>Status__c</errorDisplayField>
-    <errorMessage>Status obrigatório.</errorMessage>
-</ValidationRule>

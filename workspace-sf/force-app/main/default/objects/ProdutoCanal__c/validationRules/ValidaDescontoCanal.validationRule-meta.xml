@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>ValidaDescontoCanal</fullName>
-    <active>true</active>
-    <errorConditionFormula>IF(Produto__r.RecordType.DeveloperName = &apos;ProdutoComercial&apos;, 
-IF(Produto__r.PercentualDescontoMaximo__c &gt; PercentualDescontoMaximo__c , true, false), false)</errorConditionFormula>
-    <errorMessage>Percentual de desconto informado não pode ser maior que o percentual de desconto informado no produto.</errorMessage>
-</ValidationRule>

@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>Limite_de_Utilizacao_negativo</fullName>
-    <active>true</active>
-    <errorConditionFormula>Limite_de_Utilizacao__c &lt; 0</errorConditionFormula>
-    <errorDisplayField>Limite_de_Utilizacao__c</errorDisplayField>
-    <errorMessage>Valor inserido não pode ser negativo.</errorMessage>
-</ValidationRule>

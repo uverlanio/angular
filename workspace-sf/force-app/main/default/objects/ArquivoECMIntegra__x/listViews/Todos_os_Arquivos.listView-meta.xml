@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>Todos_os_Arquivos</fullName>
-    <columns>Id__c</columns>
-    <columns>NomeArquivo__c</columns>
-    <columns>IdContext__c</columns>
-    <filterScope>Everything</filterScope>
-    <label>Todos os Arquivos</label>
-</ListView>

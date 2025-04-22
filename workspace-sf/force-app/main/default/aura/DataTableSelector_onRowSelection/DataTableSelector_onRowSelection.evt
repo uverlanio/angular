@@ -1,3 +1,0 @@
-<aura:event type="COMPONENT" description="Data Table Selector - onRowSelection" >
-    <aura:attribute name="selectedRows" type="Object[]" />
-</aura:event>

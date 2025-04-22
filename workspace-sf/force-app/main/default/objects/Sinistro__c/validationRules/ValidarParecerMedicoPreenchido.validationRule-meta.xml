@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>ValidarParecerMedicoPreenchido</fullName>
-    <active>true</active>
-    <errorConditionFormula>AND( OR( CRM__c  = null, NomeMedico__c = null) , ParecerMedico__c = true)</errorConditionFormula>
-    <errorDisplayField>ParecerMedico__c</errorDisplayField>
-    <errorMessage>Os campos CRM e Nome do médico devem ser preenchidos.</errorMessage>
-</ValidationRule>

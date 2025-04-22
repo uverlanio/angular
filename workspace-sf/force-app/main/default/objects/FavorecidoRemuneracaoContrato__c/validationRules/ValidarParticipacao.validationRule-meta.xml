@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>ValidarParticipacao</fullName>
-    <active>true</active>
-    <description>Impede o cadastro de participações com mais de 100%</description>
-    <errorConditionFormula>Participacao__c  &gt; 1</errorConditionFormula>
-    <errorDisplayField>Participacao__c</errorDisplayField>
-    <errorMessage>A participação não pode passar de 100%</errorMessage>
-</ValidationRule>

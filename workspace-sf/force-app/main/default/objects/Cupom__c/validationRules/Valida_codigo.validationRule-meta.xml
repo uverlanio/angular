@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>Valida_codigo</fullName>
-    <active>true</active>
-    <errorConditionFormula>Codigo__c &lt;&gt; UPPER( Codigo__c )</errorConditionFormula>
-    <errorDisplayField>Codigo__c</errorDisplayField>
-    <errorMessage>O código do campo tem que ser maiusculo</errorMessage>
-</ValidationRule>

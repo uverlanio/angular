@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>ValidarRecuperacaoModeloRemuneracao</fullName>
-    <active>true</active>
-    <errorConditionFormula>AND( ISPICKVAL(ModeloRemuneracao__c, &quot;Recuperação&quot;)  , 
-AND(  ISNULL(CarenciaMesesRecuperacao__c) , ISNULL(LimiteMaximoRecuperacao__c) ,    ISNULL(LimiteMinimoRecuperacao__c) ) )</errorConditionFormula>
-    <errorMessage>Os campos Competência, Limite de Recuperação Mínimo e Limite de Recuperação Máximo devem ser preenchidos.</errorMessage>
-</ValidationRule>

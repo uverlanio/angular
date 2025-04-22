@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>RV001_PercentuarIndenizacao</fullName>
-    <active>false</active>
-    <errorConditionFormula>Soma_Percentual__c  &gt; 100</errorConditionFormula>
-    <errorMessage>Favor verificar os percentuais de indenização e os valores de indenização dos beneficiários da garantia, pois somados não podem ultrapassar o total do valor do Pagamento.</errorMessage>
-</ValidationRule>

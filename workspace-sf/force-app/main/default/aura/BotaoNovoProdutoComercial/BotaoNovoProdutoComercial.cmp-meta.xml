@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<AuraDefinitionBundle xmlns="http://soap.sforce.com/2006/04/metadata">
-    <apiVersion>42.0</apiVersion>
-    <description>Botão responsável pela geração de um novo produto comercial a partir de um técnico</description>
-</AuraDefinitionBundle>

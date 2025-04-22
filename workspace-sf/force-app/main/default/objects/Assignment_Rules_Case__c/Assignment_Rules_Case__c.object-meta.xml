@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
-    <customSettingsType>List</customSettingsType>
-    <description>https://help.salesforce.com/articleView?id=000239773&amp;type=1</description>
-    <enableFeeds>false</enableFeeds>
-    <label>Regra de atribuição de caso</label>
-    <visibility>Public</visibility>
-</CustomObject>

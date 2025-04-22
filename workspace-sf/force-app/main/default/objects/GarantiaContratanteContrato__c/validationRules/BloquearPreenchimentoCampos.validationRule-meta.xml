@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>BloquearPreenchimentoCampos</fullName>
-    <active>true</active>
-    <description>Edições e adições de novos dados bloqueados para contratos com o status &quot;Emitido&quot;</description>
-    <errorConditionFormula>AND(ISPICKVAL( ContratanteContrato__r.Contrato__r.Status, &quot;Emitido&quot;),
-$Profile.Name  &lt;&gt;  &quot;Administrador do sistema&quot;)</errorConditionFormula>
-    <errorMessage>Edições de campos e adições de novos dados não são permitidas para Contratos com o Status &quot;Emitido&quot;</errorMessage>
-</ValidationRule>

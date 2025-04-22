@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>ValidarRamo</fullName>
-    <active>true</active>
-    <errorConditionFormula>IF( ISBLANK(Ramo__c ) , FALSE, 
-  NOT( ISNUMBER( Ramo__c ) ) ||
-  VALUE( Ramo__c )  &lt;= 0)</errorConditionFormula>
-    <errorMessage>Campo Ramo deve ser apenas numérico</errorMessage>
-</ValidationRule>

@@ -1,3 +1,0 @@
-Neste arquivo estarão somente as bibliotecas
-Verifique a visualforce para editar os recursos estáticos corretos
-=)

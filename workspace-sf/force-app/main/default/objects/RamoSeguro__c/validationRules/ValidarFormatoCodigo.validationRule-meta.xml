@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>ValidarFormatoCodigo</fullName>
-    <active>true</active>
-    <errorConditionFormula>NOT(ISNUMBER(Codigo__c))</errorConditionFormula>
-    <errorMessage>Código inválido</errorMessage>
-</ValidationRule>

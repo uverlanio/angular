@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>Valida_Tipo_Registro</fullName>
-    <active>false</active>
-    <errorConditionFormula>RecordType.Name !=  Produto__r.RecordType.Name</errorConditionFormula>
-    <errorMessage>O Tipo de registro deve ser o mesmo do objeto &quot;Produto&quot;</errorMessage>
-</ValidationRule>

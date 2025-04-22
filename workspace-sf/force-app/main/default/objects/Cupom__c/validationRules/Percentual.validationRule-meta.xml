@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>Percentual</fullName>
-    <active>true</active>
-    <errorConditionFormula>Percentual__c  &lt;= 0.0</errorConditionFormula>
-    <errorDisplayField>Percentual__c</errorDisplayField>
-    <errorMessage>Valor inserido deve ser &gt; 0.</errorMessage>
-</ValidationRule>

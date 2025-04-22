@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>ValidarLimiteMaximoMinimo</fullName>
-    <active>true</active>
-    <errorConditionFormula>LimiteMaximo__c &lt;  LimiteMinimo__c</errorConditionFormula>
-    <errorMessage>Limite mínimo ou máximo inválido. O limite mínimo deve sempre ser menor que o  limite máximo</errorMessage>
-</ValidationRule>

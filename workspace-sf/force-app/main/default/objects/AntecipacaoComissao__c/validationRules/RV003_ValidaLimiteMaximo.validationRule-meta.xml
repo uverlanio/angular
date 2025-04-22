@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>RV003_ValidaLimiteMaximo</fullName>
-    <active>true</active>
-    <errorConditionFormula>OR( LimiteMaximo__c &lt; 0.0,
- LimiteMaximo__c &gt; 1.0)</errorConditionFormula>
-    <errorDisplayField>LimiteMaximo__c</errorDisplayField>
-    <errorMessage>Limite máximo precisa estar entre 0 e 100</errorMessage>
-</ValidationRule>

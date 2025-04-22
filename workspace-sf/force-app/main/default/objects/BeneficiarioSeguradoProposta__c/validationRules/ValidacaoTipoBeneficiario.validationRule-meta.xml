@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>ValidacaoTipoBeneficiario</fullName>
-    <active>true</active>
-    <errorConditionFormula>IF(ISPICKVAL( TipoBeneficiario__c , &quot;&quot;), true, false)</errorConditionFormula>
-    <errorDisplayField>TipoBeneficiario__c</errorDisplayField>
-    <errorMessage>Tipo de beneficiário não informado</errorMessage>
-</ValidationRule>

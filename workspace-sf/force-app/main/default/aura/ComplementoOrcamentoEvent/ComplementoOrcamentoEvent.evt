@@ -1,7 +1,0 @@
-<!--
- - Created by Alessndro Ponte on 17/06/2018.
- -->
-
-<aura:event type="APPLICATION" description="ComplementoOrcamentoEvent">
-  <aura:attribute name="salvouPrimeiraAba" type="Boolean" />
-</aura:event>

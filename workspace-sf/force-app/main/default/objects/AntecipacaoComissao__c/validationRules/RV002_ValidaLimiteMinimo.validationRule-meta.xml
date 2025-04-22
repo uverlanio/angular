@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>RV002_ValidaLimiteMinimo</fullName>
-    <active>true</active>
-    <errorConditionFormula>OR(LimiteMinimo__c &lt; 0.0,
- LimiteMinimo__c &gt; 1.0)</errorConditionFormula>
-    <errorDisplayField>LimiteMinimo__c</errorDisplayField>
-    <errorMessage>Limite minimo precisa estar entre 0 e 100</errorMessage>
-</ValidationRule>

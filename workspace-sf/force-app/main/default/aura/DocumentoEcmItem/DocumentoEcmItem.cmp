@@ -1,5 +1,0 @@
-<aura:component implements="flexipage:availableForAllPageTypes,force:hasRecordId,force:lightningQuickActionWithoutHeader" controller="DocumentoEcmController">
-	<aura:attribute name="arquivoECM" type="Object" />
-    <a onclick="{!c.solicitacaoDownload}">{!v.arquivoECM.nomearquivo__c}</a>
-    <lightning:spinner alternativeText="Loading" size="medium" class="slds-hide" aura:id="spinner"/>
-</aura:component>
