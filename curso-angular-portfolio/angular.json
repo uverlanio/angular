@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "meu-primeiro-projeto-latest": {
+    "curso-angular-portfolio": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist",
+            "outputPath": "dist/curso-angular-portfolio",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -46,8 +46,8 @@
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2kB",
-                  "maximumError": "4kB"
+                  "maximumWarning": "4kB",
+                  "maximumError": "8kB"
                 }
               ],
               "outputHashing": "all"
@@ -64,10 +64,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "meu-primeiro-projeto-latest:build:production"
+              "buildTarget": "curso-angular-portfolio:build:production"
             },
             "development": {
-              "buildTarget": "meu-primeiro-projeto-latest:build:development"
+              "buildTarget": "curso-angular-portfolio:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -100,6 +100,6 @@
     }
   },
   "cli": {
-    "analytics": false
+    "analytics": "ff338502-087f-4eb6-9e3c-d03df0e284f5"
   }
 }
