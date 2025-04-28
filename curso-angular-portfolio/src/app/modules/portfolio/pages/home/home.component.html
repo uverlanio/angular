@@ -3,7 +3,7 @@
     <app-knowledge />
     <app-experiences />
 
-    @defer (on viewport) { <!-- Quando scrool do mouse chegar, o componente é carregado-->
+    @defer (on viewport; on timer (10s)) { <!-- Quando scrool do mouse chegar, o componente é carregado-->
         <app-projects />
     } 
     @placeholder {
