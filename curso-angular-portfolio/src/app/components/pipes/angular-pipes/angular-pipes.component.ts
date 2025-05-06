@@ -1,6 +1,7 @@
 import { AsyncPipe, CurrencyPipe, DatePipe, DecimalPipe, JsonPipe, LowerCasePipe, PercentPipe, registerLocaleData, UpperCasePipe } from '@angular/common';
 import { Component, LOCALE_ID, signal } from '@angular/core';
 import { delay, Observable, of } from 'rxjs';
+import { CustomStringPipe } from '../../../pipes/custom-string.pipe';
 
 @Component({
   selector: 'app-angular-pipes',
@@ -14,6 +15,7 @@ import { delay, Observable, of } from 'rxjs';
     CurrencyPipe,
     DecimalPipe,
     PercentPipe,
+    CustomStringPipe
   ],
   templateUrl: './angular-pipes.component.html',
   styleUrl: './angular-pipes.component.scss'

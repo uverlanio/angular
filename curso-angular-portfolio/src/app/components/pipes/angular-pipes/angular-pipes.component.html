@@ -7,7 +7,8 @@
     <li>json: {{ loadingData$ | async }}</li>
     <li>currency: {{ 200.50 | currency : 'BRL' }}</li>
     <li>number: {{ 2000.50 | number :'1.0-1' }}</li><!-- Como um regex-->
-    <li>percent: {{ 0.205 | percent : '1.0-2' }}</li>
+
+    <li>customString: {{ 'Uverlanio Mauricio ' | customString : 'upper' }}</li>
 </ul>
 
 

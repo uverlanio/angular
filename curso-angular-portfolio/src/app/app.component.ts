@@ -9,9 +9,8 @@ import { AngularPipesComponent } from './components/pipes/angular-pipes/angular-
   standalone: true,
   imports: [
     CommonModule,
-    RouterOutlet,
-    PaiOuMaeComponent,
-    AngularPipesComponent],
+    AngularPipesComponent
+],
   template: `<!--<router-outlet></router-outlet>-->
     <h1>Curso de Angular</h1>
     <app-angular-pipes />
