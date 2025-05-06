@@ -2,8 +2,6 @@ import { AsyncPipe, CurrencyPipe, DatePipe, DecimalPipe, JsonPipe, LowerCasePipe
 import { Component, LOCALE_ID, signal } from '@angular/core';
 import { delay, Observable, of } from 'rxjs';
 
-import localePt from '@angular/common/locales/pt';
-registerLocaleData(localePt)
 @Component({
   selector: 'app-angular-pipes',
   standalone: true,
@@ -18,8 +16,7 @@ registerLocaleData(localePt)
     PercentPipe,
   ],
   templateUrl: './angular-pipes.component.html',
-  styleUrl: './angular-pipes.component.scss',
-  providers: [{ provide: LOCALE_ID, useValue: 'pt-BR' }]
+  styleUrl: './angular-pipes.component.scss'
 })
 export class AngularPipesComponent {
   public date = signal(new Date());
