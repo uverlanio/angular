@@ -1,0 +1,24 @@
+<!--
+    on
+     idle
+     timer
+     viewport
+     interaction
+     hover
+     immediate
+     prefetch
+-->
+
+<h2>Deferrable views</h2>
+
+@defer (when isTrue) {
+    <app-new-component />
+}@placeholder {
+    <p>Mostrar antes de carregar algo.</p>
+}@loading (after 200ms; minimum 8s) {
+    <p>Loading ...</p>
+}@error {
+    <p>Loading failed :(</p>
+}
+
+
