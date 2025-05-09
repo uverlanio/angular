@@ -3,63 +3,64 @@ import { InputAddItemComponent } from '../../components/input-add-item/input-add
 import { IListItems } from '../../interface/IListItems.interface';
 import { InputListItemComponent } from '../../components/input-list-item/input-list-item.component';
 import { ELocalStorage } from '../../enum/ELocalStorage.enum';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-list',
   standalone: true,
   imports: [InputAddItemComponent, InputListItemComponent],
   templateUrl: './list.component.html',
-  styleUrl: './list.component.scss'
+  styleUrl: './list.component.scss',
 })
 export class ListComponent {
-
   public addItem = signal(true);
 
   #setListItems = signal<IListItems[]>(this.#parseItems());
   public getListItems = this.#setListItems.asReadonly();
 
-  #parseItems(){
+  #parseItems() {
     return JSON.parse(localStorage.getItem(ELocalStorage.MY_LIST) || '[]');
   }
 
-  #updateLocalStorage(){
-    localStorage.setItem(
-          ELocalStorage.MY_LIST, JSON.stringify([...this.#setListItems(), value])
-        );
+  #updateLocalStorage() {
+    return localStorage.setItem(
+      ELocalStorage.MY_LIST,
+      JSON.stringify(this.#setListItems())
+    );
   }
 
-  public getInputAndAddItem(value: IListItems){
+  public getInputAndAddItem(value: IListItems) {
     
-    this.#updateLocalStorage();
+    localStorage.setItem(
+      ELocalStorage.MY_LIST,
+      JSON.stringify([...this.#setListItems(), value])
+    );
 
     return this.#setListItems.set(this.#parseItems());
   }
 
   public listItemsStage(value: 'pending' | 'completed') {
-    return this.getListItems().filter(
-      (res: IListItems) =>{
-        if(value === 'pending'){
-          return !res.checked;
-        }
-
-        if(value === 'completed'){
-          return res.checked;
-        }
-
-        return res;
+    return this.getListItems().filter((res: IListItems) => {
+      if (value === 'pending') {
+        return !res.checked;
       }
-    )
+
+      if (value === 'completed') {
+        return res.checked;
+      }
+
+      return res;
+    });
   }
 
   public updateItemCheckbox(newItem: { id: string; checked: boolean }) {
-    
-    this.#setListItems.update((oldValue: IListItems[]) =>{
+    this.#setListItems.update((oldValue: IListItems[]) => {
       oldValue.filter((res) => {
-        if(res.id === newItem.id){
+        if (res.id === newItem.id) {
           res.checked = newItem.checked;
           return res;
         }
-       
+
         return res;
       });
       return oldValue;
@@ -69,10 +70,9 @@ export class ListComponent {
   }
 
   public updateItemText(newItem: { id: string; value: string }) {
-    
-    this.#setListItems.update((oldValue: IListItems[]) =>{
+    this.#setListItems.update((oldValue: IListItems[]) => {
       oldValue.filter((res) => {
-        if(res.id === newItem.id){
+        if (res.id === newItem.id) {
           res.value = newItem.value;
           return res;
         }
@@ -85,18 +85,36 @@ export class ListComponent {
   }
 
   public deleteItem(id: string) {
-    
-    this.#setListItems.update((oldValue: IListItems[]) =>{
-      return oldValue.filter((res) => res.id !== id);
+
+    Swal.fire({
+      title: 'Tem certeza?',
+      text: 'Você não poderá reverter isso!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sim, delete o item',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.#setListItems.update((oldValue: IListItems[]) => {
+          return oldValue.filter((res) => res.id !== id);
+        });
+      }
     });
 
-    return localStorage.setItem(
-      ELocalStorage.MY_LIST,
-      JSON.stringify(this.#setListItems()));
+    return this.#updateLocalStorage();
   }
 
   public deleteAllItems() {
-    localStorage.removeItem(ELocalStorage.MY_LIST);
-    return this.#setListItems.set(this.#parseItems());
+    Swal.fire({
+      title: 'Tem certeza?',
+      text: 'Você não poderá reverter isso!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sim, delete tudo',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        localStorage.removeItem(ELocalStorage.MY_LIST);
+        return this.#setListItems.set(this.#parseItems());
+      }
+    });
   }
 }
