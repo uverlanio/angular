@@ -14,7 +14,7 @@ import { TemplateDrivenFormsComponent } from './components/forms/template-driven
     TemplateDrivenFormsComponent,
   ],
   template: ` <h1>Curso de Angular</h1>
-    <app-template-driven-forms />
+    <!--<app-template-driven-forms />-->
     <app-reactive-forms />
     `,
 })
