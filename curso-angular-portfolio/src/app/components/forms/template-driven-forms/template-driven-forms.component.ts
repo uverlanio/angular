@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { Component, signal } from '@angular/core';
+import { FormsModule, NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-template-driven-forms',
@@ -10,5 +10,25 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './template-driven-forms.component.scss'
 })
 export class TemplateDrivenFormsComponent {
+
+
+  public listComidas = signal<Array<{comida: String, preco: String }>>([
+  {
+    comida: 'X-salada', preco: 'R$ 10'
+  },
+  {
+    comida: 'X-bacon', preco: 'R$ 11'
+  },
+  {
+    comida: 'Coxinha', preco: 'R$ 6'
+  }
+]);
+
+public submitForm(form: NgForm) {
+  console.log(form.valid)
+  if(form.valid){
+    console.log(form.value)
+  }
+}
 
 }

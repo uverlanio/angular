@@ -1,5 +1,5 @@
 <h2>template-driven-forms works!</h2>
-<form>
+<form #form="ngForm" (ngSubmit)="submitForm(form)"> 
   <label for="">
     Nome:
     <input
@@ -9,7 +9,7 @@
       [ngModel]="name.value"
       required
     />
-  </label>
+  </label><!--
   <hr />
   <p>value: {{ name.value }}</p>
   <p>valid: {{ name.valid }}</p>
@@ -18,7 +18,7 @@
 </form>
 
 <form>
-    <hr />
+  <hr />
   <label>
     Feminino:
     <input
@@ -99,5 +99,25 @@
   <p>valid: {{ techReact.valid }}</p>
   <p>dirty: {{ techReact.dirty }}</p>
   <p>touched: {{ techReact.touched }}</p>
+  <hr />-->
+  <select name="selectComidas" #comidas="ngModel" ngModel>
+    <option value="">Selecione um alimento</option>
+    @for (item of listComidas(); track item) {
+     <option [ngValue]="item">{{item.comida}}</option>
+    }
+  </select>
+
   <hr />
+  <p>value: {{ comidas.value }} </p>
+  <p>valid: {{ comidas.valid }} </p>
+  <p>comida: {{ comidas.value?.comida }} </p>
+  <p>preco: {{ comidas.value?.preco }} </p>
+  <p>dirty: {{ comidas.dirty }} </p>
+  <p>touched: {{ comidas.touched}} </p>
+  <hr />
+
+  <button [disabled]="!form.valid">Send</button>
 </form>
+
+<p>Form Valid: {{ form.valid }}</p>
+<p>Form Value:{{ form.value | json }}</p>
