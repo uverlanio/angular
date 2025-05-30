@@ -5,6 +5,7 @@ import { ReactiveFormsComponent } from './components/forms/reactive-forms/reacti
 import { TemplateDrivenFormsComponent } from './components/forms/template-driven-forms/template-driven-forms.component';
 import { ContentComponent } from './components/content/content.component';
 import { HostElementsComponent } from './components/host-elements/host-elements.component';
+import { LifeCycleComponent } from './components/life-cycle/life-cycle.component';
 
 @Component({
   selector: 'app-root',
@@ -15,9 +16,10 @@ import { HostElementsComponent } from './components/host-elements/host-elements.
     ReactiveFormsComponent,
     TemplateDrivenFormsComponent,
     ContentComponent,
-    HostElementsComponent
+    HostElementsComponent,
+    LifeCycleComponent,
   ],
-  template: ` 
+  template: `
     <h1>Curso de Angular</h1>
     <!--<app-template-driven-forms />-->
     <!--<app-content>
@@ -29,8 +31,19 @@ import { HostElementsComponent } from './components/host-elements/host-elements.
         <p>Class footer</p>
       </footer>
       <p text>Text</p>
-    </app-content>-->
-    <app-host-elements />
-    `,
+    </app-content>
+    <app-host-elements />-->
+    <app-life-cycle [number]="addFatherNumber()" />
+  `,
 })
-export class AppComponent {}
+export class AppComponent {
+  public myNumber = 0;
+
+  public addFatherNumber() {
+    setInterval(() => {
+      this.myNumber++;
+    }, 2000);
+
+    return this.myNumber;
+  }
+}
