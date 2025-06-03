@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { IExperiences } from '../../interface/IExperiences.interface';
 
 @Component({
@@ -6,7 +6,8 @@ import { IExperiences } from '../../interface/IExperiences.interface';
   standalone: true,
   imports: [],
   templateUrl: './experiences.component.html',
-  styleUrl: './experiences.component.scss'
+  styleUrl: './experiences.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ExperiencesComponent {
   public arrayExperiences = signal<IExperiences[]>([

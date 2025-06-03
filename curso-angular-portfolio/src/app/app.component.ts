@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { ReactiveFormsComponent } from './components/forms/reactive-forms/reactive-forms.component';
 import { TemplateDrivenFormsComponent } from './components/forms/template-driven-forms/template-driven-forms.component';
 import { ContentComponent } from './components/content/content.component';
 import { HostElementsComponent } from './components/host-elements/host-elements.component';
 import { LifeCycleComponent } from './components/life-cycle/life-cycle.component';
+import { HomeComponent } from "./modules/portfolio/pages/home/home.component";
 
 @Component({
   selector: 'app-root',
@@ -18,7 +19,8 @@ import { LifeCycleComponent } from './components/life-cycle/life-cycle.component
     ContentComponent,
     HostElementsComponent,
     LifeCycleComponent,
-  ],
+    HomeComponent
+],
   template: `
     <h1>Curso de Angular</h1>
     <!--<app-template-driven-forms />-->
@@ -32,18 +34,28 @@ import { LifeCycleComponent } from './components/life-cycle/life-cycle.component
       </footer>
       <p text>Text</p>
     </app-content>
-    <app-host-elements />-->
-    <app-life-cycle [number]="addFatherNumber()" />
-  `,
+    <app-host-elements />
+    
+    @if(boolean){
+      <app-life-cycle [inputMyNumber]="myNumber()">
+        <p #text>Text</p>
+      </app-life-cycle>
+    } 
+
+    <button (click)="boolean = !boolean">Destroy Component</button>-->
+    <app-home />
+  `,  
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AppComponent {
-  public myNumber = 0;
+export class AppComponent implements OnInit{
+  public myNumber = signal(0);
+  public boolean = true;
 
-  public addFatherNumber() {
-    setInterval(() => {
-      this.myNumber++;
-    }, 2000);
-
-    return this.myNumber;
+  ngOnInit(): void {
+     setInterval(() => {
+      this.myNumber.update((oldValue) => {
+        return oldValue + 1;
+      })
+    }, 1000);
   }
 }

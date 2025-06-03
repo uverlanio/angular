@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { IProjects } from '../../interface/IProjects.interface';
 //Material
 import {MatDialog, MatDialogModule} from '@angular/material/dialog';
@@ -10,7 +10,8 @@ import { DialogProjectsComponent } from '../dialog/dialog-projects/dialog-projec
   standalone: true,
   imports: [MatDialogModule],
   templateUrl: './projects.component.html',
-  styleUrl: './projects.component.scss'
+  styleUrl: './projects.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProjectsComponent {
   #dialog = inject(MatDialog);

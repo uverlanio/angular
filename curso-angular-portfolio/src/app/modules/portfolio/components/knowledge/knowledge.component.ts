@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { IKnowledge } from '../../interface/IKnowledge.interface';
 
 @Component({
@@ -6,7 +6,8 @@ import { IKnowledge } from '../../interface/IKnowledge.interface';
   standalone: true,
   imports: [],
   templateUrl: './knowledge.component.html',
-  styleUrl: './knowledge.component.scss'
+  styleUrl: './knowledge.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class KnowledgeComponent {
   public arrayKnowledge = signal<IKnowledge[]>([
