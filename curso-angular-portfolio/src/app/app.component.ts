@@ -7,6 +7,7 @@ import { HostElementsComponent } from './components/host-elements/host-elements.
 import { LifeCycleComponent } from './components/life-cycle/life-cycle.component';
 import { HomeComponent } from "./modules/portfolio/pages/home/home.component";
 import { ReactiveFormsComponent } from '@components/forms/reactive-forms/reactive-forms.component';
+import { environment } from 'environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -46,15 +47,10 @@ import { ReactiveFormsComponent } from '@components/forms/reactive-forms/reactiv
   `,  
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AppComponent implements OnInit{
-  public myNumber = signal(0);
-  public boolean = true;
+export class AppComponent {
 
-  ngOnInit(): void {
-     setInterval(() => {
-      this.myNumber.update((oldValue) => {
-        return oldValue + 1;
-      })
-    }, 1000);
+  constructor(){
+    console.log(environment.env)
   }
+  
 }
