@@ -1,12 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { ReactiveFormsComponent } from './components/forms/reactive-forms/reactive-forms.component';
 import { TemplateDrivenFormsComponent } from './components/forms/template-driven-forms/template-driven-forms.component';
 import { ContentComponent } from './components/content/content.component';
 import { HostElementsComponent } from './components/host-elements/host-elements.component';
 import { LifeCycleComponent } from './components/life-cycle/life-cycle.component';
 import { HomeComponent } from "./modules/portfolio/pages/home/home.component";
+import { ReactiveFormsComponent } from '@components/forms/reactive-forms/reactive-forms.component';
 
 @Component({
   selector: 'app-root',
@@ -43,7 +43,6 @@ import { HomeComponent } from "./modules/portfolio/pages/home/home.component";
     } 
 
     <button (click)="boolean = !boolean">Destroy Component</button>-->
-    <app-home />
   `,  
   changeDetection: ChangeDetectionStrategy.OnPush
 })
