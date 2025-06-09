@@ -8,6 +8,7 @@ import { LifeCycleComponent } from './components/life-cycle/life-cycle.component
 import { HomeComponent } from "./modules/portfolio/pages/home/home.component";
 import { ReactiveFormsComponent } from '@components/forms/reactive-forms/reactive-forms.component';
 import { environment } from 'environments/environment';
+import { ConsumeServiceComponent } from "./components/consume-service/consume-service.component";
 
 @Component({
   selector: 'app-root',
@@ -20,7 +21,8 @@ import { environment } from 'environments/environment';
     ContentComponent,
     HostElementsComponent,
     LifeCycleComponent,
-    HomeComponent
+    HomeComponent,
+    ConsumeServiceComponent
 ],
   template: `
     <h1>Curso de Angular</h1>
@@ -44,13 +46,12 @@ import { environment } from 'environments/environment';
     } 
 
     <button (click)="boolean = !boolean">Destroy Component</button>-->
+    <app-consume-service />
   `,  
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent {
 
-  constructor(){
-    console.log(environment.env)
-  }
+  constructor(){}
   
 }
