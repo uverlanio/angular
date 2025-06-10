@@ -1,2 +1,8 @@
 <p>Services</p>
-<app-new-component />
+<div class="container">
+    @for (item of getTask$ | async; track item) {
+    <li> Id: {{item.id}} : Title {{item.title}} </li>
+    } @empty {
+    <li>Loading...</li>
+    }
+</div>
