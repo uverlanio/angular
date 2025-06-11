@@ -7,9 +7,10 @@ import {
   OnInit,
   signal,
 } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { NewComponent } from 'app/modules/portfolio/components/new-component/new.component';
 import { ApiService } from 'app/services/api.service';
-import { Observable, timeInterval } from 'rxjs';
+import { concatMap, Observable, timeInterval } from 'rxjs';
 
 @Component({
   selector: 'app-consume-service',
@@ -22,28 +23,20 @@ import { Observable, timeInterval } from 'rxjs';
 
 export class ConsumeServiceComponent implements OnInit {
 
-  public getTask = signal<null | Array<{
-    id : string,
-    title : string
-  }>>(null);
-
-  public getTask$: Observable<Array<{
-    id : string,
-    title : string
-  }>>;
-
-  //#apiService = inject(ApiService)
-  constructor(private _apiService: ApiService) {
-    this.getTask$ = this._apiService.httpListTask$();
-  }
+  #apiService = inject(ApiService);
+  public getListTask = this.#apiService.getListTask;
+  public getTaskId = this.#apiService.getTaskId;
 
   ngOnInit(): void {
-    this.getTask$.subscribe({
-      next: (next: { id: string; title: string; }[] | null) => {
-        this.getTask.set(next)
-        console.log(next)},
-      error: (error: any) => console.log(error),
-      complete: () => console.log('Complete!')
-    })
+    this.#apiService.httpListTask$().subscribe();
+    this.#apiService.httpTaskId$('srHRSX1H6HRAtmP6BVl6').subscribe();
+  }
+
+
+  public httpTaskCreate(title: string){
+    return this.#apiService
+      .httpTaskCreate$(title)
+      .pipe(concatMap(() => this.#apiService.httpListTask$()))
+      .subscribe();
   }
 }

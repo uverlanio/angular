@@ -1,8 +1,21 @@
-<p>Services</p>
+<h2>Services</h2>
+
 <div class="container">
-    @for (item of getTask$ | async; track item) {
-    <li> Id: {{item.id}} : Title {{item.title}} </li>
+    <h3>Get List</h3>
+    @if(getListTask(); as data){ @for (item of data; track item) {
+    <li>Id: {{ item.id }} : Title {{ item.title }}</li>
     } @empty {
+    <li>Os dados ainda não foram carregados</li>
+    } }@else{
     <li>Loading...</li>
     }
+
+<h3>Get List Id</h3>
+@if(getTaskId(); as data){
+    <p>Get por ID: {{data.id}} - {{data.title}}</p>
+}
+
+<h3>Post Create</h3>
+<input type="text" #createTitle placeholder="Add title">
+<button (click)="httpTaskCreate(createTitle.value)">Create</button>
 </div>
