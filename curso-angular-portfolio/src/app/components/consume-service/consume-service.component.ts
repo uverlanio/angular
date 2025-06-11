@@ -29,7 +29,6 @@ export class ConsumeServiceComponent implements OnInit {
 
   ngOnInit(): void {
     this.#apiService.httpListTask$().subscribe();
-    this.#apiService.httpTaskId$('srHRSX1H6HRAtmP6BVl6').subscribe();
   }
 
 
