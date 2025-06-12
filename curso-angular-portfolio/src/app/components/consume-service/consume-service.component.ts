@@ -10,11 +10,11 @@ import {
 import { toSignal } from '@angular/core/rxjs-interop';
 import { NewComponent } from 'app/modules/portfolio/components/new-component/new.component';
 import { ApiService } from 'app/services/api.service';
-import { concatMap, Observable, timeInterval } from 'rxjs';
+import { concatMap, map, Observable, timeInterval } from 'rxjs';
 
 @Component({
   selector: 'app-consume-service',
-  imports: [CommonModule, NewComponent],
+  imports: [CommonModule],
   standalone: true,
   templateUrl: './consume-service.component.html',
   styleUrl: './consume-service.component.scss',
@@ -34,21 +34,21 @@ export class ConsumeServiceComponent implements OnInit {
   public httpTaskCreate(title: string){
     return this.#apiService
       .httpTaskCreate$(title)
-      .pipe(concatMap(() => this.#apiService.httpTaskList$()))
-      .subscribe();
+      .pipe(map(() => this.#apiService.httpTaskList$()))
+      .subscribe(taskList$ => this.#apiService.httpTaskList$().subscribe());
   }
 
    public httpTaskUpdate(id: string, title: string){
     return this.#apiService
       .httpTaskUpdate$(id, title)
-      .pipe(concatMap(() => this.#apiService.httpTaskList$()))
-      .subscribe();
+      .pipe(map(() => this.#apiService.httpTaskList$()))
+      .subscribe(taskList$ => this.#apiService.httpTaskList$().subscribe());
   }
 
   public httpTaskDelete(id: string){
     return this.#apiService
       .httpTaskDelete$(id)
-      .pipe(concatMap(() => this.#apiService.httpTaskList$()))
-      .subscribe();
+      .pipe(map(() => this.#apiService.httpTaskList$()))
+      .subscribe(taskList$ => this.#apiService.httpTaskList$().subscribe());
   }
 }
