@@ -24,18 +24,31 @@ import { concatMap, Observable, timeInterval } from 'rxjs';
 export class ConsumeServiceComponent implements OnInit {
 
   #apiService = inject(ApiService);
-  public getListTask = this.#apiService.getListTask;
+  public getTaskList = this.#apiService.getTaskList;
   public getTaskId = this.#apiService.getTaskId;
 
   ngOnInit(): void {
-    this.#apiService.httpListTask$().subscribe();
+    this.#apiService.httpTaskList$().subscribe();
   }
-
 
   public httpTaskCreate(title: string){
     return this.#apiService
       .httpTaskCreate$(title)
-      .pipe(concatMap(() => this.#apiService.httpListTask$()))
+      .pipe(concatMap(() => this.#apiService.httpTaskList$()))
+      .subscribe();
+  }
+
+   public httpTaskUpdate(id: string, title: string){
+    return this.#apiService
+      .httpTaskUpdate$(id, title)
+      .pipe(concatMap(() => this.#apiService.httpTaskList$()))
+      .subscribe();
+  }
+
+  public httpTaskDelete(id: string){
+    return this.#apiService
+      .httpTaskDelete$(id)
+      .pipe(concatMap(() => this.#apiService.httpTaskList$()))
       .subscribe();
   }
 }

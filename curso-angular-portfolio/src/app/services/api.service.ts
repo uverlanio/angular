@@ -18,15 +18,15 @@ export class ApiService {
   #http = inject(HttpClient);
   #url = signal(environment.apiTask);
 
-  #setListTask = signal<ITask[] | null>(null);
-  get getListTask(){
-    return this.#setListTask.asReadonly();
+  #setTaskList = signal<ITask[] | null>(null);
+  get getTaskList(){
+    return this.#setTaskList.asReadonly();
   }
 
-  public httpListTask$(): Observable<ITask[]> {
+  public httpTaskList$(): Observable<ITask[]> {
     return this.#http.get<ITask[]>(this.#url()).pipe(
       shareReplay(),
-      tap((res) => this.#setListTask.set(res))
+      tap((res) => this.#setTaskList.set(res))
     );
   }
 
@@ -36,20 +36,18 @@ export class ApiService {
   }
 
   public httpTaskId$(id: string): Observable<ITask> {
-    return this.#http.get<ITask>(`${this.#url()}/${id}`).pipe(
-      shareReplay(),
-      tap((res) => this.#setTaskId.set(res))
-    );
+    return this.#http.get<ITask>(`${this.#url()}/${id}`).pipe(shareReplay());
   }
 
-  #setTaskCreate = signal<ITask | null>(null);
-  get getTaskCreate(){
-    return this.#setTaskCreate.asReadonly();
-  }
   public httpTaskCreate$(title : string): Observable<ITask> {
-    return this.#http.post<ITask>(this.#url(), { title }).pipe(
-      shareReplay(),
-      tap((res) => this.#setTaskCreate.set(res))
-    );
+    return this.#http.post<ITask>(this.#url(), { title }).pipe(shareReplay());
+  }
+
+  public httpTaskUpdate$(id: string, title : string): Observable<ITask> {
+    return this.#http.patch<ITask>(`${this.#url()}/${id}`, { title }).pipe(shareReplay());
+  }
+
+  public httpTaskDelete$(id: string): Observable<void> {
+     return this.#http.delete<void>(`${this.#url()}/${id}`).pipe(shareReplay());
   }
 }

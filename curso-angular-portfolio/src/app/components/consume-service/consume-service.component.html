@@ -2,20 +2,28 @@
 
 <div class="container">
     <h3>Get List</h3>
-    @if(getListTask(); as data){ @for (item of data; track item) {
-    <li>Id: {{ item.id }} : Title {{ item.title }}</li>
+    @if(getTaskList(); as data){ @for (item of data; track item) {
+    <li>
+        Id: {{ item.id }} : Title {{ item.title }} - <button (click)="httpTaskDelete(item.id)">Delete</button>
+    </li>
     } @empty {
     <li>Os dados ainda não foram carregados</li>
     } }@else{
     <li>Loading...</li>
     }
 
-<h3>Get List Id</h3>
-@if(getTaskId(); as data){
+    <h3>Get List Id</h3>
+    @if(getTaskId(); as data){
     <p>Get por ID: {{data.id}} - {{data.title}}</p>
-}
+    }
 
-<h3>Post Create</h3>
-<input type="text" #createTitle placeholder="Add title">
-<button (click)="httpTaskCreate(createTitle.value)">Create</button>
+    <h3>Post Create</h3>
+    <input type="text" #createTitle placeholder="Add title">
+    <button (click)="httpTaskCreate(createTitle.value)">Create</button>
+
+    <h3>Patch Update</h3>
+    <input type="text" #updateId placeholder="Add Id">
+    <input type="text" #updateTitle placeholder="Add title">
+    <button (click)="httpTaskUpdate(updateId.value, updateTitle.value)">Update</button>
+
 </div>
