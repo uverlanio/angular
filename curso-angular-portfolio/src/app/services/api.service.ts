@@ -1,4 +1,4 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
 import { environment } from 'environments/environment';
 import {
@@ -35,10 +35,12 @@ export class ApiService {
   }
 
   public httpTaskList$(): Observable<ITask[]> {
+    
+    const headers = new HttpHeaders().set('x-vida-full-stack','dev')
+    const params = new HttpParams().set('page', '1');
     this.#setTaskList.set(null);
     this.#setTaskListError.set(null);
-    return this.#http.get<ITask[]>(this.#url()).pipe(
-      shareReplay(),
+    return this.#http.get<ITask[]>(this.#url(), { headers, params }).pipe(
       tap((res) => this.#setTaskList.set(res)),
       catchError((error: HttpErrorResponse) => {
         this.#setTaskListError.set(error.error.message);
@@ -61,7 +63,6 @@ export class ApiService {
     this.#setTaskId.set(null);
     this.#setTaskIdError.set(null);
     return this.#http.get<ITask>(`${this.#url()}/${id}`).pipe(
-      shareReplay(),
       catchError((error: HttpErrorResponse) => {
         this.#setTaskIdError.set(error.error.message);
         return throwError(() => error);
@@ -77,7 +78,6 @@ export class ApiService {
   public httpTaskCreate$(title: string): Observable<ITask> {
     this.#setTaskCreateError.set(null);
     return this.#http.post<ITask>(this.#url(), { title }).pipe(
-      shareReplay(),
       catchError((error: HttpErrorResponse) => {
         this.#setTaskCreateError.set(error.error.message);
         return throwError(() => error);
@@ -93,7 +93,6 @@ export class ApiService {
   public httpTaskUpdate$(id: string, title: string): Observable<ITask> {
     this.#setTaskUpdateError.set(null);
     return this.#http.patch<ITask>(`${this.#url()}/${id}`, { title }).pipe(
-      shareReplay(),
       catchError((error: HttpErrorResponse) => {
         this.#setTaskUpdateError.set(error.error.message);
         return throwError(() => error);
@@ -109,7 +108,6 @@ export class ApiService {
   public httpTaskDelete$(id: string): Observable<void> {
     this.#setTaskDeleteError.set(null);
     return this.#http.delete<void>(`${this.#url()}/${id}`).pipe(
-      shareReplay(),
       catchError((error: HttpErrorResponse) => {
         this.#setTaskDeleteError.set(error.error.message);
         return throwError(() => error);
