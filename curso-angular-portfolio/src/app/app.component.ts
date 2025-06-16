@@ -1,13 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnInit, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { TemplateDrivenFormsComponent } from './components/forms/template-driven-forms/template-driven-forms.component';
 import { ContentComponent } from './components/content/content.component';
 import { HostElementsComponent } from './components/host-elements/host-elements.component';
 import { LifeCycleComponent } from './components/life-cycle/life-cycle.component';
-import { HomeComponent } from "./modules/portfolio/pages/home/home.component";
 import { ReactiveFormsComponent } from '@components/forms/reactive-forms/reactive-forms.component';
-import { environment } from 'environments/environment';
 import { ConsumeServiceComponent } from "./components/consume-service/consume-service.component";
 
 @Component({
@@ -21,7 +19,6 @@ import { ConsumeServiceComponent } from "./components/consume-service/consume-se
     ContentComponent,
     HostElementsComponent,
     LifeCycleComponent,
-    HomeComponent,
     ConsumeServiceComponent
 ],
   template: `
@@ -45,8 +42,9 @@ import { ConsumeServiceComponent } from "./components/consume-service/consume-se
       </app-life-cycle>
     } 
 
-    <button (click)="boolean = !boolean">Destroy Component</button>-->
-    <app-consume-service />
+    <button (click)="boolean = !boolean">Destroy Component</button>
+    <app-consume-service />-->
+    <router-outlet />
   `,  
   changeDetection: ChangeDetectionStrategy.OnPush
 })
