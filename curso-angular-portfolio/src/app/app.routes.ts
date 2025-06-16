@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
 import { SobreComponent } from './pages/sobre/sobre.component';
 import { ServicosPrestadoComponent } from './pages/servicos-prestado/servicos-prestado.component';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
 
 
 export const routes: Routes = [
@@ -18,5 +19,9 @@ export const routes: Routes = [
     {
         path: 'servicos/:id',
         component: ServicosPrestadoComponent
+    },
+    {
+        path: '**',
+        component: NotFoundComponent
     }
 ];
