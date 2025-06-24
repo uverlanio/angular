@@ -8,7 +8,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrl: './servicos-prestado.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ServicosPrestadoComponent implements OnInit{
+export default class ServicosPrestadoComponent implements OnInit{
   
   #router = inject(ActivatedRoute);
 
@@ -19,7 +19,7 @@ export class ServicosPrestadoComponent implements OnInit{
   public getId = signal<null | string>(null);
 
   ngOnInit(): void { //2 formas de resgatar o id passado por parametro em routes
-    console.log(this.#router.snapshot.params['id'])
-    this.#router.params.subscribe((res) => console.log(res['id']));
+    /*console.log(this.#router.snapshot.params['id'])
+    this.#router.params.subscribe((res) => console.log(res['id']));*/
   }
 }
