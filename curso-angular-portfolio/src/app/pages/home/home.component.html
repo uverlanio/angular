@@ -6,14 +6,15 @@
 >Home</a>
 <br>
 <a 
-    [routerLink]="['/sobre']" 
+    [routerLink]="['sobre']" 
     routerLinkActive="active"
     ariaCurrentWhenActive="page"
 >Sobre
 </a>
 <br>
 <a 
-    [routerLink]="['/servicos','1']" 
+    [routerLink]="['servicos','1']"
+    [queryParams]="{name: 'xpto', age: 37}" 
     routerLinkActive="active"
     ariaCurrentWhenActive="page"
 >Serviços
