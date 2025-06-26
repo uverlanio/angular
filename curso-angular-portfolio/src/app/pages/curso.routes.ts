@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { canActivateGuard } from 'app/guard/can-activate.guard';
+import { canDeactivateGuard } from 'app/guard/can-deactivate.guard';
 import { canMatchGuard } from 'app/guard/can-match.guard';
 
 export const cursoRoutes: Routes = [
@@ -20,10 +21,11 @@ export const cursoRoutes: Routes = [
     path: 'servicos/:id',
     loadComponent: () =>
          import('./servicos-prestado/servicos-prestado.component'),
+    canDeactivate: [canDeactivateGuard]
   },
   {
     path: '**',
     loadComponent: () =>
-         import('./not-found/not-found.component'),
+         import('./not-found/not-found.component')
   },
 ];

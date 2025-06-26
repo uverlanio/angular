@@ -1,9 +1,10 @@
 import { ChangeDetectionStrategy, Component, inject, Input, OnInit, signal } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-servicos-prestado',
-  imports: [],
+  imports: [ReactiveFormsModule, RouterLink],
   templateUrl: './servicos-prestado.component.html',
   styleUrl: './servicos-prestado.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -18,6 +19,10 @@ export default class ServicosPrestadoComponent implements OnInit {
 
   public getId = signal<null | string>(null);
 
+  public form = new FormGroup({
+    name: new FormControl(null, [Validators.required])
+  });
+
   ngOnInit(): void {
     //2 formas de resgatar o id passado por parametro em routes
     /*console.log(this.#route.snapshot.params['id'])
@@ -29,7 +34,7 @@ export default class ServicosPrestadoComponent implements OnInit {
       next: (next) => console.log(next.get('age')),
     });
 
-    setTimeout(() =>  this.#router.navigate(['/curso']), 3000)
+    //setTimeout(() =>  this.#router.navigate(['/curso']), 3000)
    
   }
 }
