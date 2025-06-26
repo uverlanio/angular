@@ -7,6 +7,7 @@ import { HostElementsComponent } from './components/host-elements/host-elements.
 import { LifeCycleComponent } from './components/life-cycle/life-cycle.component';
 import { ReactiveFormsComponent } from '@components/forms/reactive-forms/reactive-forms.component';
 import { ConsumeServiceComponent } from "./components/consume-service/consume-service.component";
+import { TranslateComponent } from '@components/translate/translate.component';
 
 @Component({
   selector: 'app-root',
@@ -19,7 +20,8 @@ import { ConsumeServiceComponent } from "./components/consume-service/consume-se
     ContentComponent,
     HostElementsComponent,
     LifeCycleComponent,
-    ConsumeServiceComponent
+    ConsumeServiceComponent,
+    TranslateComponent
 ],
   template: `
     <h1>Curso de Angular</h1>
@@ -44,7 +46,7 @@ import { ConsumeServiceComponent } from "./components/consume-service/consume-se
 
     <button (click)="boolean = !boolean">Destroy Component</button>
     <app-consume-service />-->
-    <router-outlet />
+    <app-translate />
   `,  
   changeDetection: ChangeDetectionStrategy.OnPush
 })

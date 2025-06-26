@@ -4,6 +4,7 @@ import { provideRouter, withComponentInputBinding, withRouterConfig } from '@ang
 import { routes } from './app.routes';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { httpInterceptor } from './interceptor/http.interceptor';
+import { provideTranslate } from './app.translate';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -14,7 +15,8 @@ export const appConfig: ApplicationConfig = {
       }
     )),
     provideHttpClient(
-      withInterceptors([httpInterceptor])
+      withInterceptors([httpInterceptor]),
     ),
+    provideTranslate()
   ],
 };
