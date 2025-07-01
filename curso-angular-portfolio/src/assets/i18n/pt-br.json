@@ -1,3 +1,9 @@
 {
-    "language" : "pt-br"
+  "pages": {
+    "translate": {
+      "text": {
+        "language": "pt-br"
+      }
+    }
+  }
 }
