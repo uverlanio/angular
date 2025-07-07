@@ -20,8 +20,8 @@ export const appConfig: ApplicationConfig = {
       withInterceptors([httpInterceptor]),
     ),
     provideTranslate(),
-    //provideImgixLoader(environment.img),
-    {
+    provideImgixLoader(environment.img),
+    /*{
       provide: IMAGE_LOADER,
       useValue: (config: ImageLoaderConfig) => {
         const img = config.src.split('.');
@@ -30,6 +30,6 @@ export const appConfig: ApplicationConfig = {
         const width = config.width;
         return `${environment.img}${name}-${width}w.${type}`;
       },
-    }
+    }*/
   ],
 };
