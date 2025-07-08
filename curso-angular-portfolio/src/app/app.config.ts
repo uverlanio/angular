@@ -7,6 +7,7 @@ import { httpInterceptor } from './interceptor/http.interceptor';
 import { provideTranslate } from './app.translate';
 import { IMAGE_LOADER, ImageLoaderConfig, provideImgixLoader } from '@angular/common';
 import { environment } from 'environments/environment';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -21,6 +22,7 @@ export const appConfig: ApplicationConfig = {
     ),
     provideTranslate(),
     provideImgixLoader(environment.img),
+    provideAnimationsAsync()
     /*{
       provide: IMAGE_LOADER,
       useValue: (config: ImageLoaderConfig) => {
